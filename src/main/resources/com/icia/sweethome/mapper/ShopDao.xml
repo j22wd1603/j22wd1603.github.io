@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace ="com.icia.sweethome.dao.ShopDao">				
+
+<resultMap type="com.icia.sweethome.model.Shop" id="shopResultMap" >
+	<id column="PRODUCT_IDK" property="productIdk"/>
+	<result column="SHOP_TAB_CODE" property="shopTabCode"/>
+	<result column="SHOP_DETAIL_TAB_CODE" property="shopDetailTabCode"/>
+	<result column="PRODUCT_CODE" property="productCode"/>
+	<result column="SELLER_ID" property="sellerId"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="PRODUCT_PRICE" property="productPrice"/>
+	<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
+	<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
+	<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
+	<result column="PRODUCT_STATUS" property="productStatus"/>
+	<result column="REG_DATE" property="regDate"/>
+	<result column="PRODUCT_VIEWS" property="productViews"/>
+</resultMap>
+
+<resultMap type="com.icia.sweethome.model.Review" id="productReviewResultMap" >
+    <id column="REVIEW_IDK" property="reviewIdk" />
+    <result column="PRODUCT_IDK"  property="productIdk"/>
+    <result column="ORDER_IDK" property="orderIdk"/>
+    <result column="USER_ID"  property="userId"/>
+    <result column="REVIEW_CONTENT"  property="reviewContent"/>
+    <result column="REG_DATE"  property="regDate"/>
+    <result column="PRODUCT_NAME"  property="productName"/>
+</resultMap>
+
+<resultMap type="com.icia.sweethome.model.Cart" id="cartResultMap" >
+    <id column="USER_ID" property="userId" />
+    <result column="PRODUCT_IDK"  property="productIdk"/>
+    <result column="QUANTITY" property="quantity"/>
+    <result column="CART_REG_DATE"  property="cartRegDate"/>
+    <result column="PRODUCT_NAME"  property="productName"/>
+    <result column="PRODUCT_BRAND_NAME"  property="productBrandName"/>
+    <result column="PRODUCT_FILE_EXT"  property="productFileExt"/>
+    <result column="PRODUCT_CODE"  property="productCode"/>
+    <result column="PRODUCT_PRICE"  property="productPrice"/> 
+</resultMap>
+
+
+<!-- shop - shop,product 페이지 리스트--> 
+<select id = "shopList" parameterType ="com.icia.sweethome.model.Shop" resultMap = "shopResultMap">
+	SELECT PRODUCT_IDK, 
+					SHOP_TAB_CODE,
+					SHOP_DETAIL_TAB_CODE,
+					PRODUCT_CODE,
+					SELLER_ID,
+					PRODUCT_NAME,
+					PRODUCT_PRICE,
+					PRODUCT_BRAND_NAME,
+					PRODUCT_DESCRIPTION,
+					PRODUCT_FILE_EXT,
+					PRODUCT_STATUS,
+					REG_DATE,
+					PRODUCT_VIEWS		
+	FROM(SELECT ROWNUM AS RNUM,	
+					PRODUCT_IDK,
+					SHOP_TAB_CODE,
+					SHOP_DETAIL_TAB_CODE,
+					PRODUCT_CODE,
+					SELLER_ID,
+					PRODUCT_NAME,
+					PRODUCT_PRICE,
+					PRODUCT_BRAND_NAME,
+					PRODUCT_DESCRIPTION,
+					PRODUCT_FILE_EXT,
+					PRODUCT_STATUS,
+					REG_DATE,
+					PRODUCT_VIEWS	
+	FROM(SELECT PRODUCT_IDK,
+			    NVL(SHOP_TAB_CODE, '') AS SHOP_TAB_CODE,
+			    NVL(SHOP_DETAIL_TAB_CODE, '') AS SHOP_DETAIL_TAB_CODE,
+			    NVL(PRODUCT_CODE, '') AS PRODUCT_CODE,
+			    NVL(SELLER_ID, '') AS SELLER_ID,
+			    NVL(PRODUCT_NAME, '') AS PRODUCT_NAME,
+			    NVL(PRODUCT_PRICE, '') AS PRODUCT_PRICE,
+			    NVL(PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME,
+			    NVL(PRODUCT_DESCRIPTION, '') AS PRODUCT_DESCRIPTION,
+			    NVL(PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT,
+			    NVL(PRODUCT_STATUS, '') AS PRODUCT_STATUS,
+			    NVL( TO_CHAR( REG_DATE, 'YYYY.MM.DD HH24:MI:SS'),'') AS REG_DATE,
+			    NVL(PRODUCT_VIEWS, '') AS PRODUCT_VIEWS
+	        FROM PRODUCT
+	        WHERE 1=1 
+	<if test='shopTabCode != null and shopTabCode != "" '>       
+	     	AND SHOP_TAB_CODE = #{shopTabCode}			
+	</if>     
+	
+	<if test='shopDetailTabCode != null and shopDetailTabCode != ""'>    
+	 	 	AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}		
+	</if>  
+	
+	<if test='productBrandName != null and productBrandName != ""'>    
+		 	AND PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+	</if>  
+	<if test='productPrice != null and productPrice != ""'>    
+		 	AND PRODUCT_PRICE LIKE '%' || #{productPrice} || '%'
+	</if>  
+	
+	<if test='productStatus != null and productStatus != ""'>    
+                AND PRODUCT_STATUS = #{productStatus}
+            </if>
+            
+	<if test='regDate != null and regDate != ""'>    
+		 	AND REG_DATE LIKE '%' || #{regDate} || '%'
+	</if>
+	      
+	<if test='orderBy != null and orderBy != ""'>   
+		<choose>
+ 			<when test='orderBy == "productPrice_desc"'>
+ 			ORDER BY PRODUCT_PRICE DESC
+ 			</when>
+ 		 	<when test='orderBy == "productPrice_asc"'>
+ 			ORDER BY PRODUCT_PRICE ASC
+ 			</when>
+ 		</choose>
+	</if>
+	
+	<if test='orderBy != null and orderBy != ""'>   
+		<choose>
+ 			<when test='orderBy == "regDate_desc"'>
+ 			ORDER BY REG_DATE DESC
+ 			</when>	 	
+ 		</choose>
+	</if>
+	
+	<if test='orderBy == null or orderBy == ""'>  
+            ORDER BY PRODUCT_CODE ASC
+    </if>
+            
+            )
+          )       
+</select>
+
+
+<!-- shop - besItem 페이지 리스트 -->
+<select id = "shopListView" parameterType ="com.icia.sweethome.model.Shop" resultMap = "shopResultMap">
+SELECT PRODUCT_IDK
+      ,SHOP_TAB_CODE
+      ,SHOP_DETAIL_TAB_CODE
+      ,PRODUCT_CODE
+      ,SELLER_ID
+      ,PRODUCT_NAME
+      ,PRODUCT_PRICE
+      ,PRODUCT_BRAND_NAME
+      ,PRODUCT_DESCRIPTION
+      ,PRODUCT_FILE_EXT
+      ,PRODUCT_STATUS
+      ,REG_DATE
+      ,PRODUCT_VIEWS		
+FROM(SELECT ROWNUM AS RNUM
+           ,PRODUCT_IDK
+           ,SHOP_TAB_CODE
+           ,SHOP_DETAIL_TAB_CODE
+           ,PRODUCT_CODE
+           ,SELLER_ID
+           ,PRODUCT_NAME
+           ,PRODUCT_PRICE
+           ,PRODUCT_BRAND_NAME
+           ,PRODUCT_DESCRIPTION
+           ,PRODUCT_FILE_EXT
+           ,PRODUCT_STATUS
+           ,REG_DATE
+           ,PRODUCT_VIEWS	
+	 FROM(SELECT PRODUCT_IDK
+			    ,NVL(SHOP_TAB_CODE, '') AS SHOP_TAB_CODE
+			    ,NVL(SHOP_DETAIL_TAB_CODE, '') AS SHOP_DETAIL_TAB_CODE
+			    ,NVL(PRODUCT_CODE, '') AS PRODUCT_CODE
+			    ,NVL(SELLER_ID, '') AS SELLER_ID
+			    ,NVL(PRODUCT_NAME, '') AS PRODUCT_NAME
+			    ,NVL(PRODUCT_PRICE, '') AS PRODUCT_PRICE
+			    ,NVL(PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME
+			    ,NVL(PRODUCT_DESCRIPTION, '') AS PRODUCT_DESCRIPTION
+			    ,NVL(PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT
+			    ,NVL(PRODUCT_STATUS, '') AS PRODUCT_STATUS
+			    ,NVL( TO_CHAR( REG_DATE, 'YYYY.MM.DD HH24:MI:SS'),'') AS REG_DATE
+			    ,NVL(PRODUCT_VIEWS, '') AS PRODUCT_VIEWS
+	       FROM PRODUCT
+           WHERE 1=1
+           <if test='productName != null and productName !="" '>
+           		AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
+           </if>
+           ORDER BY PRODUCT_VIEWS DESC))
+WHERE RNUM <![CDATA[>=]]> #{startRow}
+AND RNUM <![CDATA[<=]]> #{endRow}  
+</select>
+
+
+<!-- shop - bestItem 페이징처리 , 검색 -->
+<select id="shopListViewCount" parameterType = "com.icia.sweethome.model.Shop" resultType = "int">
+SELECT COUNT(PRODUCT_IDK)
+FROM PRODUCT
+WHERE 1=1
+<if test='productName != null and productName !="" '>
+	AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
+</if>
+</select>
+
+
+<!-- shop - shop,product 페이징처리 / 만들어만뒀고 사용 x -->
+<select id="shopListCount" parameterType = "com.icia.sweethome.model.Shop" resultType="int">     
+ SELECT COUNT (PRODUCT_IDK) AS CNT
+    FROM PRODUCT
+    WHERE 1=1
+<if test='shopTabCode != null and shopTabCode != "" '>       
+     AND SHOP_TAB_CODE = #{shopTabCode}			
+</if>     
+<if test='shopDetailTabCode != null and shopDetailTabCode != ""'>    
+ 	 AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}		
+</if>  
+
+<if test='productBrandName != null and productBrandName != ""'>    
+	 AND PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+</if>  
+</select>
+
+
+<!-- shop - 조회수 업데이트 , productSelect에서 씀 -->
+<update id="shopListViewCntPlus" parameterType="int">
+UPDATE PRODUCT
+   SET PRODUCT_VIEWS = PRODUCT_VIEWS + 1
+ WHERE PRODUCT_IDK = #{value}
+</update>
+
+
+
+<!-- shop - productDetail -->
+<select id="productSelect" parameterType="int" resultMap="shopResultMap">
+   SELECT PRODUCT_IDK,
+			    NVL(SHOP_TAB_CODE, '') AS SHOP_TAB_CODE,
+			    NVL(SHOP_DETAIL_TAB_CODE, '') AS SHOP_DETAIL_TAB_CODE,
+			    NVL(PRODUCT_CODE, '') AS PRODUCT_CODE,
+			    NVL(SELLER_ID, '') AS SELLER_ID,
+			    NVL(PRODUCT_NAME, '') AS PRODUCT_NAME,
+			    NVL(PRODUCT_PRICE, '') AS PRODUCT_PRICE,
+			    NVL(PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME,
+			    NVL(PRODUCT_DESCRIPTION, '') AS PRODUCT_DESCRIPTION,
+			    NVL(PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT,
+			    NVL(PRODUCT_STATUS, '') AS PRODUCT_STATUS,
+			    NVL( TO_CHAR( REG_DATE, 'YYYY.MM.DD HH24:MI:SS'),'') AS REG_DATE,
+			    NVL(PRODUCT_VIEWS, '') AS PRODUCT_VIEWS
+    FROM PRODUCT
+    WHERE PRODUCT_IDK = #{value}
+</select>
+
+<!-- shop - productDetail 리뷰조회 리스트    //질문할거 : 파라미터타입 int? 모델로 받아도 되나요 ?-->
+<select id="productReviewList" parameterType="int" resultMap="productReviewResultMap">
+SELECT
+    PR.REVIEW_IDK AS REVIEW_IDK,
+    PR.PRODUCT_IDK AS PRODUCT_IDK,
+    PR.ORDER_IDK AS ORDER_IDK,
+    U.USER_ID   AS USER_ID,
+    PR.REVIEW_CONTENT  AS REVIEW_CONTENT,
+    TO_CHAR(PR.REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE,
+    '' AS PRODUCT_NAME
+FROM
+    PRODUCT_REVIEW PR
+INNER JOIN
+    USERS U
+ON
+    PR.USER_ID = U.USER_ID
+WHERE
+    PR.PRODUCT_IDK = #{value}
+ORDER BY REG_DATE ASC
+</select>
+
+
+<!-- user- cart 카트조회해서 인서트 또는 업데이트 -->
+<select id="cartSelect" parameterType="com.icia.sweethome.model.Cart" resultMap="cartResultMap">
+    SELECT NVL(C.USER_ID, '') AS USER_ID,
+           NVL(P.PRODUCT_IDK, '') AS PRODUCT_IDK,
+           NVL(C.QUANTITY, '') AS QUANTITY,
+           NVL(TO_CHAR(C.CART_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS CART_REG_DATE
+    	FROM PRODUCT P, CART C
+            WHERE 1=1
+            AND C.USER_ID = #{userId}       
+            AND C.PRODUCT_IDK = #{productIdk}     
+            AND P.PRODUCT_IDK = C.PRODUCT_IDK
+
+</select>
+
+<insert id="cartInsert" parameterType="com.icia.sweethome.model.Cart" >
+INSERT INTO CART (
+    USER_ID,
+    PRODUCT_IDK,
+    QUANTITY,
+    CART_REG_DATE
+) VALUES (
+    #{userId},
+    #{productIdk},
+    #{quantity},
+   sysdate
+)
+</insert>
+
+<update id="cartUpdate" parameterType="com.icia.sweethome.model.Cart">
+    UPDATE CART
+    SET QUANTITY = QUANTITY + #{quantity}
+    WHERE USER_ID = #{userId} 
+    AND PRODUCT_IDK = #{productIdk}
+</update>
+
+<!-- user - cartPage 리스트 -->
+<select id="cartList" parameterType="com.icia.sweethome.model.Cart" resultMap="cartResultMap">
+   SELECT USER_ID,
+           PRODUCT_IDK,
+           QUANTITY,
+           CART_REG_DATE,
+           PRODUCT_NAME,
+           PRODUCT_BRAND_NAME,
+           PRODUCT_FILE_EXT,
+           PRODUCT_CODE,
+           PRODUCT_PRICE
+    FROM (
+        SELECT ROWNUM AS RNUM,
+               USER_ID,
+           PRODUCT_IDK,
+           QUANTITY,
+           CART_REG_DATE,
+           PRODUCT_NAME,
+           PRODUCT_BRAND_NAME,
+           PRODUCT_FILE_EXT,
+           PRODUCT_CODE,
+           PRODUCT_PRICE
+        FROM (
+            SELECT NVL(C.USER_ID, '') AS USER_ID,
+                   NVL(P.PRODUCT_IDK, '') AS PRODUCT_IDK,
+                   NVL(C.QUANTITY, '') AS QUANTITY,
+                   NVL(TO_CHAR(C.CART_REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS CART_REG_DATE,
+                   NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME,
+                   NVL(P.PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME,
+                   NVL(P.PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT,
+                   NVL(P.PRODUCT_CODE, '') AS PRODUCT_CODE,
+                   NVL(P.PRODUCT_PRICE, '') AS PRODUCT_PRICE
+            FROM PRODUCT P, CART C
+            WHERE 1=1
+            AND C.USER_ID = #{userId}    
+            AND P.PRODUCT_IDK = C.PRODUCT_IDK          
+            ORDER BY CART_REG_DATE DESC))
+   WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}   
+</select>
+
+<!-- user - cartPage 페이징처리 -->
+<select id="cartListCount" parameterType ="com.icia.sweethome.model.Cart" resultType="int">
+SELECT COUNT(C.PRODUCT_IDK)
+ FROM CART C, PRODUCT P
+ WHERE 1=1
+ AND C.USER_ID = #{userId}          
+ AND P.PRODUCT_IDK = C.PRODUCT_IDK  
+</select>
+
+
+<delete id="cartDelete" parameterType="int">
+DELETE FROM CART
+WHERE PRODUCT_IDK = #{productIdk} 
+</delete>
+
+<!--  0918 마이페이지 내 리뷰  -->
+<select id="boardMyReview" parameterType ="com.icia.sweethome.model.Review" resultMap="productReviewResultMap">
+SELECT REVIEW_IDK,
+	   PRODUCT_IDK,
+	   ORDER_IDK,
+	   USER_ID,
+	   REVIEW_CONTENT,
+	   REG_DATE,
+       PRODUCT_NAME
+  FROM (SELECT ROWNUM RNUM,
+			   REVIEW_IDK,
+			   PRODUCT_IDK,
+			   ORDER_IDK,
+			   USER_ID,
+			   REVIEW_CONTENT,
+			   REG_DATE,
+               PRODUCT_NAME
+		  FROM (SELECT NVL(R.REVIEW_IDK, 0) AS REVIEW_IDK,
+					   NVL(R.PRODUCT_IDK, 0) AS PRODUCT_IDK,
+					   NVL(R.ORDER_IDK, 0) AS ORDER_IDK,
+					   NVL(R.USER_ID, '') AS USER_ID,
+					   NVL(R.REVIEW_CONTENT, '') AS REVIEW_CONTENT,
+					   NVL(TO_CHAR(R.REG_DATE,  'YYYY.MM.DD'), '') AS REG_DATE,
+                       NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME
+				  FROM PRODUCT_REVIEW R, USERS U, PRODUCT P
+				  WHERE R.USER_ID = #{userId}
+				    AND R.USER_ID = U.USER_ID
+                    AND R.PRODUCT_IDK = P.PRODUCT_IDK
+	              ORDER BY REVIEW_IDK DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!--  0918 마이페이지 내 리뷰 전체 카운트 조회 -->
+<select id="boardMyReviewCount" parameterType ="com.icia.sweethome.model.Review" resultType="int">
+SELECT NVL(COUNT(R.REVIEW_IDK), 0) AS CNT
+  FROM PRODUCT_REVIEW R, USERS U, PRODUCT P
+ WHERE R.USER_ID = #{userId}
+   AND R.USER_ID = U.USER_ID
+   AND R.PRODUCT_IDK = P.PRODUCT_IDK
+</select>
+
+<!-- 마이페이지에서 내 좋아요 존재 여부 확인 0913 윤하나 -->
+<select id="boardMyReviewSearch" parameterType="int" resultType="int">
+SELECT REVIEW_IDK,
+	   PRODUCT_IDK,
+	   ORDER_IDK,
+	   USER_ID,
+	   REVIEW_CONTENT,
+	   REG_DATE
+ FROM  PRODUCT_REVIEW
+WHERE  PRODUCT_IDK = #{value}
+</select>
+
+<!-- 마이페이지에서 내 좋아요 삭제 0913 윤하나 -->
+<delete id="boardMyReviewDelete" parameterType="int">
+DELETE FROM PRODUCT_REVIEW
+ WHERE PRODUCT_IDK = #{value}
+</delete>
+
+</mapper>

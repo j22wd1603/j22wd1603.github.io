@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.sweethome.dao.CsDao">
+
+<!-- 게시물 resultMap -->
+<resultMap id="csResultMap" type="com.icia.sweethome.model.Cs">
+	<id column="NOTICE_IDK" property="noticeIdk" />
+    <result column="ADMIN_ID" property="adminId" />
+    <result column="NOTICE_TITLE" property="noticeTitle" />
+    <result column="NOTICE_CONTENT" property="noticeContent" />
+    <result column="REG_DATE" property="regDate" />
+</resultMap>
+<!-- FAQ resultMap -->
+<resultMap id="csMainResultMap" type="com.icia.sweethome.model.CsMain">
+	<id column="FAQ_SEQ" property="faqSeq" />
+    <result column="FAQ_CATEGORY" property="faqCategory" />
+    <result column="FAQ_TITLE" property="faqTitle" />
+    <result column="FAQ_CONTENT" property="faqContent" />
+    <result column="REG_DATE" property="regDate" />
+</resultMap>
+
+
+<resultMap id="questionResultMap" type="com.icia.sweethome.model.Question">
+	<id column="QUESTION_IDK" property="questionIdk" />
+    <result column="QUESTION_CATEGORY" property="questionCategory" />
+    <result column="QUESTION_TITLE" property="questionTitle" />
+    <result column="USER_ID" property="userId" />
+    <result column="QUESTION_CONTENT" property="questionContent" />
+    <result column="ANS_STATUS" property="ansStatus" />
+    <result column="REG_DATE" property="regDate" />
+    <result column="FILE_CHECK" property="fileCheck" />
+    <result column="FILE_EXT" property="fileExt" />
+</resultMap>
+
+ <resultMap id="answerResultMap" type="com.icia.sweethome.model.Answer">
+ 	<id column="QUESTION_IDK" property="questionIdk" />
+ 	<result column="ADMIN_ID" property="adminId" />
+ 	<result column="ANS_TITLE" property="ansTitle" />
+ 	<result column="ANS_CONTENT" property="ansContent" />
+ 	<result column="ANS_DATE" property="ansDate" />
+ 	
+ </resultMap>
+ 
+ 
+<!-- 게시판 리스트
+<select id="boardList" parameterType="com.icia.sweethome.model.Cs" resultMap="csResultMap">
+SELECT  NOTICE_IDK,
+		ADMIN_ID,
+		NOTICE_TITLE,
+		NOTICE_CONTENT,
+		REG_DATE
+  FROM  NOTICE
+
+</select> -->
+
+<select id="csMainList" parameterType="com.icia.sweethome.model.CsMain" resultMap="csMainResultMap">
+SELECT FAQ_SEQ,
+	   FAQ_CATEGORY,
+	   FAQ_TITLE,
+	   FAQ_CONTENT,
+	   REG_DATE
+  FROM FAQ
+ WHERE 1=1
+ 	<if test='faqCategory != null and faqCategory != "" '>       
+	     	AND FAQ_CATEGORY = #{faqCategory}			
+	</if>
+</select>
+
+<!-- 게시판 리스트 -->
+<select id="boardList" parameterType="com.icia.sweethome.model.Cs" resultMap="csResultMap">
+SELECT NOTICE_IDK,
+       ADMIN_ID,
+       NOTICE_TITLE,
+       NOTICE_CONTENT,
+       REG_DATE
+  FROM (SELECT ROWNUM RNM,
+               NOTICE_IDK,
+               ADMIN_ID,
+               NOTICE_TITLE,
+               NOTICE_CONTENT,
+               REG_DATE
+          FROM (SELECT NOTICE_IDK,
+                       NVL(A.ADMIN_ID, '') AS ADMIN_ID,
+                       NVL(A.NOTICE_TITLE, '') AS NOTICE_TITLE,
+                       NVL(A.NOTICE_CONTENT, '') AS NOTICE_CONTENT,
+                       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE
+                  FROM NOTICE A, ADMIN B
+                 WHERE A.ADMIN_ID = B.ADMIN_ID
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>    
+	<choose>
+        <when test='searchType == "1"'>
+                   AND A.NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+        </when>
+        <when test='searchType == "2"'>
+                   AND DBMS_LOB.INSTR(A.NOTICE_CONTENT, #{searchValue}) > 0
+        </when>
+	</choose>                   
+</if>                   
+       ORDER BY NOTICE_IDK DESC  ))
+ WHERE RNM <![CDATA[>=]]> #{startRow}
+   AND RNM <![CDATA[<=]]> #{endRow}
+</select>
+
+
+
+
+<!-- 총 게시물 수 -->
+<select id="boardListCount" parameterType="com.icia.sweethome.model.Cs" resultType="int">
+SELECT COUNT(A.NOTICE_IDK) AS CNT
+  FROM NOTICE A, ADMIN B
+ WHERE A.ADMIN_ID = B.ADMIN_ID
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>
+	<choose>
+
+   		<when test='searchType == "2"'>
+   AND A.NOTICE_TITLE LIKE '%' || #{searchValue} ||'%'
+   		</when>
+   		<when test='searchType == "3"'>
+   AND DBMS_LOB.INSTR(A.NOTICE_CONTENT, #{searchValue}) > 0
+   		</when>
+   </choose>
+</if>
+</select>
+
+
+<!-- 선행처리기(시퀀스번호 생성) -->
+<select id="questionSeq" resultType="int">
+	SELECT SEQ_QUESTION_SEQ.NEXTVAL FROM DUAL
+</select>
+
+<!-- 1:1질문 등록 -->
+<insert id="boardInsert" parameterType="com.icia.sweethome.model.Question">
+
+
+INSERT INTO QUESTION_BOARD (
+	QUESTION_IDK,
+	QUESTION_CATEGORY,
+	USER_ID,
+	QUESTION_TITLE,
+	QUESTION_CONTENT,
+	ANS_STATUS,
+	FILE_CHECK,
+	FILE_EXT,
+    REG_DATE
+) VALUES (
+    #{questionIdk},
+    #{questionCategory},
+    #{userId},
+    #{questionTitle},
+    #{questionContent},
+    #{ansStatus},
+    #{fileCheck},
+    #{fileExt},
+    SYSDATE
+
+)
+</insert>
+
+
+<!--1:1질문 총 게시물 수 -->
+<select id="boardListCount2" parameterType="com.icia.sweethome.model.Question" resultType="int">
+SELECT COUNT(QUESTION_IDK) AS CNT
+  FROM QUESTION_BOARD
+
+</select>
+
+
+
+<!-- 마이페이지 내가 쓴 질문 리스트 조회 -->
+<select id="boardList2" parameterType="com.icia.sweethome.model.Question" resultMap="questionResultMap">
+SELECT  QUESTION_IDK,
+		QUESTION_CATEGORY,
+		USER_ID,
+		QUESTION_TITLE,
+		QUESTION_CONTENT,
+		ANS_STATUS,
+		REG_DATE,
+		FILE_CHECK,
+		FILE_EXT
+  FROM (SELECT ROWNUM RNM,
+  			   QUESTION_IDK,
+		   	   QUESTION_CATEGORY,
+			   USER_ID,
+			   QUESTION_TITLE,
+			   QUESTION_CONTENT,
+			   ANS_STATUS,
+			   REG_DATE,
+			   FILE_CHECK,
+			   FILE_EXT
+          FROM (SELECT QUESTION_IDK,
+                       NVL(QUESTION_CATEGORY, '') AS QUESTION_CATEGORY,
+                       NVL(USER_ID, '') AS USER_ID,
+                       NVL(QUESTION_TITLE, '') AS QUESTION_TITLE,
+                       NVL(QUESTION_CONTENT, '') AS QUESTION_CONTENT,
+                       NVL(ANS_STATUS, '') AS ANS_STATUS,
+                       TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE,
+                       NVL(FILE_CHECK, '') AS FILE_CHECK,
+             		   NVL(FILE_EXT, '') AS FILE_EXT
+                       
+                  FROM QUESTION_BOARD
+          		 WHERE USER_ID = #{userId}
+        ORDER BY QUESTION_IDK DESC  ))
+ WHERE RNM <![CDATA[>=]]> #{startRow}
+   AND RNM <![CDATA[<=]]> #{endRow}
+ 
+</select>
+
+
+<!-- 공지사항 상세 -->
+<select id="boardSelect" parameterType="int" resultMap="csResultMap">
+SELECT NOTICE_IDK,
+       NVL(A.ADMIN_ID, '') AS ADMIN_ID,
+       NVL(A.NOTICE_TITLE, '') AS NOTICE_TITLE,
+       NVL(A.NOTICE_CONTENT, '') AS NOTICE_CONTENT,
+       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE
+  FROM NOTICE A, ADMIN B
+ WHERE A.NOTICE_IDK = #{value}
+   AND A.ADMIN_ID = B.ADMIN_ID
+</select>
+
+<!-- 1:1질문 상세 -->
+<select id="boardSelect2" parameterType="int" resultMap="questionResultMap">
+SELECT QUESTION_IDK,
+       NVL(A.QUESTION_CATEGORY, '') AS QUESTION_CATEGORY,
+       NVL(A.USER_ID, '') AS USER_ID,
+       NVL(A.QUESTION_TITLE, '') AS QUESTION_TITLE,
+       NVL(A.QUESTION_CONTENT, '') AS QUESTION_CONTENT,
+       NVL(A.ANS_STATUS, '') AS ANS_STATUS,
+       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE,
+       NVL(A.FILE_CHECK, '') AS FILE_CHECK,
+       NVL(A.FILE_EXT, '') AS FILE_EXT
+  FROM QUESTION_BOARD A, USERS B
+ WHERE A.QUESTION_IDK = #{value}
+   AND A.USER_ID = B.USER_ID
+</select>
+
+<!-- 게시물 수정 -->
+<update id="boardUpdate" parameterType="com.icia.sweethome.model.Question">
+UPDATE QUESTION_BOARD
+   SET QUESTION_TITLE = #{questionTitle},
+       QUESTION_CONTENT = #{questionContent},
+       FILE_CHECK = #{fileCheck},
+       FILE_EXT = #{fileExt}
+ WHERE QUESTION_IDK = #{questionIdk}
+</update>
+
+
+<delete id="boardDelete" parameterType="int">
+DELETE FROM QUESTION_BOARD
+ WHERE QUESTION_IDK = #{value}
+</delete>
+
+
+
+
+<insert id="boardReplyInsert" parameterType="com.icia.sweethome.model.Answer">
+INSERT INTO ANS_BOARD(
+	   ADMIN_ID,
+	   QUESTION_IDK,
+	   ANS_TITLE,
+	   ANS_CONTENT,
+	   ANS_DATE
+)VALUES
+	 (
+	 #{adminId},
+	 #{questionIdk},
+	 #{ansTitle},
+	 #{ansContent},
+	 SYSDATE
+	 
+	 )
+</insert>
+
+<update id="statusUpdate" parameterType="com.icia.sweethome.model.Question">
+UPDATE QUESTION_BOARD
+SET ANS_STATUS = 'Y'
+WHERE QUESTION_IDK = #{questionIdk}
+</update>
+
+
+
+<select id="answerSelect" parameterType="int" resultMap="answerResultMap">
+SELECT A.QUESTION_IDK,
+       NVL(A.ADMIN_ID, '') AS ADMIN_ID,
+       NVL(A.ANS_TITLE, '') AS ANS_TITLE,
+       NVL(A.ANS_CONTENT, '') AS ANS_CONTENT,
+       TO_CHAR(A.ANS_DATE, 'YYYY.MM.DD HH24:MI:SS') AS ANS_DATE
+  FROM ANS_BOARD A, QUESTION_BOARD B
+ WHERE A.QUESTION_IDK = #{value}
+   AND A.QUESTION_IDK = B.QUESTION_IDK
+</select>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.sweethome.dao.CommunityDao">
+
+<resultMap id="communityResultMap" type="com.icia.sweethome.model.Community">
+    <id column="COMMU_IDK" property="commuIdk" />
+    <result column="COMMU_TAB" property="commuTab" />
+    <result column="USER_ID" property="userId" />
+    <result column="COMMU_TITLE" property="commuTitle" />
+    <result column="COMMU_CONTENT" property="commuContent" />
+    <result column="COMMU_VIEWS" property="commuViews" />
+    <result column="COMMU_LIKES" property="commuLikes" />
+    <result column="COMMU_STATUS" property="commuStatus" />
+    <result column="REG_DATE" property="regDate" />   
+    <result column="MOD_DATE" property="modDate" />
+    <result column="DELETE_DATE" property="deleteDate" />
+    <result column="FILE_CHECK" property="fileCheck" />
+    <result column="FILE_EXT" property="fileExt" />
+</resultMap>
+
+<resultMap id="commentResultMap" type="com.icia.sweethome.model.Comment">
+    <id column="COMMENT_IDK" property="commentIdk" />
+    <result column="COMMU_IDK" property="commuIdk" />
+    <result column="COMMENT_STATUS" property="commentStatus" />
+    <result column="REG_DATE" property="regDate" />
+    <result column="MOD_DATE" property="modDate" />
+    <result column="DELETE_DATE" property="deleteDate" />
+    <result column="PARENT_IDK" property="parentIdk" />
+    <result column="COMMENT_CONTENT" property="commentContent" />
+    <result column="USER_ID" property="userId" />   
+    <result column="GROUP_IDK" property="groupIdk" />
+    <result column="IMAGE_FILE_EXT" property="imageFileExt" />
+</resultMap>
+
+
+
+
+<!-- 선행처리기(시퀀스번호 생성) -->
+<select id="communitySeq" resultType="int">
+   SELECT SEQ_COMMUNITY_SEQ.NEXTVAL FROM DUAL
+</select>
+
+
+
+<!-- 게시물 등록 -->
+<insert id="boardInsert" parameterType="com.icia.sweethome.model.Community">
+
+INSERT INTO COMMU_BOARD (
+       COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       FILE_CHECK,
+       FILE_EXT
+) VALUES (
+    #{commuIdk},
+    #{commuTab},
+    #{userId},
+    #{commuTitle},
+    #{commuContent},
+    0,
+    0,
+    'Y',
+    SYSDATE,
+    #{fileCheck},
+    #{fileExt}
+)
+</insert>
+
+
+<!-- 게시물 조회 -->
+<select id="boardSelect" parameterType="int" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       NVL(A.COMMU_TAB, '') AS COMMU_TAB,
+       NVL(A.USER_ID, '') AS USER_ID,
+       NVL(A.COMMU_TITLE, '') AS COMMU_TITLE,
+       NVL(A.COMMU_CONTENT, 0) AS COMMU_CONTENT,
+       NVL(A.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+       NVL(A.COMMU_LIKES, 0) AS COMMU_LIKES,
+       NVL(A.COMMU_STATUS, '') AS COMMU_STATUS,
+       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE,
+       TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
+       TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
+       NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
+	   NVL(A.FILE_EXT, '') AS FILE_EXT 
+  FROM COMMU_BOARD A, USERS B
+ WHERE A.COMMU_IDK = #{value}
+   AND A.USER_ID = B.USER_ID   
+</select>
+
+<!-- 높은 좋아요 순으로 게시판 리스트 -->
+<select id="boardListByLikes" parameterType="String" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT       
+  FROM (SELECT ROWNUM RNM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT COMMU_IDK,
+                       NVL(A.COMMU_TAB, '') AS COMMU_TAB,
+                       NVL(A.USER_ID, '') AS USER_ID,
+                       NVL(A.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(A.COMMU_CONTENT, 0) AS COMMU_CONTENT,
+                       NVL(A.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(A.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(A.COMMU_STATUS, '') AS COMMU_STATUS,
+                       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE,
+                       TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
+                       TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
+                       NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+                  FROM COMMU_BOARD A, USERS B
+                 WHERE A.COMMU_TAB = #{value}
+                   AND A.USER_ID = B.USER_ID
+                   AND A.COMMU_STATUS = 'Y'
+                 ORDER BY COMMU_LIKES DESC))
+ WHERE  RNM <![CDATA[>=]]> 1
+   AND  RNM <![CDATA[<=]]> 3
+</select>
+
+
+<!-- 높은 조회수 순으로 게시판 리스트 -->
+<select id="boardListByViews" parameterType="String" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT       
+  FROM (SELECT ROWNUM RNM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT COMMU_IDK,
+                       NVL(A.COMMU_TAB, '') AS COMMU_TAB,
+                       NVL(A.USER_ID, '') AS USER_ID,
+                       NVL(A.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(A.COMMU_CONTENT, 0) AS COMMU_CONTENT,
+                       NVL(A.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(A.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(A.COMMU_STATUS, '') AS COMMU_STATUS,
+                       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE,
+                       TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
+                       TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
+                       NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+                  FROM COMMU_BOARD A, USERS B
+                 WHERE A.COMMU_TAB = #{value}
+                   AND A.USER_ID = B.USER_ID
+                   AND A.COMMU_STATUS = 'Y'
+                 ORDER BY COMMU_VIEWS DESC))
+ WHERE  RNM <![CDATA[>=]]> 1
+   AND  RNM <![CDATA[<=]]> 3
+
+</select>
+
+
+<!-- 등록일순(겹치면 글자순)으로 게시물 조회 -->
+<select id="boardListByRegDateAndCommuTitle" parameterType="String" resultMap="communityResultMap">
+
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT       
+  FROM (SELECT ROWNUM RNM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT COMMU_IDK,
+                       NVL(A.COMMU_TAB, '') AS COMMU_TAB,
+                       NVL(A.USER_ID, '') AS USER_ID,
+                       NVL(A.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(A.COMMU_CONTENT, 0) AS COMMU_CONTENT,
+                       NVL(A.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(A.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(A.COMMU_STATUS, '') AS COMMU_STATUS,
+                       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE,
+                       TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
+                       TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
+                       NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+                  FROM COMMU_BOARD A, USERS B
+                 WHERE A.COMMU_TAB = #{value}
+                   AND A.USER_ID = B.USER_ID
+                 ORDER BY A.REG_DATE DESC, A.COMMU_TITLE ASC))
+</select>
+
+
+<!-- 월간 게시판 리스트 -->
+<select id="boardListByMonth" parameterType="String" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT       
+  FROM (SELECT ROWNUM RNM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT COMMU_IDK,
+                       NVL(A.COMMU_TAB, '') AS COMMU_TAB,
+                       NVL(A.USER_ID, '') AS USER_ID,
+                       NVL(A.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(A.COMMU_CONTENT, 0) AS COMMU_CONTENT,
+                       NVL(A.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(A.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(A.COMMU_STATUS, '') AS COMMU_STATUS,
+                       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE,
+                       TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
+                       TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
+                       NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+                  FROM COMMU_BOARD A, USERS B
+                 WHERE A.COMMU_TAB = #{value}
+                   AND A.USER_ID = B.USER_ID
+                   AND TO_CHAR(A.REG_DATE, 'MM') = TO_CHAR(SYSDATE, 'MM')
+                   AND A.COMMU_STATUS = 'Y'
+				   <choose>
+				      <when test='commuTab == "1"'>   
+				 ORDER BY COMMU_LIKES DESC
+				         </when>
+				         <when test='commuTab == "2"'>
+				 ORDER BY COMMU_LIKES DESC
+				         </when>
+				         <when test='commuTab == "3"'>
+				 ORDER BY COMMU_VIEWS DESC
+				         </when>
+				   </choose>
+				 ))                        
+                 
+ WHERE  RNM <![CDATA[>=]]> 1
+   AND  RNM <![CDATA[<=]]> 3
+</select>
+
+
+
+<!-- 마이룸 총 게시물 수 -->
+<select id="boardListCount" parameterType="com.icia.sweethome.model.Community" resultType="int">
+SELECT COUNT(A.COMMU_IDK) AS CNT
+  FROM COMMU_BOARD A, USERS B 
+ WHERE A.USER_ID = B.USER_ID
+   <choose>
+      <when test='commuTab == "1"'>   
+   AND A.COMMU_TAB = '1'
+         </when>
+         <when test='commuTab == "2"'>
+   AND A.COMMU_TAB = '2'
+         </when>
+         <when test='commuTab == "3"'>
+   AND A.COMMU_TAB = '3'
+         </when>
+   </choose> 
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>
+   <choose>
+      <when test='searchType == "1"'>   
+   AND B.USER_ID LIKE '%' || #{searchValue} ||'%'
+         </when>
+         <when test='searchType == "2"'>
+   AND A.COMMU_TITLE LIKE '%' || #{searchValue} ||'%'
+         </when>
+         <when test='searchType == "3"'>
+   AND DBMS_LOB.INSTR(A.COMMU_CONTENT, #{searchValue}) > 0
+         </when>
+   </choose>
+</if>
+</select>
+
+
+
+<!-- 마이룸 게시글 조회 -->
+<select id="boardList" parameterType="String" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT       
+  FROM (SELECT ROWNUM RNM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT COMMU_IDK,
+                       NVL(A.COMMU_TAB, '') AS COMMU_TAB,
+                       NVL(A.USER_ID, '') AS USER_ID,
+                       NVL(A.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(A.COMMU_CONTENT, 0) AS COMMU_CONTENT,
+                       NVL(A.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(A.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(A.COMMU_STATUS, '') AS COMMU_STATUS,
+                       TO_CHAR(A.REG_DATE, 'YYYY.MM.DD') AS REG_DATE,
+                       TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
+                       TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
+                       NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+                  FROM COMMU_BOARD A, USERS B
+                  
+				   <choose>
+				      <when test='commuTab == "1"'>   
+				 WHERE A.COMMU_TAB = '1'
+				         </when>
+				         <when test='commuTab == "2"'>
+				 WHERE A.COMMU_TAB = '2'
+				         </when>
+				         <when test='commuTab == "3"'>
+				 WHERE A.COMMU_TAB = '3'
+				         </when>
+				   </choose>                   
+                 AND A.USER_ID = B.USER_ID                   
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>    
+   <choose>
+      <when test='searchType == "1"'>
+                   AND B.USER_ID LIKE '%' || #{searchValue} || '%'
+        </when>
+        <when test='searchType == "2"'>
+                   AND A.COMMU_TITLE LIKE '%' || #{searchValue} || '%'
+        </when>
+        <when test='searchType == "3"'>
+                   AND DBMS_LOB.INSTR(A.COMMU_CONTENT, #{searchValue}) > 0                 
+        </when>
+   </choose>                   
+</if>      
+
+<if test='sortType == null and sortType == ""'>
+                 ORDER BY A.REG_DATE DESC, A.COMMU_TITLE ASC
+</if>
+<if test='sortType != null and sortType != ""'>
+	<choose>
+		<when test='sortType == "1"'>   
+				 ORDER BY A.REG_DATE DESC
+		</when>
+		<when test='sortType == "2"'>
+				 ORDER BY A.REG_DATE ASC
+		</when>
+		<when test='sortType == "3"'>
+				 ORDER BY A.COMMU_LIKES DESC
+		</when>
+	</choose>				   
+</if>
+))
+ WHERE RNM <![CDATA[>=]]> #{startRow}
+   AND RNM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 게시물 삭제 (게시물 삭제 시 댓글도 같이 삭제)-->
+<delete id="boardDelete" parameterType="int">
+
+ DELETE FROM COMMU_BOARD
+  WHERE COMMU_IDK = #{value}
+
+</delete>
+
+<!-- 게시물이 삭제 될 때 댓글 삭제 -->
+<delete id="commentDeleteWhenBoardDelete" parameterType="int">
+
+ DELETE FROM COMMENT_TABLE
+  WHERE COMMU_IDK = #{value}
+
+</delete>
+
+
+
+<!-- 게시물 수정 -->
+<update id="boardUpdate" parameterType="com.icia.sweethome.model.Community">
+UPDATE COMMU_BOARD
+   SET COMMU_TITLE = #{commuTitle},
+       COMMU_CONTENT = #{commuContent},
+       MOD_DATE = SYSDATE,
+       FILE_CHECK = #{fileCheck},
+       FILE_EXT = #{fileExt}       
+ WHERE COMMU_IDK = #{commuIdk}
+</update>
+
+<!-- 조회수 증가 -->
+<update id="boardReadCntPlus" parameterType="int">
+
+UPDATE COMMU_BOARD
+   SET COMMU_VIEWS = COMMU_VIEWS + 1
+ WHERE COMMU_IDK = #{value}
+ 
+</update>
+
+
+<!-- 게시물에 대한 댓글 조회(사진도 같이 불러옴) -->
+<select id="commentList" parameterType="int" resultMap="commentResultMap">
+
+SELECT A.COMMENT_IDK,
+       A.COMMU_IDK,
+       A.COMMENT_STATUS,
+       A.REG_DATE,
+       A.MOD_DATE,
+       A.DELETE_DATE,
+       A.PARENT_IDK,
+       A.COMMENT_CONTENT,
+       A.USER_ID,
+       A.GROUP_IDK,
+       B.IMAGE_FILE_EXT
+  FROM COMMENT_TABLE A, USERS B
+ WHERE A.COMMU_IDK = #{commuIdk}
+   AND A.USER_ID = B.USER_ID
+ ORDER BY A.GROUP_IDK DESC, A.PARENT_IDK DESC, A.REG_DATE DESC
+
+</select>
+
+
+
+<!-- 선행처리기(게시글 시퀀스번호 생성 -->
+<select id="commentSeq" resultType="int">
+	SELECT SEQ_COMMENT_SEQ.NEXTVAL FROM DUAL
+</select>
+
+<!-- 게시물 등록 -->
+<insert id="commentInsert" parameterType="com.icia.sweethome.model.Comment">
+
+INSERT INTO COMMENT_TABLE (
+	   COMMENT_IDK,
+	   COMMU_IDK,
+	   COMMENT_STATUS,
+	   REG_DATE,
+	   PARENT_IDK,
+	   COMMENT_CONTENT,
+	   USER_ID,
+	   GROUP_IDK
+) VALUES (
+    #{commentIdk},
+    #{commuIdk},
+    'Y',
+    SYSDATE,
+    #{parentIdk},
+    #{commentContent},
+    #{userId},
+    #{groupIdk}
+)
+
+</insert>
+
+
+<!-- 댓글 삭제 -->
+<delete id="commentDelete" parameterType="com.icia.sweethome.model.Comment">
+
+DELETE FROM COMMENT_TABLE
+<choose>
+	<when test='parentIdk == "1"'>
+ WHERE GROUP_IDK = #{commentIdk}
+	</when>
+	<when test='parentIdk == "0"'>
+ WHERE COMMENT_IDK = #{commentIdk}
+	</when>	
+</choose>
+
+ 
+</delete>
+
+<!-- 댓글 조회 -->
+<select id="commentSelect" parameterType="com.icia.sweethome.model.Comment" resultMap="commentResultMap">
+
+SELECT  COMMENT_IDK,
+        COMMU_IDK,
+        COMMENT_STATUS,
+        REG_DATE,
+        MOD_DATE,
+        DELETE_DATE,
+        PARENT_IDK,
+        COMMENT_CONTENT,
+        USER_ID,
+        GROUP_IDK
+  FROM COMMENT_TABLE
+ WHERE COMMENT_IDK = #{value}
+
+</select>
+
+
+<!-- 댓글 수정 -->
+<update id="commentUpdate" parameterType="com.icia.sweethome.model.Comment">
+UPDATE COMMENT_TABLE
+   SET COMMENT_CONTENT = #{commentContent},
+       MOD_DATE = SYSDATE
+ WHERE COMMENT_IDK = #{commentIdk}
+</update>
+
+<!-- 상세 게시물 조회 시 나의 좋아요 여부 -->
+<select id="boardViewMyLikes" parameterType="com.icia.sweethome.model.Community" resultType="int">
+
+SELECT COUNT(A.COMMU_IDK) AS CNT
+  FROM COMMU_LIKES  A, COMMU_BOARD B
+ WHERE A.COMMU_IDK = B.COMMU_IDK
+   AND A.USER_ID = #{userId}
+   AND A.COMMU_IDK = #{commuIdk}
+
+</select>
+
+
+<!-- 상세 게시물 조회 시 나의 스크랩 여부 -->
+<select id="boardViewMyScrap" parameterType="com.icia.sweethome.model.Community" resultType="int">
+
+SELECT COUNT(A.COMMU_IDK) AS CNT
+  FROM COMMU_SCRAP  A, COMMU_BOARD B
+ WHERE A.COMMU_IDK = B.COMMU_IDK
+   AND A.USER_ID = #{userId}
+   AND A.COMMU_IDK = #{commuIdk}
+
+</select>
+
+<!-- 상세 게시물 좋아요 증가 -->
+<update id="boardLikesCntPlus" parameterType="int">
+
+UPDATE COMMU_BOARD
+   SET COMMU_LIKES = COMMU_LIKES + 1
+ WHERE COMMU_IDK = #{value}
+ 
+</update>
+
+<!-- 상세 게시물 좋아요 감소 -->
+<update id="boardLikesCntMinus" parameterType="int">
+
+UPDATE COMMU_BOARD
+   SET COMMU_LIKES = COMMU_LIKES - 1
+ WHERE COMMU_IDK = #{value}
+ 
+</update>
+
+<!-- 좋아요 테이블에 인서트 -->
+<insert id="likesInsert" parameterType="com.icia.sweethome.model.Community">
+INSERT INTO COMMU_LIKES (COMMU_IDK, USER_ID) 
+VALUES (#{commuIdk}, #{userId})
+</insert>
+
+<!-- 스크랩 테이블에 인서트 -->
+<insert id="scrapInsert" parameterType="com.icia.sweethome.model.Community">
+INSERT INTO COMMU_SCRAP (COMMU_IDK, USER_ID) 
+VALUES (#{commuIdk}, #{userId})
+</insert>
+
+<!-- 좋아요 테이블에서 딜리트 -->
+<delete id="likesDelete" parameterType="com.icia.sweethome.model.Community">
+DELETE FROM COMMU_LIKES
+ WHERE USER_ID = #{userId}
+   AND COMMU_IDK = #{commuIdk}
+</delete>
+
+<!-- 스크랩 테이블에서 딜리트 -->
+<delete id="scrapDelete" parameterType="com.icia.sweethome.model.Community">
+DELETE FROM COMMU_SCRAP
+ WHERE USER_ID = #{userId}
+   AND COMMU_IDK = #{commuIdk}
+</delete>
+
+<!-- 게시물 삭제 시 좋아요 테이블에서 딜리트 -->
+<delete id="likesDeleteWhenBoardDelete" parameterType="int">
+DELETE FROM COMMU_LIKES
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+<!-- 게시물 삭제 시 스크랩 테이블에서 딜리트 -->
+<delete id="scrapDeleteWhenBoardDelete" parameterType="int">
+DELETE FROM COMMU_SCRAP
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+<!-- 임시 저장 테이블에 인서트 -->
+<insert id="saveInsert" parameterType="com.icia.sweethome.model.Community">
+INSERT INTO COMMU_SAVE (USER_ID, COMMU_TAB, COMMU_TITLE, COMMU_CONTENT, REG_DATE)
+VALUES (#{userId}, #{commuTab}, #{commuTitle}, #{commuContent}, SYSDATE)
+</insert>
+
+<!-- 임시 저장 테이블에서 딜리트 -->
+<delete id="saveDelete" parameterType="string">
+DELETE FROM COMMU_SAVE
+ WHERE USER_ID = #{value}
+</delete>
+
+<!-- 임시 저장 테이블에서 조회 -->
+<select id="saveSelect" parameterType="string" resultMap="communityResultMap">
+SELECT USER_ID,
+       COMMU_TAB,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       REG_DATE
+  FROM COMMU_SAVE
+ WHERE USER_ID = #{value}
+</select>
+
+<!-- 위 인호 @@@@ 아래 하나 -->
+
+
+<!-- 마이페이지 게시물 조회 -->
+<select id="boardMyList" parameterType="com.icia.sweethome.model.Community" resultMap="communityResultMap">
+SELECT
+    COMMU_IDK,
+    COMMU_TAB,
+    USER_ID,
+    COMMU_TITLE,
+    COMMU_CONTENT,
+    COMMU_VIEWS,
+    COMMU_LIKES,
+    COMMU_STATUS,
+    REG_DATE,
+    MOD_DATE,
+    DELETE_DATE,
+    FILE_CHECK,
+    FILE_EXT
+FROM (SELECT
+            ROWNUM AS RNUM,
+            COMMU_IDK,
+            COMMU_TAB,
+            USER_ID,
+            COMMU_TITLE,
+            COMMU_CONTENT,
+            COMMU_VIEWS,
+            COMMU_LIKES,
+            COMMU_STATUS,
+            REG_DATE,
+            MOD_DATE,
+            DELETE_DATE,
+            FILE_CHECK,
+            FILE_EXT
+        FROM (SELECT
+                    COMMU_IDK,
+                    NVL(COMMU_TAB,'') AS COMMU_TAB,
+                    NVL(USER_ID,'') AS USER_ID,
+                    NVL(COMMU_TITLE,'') AS COMMU_TITLE,
+                    NVL(COMMU_CONTENT,'') AS COMMU_CONTENT,
+                    NVL(COMMU_VIEWS,'') AS COMMU_VIEWS,
+                    NVL(COMMU_LIKES,'') AS COMMU_LIKES,
+                    NVL(COMMU_STATUS,'') AS COMMU_STATUS,
+                    TO_CHAR(REG_DATE,'YYYY.MM.DD') AS REG_DATE,
+                    TO_CHAR(MOD_DATE,'YYYY.MM.DD') AS MOD_DATE,
+                    TO_CHAR(DELETE_DATE,'YYYY.MM.DD') AS DELETE_DATE,
+                    NVL(FILE_CHECK,'N') AS FILE_CHECK,
+                    NVL(FILE_EXT, '') AS FILE_EXT
+                FROM
+                    COMMU_BOARD
+                WHERE USER_ID = #{userId}
+<if test='searchValue != null and searchValue != ""'>
+                  AND COMMU_TITLE LIKE '%' || #{commuTitle} || '%'
+</if>
+                ORDER BY COMMU_IDK DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 마이페이지 게시물 수 조회 -->
+<select id="boardMyListCount" parameterType="com.icia.sweethome.model.Community" resultType="int">
+	   SELECT
+	        COUNT(COMMU_IDK) AS CNT
+	    FROM
+	        COMMU_BOARD
+	    WHERE USER_ID = #{userId}
+	<if test='searchValue != null and searchValue != ""'>
+	      AND COMMU_TITLE LIKE '%' || #{commuTitle} || '%'
+	</if>
+</select>
+
+
+<!-- 마이페이지 내 스크랩 전체건수 조회 -->
+<select id="boardMyScrapCount" parameterType="com.icia.sweethome.model.Community" resultType="int">
+ SELECT COUNT(S.COMMU_IDK) AS CNT
+   FROM COMMU_SCRAP S, COMMU_BOARD B
+  WHERE S.USER_ID = #{userId}
+   AND S.COMMU_IDK = B.COMMU_IDK
+</select>
+   
+   
+<!-- 마이페이지 내 스크랩  -->
+<select id="boardMyScrap" parameterType="com.icia.sweethome.model.Community" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT
+  FROM (SELECT ROWNUM RNUM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT S.COMMU_IDK,
+                       B.COMMU_TAB,
+                       S.USER_ID,
+                       NVL(B.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(B.COMMU_CONTENT, '') AS COMMU_CONTENT,
+                       NVL(B.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(B.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(B.COMMU_STATUS, 'Y') AS COMMU_STATUS,
+                       NVL(TO_CHAR(B.REG_DATE, 'YYYY.MM.DD'), '') AS REG_DATE,
+                       NVL(TO_CHAR(MOD_DATE,'YYYY.MM.DD'), '') AS MOD_DATE,
+                       NVL(TO_CHAR(DELETE_DATE,'YYYY.MM.DD'), '') AS DELETE_DATE,
+                       NVL(B.FILE_CHECK, 'N') AS FILE_CHECK,
+                       NVL(B.FILE_EXT, '') AS FILE_EXT
+                  FROM COMMU_SCRAP S, COMMU_BOARD B
+                 WHERE S.USER_ID = #{userId}
+                   AND S.COMMU_IDK = B.COMMU_IDK
+                 ORDER BY S.COMMU_IDK DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+<!-- 마이페이지에서 내 게시물 삭제 0913 윤하나 -->
+<delete id="boardMyDelete" parameterType="int">
+DELETE FROM COMMU_BOARD
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+<!-- 마이페이지에서 내 스크랩 삭제 0913 윤하나 -->
+<delete id="boardMyScrapDelete" parameterType="int">
+DELETE FROM COMMU_SCRAP
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+<!-- 마이페이지에서 내 스크랩 존재 여부 확인 0913 윤하나 -->
+<select id="boardMyScrapSearch" parameterType="int" resultType="int">
+SELECT COUNT(COMMU_IDK) AS CNT
+  FROM COMMU_SCRAP
+ WHERE COMMU_IDK = #{value}
+</select>
+
+
+<!-- 마이페이지 내 좋아요 전체건수 조회 0913 윤하나-->
+<select id="boardMyLikesCount" parameterType="com.icia.sweethome.model.Community" resultType="int">
+ SELECT COUNT(L.COMMU_IDK) AS CNT
+   FROM COMMU_LIKES L, COMMU_BOARD B
+  WHERE L.USER_ID = #{userId}
+   AND L.COMMU_IDK = B.COMMU_IDK
+</select>
+<!-- 마이페이지 내 좋아요 0913 윤하나  -->
+<select id="boardMyLikes" parameterType="com.icia.sweethome.model.Community" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       COMMU_TAB,
+       USER_ID,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       COMMU_VIEWS,
+       COMMU_LIKES,
+       COMMU_STATUS,
+       REG_DATE,
+       MOD_DATE,
+       DELETE_DATE,
+       FILE_CHECK,
+       FILE_EXT
+  FROM (SELECT ROWNUM RNUM,
+               COMMU_IDK,
+               COMMU_TAB,
+               USER_ID,
+               COMMU_TITLE,
+               COMMU_CONTENT,
+               COMMU_VIEWS,
+               COMMU_LIKES,
+               COMMU_STATUS,
+               REG_DATE,
+               MOD_DATE,
+               DELETE_DATE,
+               FILE_CHECK,
+               FILE_EXT
+          FROM (SELECT L.COMMU_IDK,
+                       B.COMMU_TAB,
+                       L.USER_ID,
+                       NVL(B.COMMU_TITLE, '') AS COMMU_TITLE,
+                       NVL(B.COMMU_CONTENT, '') AS COMMU_CONTENT,
+                       NVL(B.COMMU_VIEWS, 0) AS COMMU_VIEWS,
+                       NVL(B.COMMU_LIKES, 0) AS COMMU_LIKES,
+                       NVL(B.COMMU_STATUS, 'Y') AS COMMU_STATUS,
+                       NVL(TO_CHAR(B.REG_DATE, 'YYYY.MM.DD'), '') AS REG_DATE,
+                       NVL(TO_CHAR(MOD_DATE,'YYYY.MM.DD'), '') AS MOD_DATE,
+                       NVL(TO_CHAR(DELETE_DATE,'YYYY.MM.DD'), '') AS DELETE_DATE,
+                       NVL(B.FILE_CHECK, 'N') AS FILE_CHECK,
+                       NVL(B.FILE_EXT, '') AS FILE_EXT
+                  FROM COMMU_LIKES L, COMMU_BOARD B
+                 WHERE L.USER_ID = #{userId}
+                   AND L.COMMU_IDK = B.COMMU_IDK
+                 ORDER BY L.COMMU_IDK DESC))
+ WHERE RNUM <![CDATA[>=]]> #{startRow}
+   AND RNUM <![CDATA[<=]]> #{endRow}
+</select>
+
+<!-- 마이페이지에서 내 좋아요 존재 여부 확인 0913 윤하나 -->
+<select id="boardMyLikesSearch" parameterType="int" resultType="int">
+SELECT COUNT(COMMU_IDK) AS CNT
+  FROM COMMU_LIKES
+ WHERE COMMU_IDK = #{value}
+</select>
+
+<!-- 마이페이지에서 내 좋아요 삭제 0913 윤하나 -->
+<delete id="boardMyLikesDelete" parameterType="int">
+DELETE FROM COMMU_LIKES
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+
+<!-- 마이페이지에서 내 좋아요 선택삭제 0920 윤하나 -->
+<delete id="myLikesSelectDelete" parameterType="int">
+DELETE FROM COMMU_LIKES
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+<!-- 마이페이지에서 내 게시물 선택삭제 0913 윤하나 -->
+<delete id="mySelectDelete" parameterType="int">
+DELETE FROM COMMU_BOARD
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+<!-- 마이페이지에서 내 스크랩 선택삭제 0920 윤하나 -->
+<delete id="myScrapSelectDelete" parameterType="int">
+DELETE FROM COMMU_SCRAP
+ WHERE COMMU_IDK = #{value}
+</delete>
+
+</mapper>
+
