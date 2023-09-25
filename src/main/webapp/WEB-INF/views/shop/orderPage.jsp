@@ -50,7 +50,7 @@ $(document).ready(function() {
 		   if(trimCheck("deliveryMessage","메세지를 입력해주세요"))return;
 		   
 		    $("#deliveryName").val("${user.userName}");
-		    $("#deliveryAddress").val("${user.userName}");
+		    $("#deliveryAddress").val("${user.userAddress}");
 		    $("#deliveryPhone").val("${user.userPhone}");
 		    $("#deliveryContent").val($("#deliveryMessage").val());
 	   }

@@ -150,7 +150,7 @@ text-align: center;
                             <td>${order.orderIdk}</td>
                             <td rowspan="3">총 결제금액</td>
                             <td rowspan="3">
-                                <fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice}" />원
+                                <fmt:formatNumber type="number" maxFractionDigits="3" value="${order.actualPrice}" />원
                             </td>
                         </tr>
                         <tr>
