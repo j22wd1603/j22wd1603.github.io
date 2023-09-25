@@ -20,4 +20,40 @@ public class AdminController {
 		
 		return "/admin/main";
 	}
+	
+	@RequestMapping(value = "/admin/userAdmin")
+	public String userAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "/admin/userAdmin";
+	}	
+	
+	@RequestMapping(value = "/admin/shopAdmin")
+	public String shopAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "/admin/shopAdmin";
+	}
+	
+	@RequestMapping(value = "/admin/communityAdmin")
+	public String communityAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "/admin/communityAdmin";
+	}
+	
+	@RequestMapping(value = "/admin/csAdmin")
+	public String csAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "/admin/main";
+	}
+	
+	@RequestMapping(value = "/admin/sellerAdmin")
+	public String sellerAdmin(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return "/admin/sellerAdmin";
+	}
+	
 }
