@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.sweethome.dao.AdminDao">
+  
+    <resultMap type="com.icia.sweethome.model.Admin" id="adminResultMap">
+     <id column="ADMIN_ID" property="adminId" />
+     <result column="ADMIN_PWD" property="adminPwd" />
+     <result column="ADMIN_NAME" property="adminName" />
+     <result column="ADMIN_PHONE" property="adminPhone" />
+     <result column="ADMIN_EMAIL" property="adminEmail" />
+  	</resultMap>
+
+  <select id="adminSelect" parameterType="String" resultMap="adminResultMap">     
+SELECT
+       NVL(ADMIN_ID, '') AS ADMIN_ID,
+       NVL(ADMIN_PWD, '') AS ADMIN_PWD,
+       NVL(ADMIN_NAME, '') AS ADMIN_NAME,
+       NVL(ADMIN_PHONE, '') AS ADMIN_PHONE,
+       NVL(ADMIN_EMAIL, '') AS ADMIN_EMAIL
+ FROM ADMIN
+WHERE ADMIN_ID = #{value}
+  </select>   
+
+ 
+</mapper>
+
+
+
+
+
+
