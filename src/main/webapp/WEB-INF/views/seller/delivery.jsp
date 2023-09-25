@@ -48,6 +48,56 @@ function fn_search()
 	document.searchForm.submit();
 }
 
+function fn_delete(productIdk, bbsStatus)
+{
+	var msg ="";
+	var status ="";
+	if(bbsStatus == 'Y'){
+		msg = "배송완료 하시겠습까";
+		status = bbsStatus;
+	}
+	else if(bbsStatus == 'R'){
+		
+	}
+	else{
+		msg = "재판매 하시겠습까";
+		status = 'Y';
+	}
+	
+    if(!confirm(msg)){
+        return;
+    }
+    
+    $.ajax({
+        type :"POST",
+        url:"/seller/deliveryStatus",
+        data:{
+        	productIdk:productIdk,
+        	status:status
+        },
+        datatype:"JSON",
+        beforeSend:function(xhr)
+        {
+           xhr.setRequestHeader("AJAX", "true");
+        },
+        success:function(response)
+        {
+           if(response.code == 0)
+           {
+        	   location.href = "/seller/main";
+           }
+           else
+           {
+              alert("오류가 발생하였습니다.");
+           }
+        },
+        error:function(xhr, status, error)
+        {
+           icia.common.error(error);
+        }
+     });
+}
+
 </script>
 </head>
 <body>
@@ -90,109 +140,109 @@ function fn_search()
 					<c:if test="${!empty list}">
 						<c:forEach items="${list}" var="delivery" varStatus="status">
 						<c:set var="row" value="${5+fn:length(delivery.deliveryList)}" />
-<tr>
-	<th rowspan="${row}">${delivery.orderIdk}</th>
-	<th width="5%">상세번호</th>
-	<th>이미지</th>
-	<th colspan="2">상품정보</th>
-	<th width="5%">수량</th>
-	<th>총금액</th>
-	<th>할인금액</th>
-	<th>결제금액</th>
-	<th rowspan="${row}">${delivery.orderDate}</th>
-	<c:choose>
-		<c:when test="${delivery.deliveryStatus == 'Y'}">
-			<th rowspan="${row}">배송완료</th>
-		</c:when>
-		<c:when test="${delivery.deliveryStatus == 'R'}">
-			<th rowspan="${row}">배송중</th>
-		</c:when>
-		<c:otherwise>
-			<th rowspan="${row}">배송준비중</th>
-		</c:otherwise>
-	</c:choose>
-	<th rowspan="6">
-</tr>
-<c:forEach items="${delivery.deliveryList}" var="deliveryDetail" varStatus="status2">
-<tr>
-	<th>${status2.index+1}</th>
-	<th><img src="/resources/images/product/small/${deliveryDetail.productCode}.${deliveryDetail.productFileExt}" alt="${deliveryDetail.productName}"></th>
-	<th colspan="2">							
-		<div class="deliveryTable">
-            상품 이름: ${deliveryDetail.productName}
-        </div>
-        <div class="deliveryTable">
-            상품 단가: ${deliveryDetail.productPrice}
-        </div>
-        <div class="deliveryTable">
-            상품 브랜드: ${deliveryDetail.productBrandName}
-        </div>
-	</th>
-	<th>${deliveryDetail.quantity}</th>
-<c:choose>
-	<c:when test="${status2.index == 0}">	
-		<th rowspan="${fn:length(delivery.deliveryList)}">${delivery.totalPrice}</th>
-		<th rowspan="${fn:length(delivery.deliveryList)}">${delivery.couponDiscountPrice}</th>
-		<th rowspan="${fn:length(delivery.deliveryList)}">${delivery.actualPrice}</th>
-	</c:when>
-</c:choose>
-</tr>
-</c:forEach>
-<tr>
-	<th colspan="5">주문자 정보</th>
-	<th>결제상태</th>
-	<th>결제종류</th>
-	<th>결제일자</th>
-</tr>
-<tr>
-	<th colspan="2" style="text-align: left;">
-	<div class="deliveryTable">
-		아이디(이름): ${delivery.userId}(${delivery.userName})	
-	</div>
-	<div class="deliveryTable">
-		번호: ${delivery.userPhone}	
-	</div>
-	</th>
-	<th colspan="3" style="text-align: left;" >
-		<div class="deliveryTable">
-			이메일: ${delivery.userEmail}
-		</div>
-		<div class="deliveryTable">
-			주소: ${delivery.userAddress}
-		</div>
-	</th>
-<c:choose>
-	<c:when test="${delivery.payStatus == 'Y'}">
-		<th rowspan="3">결재완료</th>
-		<th rowspan="3">${delivery.payMethodType}</th>
-		<th rowspan="3">${delivery.approvedDate}</th>
-	</c:when>
-	<c:otherwise>
-		<th rowspan="3" colspan="3">미결재</th>
-	</c:otherwise>
-</c:choose>
-</tr>
-<tr>
-	<th colspan="5">배송지 정보</th>
-</tr>
-<tr>
-	<th colspan="2" style="text-align: left;">
-	<div class="deliveryTable">
-		받는사람: ${delivery.deliveryName}
-	</div>
-	<div class="deliveryTable">
-		번호: ${delivery.deliveryPhone}	
-	</div>
-	</th>
-	<th colspan="3" style="text-align: left;" >
-		<div class="deliveryTable">
-			배송지: ${delivery.deliveryAddress}
-		</div>
-		<div class="deliveryTable">
-			배송시 요청사항: ${delivery.deliveryContent}
-		</div>
-	</th>
-</tr>
+						<tr>
+							<th rowspan="${row}">${delivery.orderIdk}</th>
+							<th width="5%">상세번호</th>
+							<th>이미지</th>
+							<th colspan="2">상품정보</th>
+							<th width="5%">수량</th>
+							<th>총금액</th>
+							<th>할인금액</th>
+							<th>결제금액</th>
+							<th rowspan="${row}">${delivery.orderDate}</th>
+							<c:choose>
+								<c:when test="${delivery.deliveryStatus == 'Y'}">
+									<th rowspan="${row}">배송완료</th>
+								</c:when>
+								<c:when test="${delivery.deliveryStatus == 'R'}">
+									<th rowspan="${row}">배송중</th>
+								</c:when>
+								<c:otherwise>
+									<th rowspan="${row}">배송준비중</th>
+								</c:otherwise>
+							</c:choose>
+							<th rowspan="6"><input type="button" onclick="${delivery.orderIdk}"></th>
+						</tr>
+						<c:forEach items="${delivery.deliveryList}" var="deliveryDetail" varStatus="status2">
+						<tr>
+							<th>${status2.index+1}</th>
+							<th><img src="/resources/images/product/small/${deliveryDetail.productCode}.${deliveryDetail.productFileExt}" alt="${deliveryDetail.productName}"></th>
+							<th colspan="2">							
+								<div class="deliveryTable">
+						            상품 이름: ${deliveryDetail.productName}
+						        </div>
+						        <div class="deliveryTable">
+						            상품 단가: ${deliveryDetail.productPrice}
+						        </div>
+						        <div class="deliveryTable">
+						            상품 브랜드: ${deliveryDetail.productBrandName}
+						        </div>
+							</th>
+							<th>${deliveryDetail.quantity}</th>
+						<c:choose>
+							<c:when test="${status2.index == 0}">	
+								<th rowspan="${fn:length(delivery.deliveryList)}">${delivery.totalPrice}</th>
+								<th rowspan="${fn:length(delivery.deliveryList)}">${delivery.couponDiscountPrice}</th>
+								<th rowspan="${fn:length(delivery.deliveryList)}">${delivery.actualPrice}</th>
+							</c:when>
+						</c:choose>
+						</tr>
+						</c:forEach>
+						<tr>
+							<th colspan="5">주문자 정보</th>
+							<th>결제상태</th>
+							<th>결제종류</th>
+							<th>결제일자</th>
+						</tr>
+						<tr>
+							<th colspan="2" style="text-align: left;">
+							<div class="deliveryTable">
+								아이디(이름): ${delivery.userId}(${delivery.userName})	
+							</div>
+							<div class="deliveryTable">
+								번호: ${delivery.userPhone}	
+							</div>
+							</th>
+							<th colspan="3" style="text-align: left;" >
+								<div class="deliveryTable">
+									이메일: ${delivery.userEmail}
+								</div>
+								<div class="deliveryTable">
+									주소: ${delivery.userAddress}
+								</div>
+							</th>
+						<c:choose>
+							<c:when test="${delivery.payStatus == 'Y'}">
+								<th rowspan="3">결재완료</th>
+								<th rowspan="3">${delivery.payMethodType}</th>
+								<th rowspan="3">${delivery.approvedDate}</th>
+							</c:when>
+							<c:otherwise>
+								<th rowspan="3" colspan="3">미결재</th>
+							</c:otherwise>
+						</c:choose>
+						</tr>
+						<tr>
+							<th colspan="5">배송지 정보</th>
+						</tr>
+						<tr>
+							<th colspan="2" style="text-align: left;">
+							<div class="deliveryTable">
+								받는사람: ${delivery.deliveryName}
+							</div>
+							<div class="deliveryTable">
+								번호: ${delivery.deliveryPhone}	
+							</div>
+							</th>
+							<th colspan="3" style="text-align: left;" >
+								<div class="deliveryTable">
+									배송지: ${delivery.deliveryAddress}
+								</div>
+								<div class="deliveryTable">
+									배송시 요청사항: ${delivery.deliveryContent}
+								</div>
+							</th>
+						</tr>
 						</c:forEach>
 					</c:if>
 
