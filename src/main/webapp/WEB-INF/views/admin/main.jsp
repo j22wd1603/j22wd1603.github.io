@@ -494,7 +494,7 @@ function fn_loginCheck() {
 
 				if (response.code == 0) {
 					alert("로그인을 성공했습니다.");
-					location.href = "/admin/adminCommunity";
+					location.href = "/admin/adminIndex";
 				} else {
 					if (response.code == -1) {
 						alert("비밀번호가 올바르지 않습니다.");

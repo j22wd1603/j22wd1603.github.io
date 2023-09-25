@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.sweethome.dao.CommunityDao">
+
+<resultMap id="communityResultMap" type="com.icia.sweethome.model.Community">
+    <id column="COMMU_IDK" property="commuIdk" />
+    <result column="COMMU_TAB" property="commuTab" />
+    <result column="USER_ID" property="userId" />
+    <result column="COMMU_TITLE" property="commuTitle" />
+    <result column="COMMU_CONTENT" property="commuContent" />
+    <result column="COMMU_VIEWS" property="commuViews" />
+    <result column="COMMU_LIKES" property="commuLikes" />
+    <result column="COMMU_STATUS" property="commuStatus" />
+    <result column="REG_DATE" property="regDate" />   
+    <result column="MOD_DATE" property="modDate" />
+    <result column="DELETE_DATE" property="deleteDate" />
+    <result column="FILE_CHECK" property="fileCheck" />
+    <result column="FILE_EXT" property="fileExt" />
+</resultMap>
+
+<resultMap id="commentResultMap" type="com.icia.sweethome.model.Comment">
+    <id column="COMMENT_IDK" property="commentIdk" />
+    <result column="COMMU_IDK" property="commuIdk" />
+    <result column="COMMENT_STATUS" property="commentStatus" />
+    <result column="REG_DATE" property="regDate" />
+    <result column="MOD_DATE" property="modDate" />
+    <result column="DELETE_DATE" property="deleteDate" />
+    <result column="PARENT_IDK" property="parentIdk" />
+    <result column="COMMENT_CONTENT" property="commentContent" />
+    <result column="USER_ID" property="userId" />   
+    <result column="GROUP_IDK" property="groupIdk" />
+    <result column="IMAGE_FILE_EXT" property="imageFileExt" />
+</resultMap>
+
+
+
+<select id="commentSelect" parameterType="com.icia.sweethome.model.Comment" resultMap="commentResultMap">
+	
+     SELECT
+	      COMMENT_IDK,
+	      COMMU_IDK,
+	      COMMENT_STATUS,
+	      REG_DATE,
+	      MOD_DATE,
+	      DELETE_DATE,
+	      PARENT_IDK,
+	      COMMENT_CONTENT,
+	      USER_ID,
+	      GROUP_IDK
+	FROM
+	      COMMENT_TABLE
+	WHERE DBMS_LOB.INSTR(COMMENT_CONTENT, #{commentContent}) > 0
+      AND COMMENT_STATUS = #{commentStatus}	
+	
+  
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</mapper>
+
+
+
+
+
+
