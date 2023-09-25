@@ -33,7 +33,7 @@ public interface ShopDao {
 	 
 	 public int cartListCount (Cart cart);
 	 
-	 public int cartDelete(int productIdk);
+	 public int cartDelete(Cart cart);
 	 
 	 
 	//마이페이지의 내 리뷰 0913 윤하나

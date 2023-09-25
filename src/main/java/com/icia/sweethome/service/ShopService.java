@@ -208,13 +208,13 @@ public class ShopService
 			}
 	 
 	 
-	 public int cartDelete(int productIdk)
+	 public int cartDelete(Cart cart)
 		{  
 			int count = 0;
 	      
 	      try
 	      {
-	         count =  shopDao.cartDelete(productIdk);
+	         count =  shopDao.cartDelete(cart);
 	      }
 	      catch(Exception e)
 	      {
