@@ -48,7 +48,7 @@ function fn_search()
 	document.searchForm.submit();
 }
 
-function fn_delete(productIdk, bbsStatus)
+function fn_delivery(productIdk, bbsStatus,index)
 {
 	var msg ="";
 	var status ="";
@@ -57,11 +57,12 @@ function fn_delete(productIdk, bbsStatus)
 		status = bbsStatus;
 	}
 	else if(bbsStatus == 'R'){
-		
+		msg = "배송하시겠습까";
+		status = bbsStatus;
 	}
 	else{
-		msg = "재판매 하시겠습까";
-		status = 'Y';
+		msg = "배송 전으로 돌리시겠습니까?";
+		status = bbsStatus;
 	}
 	
     if(!confirm(msg)){
@@ -150,18 +151,15 @@ function fn_delete(productIdk, bbsStatus)
 							<th>할인금액</th>
 							<th>결제금액</th>
 							<th rowspan="${row}">${delivery.orderDate}</th>
-							<c:choose>
-								<c:when test="${delivery.deliveryStatus == 'Y'}">
-									<th rowspan="${row}">배송완료</th>
-								</c:when>
-								<c:when test="${delivery.deliveryStatus == 'R'}">
-									<th rowspan="${row}">배송중</th>
-								</c:when>
-								<c:otherwise>
-									<th rowspan="${row}">배송준비중</th>
-								</c:otherwise>
-							</c:choose>
-							<th rowspan="6"><input type="button" onclick="${delivery.orderIdk}"></th>
+				<th rowspan="${row}">
+					<select id="bbsDeliveryStatus${status.index}" class="search">
+						<option value=""  <c:if test="${delivery.deliveryStatus == ''}">selected</c:if>>배송상태</option>
+						<option value="Y" <c:if test="${delivery.deliveryStatus == 'Y'}">selected</c:if>>배송완료</option>
+						<option value="R" <c:if test="${delivery.deliveryStatus == 'R'}">selected</c:if>>배송중</option>
+						<option value="N" <c:if test="${delivery.deliveryStatus == 'N'}">selected</c:if>>배송준비중</option>
+					</select>
+				</th>
+							<th rowspan="${row}"><input type="button" onclick="fn_delivery(${delivery.orderIdk},${delivery.deliveryStatus},${status.index})" value="배송"></th>
 						</tr>
 						<c:forEach items="${delivery.deliveryList}" var="deliveryDetail" varStatus="status2">
 						<tr>
