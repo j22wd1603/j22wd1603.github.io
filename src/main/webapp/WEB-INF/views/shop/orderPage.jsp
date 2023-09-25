@@ -499,16 +499,7 @@ function setInputAddress() {
                                    </tr>
                                </table>
                            </div>
-                           
-                           <div id="virtualTable" style="display: none;"> 
-                               <table>
-                                   <tr>
-                                            <td></td>
-                                            <td style="font-size: 5px; color: gray; text-align:center;"><br/>소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</td>
-                                        </tr>
-                               </table>
-                           </div>
-                             
+                        
                              </article>
                           </div>
                           
@@ -613,16 +604,6 @@ function setInputAddress() {
         }
     });
     
-    const virtualRadio = document.getElementById('virtualRadio');
-    const virtualTable = document.getElementById('virtualTable');
-
-    virtualRadio.addEventListener('change', function() {
-        if (virtualRadio.checked) {
-           virtualTable.style.display = 'block';
-            bankTable.style.display = 'none'; 
-            kakaoTable.style.display = 'none'; 
-        }
-    });
   	//배송에 쓰이는 스크립트
     const deliveryRadio = document.getElementById('deliveryRadio');
     const deliveryTable = document.getElementById('deliveryTable');
