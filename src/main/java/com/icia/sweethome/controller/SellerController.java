@@ -85,34 +85,42 @@ public class SellerController {
 		return SCode; 
 	}
 	
-	   @RequestMapping(value = "/shop/orderPage", method = RequestMethod.POST)
-	   public String orderPage(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
-	   
-	      String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-	      User user = userService.userSelect(userId);
-	      if(userId == null || user==null) {
-	    	  loginChack(response);
-	         return "redirect:/";
-	      }
-	      
-	      List<Shop> productList = new ArrayList<Shop>();
-	      
-	      int productIdk = HttpUtil.get(request, "bbsProductIdk1", 0);
-	      int quantity = HttpUtil.get(request, "bbsQuantity", 0);
-	      Shop product = sellerService.productSelect(productIdk);
-	      product.setQuantity(quantity);
-	      
-	      productList.add(product);
-	      
-	      List<String> couponList = sellerService.noUseCoupon(userId);
-	      
-	      
-	      model.addAttribute("productList", productList);
-	      model.addAttribute("user", user);
-	      model.addAttribute("couponList", couponList);
-	      
-	      
-	      return "/shop/orderPage";
+	@RequestMapping(value = "/shop/orderPage", method = RequestMethod.POST)
+	   public String orderPage(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	       String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	       User user = userService.userSelect(userId);
+	       
+	       if (userId == null || user == null) {
+	           loginChack(response);
+	           return "redirect:/";
+	       }
+
+	       // 선택한 상품의 productIdk와 quantity
+	       String[] productIdks = request.getParameterValues("bbsProductIdk");
+	       String[] quantities = request.getParameterValues("bbsQuantity");
+	       
+	       List<Shop> productList = new ArrayList<Shop>();
+
+	       //productList에 추가합니다.
+	       if (productIdks != null && quantities != null) {
+	           for (int i = 0; i < productIdks.length; i++) {
+	               int productIdk = Integer.parseInt(productIdks[i]);
+	               int quantity = Integer.parseInt(quantities[i]);
+	               
+	               Shop product = sellerService.productSelect(productIdk);
+	               product.setQuantity(quantity);
+	               
+	               productList.add(product);
+	           }
+	       }
+	       
+	       List<String> couponList = sellerService.noUseCoupon(userId);
+
+	       model.addAttribute("productList", productList);
+	       model.addAttribute("user", user);
+	       model.addAttribute("couponList", couponList);
+
+	       return "/shop/orderPage";
 	   }
 
 

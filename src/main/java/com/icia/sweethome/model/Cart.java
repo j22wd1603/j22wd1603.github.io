@@ -16,7 +16,7 @@ public class Cart implements Serializable
 	private String productBrandName;
 	private String productName;
 	private String productFileExt;
-	private int productCode;
+	private String productCode;
 	private int productPrice;
 	
 	private int startRow;
@@ -38,7 +38,7 @@ public class Cart implements Serializable
 		productBrandName = "";
 		productName="";
 		productFileExt = "";
-		productCode=0;
+		productCode="";
 		productPrice = 0;
 	}
 
@@ -58,16 +58,19 @@ public class Cart implements Serializable
 
 
 
-
-	public int getProductCode() {
+	public String getProductCode() {
 		return productCode;
 	}
 
 
 
-	public void setProductCode(int productCode) {
+
+
+	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
+
+
 
 
 

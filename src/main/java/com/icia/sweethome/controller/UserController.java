@@ -161,7 +161,41 @@ public class UserController
 
 	    return ajaxResponse;
 	}
+	
+	
+	@RequestMapping(value = "/user/cartDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<Object> cartDelete(HttpServletRequest request) {
+	    Response<Object> ajaxResponse = new Response<Object>();
+	    int productIdk = HttpUtil.get(request, "productIdk", 0);
+	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	    User user = userService.userSelect(userId);
 
+	    if (user != null) {
+	        if (productIdk > 0) {
+	            int deleteCount = shopService.cartDelete(productIdk);
+
+	            if (deleteCount > 0) {
+	                ajaxResponse.setResponse(0, "상품이 삭제되었습니다.");
+	            } else {
+	                ajaxResponse.setResponse(500, "상품 삭제 중 오류가 발생했습니다.");
+	            }
+	        } else {
+	            ajaxResponse.setResponse(400, "매개변수 오류");
+	        }
+	    } else {
+	        ajaxResponse.setResponse(404, "사용자를 찾을 수 없음");
+	    }
+
+	    if (logger.isDebugEnabled()) {
+	        logger.debug("[ShopController]/user/cartDelete response\n" + JsonUtil.toJsonPretty(ajaxResponse));
+	    }
+
+	    return ajaxResponse;
+	}
+
+	
+	
 	@RequestMapping(value ="/user/cartPage")
 	public String cartPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 	      
@@ -181,12 +215,9 @@ public class UserController
 			String productName = HttpUtil.get(request, "productName", "");
 			String productFileExt = HttpUtil.get(request, "productFileExt", "");
 			
-			int productCode = HttpUtil.get(request, "productCode", 0);
+			String productCode = HttpUtil.get(request, "productCode", "");
 			int productPrice = HttpUtil.get(request, "productPrice", 0); 
-			
-			int quantity = HttpUtil.get(request, "quantity", 0); 
-			int finalPrice =  0;
-			
+
 			List<Cart> cartList = null;
 				
 			Cart cart = new Cart();
@@ -198,6 +229,7 @@ public class UserController
 			cart.setProductCode(productCode);
 			cart.setProductPrice(productPrice);
 			
+
 			totalCount = shopService.cartListCount(cart);
 			
 			if(totalCount > 0)
@@ -208,23 +240,15 @@ public class UserController
 				cart.setEndRow(paging.getEndRow());
 				
 				cartList = shopService.cartList(cart);
-				
-				
-			}
-
-
-			
-			if(quantity >0)
-			{
-				cart.setFinalPrice(cart.getQuantity() *cart.getProductPrice());
-			}
 		
-			
+			}
 			 model.addAttribute("cartList",cartList);
-			    model.addAttribute("user",user);
-			    model.addAttribute("curPage", curPage);
-				model.addAttribute("paging", paging);
-				
+			 model.addAttribute("user",user);
+			 model.addAttribute("curPage", curPage);
+			 model.addAttribute("paging", paging);
+			
+			
+			 
 		    return "/user/cartPage"; 
 	}
 	
