@@ -34,7 +34,7 @@ $(document).ready(function() {
 	   var regPhone2 = /^[0-9]{3,4}$/;
 	   var regPhone3 = /^[0-9]{4}$/;
 	   var name = /^[가-힣a-zA-Z]+$/;
-	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)]+$/;
+	   var address = /^[가-힣a-zA-Z0-9\s\-]+$/;
 
 	   if(deliveryRadio.checked){		   
 		   if(trimCheck("deliveryName","수령인을 입력해주세요"))return;
@@ -50,7 +50,7 @@ $(document).ready(function() {
 		   if(trimCheck("deliveryMessage","메세지를 입력해주세요"))return;
 		   
 		    $("#deliveryName").val("${user.userName}");
-		    $("#deliveryAddress").val("${user.userAddress}");
+		    $("#deliveryAddress").val("${user.userName}");
 		    $("#deliveryPhone").val("${user.userPhone}");
 		    $("#deliveryContent").val($("#deliveryMessage").val());
 	   }
@@ -75,47 +75,48 @@ $(document).ready(function() {
 		    $("#deliveryPhone").val(bbsDeliveryPhone);
 		    $("#deliveryContent").val($("#anotherDeliveryMessage").val());
 		   }
+	   var productIds = $("input[name='productIdk[]']").map(function() {
+           return $(this).val();
+       }).get();
+       var quantities = $("input[name='quantity[]']").map(function() {
+           return $(this).val();
+       }).get();
 
-      $.ajax({
-         type : "POST",
-         url:"/shop/order",
-         data:{
-            redemCode:$("#redemCode").val(),
-            deliveryAddress:$("#deliveryAddress").val(),
-            deliveryPhone:$("#deliveryPhone").val(),
-            deliveryName:$("#deliveryName").val(),
-            deliveryContent:$("#deliveryContent").val(),
-            productIdk:$("#productIdk1").val(),
-            quantity:$("#quantity1").val()
-         },
-         datatype:"JSON",
-         beforeSend:function(xhr)
-         {
-            xhr.setRequestHeader("AJAX", "true");
-         },
-         success:function(response)
-         {
-            if(response.code == 0)
-            {
-               var orderId = response.data.orderIdk;
-               $("#orderId").val(orderId);
-               kakaoPay();
-            }
-            else if(response.code == -998){
-            	alert("상품번호가 숫자가 아닙니다.");
-            }
-            else if(response.code == -999){
-            	alert("주문번호가 숫자가 아닙니다.");
-            }
-            else
-            {
-               alert("오류가 발생하였습니다.");
-            }
-         },
-         error:function(xhr, status, error)
-         {
-            icia.common.error(error);
-         }
+       // AJAX 요청 데이터 생성
+       var requestData = {
+           redemCode: $("#redemCode").val(),
+           deliveryAddress: $("#deliveryAddress").val(),
+           deliveryPhone: $("#deliveryPhone").val(),
+           deliveryName: $("#deliveryName").val(),
+           deliveryContent: $("#deliveryContent").val(),
+           productIdk: productIds, // 상품 ID 배열
+           quantity: quantities // 수량 배열
+       };
+
+       $.ajax({
+           type: "POST",
+           url: "/shop/order",
+           data: requestData, // 배열로 된 데이터 전송
+           dataType: "json",
+           beforeSend: function(xhr) {
+               xhr.setRequestHeader("AJAX", "true");
+           },
+           success: function(response) {
+               if (response.code == 0) {
+                   var orderId = response.data.orderIdk;
+                   $("#orderId").val(orderId);
+                   kakaoPay();
+               } else if (response.code == -998) {
+                   alert("상품번호가 숫자가 아닙니다.");
+               } else if (response.code == -999) {
+                   alert("주문번호가 숫자가 아닙니다.");
+               } else {
+                   alert("오류가 발생하였습니다.");
+               }
+           },
+           error: function(xhr, status, error) {
+               icia.common.error(error);
+           }
       });
 
    });
@@ -123,13 +124,23 @@ $(document).ready(function() {
 });
 
 function kakaoPay() {
+	   var productIds = $("input[name='productIdk[]']").map(function() {
+           return $(this).val();
+       }).get();
+       var quantities = $("input[name='quantity[]']").map(function() {
+           return $(this).val();
+       }).get();
+
    $.ajax({
       type : "POST",
       url:"/kakao/payReady",
       data:{
          orderId:$("#orderId").val(),
-         productIdk:$("#productIdk1").val(),
-         quantity:$("#quantity1").val()
+         productIdk1:$("#productIdk1").val(),
+         quantity1:$("#quantity1").val(),
+         productIdk: productIds, // 상품 ID 배열
+         quantity: quantities // 수량 배열
+
       },
       datatype:"JSON",
       success:function(response)
@@ -499,7 +510,16 @@ function setInputAddress() {
                                    </tr>
                                </table>
                            </div>
-                        
+                           
+                           <div id="virtualTable" style="display: none;"> 
+                               <table>
+                                   <tr>
+                                            <td></td>
+                                            <td style="font-size: 5px; color: gray; text-align:center;"><br/>소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</td>
+                                        </tr>
+                               </table>
+                           </div>
+                             
                              </article>
                           </div>
                           
@@ -554,12 +574,10 @@ function setInputAddress() {
 
 </c:forEach>
 
-<form id="orderForm" name="orderForm" method="post">
-	<c:forEach var="product" items="${productList}">
-		<input type="hidden" id="bbsProductIdk1" name="bbsProductIdk1" value="${product.productIdk}">
-		<input type="hidden" id="bbsQuantity" name="bbsQuantity" value="${product.quantity}">
-	</c:forEach>
-</form>
+<c:forEach var="product" items="${productList}" varStatus="loop">
+    <input type="hidden" name="productIdk[]" value="${product.productIdk}" />
+    <input type="hidden" name="quantity[]" value="${product.quantity}" />
+</c:forEach>
 
  <form name="payForm" id="payForm" method="post">
       <input type="hidden" name="redemCode" id="redemCode" value="" />
@@ -581,7 +599,7 @@ function setInputAddress() {
    </form>
 
    <script>
-      //결제수단때 쓰이는 스크립트 
+      //결제수단때 쓰이는 스크립트
     const bankRadio = document.getElementById('bankRadio');
     const bankTable = document.getElementById('bankTable');
 
@@ -604,6 +622,16 @@ function setInputAddress() {
         }
     });
     
+    const virtualRadio = document.getElementById('virtualRadio');
+    const virtualTable = document.getElementById('virtualTable');
+
+    virtualRadio.addEventListener('change', function() {
+        if (virtualRadio.checked) {
+           virtualTable.style.display = 'block';
+            bankTable.style.display = 'none'; 
+            kakaoTable.style.display = 'none'; 
+        }
+    });
   	//배송에 쓰이는 스크립트
     const deliveryRadio = document.getElementById('deliveryRadio');
     const deliveryTable = document.getElementById('deliveryTable');

@@ -74,10 +74,33 @@ public class KakaoPayController
 		}
 		String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 		
-		String itemCode = HttpUtil.get(request, "productIdk", "");
+		String itemCode = HttpUtil.get(request, "productIdk1", "");
 		logger.debug("itemCode : "+itemCode);
 		Shop product = null;
 		
+		String[] productIds = request.getParameterValues("productIdk[]");
+	    String[] quantities = request.getParameterValues("quantity[]");
+	    String productIdsText = "";
+	    int totalQuantity = 0;
+
+	    if (quantities != null) {
+	        for (String quantityStr : quantities) {
+	            try {
+	                int quantity = Integer.parseInt(quantityStr);
+	                totalQuantity += quantity;
+	            } catch (NumberFormatException e) {
+	                // 수량을 정수로 변환하는 동안 오류 발생 시 처리
+	                e.printStackTrace(); // 또는 로그에 오류를 기록하거나 예외 처리를 수행할 수 있음
+	            }
+	        }
+	    }
+	     if (productIds != null && productIds.length > 0) {
+	         if (productIds.length > 1) {
+	             productIdsText = "외 " + (productIds.length - 1) + "건";
+	         }
+	     } else {
+	         productIdsText = "";
+	     }
 		if(StringUtil.isNumber(itemCode)) {
 			product = sellerService.productSelect(Integer.parseInt(itemCode));
 		}
@@ -89,7 +112,7 @@ public class KakaoPayController
 		if(product != null) {
 			itemName = product.getProductName();
 		}
-		int quantity = HttpUtil.get(request, "quantity", (int)0);
+		int quantity = HttpUtil.get(request, "quantity1", (int)0);
 		int totalAmount =0;
 		if(order != null) {
 			totalAmount = order.getActualPrice();
@@ -102,8 +125,8 @@ public class KakaoPayController
 		kakaoPayOrder.setPartnerOrderId(orderId);
 		kakaoPayOrder.setPartnerUserId(userId);
 		kakaoPayOrder.setItemCode(itemCode);
-		kakaoPayOrder.setItemName(itemName);
-		kakaoPayOrder.setQuantity(quantity);
+		kakaoPayOrder.setItemName(itemName + productIdsText);
+		kakaoPayOrder.setQuantity(totalQuantity);
 		kakaoPayOrder.setTotalAmount(totalAmount);
 		kakaoPayOrder.setTaxFreeAmount(taxFreeAmount);
 		kakaoPayOrder.setVatAmount(vatAmount);

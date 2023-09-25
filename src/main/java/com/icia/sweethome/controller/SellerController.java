@@ -162,104 +162,98 @@ public class SellerController {
 				return "/shop/orderComplete";
 			}
 	
-	@RequestMapping(value ="/shop/order", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<Object> order(HttpServletRequest request, HttpServletResponse response) {
-		
-		Response<Object> ajaxResponse = new Response<Object>();
-
-		int orderIdk = sellerService.orderSeqSelect();
-		String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-		
-		String redemCode = HttpUtil.get(request, "redemCode", "");
-		String deliveryAddress = HttpUtil.get(request, "deliveryAddress", "");
-		String deliveryPhone = HttpUtil.get(request, "deliveryPhone", "");
-		String deliveryName = HttpUtil.get(request, "deliveryName", "");
-		String deliveryContent = HttpUtil.get(request, "deliveryContent", "");
-		
-		int couponDiscountPrice = 0;
-		int totalPrice = 0;
-		
-		Order order = new Order();
-		
-		order.setOrderIdk(orderIdk);
-		order.setUserId(userId);		
-		order.setDeliveryAddress(deliveryAddress);
-		order.setDeliveryPhone(deliveryPhone);
-		order.setDeliveryName(deliveryName);
-		order.setDeliveryContent(deliveryContent);
-		
-		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-		
-// 장바구니처럼 상품이 여러개인경우 재수정필요 현재 한건의 결제만 받음
-		int productIdk = HttpUtil.get(request, "productIdk", 0);
-		int quantity = HttpUtil.get(request, "quantity", 0);
-		
-		OrderDetail orderDetail = new OrderDetail();
-		Shop product = sellerService.productSelect(productIdk);
-		int productPrice = product.getProductPrice();
-		
-		orderDetail.setOrderIdk(orderIdk);
-		orderDetail.setProductIdk(productIdk);
-		orderDetail.setQuantity(quantity);
-		orderDetail.setProductPrice(productPrice);
-		
-		orderDetails.add(orderDetail);
-		
-		
-		order.setOrderDetailList(orderDetails);
-		
-		totalPrice += quantity * productPrice;
-		
-		order.setTotalPrice(totalPrice);
-		
-		if(redemCode != null || !StringUtil.equals(redemCode,"")) {
-			order.setRedemCode(redemCode);
-			
-			Coupon coupon = sellerService.couponSelect(redemCode);
-			if (coupon != null) {
-				int discount = coupon.getCouponDiscount();
-				
-				if(discount > 0) {
-					couponDiscountPrice = (totalPrice * discount)/100 ;
-				}
-				
-				coupon.setUserId(userId);
-				coupon.setOrderIdk(orderIdk);
-				coupon.setCouponDiscountPrice(couponDiscountPrice);
-				
-				order.setCouponDiscountPrice(couponDiscountPrice);
-				order.setCoupon(coupon);
-			}
-		}
-		
-		int actualPrice = totalPrice - couponDiscountPrice;
-		order.setActualPrice(actualPrice);
-		
-		try
-		{
-			if(sellerService.orderInsert(order) > 0)
-			{
-				JsonObject json = new JsonObject();
-				json.addProperty("orderIdk", orderIdk);
-				
-				ajaxResponse.setResponse(0, "success",json);
-				request.getSession().setAttribute("orderIdk", orderIdk);
-			}
-			else
-			{
-				ajaxResponse.setResponse(-1, "fail");
-			}
-		}
-		catch(Exception e)
-		{
-			logger.error("[sellerController] order Exception", e);
-			ajaxResponse.setResponse(500, "internal server error");
-		}
-		
-		
-		return ajaxResponse;
-	}
+		 @RequestMapping(value ="/shop/order", method = RequestMethod.POST)
+		 @ResponseBody
+		 public Response<Object> order(HttpServletRequest request, HttpServletResponse response) {
+		     
+		     Response<Object> ajaxResponse = new Response<Object>();
+		     
+		     int orderIdk = sellerService.orderSeqSelect();
+		     String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+		     
+		     String redemCode = HttpUtil.get(request, "redemCode", "");
+		     String deliveryAddress = HttpUtil.get(request, "deliveryAddress", "");
+		     String deliveryPhone = HttpUtil.get(request, "deliveryPhone", "");
+		     String deliveryName = HttpUtil.get(request, "deliveryName", "");
+		     String deliveryContent = HttpUtil.get(request, "deliveryContent", "");
+		     
+		     int couponDiscountPrice = 0;
+		     int totalPrice = 0;
+		     
+		     Order order = new Order();
+		     
+		     order.setOrderIdk(orderIdk);
+		     order.setUserId(userId);     
+		     order.setDeliveryAddress(deliveryAddress);
+		     order.setDeliveryPhone(deliveryPhone);
+		     order.setDeliveryName(deliveryName);
+		     order.setDeliveryContent(deliveryContent);
+		     
+		     List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+		     
+		     String[] productIds = request.getParameterValues("productIdk[]");
+		     String[] quantities = request.getParameterValues("quantity[]");
+		     
+		     for (int i = 0; i < productIds.length; i++) {
+		         int productIdk = Integer.parseInt(productIds[i]);
+		         int quantity = Integer.parseInt(quantities[i]);
+		         
+		         OrderDetail orderDetail = new OrderDetail();
+		         Shop product = sellerService.productSelect(productIdk);
+		         int productPrice = product.getProductPrice();
+		         
+		         orderDetail.setOrderIdk(orderIdk);
+		         orderDetail.setProductIdk(productIdk);
+		         orderDetail.setQuantity(quantity);
+		         orderDetail.setProductPrice(productPrice);
+		         
+		         orderDetails.add(orderDetail);
+		         
+		         totalPrice += quantity * productPrice;
+		     }
+		     order.setTotalPrice(totalPrice);
+		     order.setOrderDetailList(orderDetails);
+		     
+		     if (redemCode != null && !redemCode.isEmpty()) {
+		         order.setRedemCode(redemCode);
+		         
+		         Coupon coupon = sellerService.couponSelect(redemCode);
+		         if (coupon != null) {
+		             int discount = coupon.getCouponDiscount();
+		             
+		             if (discount > 0) {
+		                 couponDiscountPrice = (totalPrice * discount) / 100;
+		             }
+		             
+		             coupon.setUserId(userId);
+		             coupon.setOrderIdk(orderIdk);
+		             coupon.setCouponDiscountPrice(couponDiscountPrice);
+		             
+		             order.setCouponDiscountPrice(couponDiscountPrice);
+		             order.setCoupon(coupon);
+		         }
+		     }
+		     
+		     int actualPrice = totalPrice - couponDiscountPrice;
+		     order.setActualPrice(actualPrice);
+		     
+		     try {
+		         if (sellerService.orderInsert(order) > 0) {
+		             JsonObject json = new JsonObject();
+		             json.addProperty("orderIdk", orderIdk);
+		             
+		             ajaxResponse.setResponse(0, "success", json);
+		             request.getSession().setAttribute("orderIdk", orderIdk);
+		         } else {
+		             ajaxResponse.setResponse(-1, "fail");
+		         }
+		     } catch (Exception e) {
+		         logger.error("[sellerController] order Exception", e);
+		         ajaxResponse.setResponse(500, "internal server error");
+		     }
+		     
+		     return ajaxResponse;
+		 }
 	@RequestMapping(value ="/shop/fnCoupon", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<Object> fnCoupon(HttpServletRequest request, HttpServletResponse response) {

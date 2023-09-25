@@ -36,10 +36,11 @@ public class SellerService {
 		
 		count = sellerDao.orderInsert(order);
 		//현재 한건의 결제만 가능
-		if(count > 0) {
-			OrderDetail orderDetail = order.getOrderDetailList().get(0);
-			sellerDao.orderDetailInsert(orderDetail);
-		}
+		List<OrderDetail> orderDetails = order.getOrderDetailList();
+	    
+	    for (OrderDetail orderDetail : orderDetails) {
+	        sellerDao.orderDetailInsert(orderDetail);
+	    }
 		
 		Coupon coupon = order.getCoupon();
 		
