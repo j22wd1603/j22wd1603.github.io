@@ -189,6 +189,8 @@ public class ShopController {
 		int curPage = HttpUtil.get(request, "curPage", 1);
 		//총조회수
 		int totalCount = 0;
+		
+		int productStatus  =HttpUtil.get(request, "productStatus", 0);
 		//페이징
 		Paging paging =null;
 		
