@@ -93,7 +93,7 @@ function go_order() {
 				
 				<!-- 즉시구매-->							
 				<form id="orderForm" name="orderForm" method="post">
-				    <input type="hidden" id="bbsProductIdk1" name="bbsProductIdk1" value="${shop.productIdk}">
+				    <input type="hidden" id="bbsProductIdk" name="bbsProductIdk" value="${shop.productIdk}">
 					<input type="hidden" id="bbsQuantity" name="bbsQuantity" value="1">
 					<div class="productdetail-sideinfo-line"></div>								
 				</form>
