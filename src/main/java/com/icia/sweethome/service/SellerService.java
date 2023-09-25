@@ -316,7 +316,6 @@ public class SellerService {
 		return list;
 		
 	}
-	
 	public int deliveryStatusUpdate(Order order) {
 		int count = 0;
 		

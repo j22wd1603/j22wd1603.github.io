@@ -581,7 +581,7 @@ function setInputAddress() {
    </form>
 
    <script>
-      //결제수단때 쓰이는 스크립트
+      //결제수단때 쓰이는 스크립트 
     const bankRadio = document.getElementById('bankRadio');
     const bankTable = document.getElementById('bankTable');
 

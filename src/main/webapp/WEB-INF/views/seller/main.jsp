@@ -253,10 +253,6 @@ function fn_delete(productIdk, bbsStatus)
         }
      });
 }
-function fn_deleteView(productIdk){
-	
-}
-
 
 function fn_write(){
 	location.href = "/seller/write";
