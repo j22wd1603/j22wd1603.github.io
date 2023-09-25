@@ -2102,7 +2102,7 @@ tbody {
     margin-right: 140px; 
 }
 
-.deleteButton {
+#deleteButton {
     background-color: #800020;
     color: #fff;
     padding: 10px 20px;

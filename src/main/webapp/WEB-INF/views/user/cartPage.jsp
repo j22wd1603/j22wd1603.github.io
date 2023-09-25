@@ -8,8 +8,26 @@
 <meta charset="UTF-8">
 <title>Cart Page</title>
 
-<script>
-$(document).ready(function () {
+ <script>
+
+	//선택 삭제
+	var checkValue = "";
+	
+	$(document).ready(function () {
+		
+		//선택한것에 대한 삭제
+	  var chkObj = document.getElementsByName("selectedProduct");
+	  var rowCnt = chkObj.length;
+	
+	  $("input[name='selectedProduct']").click(function(){
+	      if($("input[name='selectedProduct']:checked").length == rowCnt){
+	          $("input[name='allCheck']")[0].checked = true;
+	      }
+	      else{
+	          $("input[name='allCheck']")[0].checked = false;
+	      }
+	  });
+	  
     // "전체 선택" 체크박스 클릭 시
     $("#selectAllCheckbox").click(function () {
         var isChecked = $(this).prop("checked");
@@ -70,15 +88,74 @@ $(document).ready(function () {
     });
 });
 
+	
+    
+function deleteValue()
+{
+    var userId = $("#deleteUserId").val();
+    //var productIdk = $("#deleteProductIdk").val();
 
+    var valueArr = new Array();
+    var list = $("input[name='selectedProduct']");
+    for(var i = 0; i < list.length; i++){
+        if(list[i].checked){//선택되어 있으면 배열에 값을 저장함 
+            //valueArr.push(list[i].value);
+           if(checkValue == "")
+           {
+              checkValue = list[i].value;
+           }
+           else
+           {
+              checkValue = checkValue + "," + list[i].value;
+           }
+        }
+    }
+    //alert("선택한 물품코드 : " + checkValue);
 
+    if(checkValue == "")      //if(valueArr.length == 0){
+    {
+        alert("선택된 물품이 없습니다.");
+    }
+    else{
+
+	    if (confirm("장바구니 물품을 삭제 하시겠습니까?") == true) {
+	        $.ajax({
+	            type: 'POST',
+	            url: '/user/cartDelete',
+	            data: {
+	                productIdk: checkValue
+	            },
+	            dataType: "json",
+	            beforeSend: function (xhr) {
+	                xhr.setRequestHeader("AJAX", "true");
+	            },
+	            success: function (response) {
+	                if (response.code == 0) {
+	                    alert("상품이 삭제되었습니다.");
+	                    location.href = "/user/cartPage";	                   
+	                } else if (response.code == 500) {
+	                    alert("상품 삭제 중 오류가 발생했습니다.");
+	                } else {
+	                    alert("알 수 없는 오류가 발생했습니다.");
+	                }
+	            },
+	            error: function (xhr, status, error) {
+	                alert("장바구니 삭제 중 오류 발생: " + error);
+	            }
+	        });
+	    }
+    }
+}
+
+//페이징
 function fn_list(curPage)
 {
    document.cartForm.curPage.value = curPage;
    document.cartForm.submit();
 }
-</script>   
 
+
+</script>   
 </head>
 
 <body>
@@ -120,18 +197,15 @@ function fn_list(curPage)
            </table>           
        </div>
        
-       
-       
        <div class="button-container-cart">
-	   <button class="deleteButton" onclick="deleteCartItem()">삭제</button>
+	   		<button id="deleteButton" onClick="deleteValue()">삭제</button>
 	       <button id="orderButton">주문 페이지로 이동</button>
-   	 </div>
+   		</div>
    </section>
   
           
    <footer>   
-   
-      <ul class="pagination justify-content-center">
+   	 <ul class="pagination justify-content-center">
          <c:if test="${!empty paging}">      
             <c:if test="${paging.prevBlockPage gt 0}">
                <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
@@ -156,7 +230,6 @@ function fn_list(curPage)
    </footer>
    
 
-
 <form id="orderForm" name="orderForm" method="post"></form>
 
 <form id="cartForm" name="cartForm" action="/user/cartPage" method="get">
@@ -164,37 +237,10 @@ function fn_list(curPage)
 </form>
 
 <form id="deleteCartForm" name="deleteCartForm" method="post" style="display: none;">
-    <input type="hidden" id="deleteUserId" name="userId" value="${cartItem.userId}">
-    <input type="hidden" id="deleteProductIdk" name="productIdk" value="${cartItem.productIdk}">
+    <input type="hidden" id="deleteUserId" name="userId" value="">
+    <input type="hidden" id="deleteProductIdk" name="productIdk" value="">
 </form>
 
-<script>
-$.ajax({
-    type: 'POST',
-    url: '/user/cartDelete',
-    data: {
-        userId: $("#deleteUserId").val(),
-        productIdk: $("#deleteProductIdk").val()
-    },
-    dataType: "json",
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader("AJAX", "true");
-    },
-    success: function (response) {
-        if (response.code == 0) {
-            alert("상품이 삭제되었습니다.");
-        } else if (response.code == 500) {
-            alert("상품 삭제 중 오류가 발생했습니다.");
-        } else {
-            alert("알 수 없는 오류가 발생했습니다.");
-        }
-    },
-    error: function (xhr, status, error) {
-        alert("장바구니 삭제 중 오류 발생: " + error);
-    }
-});
-
-</script>
 
  
 </body>

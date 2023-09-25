@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -167,22 +168,36 @@ public class UserController
 	@ResponseBody
 	public Response<Object> cartDelete(HttpServletRequest request) {
 	    Response<Object> ajaxResponse = new Response<Object>();
-	    int productIdk = HttpUtil.get(request, "productIdk", 0);
+	   	
+	    String productIdkList = HttpUtil.get(request, "productIdk", "");
 	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 	    User user = userService.userSelect(userId);
+	    Cart cart = null;
+	    
+	    int productIdk = 0;
+	    int deleteCount = 0;
 
 	    if (user != null) {
-	        if (productIdk > 0) {
-	            int deleteCount = shopService.cartDelete(productIdk);
-
-	            if (deleteCount > 0) {
-	                ajaxResponse.setResponse(0, "상품이 삭제되었습니다.");
-	            } else {
-	                ajaxResponse.setResponse(500, "상품 삭제 중 오류가 발생했습니다.");
-	            }
-	        } else {
-	            ajaxResponse.setResponse(400, "매개변수 오류");
-	        }
+	    	String[] productList = productIdkList.split(",");   //코드가 ,로 잘려서 (선택하게 한개 이상이면 473,250이런식으로 되니까
+	    	cart = new Cart();
+	    	
+	    	cart.setUserId(userId);
+	    	
+	    	for(int i = 0; i < productList.length; i++)
+	    	{
+	    		productIdk = Integer.parseInt(productList[i]);
+	    		cart.setProductIdk(productIdk);
+	    		deleteCount += shopService.cartDelete(cart);
+	    	}
+	    	
+            if (deleteCount == productList.length) {
+                ajaxResponse.setResponse(0, "상품이 삭제되었습니다.");
+            } 
+            else 
+            {
+                ajaxResponse.setResponse(500, "상품 삭제 중 오류가 발생했습니다.");
+            }
+            
 	    } else {
 	        ajaxResponse.setResponse(404, "사용자를 찾을 수 없음");
 	    }
@@ -193,7 +208,6 @@ public class UserController
 
 	    return ajaxResponse;
 	}
-
 	
 	
 	@RequestMapping(value ="/user/cartPage")
