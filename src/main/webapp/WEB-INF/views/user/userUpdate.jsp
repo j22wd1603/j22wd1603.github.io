@@ -77,7 +77,7 @@
     box-sizing: border-box;
     min-height: 1px;
 }
-blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+blockquote, body, code, dd, div, dl, dt, fieldset, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
     margin: 0;
     padding: 0;
 }
@@ -129,8 +129,8 @@ body, html {
     line-height: 1;
    }
 .userInfoheader_title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 900;
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 0px;
     -moz-box-flex: 1;
@@ -197,14 +197,22 @@ body, html {
     display: flex;
 }
 .button-color-blue{
-    margin: 50px 0 0 100px;
-    width: 290px;
+    width: 100%;
+    margin-top: 20px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 300px; 
+    display: block;
     padding: 11px 10px;
-    font-size: 17px;
+    font-size: 15px;
     line-height: 26px;
-    background-color: #35c5f0;
-    border-color: #35c5f0;
+    background-color: #a5a5a5;
+    border-color: #a5a5a5;
     color: #fff;
+    border-radius: 5px; /* 모서리를 둥글게 하는 부분입니다. */
+    
+    
 
 }
 
@@ -232,8 +240,13 @@ body, html {
  
 @media (max-width: 767px){
 .button-color-blue {
-    margin: 50px 0;
     width: 100%;
+    margin: 20px 0px 0px 20px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 350px; 
+    display: block;
     }
 }
 .form-check-group, .form-control, .form-radio-group, .input-group {
@@ -297,7 +310,8 @@ label {
 .edit_userInfo_form_title {
 
     padding-top: 30px;
-    width: 100px;
+    width: 150px;
+    text-align : left;
 }
 
 @media (max-width: 767px){
@@ -306,7 +320,7 @@ label {
     }
 }
 .edit_userInfo_form_group {
-    max-width: 400px;
+    max-width: 350px;
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 0px;
     -moz-box-flex: 1;
@@ -338,7 +352,7 @@ label {
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
 }
-blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+blockquote, body, code, dd, div, dl, dt, fieldset, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
     margin: 0;
     padding: 0;
 }
@@ -353,7 +367,6 @@ div {
 
 body, html {
     line-height: 1;
-    font-family: "Pretendard Variable", "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;
     font-size: 13px;
 }
 
@@ -407,7 +420,30 @@ ol, ul {
     display: flex;
 }
 
-
+.card {
+    box-shadow: 3px 3px 50px #e6e6e6;
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: space-between;
+    -webkit-align-items: space-between;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    border: 1px dashed #dbdbdb;
+    color: #757575;
+    font-size: 13px;
+    font-weight: bold;
+    -webkit-transition: .1s color;
+    transition: .1s color;
+    padding : 50px;
+    border-radius: 20px;
+    width:90%;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -673,9 +709,11 @@ function previewImage(input) {
 <body>
 	<div class="layout">
 	<div class="userInfo container">
+	
 		<div class="userInfoheader">
 		 <div class="userInfoheader_title">회원정보수정</div>
 		 </div>
+		 <div class="card">
     <form>
     	<div class="userInfo_form">
     	<div class="edit_userInfo_form_title">이메일
@@ -753,11 +791,11 @@ function previewImage(input) {
     	 <div class="expert-form-group_input">
     	  <div class="edit_userInfo">
     	   <div class="input-group email-input">
-    	     <span><input id="phone1" type="text" class="form-control" size="10px" maxlength="3"></span>
+    	     <span><input id="phone1" type="text" class="form-control" size="7px" maxlength="3"></span>
     	     <span class="input_separator">-</span>
-    	     <span><input id="phone2" type="text" class="form-control" size="11px" maxlength="4"></span>
+    	     <span><input id="phone2" type="text" class="form-control" size="9px" maxlength="4"></span>
     	     <span class="input_separator">-</span>
-    	     <span><input id="phone3" type="text" class="form-control" size="11px" maxlength="4" ></span>
+    	     <span><input id="phone3" type="text" class="form-control" size="9px" maxlength="4" ></span>
     	     </div>
     	     </div>
     	    </div>
@@ -802,7 +840,7 @@ function previewImage(input) {
     	   </div>
     	  </div>
     	 </div>
-    	 <button type="button" class="button-color-blue" id="btnReg" style="width: 350px; margin: 0 auto; display: block;">등록</button>
+    	 <button type="button" class="button-color-blue" id="btnReg" >변경하기</button>
     </form>
 
 </div>
@@ -810,13 +848,7 @@ function previewImage(input) {
           
        
     </div>
-       </div>
-</form>
-         </div>
-      
-
-
-        </div>
+ 
 
     <form name="myForm" id="myForm" method="post">
       <input type="hidden" name="commuIdk" value="" />

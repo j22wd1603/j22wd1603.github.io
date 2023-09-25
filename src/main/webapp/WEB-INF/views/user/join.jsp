@@ -3,17 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <link href="/resources/css/userstyle.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/icia.common.js"></script>
 <script type="text/javascript" src="/resources/js/icia.ajax.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <style>
+
 * {
    -moz-box-sizing: border-box;
    -webkit-box-sizing: border-box;
    box-sizing: border-box;
+   font-family: 'Gothic A1', sans-serif;
+   
 }
+
 
 p {
   margin-block: 1.5rem;
@@ -133,8 +142,7 @@ body .container_member .content .checkbox:checked + label:before {
     line-height: 35px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    border-radius: 2px;
-    
+    border-radius: 5px;
     
 }
 
@@ -246,7 +254,7 @@ input{
 }
 
 #btnReg {
-    background-color: #000; /* 배경색을 변경하세요 */
+    background-color: #a5a5a5;; /* 배경색을 변경하세요 */
     color: #fff; /* 텍스트 색상을 변경하세요 */
     border: none;
     padding: 10px 20px;
@@ -261,11 +269,12 @@ input{
 }
 
 h3 {
-   font-weight: 2000; /* 글자 굵기를 높은 값으로 설정 (900은 매우 굵은 글씨) */
-    font-size: 24px; /* 폰트 크기 설정 */
+    font-weight: 900; /* 글자 굵기를 높은 값으로 설정 (900은 매우 굵은 글씨) */
+    font-size: 26px; /* 폰트 크기 설정 */
     color: #000; /* 글자색 설정 */
     margin-left: 20px;
     position: relative;
+    font-family: 'Gothic A1', sans-serif;
 }
 
 /* 밑줄 효과 */
@@ -276,7 +285,7 @@ h3::before {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #000; /* 밑줄 색상 설정 */
+    background-color: #9e0e0b;    /* 밑줄 색상 설정 */
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
@@ -677,7 +686,7 @@ function previewImage(input) {
              
              <div class="form-group2">
                 <label for="profilePicture" style="font-size: 17px;">프로필 사진 업로드</label>
-				<input type="file" id="profilePicture" name="profilePicture" style="margin: 0 auto; display: block;" onchange="previewImage(this);" />
+				<input type="file" id="profilePicture" name="profilePicture" style="margin: 0 auto; display: block; background-color :#a5a5a5;" onchange="previewImage(this);" />
 				<img id="preview" src="#" alt="프로필 미리보기" style="font-size: 15px; display: block; margin: 10px auto 0; max-width: 100%;" />
             </div>
         </div>
@@ -686,12 +695,12 @@ function previewImage(input) {
                     <label for="userAddress" style="font-size: 17px;" >사용자 주소</label>
                     <input type="text" class="form-control" id="userAddress" name="userAddress" placeholder="사용자 주소" maxlength="30"  />
                    <input type="text" id="sample6_postcode" placeholder="우편번호">
-               <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+               <input type="button" style = "background-color :#a5a5a5;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
                <input type="text" id="sample6_address" placeholder="주소"><br>
                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
                <input type="text" id="sample6_extraAddress" placeholder="참고항목">
                      <!-- 입력 완료 버튼 -->
-                <input type="button" onclick="setInputAddress()"  style="display: block; margin: 0 auto;" value="입력 완료"></button>
+                <input type="button" onclick="setInputAddress()"  style=" background-color :#a5a5a5; display: block; margin: 0 auto;" value="입력 완료"></button>
                 </div>
                 <br>
                 

@@ -12,10 +12,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/293152e236.js" crossorigin="anonymous"></script>
 
+
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+
 <style>
 * {
     font-family: 'Gothic A1', sans-serif;
 }
+
 .card {
 
 	
@@ -25,6 +32,7 @@
     display: inline-block;
     border-radius: 20px;
     text-align:center;
+    border: 1px solid #ccc;
 
 
 
@@ -49,14 +57,7 @@
     margin: auto;
   }
 
- .title {
-  
-    white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
-    text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
-    display: flex;
-}
-
- .css-f61xoy.focus-visible:focus {
+  .css-f61xoy.focus-visible:focus {
     color: #bdbdbd;
   }
 
@@ -79,15 +80,11 @@
             display: -webkit-flex;
             display: -ms-flexbox;
             display: flex;
-            -webkit-align-items: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
             -webkit-box-pack: justify;
             -webkit-justify-content: space-between;
             justify-content: space-between;
-            margin: 0 0 20px;
-        }
+       
+}
         
 </style>
 
@@ -95,8 +92,6 @@
 
 .no-questions {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 300px; /* 필요한 높이 값으로 조정하세요. */
   font-size: 18px;
   color: #333;
@@ -122,6 +117,7 @@ coloer: inherit;
 text-decoration:none;
 }
 
+  	
 body{
 
 	display:block;
@@ -130,32 +126,15 @@ body{
 .content-box{
 	display: flex; /* Flexbox 컨테이너로 설정합니다. */
   	justify-content: space-between; /* 내부 요소 사이에 공간을 균등하게 분배합니다. */
- 	align-items: center; /* 내부 요소를 수직 가운데 정렬합니다. */
  	border-bottom: 1px solid #ccc; /* 각 항목마다 하단에 회색 선 추가 */
-  	text-align: center;
   	margin: auto;
   	
 }
 
-.up-box {
-        display: flex;
-    -webkit-font-smoothing: antialiased;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    margin: 0 0 40px;
-    padding: 10px 0 10px;
-    border-bottom: 1px solid #ededed;
-
+.num {
+  width:40px 
 }
+
 .num, .title, .date, .count, .delete {
   flex: 1; /* 요소들이 동일한 너비로 가로 정렬되도록 설정 */
 }
@@ -168,44 +147,48 @@ body{
 .card-body{
   border-bottom: 1px solid #ccc; /* 각 항목마다 하단에 회색 선 추가 */
   padding: 20px; /* 내용 주위의 간격 조정 */
-  text-align: center;
   padding-bottom: 10px; /* 가로 선과 컨텐츠 사이의 간격 조절 (선택 사항) */
-  width: 100%;
+  width:100%;
+
 }
 
+.card-body input[type="search"]{
 
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #999;
+	border: 1px solid #999;
+	border-radius: 10px;
+	width: 300px;
+	font-size: 16px;
+}
+
+.card-body a.search {
+	
+	padding: 10px 15px 10px 15px;
+	margin-left:1 10px;
+	border-radius: 10px;
+	background-color: #db7093;
+	color: #fff;
+}
 
 .card-body div{
 
 	border-bottm: 1px solid #e6e6e6;
-	
 }
 
 .card-body div div {
 
 	display: inline-block;
 	padding: 15px 10px 15px 10px;
-	margin: 0;
-	border: none;   
-  
+	border: none;
 
 }
 
-.card-body .check .delete{
-	width: 7%;
-}
-
-.css-vxgh1s e17n0xi1 {
-display: flex;
-    -webkit-font-smoothing: antialiased;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+.upbox{
+	display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+	-webkit-font-smoothing: antialiased;
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between;
@@ -214,27 +197,16 @@ display: flex;
     border-bottom: 1px solid #ededed;
 }
 
-.card-body .title{
-	width:79%
-	text-align: left;
+
+.card-body .check , .delete{
+	width: 7%;
 }
 
-.card-body .delete button{
-	background-color: #fff;
-	border: none;
-}
-
-.num{
-		text-align: center;
-
-}
-.number{
-padding: 10px;
-}
 
 .number li{
 	display: inline-block;
 }
+
 
 .number li a{
 	display: block;
@@ -248,208 +220,352 @@ padding: 10px;
 }
 
 .number li a.active {
-	background-coler: rgb(252, 212, 205);
+	background-coler: rgb(252, 212, 205); 
+	margin-right: 10px; 
 }
 
 .btn{
+	
     font-size: 16px;
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-weight: 600;
     line-height: 1.2;
     color: #db7093;
-    padding-left: 700px;
+    padding-left: 670px;
     padding-right: 20px;
     
-	   
-	
-}
 
-a{
-    white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
-    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
-  }
+}
 .btn a{
+    
 	padding: 10px;
 	background-color: #db7093;
 	color: #fff;
-	border-radiu: 10px;
+	width: 150px; /* 원하는 가로 크기로 조정 */
 	border-radius: 5px;
-}.0
+}
 
 .title {
-    width: 100px; /* 원하는 폭으로 설정하세요 */
+    width: 200px; /* 원하는 폭으로 설정하세요 */
     white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
-    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
     text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
-    text-align: left;
+    display: flex;
 }
 .whitebox{
 
-	width:800px;
-	margin-bottom: 100px;
-	flex-direction: column;
+width:800px;
+margin-bottom: 100px;
+flex-direction: column;
 
 }
 
 .middlebox{
-
-	width:7px;
-	
-}
-.mytitle {
-
-	color:#000000;
-	font-weight:bold;
-	font-size:18px;
-	line-height:1; 
+width:7px;
 }
 
 </style>
 <script type="text/javascript">
-var checkValue = "";
-
 $(document).ready(function() {
-	
-});
 
-function fn_mySearch()
-{
-	document.myForm.commuIdk.value = "";
-	document.myForm.searchValue.value = $("#_searchValue").val();
-	document.myForm.curPage.value = "1";
-	document.myForm.action = "/user/mypage";
-	document.myForm.submit();
-}
+   $("#userId").focus();
+  var phoneNumber = "${user.userPhone}";
 
-function fn_list(curPage)
-{
-	document.myForm.commuIdk.value = "";
-	document.myForm.curPage.value = curPage;
-	document.myForm.action = "/user/mypage";
-	document.myForm.submit();
-}
+// 전화번호를 3, 4, 4 형식으로 분리
+var phone1 = phoneNumber.substring(0, 3);
+var phone2 = phoneNumber.substring(3, 7);
+var phone3 = phoneNumber.substring(7, 11);
 
+// 각각의 <input> 요소에 값을 할당
+document.getElementById("phone1").value = phone1;
+document.getElementById("phone2").value = phone2;
+document.getElementById("phone3").value = phone3;
 
-function fn_boardDelete(idk)
-{
-	
-	if(confirm("게시물을 삭제 하시겠습니까?") == true)
-	{
-		$.ajax({
-			type:"POST",
-			url:"/community/myDelete",
-			data:{
-				commuIdk:idk
-			},
-			datatype:"JSON",
-			beforeSend:function(xhr)
-			{
-				xhr.setRequestHeader("AJAX", "true");	
-			},
-			success:function(response)
-			{
-				if(response.code == 0)
-				{
-					alert("게시물이 삭제 되었습니다.");
-					location.href = "/user/mypage";
-				}
-				else if(response.code == 400)
-				{
-					alert("파라미터 값이 올바르지 않습니다.");
-				}
-				else if(response.code == 403)
-				{
-					alert("본인글이 아니므로 삭제할수 없습니다.");
-				}
-				else if(response.code == 404)
-				{
-					alert("해당 게시물을 찾을수 없습니다.");
-					location.href = "/user/mypage";
-				}
-				else if(response.code == -999)
-				{
-					alert("답변 게시물이 존재하여 삭제할수 없습니다.");
-				}
-				else
-				{
-					alert("게시물 삭제시 오류가 발생하였습니다.");
-				}
-			},
-			error:function(xhr, status, error)
-			{
-				icia.common.error(error);
-			}
-		});
-	}
-}
+   $("#btnReg").on("click", function() {
+      
+      //공백체크
+      var emptCheck = /\s/g;
+      //영문 대소문자, 숫자로만 이루어진 4~12자리 정규식
+      var idPwCheck = /^[a-zA-Z0-9]{4,12}$/;
+      
+      
+      
+      
+      if($.trim($("#userId").val()).length <= 0)
+      {
+         alert("사용자 아이디를 입력하세요.");
+         $("#userId").val("");
+         $("#userId").focus();
+         return;
+      }
+      
+      if(emptCheck.test($("#userId").val()))
+      {
+         alert("사용자 아이디는 공백을 포함할수 없습니다.");
+         $("#userId").focus();
+         return;
+      }
+      
+      if(!idPwCheck.test($("#userId").val()))
+      {
+         alert("사용자 아이디는 4~12자의 영문 대소문자와 숫자로만 입력하세요.");
+         $("#userId").focus();
+         return;
+      }
+      
+      
+      if($.trim($("#userPwd1").val()).length <= 0)
+      {
+         alert("비밀번호를 입력하세요.");
+         $("#userPwd1").val("");
+         $("#userPwd1").focus();
+         return;
+      }
+      
+      if(!idPwCheck.test($("#userPwd1").val()))
+      {
+         alert("비밀번호는 영문 소문자와 숫자로 4~12자리 입니다.");
+         $("#userPwd1").val("");
+         return;
+      }
+      
+      if($("#userPwd1").val() != $("#userPwd2").val())
+      {
+         alert("비밀번호가 일치하지 않습니다.");
+         $("#userPwd2").focus();
+         return;
+      }
+      if($.trim($("#userNickname").val()).length <= 0)
+      {
+         alert("사용자 닉네임을 입력하세요.");
+         $("#userNickname").val("");
+         $("#userNickname").focus();
+         return;
+      }
 
-$(function(){
-    var chkObj = document.getElementsByName("RowCheck");
-    var rowCnt = chkObj.length;
+      if(emptCheck.test($("#userNickname").val()))
+      {
+         alert("사용자 닉네임은 공백을 포함할수 없습니다.");
+         $("#userNickname").focus();
+         return;
+      }
+      
+      
+      if($.trim($("#userName").val()).length <= 0)
+      {
+         alert("사용자 이름을 입력하세요.");
+         $("#userName").val("");
+         $("#userName").focus();
+         return;
+      }
+      
+      if(!fn_validateEmail($("#userEmail").val()))
+      {
+         alert("사용자 이메일 형식이 올바르지 않습니다.");
+         $("#userEmail").focus();
+         return;
+      }
+      
+      if($.trim($("#phone1").val()).length <= 0)
+      {
+         alert("전화번호를 입력하세요.");
+         $("#phone1").val("");
+         $("#phone1").focus();
+         return;
+      }
+      
+      if($.trim($("#phone2").val()).length <= 0)
+      {
+         alert("전화번호를 입력하세요.");
+         $("#phone2").val("");
+         $("#phone2").focus();
+         return;
+      }
+      
+      if($.trim($("#phone3").val()).length <= 0)
+      {
+         alert("전화번호를 입력하세요.");
+         $("#phone3").val("");
+         $("#phone3").focus();
+         return;
+      }
+      
+      //전화번호 조합
+      $("#userPhone").val($("#phone1").val() + $("#phone2").val() + $("#phone3").val());
+      
 
-    $("input[name='RowCheck']").click(function(){
-        if($("input[name='RowCheck']:checked").length == rowCnt){
-            $("input[name='allCheck']")[0].checked = true;
-        }
-        else{
-            $("input[name='allCheck']")[0].checked = false;
-        }
-    });
-});
-    function deleteValue(){
-        var valueArr = new Array();
-        var list = $("input[name='RowCheck']");
-        for(var i = 0; i < list.length; i++){
-            if(list[i].checked){//선택되어 있으면 배열에 값을 저장함 
-                //valueArr.push(list[i].value);
-            	if(checkValue == "")
-            	{
-            		checkValue = list[i].value;
-            	}
-            	else
-            	{
-            		checkValue = checkValue + "," + list[i].value;
-            	}
+      
+      $("#userPwd").val($("#userPwd1").val());
+      
+      //아이디 중복체크 aJax
+      
+         var form = $("#regForm")[0];
+   var formData = new FormData(form);
+   
+   $.ajax({
+      type:"POST",
+      enctype:"multipart/form-data",
+      url:"/user/updateProc",
+      data:formData,
+      processData:false,            //formData를 string으로 변환하지 않음
+      contentType:false,            //content-type헤더가 multipart/form-data로 전송
+      cache:false,
+      timeout:600000,
+      beforeSend:function(xhr)
+      {
+         alert("test");
+         xhr.setRequestHeader("AJAX", "true");
+      },
+      success:function(response)
+      {
+            if(response.code == 0)
+            {
+               alert("회원 정보가 수정 되었습니다.");
+               location.href = "/";
             }
+            else if(response.code == 400)
+            {
+               alert("파라미터 값이 올바르지 않습니다.");
+               $("#userId").focus();
+            }
+            else if(response.code == 500)
+            {
+               alert("회원 가입 중 오류가 발생하였습니다.");
+               $("#userId").focus();
+            }
+            else
+            {
+               alert("회원 가입 중 오류가 발생하였습니다.");
+               $("#userId").focus();
+            }
+      },
+      error:function(error)
+      {
+         icia.common.error(error);
+         alert("게시물 등록 중 오류가 발생하였습니다.");
+         $("#btnWrite").prop("disabled", false);      //글쓰기 버튼 활성화
+      }
+      
+   });
+     
+
+
+   });
+}); 
+
+
+
+function fn_validateEmail(value)
+{
+   var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+   
+   return emailReg.test(value);
+}
+
+function previewImage(input) {
+    var preview = document.getElementById('preview');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
         }
 
-        if(checkValue == "")		//if(valueArr.length == 0){
-        {
-            alert("선택된 게시물이 없습니다.");
-        }
-        else{
-            var chk = confirm("게시물을 삭제하시겠습니까?");
-            if (chk) {
-            $.ajax({
-                type:"POST",
-                url:"/community/mySelectDelete",
-                data:{
-                    valueArr : checkValue		//valueArr // 보내고자 하는 data 변수 설정 
-                },
-                datatype:"JSON",
-                beforeSend:function(xhr)
-                {
-                    xhr.setRequestHeader("AJAX", "true");    
-                },
-                success:function(jdata){
-                    if(jdata.code === 0) {
-                        alert("삭제되었습니다.");
-                        location.replace("/user/mypage"); //list로 페이지 새로 고침            
-                    }
-                    else{
-                        alert("삭제되지 않았습니다.");    
-                    }
-                }
-            });
-            } else {
-                // 사용자가 "취소"를 클릭한 경우에 대한 처리
-              
-            }
-        }
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '#';
     }
+}
 
 </script>
+
+
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+    function setInputAddress() {
+        var postcode = document.getElementById("sample6_postcode").value;
+        var address = document.getElementById("sample6_address").value;
+        var detailAddress = document.getElementById("sample6_detailAddress").value;
+        var extraAddress = document.getElementById("sample6_extraAddress").value;
+
+        // 주소 정보 조합
+        var fullAddress = address;
+        if (extraAddress !== '') {
+            fullAddress += extraAddress;
+        }
+        if (detailAddress !== '') {
+            fullAddress += ' ' + detailAddress;
+        }
+
+        // 사용자 주소 필드에 설정
+        document.getElementById("userAddress").value = fullAddress;
+    }
+</script>
+
+ <script>
+        function agree() {
+            // 체크박스 상태 확인
+            var checkBox = document.getElementById("agreement");
+            
+            if (checkBox.checked == true) {
+                // 동의한 경우에 실행할 동작
+                alert("동의하셨습니다.");
+                // 이후에 원하는 작업을 수행할 수 있습니다.
+            } else {
+                // 동의하지 않은 경우에 실행할 동작
+                alert("동의하지 않으셨습니다.");
+                // 이후에 원하는 작업을 수행할 수 있습니다.
+            }
+        }
+    </script>
 </head>
 <body>
       <style data-emotion="css 1x6h9tu">.css-1x6h9tu{width:100%;max-width:1256px;margin:0 auto;box-sizing:border-box;}@media all{.css-1x6h9tu{padding:0 15px;}}@media (min-width: 375px){.css-1x6h9tu{padding:0 15px;}}@media (min-width: 768px){.css-1x6h9tu{padding:0 40px;}}@media (min-width: 1024px){.css-1x6h9tu{padding:0 60px;}}@media (min-width: 1256px){.css-1x6h9tu{padding:0 60px;}}</style><div class="css-1x6h9tu ekbdbra0"><style data-emotion="css 1mux1hm">.css-1mux1hm{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;box-sizing:border-box;}@media all{.css-1mux1hm{margin:0 -5px;}}@media (min-width: 375px){.css-1mux1hm{margin:0 -5px;}}@media (min-width: 768px){.css-1mux1hm{margin:0 -7.5px;}}@media (min-width: 1024px){.css-1mux1hm{margin:0 -10px;}}@media (min-width: 1256px){.css-1mux1hm{margin:0 -10px;}}</style><div class="css-1mux1hm el2z1iq0"><style data-emotion="css i5en0t">.css-i5en0t{box-sizing:border-box;width:100%;position:relative;padding-top:30px;}@media all{.css-i5en0t{padding-left:5px;padding-right:5px;}}@media (min-width: 375px){.css-i5en0t{padding-left:5px;padding-right:5px;}}@media (min-width: 768px){.css-i5en0t{padding-left:7.5px;padding-right:7.5px;}}@media (min-width: 1024px){.css-i5en0t{padding-left:10px;padding-right:10px;}}@media (min-width: 1256px){.css-i5en0t{padding-left:10px;padding-right:10px;}}@media (min-width: 1024px){.css-i5en0t{width:25%;}}</style><div class="css-i5en0t e1ivswjr3"><div class="sticky-container"><div class="sticky-child"><div class="css-0 e1ejty664"><style data-emotion="css itjaqv">.css-itjaqv{position:relative;padding:0;}@media (min-width: 768px){.css-itjaqv{padding:30px 25px 18px;border-radius:4px;border:1px solid #dadce0;box-shadow:0 2px 4px 0 rgba(63, 71, 77, .06);}}</style>
@@ -501,13 +617,13 @@ $(function(){
                  <div class="css-10ewlqi e1q26atk1">좋아요</div>
                  <div class="css-2rwq1u e1q26atk0"><fmt:formatNumber type="number" maxFractionDigits="3" value="${userCnt.likesCnt}" /></div>
             </a>
-            <a class="css-1p9dybm e1q26atk3" href="/user/mypageMyQ">
+            <a class="css-1p9dybm e1q26atk3" href="/user/myCoupon">
                <div class="css-zpotx6 e1q26atk2">
                   <svg width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
                      <path fill="#424242" fill-rule="nonzero" d="M22.588 3H1.413C.633 3 0 3.638 0 4.426L0 9.53l.605-.088c.12-.017.243-.026.367-.026 1.413 0 2.558 1.157 2.558 2.584S2.385 14.584.972 14.584c-.124 0-.247-.009-.367-.026L0 14.47l.001 5.104C.001 20.362.633 21 1.413 21h21.175c.78 0 1.412-.638 1.412-1.426V4.426C24 3.638 23.368 3 22.588 3zM1.413 4.07h21.175c.195 0 .353.159.353.356v15.148c0 .197-.158.357-.353.357H1.413l-.071-.008c-.161-.033-.282-.176-.282-.349l-.002-3.923-.086.002c1.997 0 3.617-1.635 3.617-3.653l-.004-.182C4.493 9.945 3.006 8.443 1.152 8.35l-.094-.003.002-3.922c0-.197.158-.357.353-.357zm14.646 2.138c.293 0 .53.237.53.53v1.614c0 .292-.237.53-.53.53-.292 0-.53-.238-.53-.53V6.737c0-.292.238-.53.53-.53zm0 4.455c.293 0 .53.237.53.53v1.614c0 .293-.237.53-.53.53-.292 0-.53-.237-.53-.53v-1.614c0-.293.238-.53.53-.53zm0 4.456c.293 0 .53.237.53.53v1.614c0 .292-.237.53-.53.53-.292 0-.53-.238-.53-.53v-1.615c0-.292.238-.53.53-.53z"></path>
                   </svg>
                </div>
-                        <div class="css-10ewlqi e1q26atk1">내 질문</div>
+                        <div class="css-10ewlqi e1q26atk1">내 쿠폰</div>
                         <div class="css-2rwq1u e1q26atk0"><fmt:formatNumber type="number" maxFractionDigits="3" value="${userCnt.couponCnt}" /></div>
                </a>
             </div>
@@ -528,105 +644,98 @@ $(function(){
       <style data-emotion="css 1ltj86z">.css-1ltj86z{box-sizing:border-box;width:100%;}@media all{.css-1ltj86z{padding-left:5px;padding-right:5px;}}@media (min-width: 375px){.css-1ltj86z{padding-left:5px;padding-right:5px;}}@media (min-width: 768px){.css-1ltj86z{padding-left:7.5px;padding-right:7.5px;}}@media (min-width: 1024px){.css-1ltj86z{padding-left:10px;padding-right:10px;}}@media (min-width: 1256px){.css-1ltj86z{padding-left:10px;padding-right:10px;}}@media (min-width: 1024px){.css-1ltj86z{width:66.66666666666666%;}}</style>
       <div class="css-1ltj86z e15wafbq0"><style data-emotion="css 1ecfa5v">.css-1ecfa5v{max-width:700px;margin:0 auto;padding:50px 0 0;color:#292929;}</style>
       <div class="css-1ecfa5v emjsage0">
-
     
          <section class="whitebox">
              
                <div class="up-box">
                  
-                    <h1 class="mytitle">내 게시글
+                    <h1 class="mytitle">회원정보 수정
                         <style data-emotion="css 1vy2ypg">.css-1vy2ypg{margin-left:.4ch;color:#35c5f0;}</style>
-                          <c:choose>
-						    <c:when test="${empty list}">
-						        <span class="css-1vy2ypg e17n0xi0">0</span>
-						    </c:when>
-						    <c:otherwise>
-						        <c:set var="postCount" value="0" />
-						        <c:forEach var="commuMy" items="${list}">
-						            <!-- 게시물이 있을 때마다 게시물 갯수 1씩 증가 -->
-						            <c:set var="postCount" value="${postCount + 1}" />
-						        </c:forEach>
-						        <!-- 게시물 갯수를 출력 -->
-						        <span class="css-1vy2ypg e17n0xi0">${postCount}</span>
-						    </c:otherwise>
-						</c:choose>
+                          
                      </h1>
                   <style data-emotion="css vxgh1s">.css-vxgh1s{margin:0 -10px;}</style>
                   <div class="css-vxgh1s e17n0xi1"></div>
                                 	<div class="btn">
-			  <a href="write.html">글쓰기</a>
 			</div>
                </div>
  
               
            	 <!-- 게시판의 화면은 class="card"로 적용     margin: 0 0 40px;-->
-<c:if test="${empty list}">
-  <div class="no-questions">
-    내 게시글이 없습니다.
-  </div>
-</c:if>
-<c:if test="${not empty list}">
 
-          <div class="card">
-			  <!-- 검색어 입력하기 -->
-			  <div class="card-body">
-			    <input type="search" id="_searchValue" name="_searchValue" value="${searchValue}" placeholder="검색어를 입력하세요.">
-			    <a class="search" href="javascript:void(0)" onclick="fn_mySearch()">검색</a>
-			    
-			  <!-- 내용을 html로 작성하기 -->
-			 
-			  <div class="content-box">
-			  	<div class="check" type="button" style="overflow: none; text-overflow: none;" value="선택삭제" class="btn btn-outline-info" onClick="deleteValue()">선택삭제</button></div>
-			  
-			  	<div class="num">글번호</div>
-			  	<div class="title" style="text-align: center;">제목</div>
-			  	<div class="date">작성일</div>
-			  	<div class="count">조회</div>
-			  	<div class="delete">삭제</div>
-			  </div>
-			  
-			  
-<c:if test="${!empty list}">	
-	<c:forEach var="commuMy" items="${list}" varStatus="status">	
-			  <div class="content-box">
-			    <div class="check"><input type="checkbox" name="RowCheck" value="${commuMy.commuIdk}"></div>
-			    <div class="num">${commuMy.commuIdk}</div>
-			     <div class="title"><a href="/community/view?commuIdk=${commuMy.commuIdk}">${commuMy.commuTitle}</a></div>
-			    <div class="date">${commuMy.regDate}</div>
-			    <div class="count"><fmt:formatNumber type="number" maxFractionDigits="3" value="${commuMy.commuViews}" /></div>
-			    <div class="delete"><button class="btnDelete" onClick="fn_boardDelete(${commuMy.commuIdk})"><i class="fa-solid fa-trash-can"></i></button></div>
-			  </div>
-	</c:forEach>
-</c:if>		  
 
-			   </div>
-  
-<c:if test="${!empty paging}">	
-			  <ul class="number">	
-	<c:if test="${paging.prevBlockPage gt 0}">
-			<li><a href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">&lt;</a></li>
-	</c:if>
-	
-	<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-		<c:choose>
-			<c:when test="${i ne curPage}">
-			<li><a href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
-			</c:when>
-			<c:otherwise>
-			<li><a href="javascript:void(0)" class="active">${i}</a></li>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	
-	<c:if test="${paging.nextBlockPage gt 0}">
-		    <li><a href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">&gt;</a></li>
-	</c:if>
-			   </ul>
-</c:if>
-			  
+            <div class="card">
+           <!-- 검색어 입력하기 -->
+           <form name="regForm" id="regForm" method="post" enctype="multipart/form-data">
+    <div class="container2">
 
+    <div class="row mt-2">
+        <div class="col-12">
+               <div class="form-group">
+    <label for="userId" style="font-size: 17px;">사용자 아이디</label>${user.userId}
+</div>
+          
+                <div class="form-group">
+                    <label for="userPwd1" style="font-size: 17px;">비밀번호</label>
+                    <input type="password" class="form-control" id="userPwd1" name="userPwd1" value="${user.userPwd}" placeholder="비밀번호" maxlength="12"  />
+                </div>
+            
+                <div class="form-group">
+                    <label for="userPwd2" style="font-size: 17px;" >비밀번호 확인</label>
+                    <input type="password" class="form-control" id="userPwd2" name="userPwd2" value="${user.userPwd}" placeholder="비밀번호 확인" maxlength="12"  />
+                </div>
+           
+                 <div class="form-group" style="display: flex; align-items: center;">
+    <label for="userNickname" style="font-size: 17px; flex: 1;">닉네임</label>
+    <input type="text" class="form-control" id="userNickname" name="userNickname" value="${user.userNickname}" placeholder="닉네임" maxlength="15" style="flex: 2; width: 20px;" />
+</div>
+                <div class="form-group">
+                    <label for="userName" style="font-size: 17px;" >사용자 이름</label>
+                    <input type="text" class="form-control" id="userName" name="userName" value="${user.userName}" placeholder="사용자 이름" maxlength="15"  />
+                </div>
+                <div class="form-group">
+                    <label for="userEmail" style="font-size: 17px;" >사용자 이메일</label>
+                    <input type="text" class="form-control" id="userEmail" name="userEmail" value="${user.userEmail}" placeholder="사용자 이메일" maxlength="30" />
+                </div>
+                <div class="form-group">
+                  <label for="userName" style="font-size: 17px;" >전화번호</label>
+             <div class="phone">
+            <input id="phone1" type="text" size="1" maxlength="3" value= "phone1"> -
+            <input id="phone2" type="text" size="3" maxlength="4" value= "phone2"> -
+            <input id="phone3" type="text" size="3" maxlength="4" value= "phone3">
+            </div>
+             
+             <div class="form-group2">
+                <label for="profilePicture" style="font-size: 17px;">프로필 사진 수정</label>
+            <input type="file" id="profilePicture" name="profilePicture" style="margin: 0 auto; display: block;" onchange="previewImage(this);" />
+            
+            </div>
+        </div>
+                <div class="form-group">
+                    <label for="userAddress" style="font-size: 17px;" >사용자 주소</label>
+                    <input type="text" class="form-control" id="userAddress" name="userAddress" placeholder="사용자 주소" maxlength="30" value="${user.userAddress}" />
+                   <input type="text" id="sample6_postcode" placeholder="우편번호">
+               <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+               <input type="text" id="sample6_address" placeholder="주소"><br>
+               <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+               <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+                     <!-- 입력 완료 버튼 -->
+                <input type="button" onclick="setInputAddress()"  style="display: block; margin: 0 auto;" value="입력 완료">
+                <button type="button" id="btnReg" style="width: 350px; margin: 0 auto; display: block;">등록</button>
+                
+                </div>
+                <br>
+             
+                 <input type="hidden" id="userId" name="userId" value="${user.userId}" />
+                <input type="hidden" id="userPwd" name="userPwd" value="" />
+                <input type="hidden" id="userPhone" name="userPhone" value="" />
+
+                <br>
+          
+       
+    </div>
+       </div>
+</form>
 			</div>
-			</c:if>
 		
 
 
@@ -637,13 +746,10 @@ $(function(){
 		<input type="hidden" name="searchValue" value="${searchValue}" />
 		<input type="hidden" name="curPage" value="${curPage}" />
 	</form>
-            
-         </section>
-        
+
            </div>
        </div>
        </div>
-      </div>
     <script src="https://assets.ohou.se/web/dist/js/303-cc24ad1d9e85c42571e5.js"></script><script src="https://assets.ohou.se/web/dist/js/216-0bc0ba0ef0ac66fbf9ac.chunk.js"></script>
     <script src="https://assets.ohou.se/web/dist/js/vendor-6b87d1d93ea2d1fc895a.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/249-d537f9b2c8ddc093de63.chunk.js"></script>
     <script src="https://assets.ohou.se/web/dist/js/preamble-4fe6ebba0c5449779ac3.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/229-22c7eb30e20c7d1b5dac.chunk.js"></script>

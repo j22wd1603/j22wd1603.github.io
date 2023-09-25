@@ -194,7 +194,7 @@ body{
     font-family: "Teko",sans-serif;
     font-weight: 600;
     line-height: 1.2;
-    color: #db7093;
+    color: #9e0e0b;   
     padding-left: 20px;
     padding-right: 20px;
     
@@ -202,10 +202,10 @@ body{
 }
 .btn a{
 	padding: 10px;
-	background-color: #db7093;
+	background-color: #9e0e0b;   
 	color: #fff;
-	 width: 300px; /* 원하는 가로 크기로 조정 */
-	 border-radius: 5px;
+	width: 300px; /* 원하는 가로 크기로 조정 */
+	border-radius: 5px;
 }
 
 .title {
