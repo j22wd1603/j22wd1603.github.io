@@ -707,5 +707,32 @@ public class SellerController {
         
         return "redirect:/";
     }
+	
+	@RequestMapping(value ="/seller/deliveryStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<Object> deliveryStatus(HttpServletRequest request, HttpServletResponse response) {
+		Response<Object> ajaxResponse = new Response<Object>();
+		
+		int orderIdk = HttpUtil.get(request, "orderIdk",0);
+		String status = HttpUtil.get(request, "status");
+		
+		if(!StringUtil.isEmpty(status) && !(orderIdk ==0)) {
+			Order param = new Order();
+			
+			param.setOrderIdk(orderIdk);
+			param.setDeliveryStatus(status);
+			
+			if(sellerService.deliveryStatusUpdate(param) > 0) {
+				ajaxResponse.setResponse(0, "Success");
+			}else {
+				ajaxResponse.setResponse(-1, "SQL Fail");
+			}
+		}
+		else {
+			ajaxResponse.setResponse(400, "Bad Request");
+		}
+		
+		return ajaxResponse;
+	}
 
 }

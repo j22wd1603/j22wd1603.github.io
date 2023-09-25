@@ -48,21 +48,18 @@ function fn_search()
 	document.searchForm.submit();
 }
 
-function fn_delivery(productIdk, bbsStatus,index)
+function fn_delivery(orderIdk,index)
 {
 	var msg ="";
-	var status ="";
-	if(bbsStatus == 'Y'){
+	var status = $("#bbsDeliveryStatus"+index).val();
+	if(status == 'Y'){
 		msg = "선택된 값은 배송완료 입니다.";
-		status = bbsStatus;
 	}
-	else if(bbsStatus == 'R'){
+	else if(status == 'R'){
 		msg = "선택된 값은 배송중 입니다.";
-		status = bbsStatus;
 	}
 	else{
 		msg = "선택된 값은 배송준비중 입니다.";
-		status = bbsStatus;
 	}
 	
     if(!confirm(msg)){
@@ -73,7 +70,7 @@ function fn_delivery(productIdk, bbsStatus,index)
         type :"POST",
         url:"/seller/deliveryStatus",
         data:{
-        	productIdk:productIdk,
+        	orderIdk:orderIdk,
         	status:status
         },
         datatype:"JSON",
@@ -85,7 +82,10 @@ function fn_delivery(productIdk, bbsStatus,index)
         {
            if(response.code == 0)
            {
-        	   location.href = "/seller/main";
+        	   location.href = "/seller/delivery";
+           }
+           else if(response.code == 400){
+        	   alert("파라미터 값 오류");
            }
            else
            {
@@ -159,7 +159,7 @@ function fn_delivery(productIdk, bbsStatus,index)
 						<option value="N" <c:if test="${delivery.deliveryStatus == 'N'}">selected</c:if>>배송준비중</option>
 					</select>
 				</th>
-							<th rowspan="${row}"><input type="button" onclick="fn_delivery(${delivery.orderIdk},${delivery.deliveryStatus},${status.index})" value="배송"></th>
+							<th rowspan="${row}"><input type="button" onclick="fn_delivery(${delivery.orderIdk},${status.index})" value="배송"></th>
 						</tr>
 						<c:forEach items="${delivery.deliveryList}" var="deliveryDetail" varStatus="status2">
 						<tr>

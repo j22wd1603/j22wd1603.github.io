@@ -530,22 +530,25 @@ WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 
 <select id="deliveryListCount" parameterType="com.icia.sweethome.model.Delivery" resultType = "int">
 SELECT COUNT(O.ORDER_IDK)
-FROM ORDERS O, PAY P, USERS U
-WHERE O.ORDER_IDK IN(SELECT D.ORDER_IDK AS ORDER_IDK FROM ORDER_DETAIL D, PRODUCT P
-					 WHERE P.SELLER_ID = #{sellerId}
-					 <if test='productName != null and productName !="" '>
-						AND P.PRODUCT_NAME LIKE '%' || #{productName} || '%'
-					</if>
-					 <if test='productBrandName != null and productBrandName !="" '>
-						AND P.PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
-					</if>
-					 AND D.PRODUCT_IDK = P.PRODUCT_IDK) 
-
-<if test='orderIdk != null and orderIdk !="" '>
-	AND P.ORDER_IDK LIKE '%' || #{orderIdk} || '%'
-</if>
-AND P.ORDER_IDK(+)=O.ORDER_IDK
-AND O.USER_ID = U.USER_ID
+			FROM ORDERS O, PAY P, USERS U
+			WHERE O.ORDER_IDK IN(SELECT D.ORDER_IDK AS ORDER_IDK FROM ORDER_DETAIL D, PRODUCT P
+								 WHERE P.SELLER_ID = #{sellerId}
+								 <if test='productName != null and productName !="" '>
+									AND P.PRODUCT_NAME LIKE '%' || #{productName} || '%'
+								</if>
+								 <if test='productBrandName != null and productBrandName !="" '>
+									AND P.PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+								</if>
+								 AND D.PRODUCT_IDK = P.PRODUCT_IDK) 
+			
+			<if test='orderIdk != null and orderIdk !="" '>
+				AND O.ORDER_IDK LIKE '%' || #{orderIdk} || '%'
+			</if>
+			<if test='deliveryStatus != null and deliveryStatus !="" '>
+				AND O.DELIVERY_STATUS = #{deliveryStatus}
+			</if>
+			AND P.ORDER_IDK(+)=O.ORDER_IDK
+			AND O.USER_ID = U.USER_ID
 </select>
 
 <select id="deliveryDetailSelect" parameterType="com.icia.sweethome.model.DeliveryDetail"  resultMap="deliveryDetailResultMap">
