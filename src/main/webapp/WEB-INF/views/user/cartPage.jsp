@@ -1,243 +1,201 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Cart Page</title>
 
-<!DOCTYPE html>
-<html>
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Cart List</title>
+<script>
+$(document).ready(function () {
+    // "전체 선택" 체크박스 클릭 시
+    $("#selectAllCheckbox").click(function () {
+        var isChecked = $(this).prop("checked");
 
-<!-- Required CSS files -->
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/owl.carousel.css">
-<link rel="stylesheet" href="/assets/css/barfiller.css">
-<link rel="stylesheet" href="/assets/css/animate.css">
-<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/css/slicknav.css">
-<link rel="stylesheet" href="/assets/css/main.css">
-<link rel="stylesheet" href="/bootstrap.min.css">
+        // 모든 상품 체크박스 상태 변경
+        $(".productCheckbox").prop("checked", isChecked);
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<style>
-.thumbnail {
-   width: 70px;
-   height: 70px;
-}
+        // 현재 페이지 이외의 페이지의 "전체 선택" 체크박스 상태도 변경
+        $(".otherPageSelectAllCheckbox").prop("checked", isChecked);
+    });
 
-* {
-    font-family: 'Gothic A1', sans-serif;
-}
+    // 주문 페이지로 이동 버튼 클릭 시
+    $("#orderButton").click(function () {
+        var selectedProducts = [];
 
-.container {
+        // 선택된 상품들을 수집
+        $(".productCheckbox:checked, .otherPageSelectAllCheckbox:checked").each(function () {
+            var productIdk = $(this).val();
+            var quantity = $(this).closest("tr").find(".quantity").text();
+            quantity = parseInt(quantity);
 
-	margin-top: 100px; 
+            if (!isNaN(quantity) && quantity > 0) {
+                selectedProducts.push({ productIdk: productIdk, quantity: quantity });
+            }
+        });
 
-}
+        if (selectedProducts.length === 0) {
+            alert("주문할 상품을 선택하세요.");
+            return;
+        }
 
-h3{
+        var orderForm = $("#orderForm");
+        orderForm.empty();
 
-	margin-bottom: 100px; 
+        $.each(selectedProducts, function (index, product) {
+            orderForm.append(
+                $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", "bbsProductIdk")
+                    .val(product.productIdk)
+            );
+            orderForm.append(
+                $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", "bbsQuantity")
+                    .val(product.quantity)
+            );
+        });
 
-}
+        var curPageInput = $("<input>")
+            .attr("type", "hidden")
+            .attr("name", "curPage")
+            .val("${curPage}");
+        orderForm.append(curPageInput);
 
-
-
-</style>
-<script type="text/javascript">
-
-
-// 전체 선택
-$(document).ready(function(){
-   $('#checkall').click(function() {
-      var checked = $('#checkall').is(':checked');
-      if (checked)
-         $('input:checkbox').prop('checked', true);
-      if (!checked)
-         $('input:checkbox').prop('checked', false);
-      summary();
-   });
+        orderForm.attr("action", "/shop/orderPage");
+        orderForm.submit();
+    });
 });
 
-// 해당 상품 삭제
-function cartDelete(i) {
-   var tr = '#tr' + i;
-   $(tr).remove();
-   cartList = JSON.parse(sessionStorage.getItem('cartList'));
-   cartList.splice(i, 1);
-   sessionStorage.setItem('cartList', JSON.stringify(cartList));
-   summary();
-}
 
-// 카트 총 합 계산
-function summary() {
-   var sum = 0;
-   var count = this.form.prdct_id.length;
-   for (var i = 0; i < count; i++) {
-      if (this.form.prdct_id[i].checked == true) {
-         sum += parseInt(this.form.sum[i].value);
-         console.log(sum)
-         console.log(typeof(sum))
-      }
-   }
+
+function fn_list(curPage)
+{
+   document.cartForm.curPage.value = curPage;
+   document.cartForm.submit();
+}
+</script>   
+
+</head>
+
+<body>
+
+   <header><h1 id="cart-title">SHOPPING BAG</h1></header>
+
+     <section>
+       <div class="cartList">
+           <table border="1">
+               <tr>
+                   <th class="select-checkbox">
+                       <input type="checkbox" id="selectAllCheckbox">
+                       <label for="selectAllCheckbox">전체 선택</label>
+                   </th>
+                   <th></th>
+                   <th>브랜드</th>
+                   <th>상품명</th>
+                   <th>판매가</th>
+                   <th>수량</th>
+                   <th>배송비</th>
+                   <th>최종 가격</th>
+                   <th>장바구니 등록일</th>
+               </tr>
+               <c:forEach var="cartItem" items="${cartList}">
+                   <tr>
+                       <td class="select-checkbox">
+                           <input type="checkbox" class="productCheckbox" name="selectedProduct" value="${cartItem.productIdk}">
+                       </td>
+                       <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}"alt="${cartItem.productName}"></td>
+                       <td>${cartItem.productBrandName}</td>
+                       <td>${cartItem.productName}</td>
+                       <td><fmt:formatNumber value="${cartItem.productPrice}" type="number" pattern="#,##0"/></td>
+                       <td class="quantity">${cartItem.quantity}</td>
+                       <td>무료배송</td>
+                       <td><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></td>
+                       <td>${cartItem.cartRegDate}</td>
+                   </tr>
+               </c:forEach>      
+           </table>           
+       </div>
+       
+       
+       
+       <div class="button-container-cart">
+	   <button class="deleteButton" onclick="deleteCartItem()">삭제</button>
+	       <button id="orderButton">주문 페이지로 이동</button>
+   	 </div>
+   </section>
+  
+          
+   <footer>   
    
-   $('.total').html(sum + '원');
-}
-
-// 전체 카트 삭제
-function allCartDelete() {
-   $('#getCart').remove();
-   var cartList = new Array();
-   sessionStorage.setItem('cartList', JSON.stringify(cartList));
-   summary();
-}
-
-
-function nullCheck() {
-   var count = this.form.prdct_id.length;
-   var checked = 0;
-   for (var i = 1; i < count; i++) {
-      if (this.form.prdct_id[i].checked == true) {
-         checked += 1;
-      }
-   }
-   if (checked < 1) {
-      alert("결제할 상품을 선택해주세요.")
-      return false;
-   } else {
-      // 결제 페이지 이동
-      //function buy() {
-         var order = new Array();
-         //var count = this.form.prdct_id.length;
-         for (var i = 1; i < count; i++) {
-            if (this.form.prdct_id[i].checked == true) {
-               var prdct = new Object();
-               prdct.prdct_id = this.form.prdct_id[i].value;
-               prdct.order_amount = parseInt(this.form.order_amount[i].value);
-               prdct.order_size = this.form.order_size[i].value;
-               prdct.order_color = this.form.order_color[i].value;
-               prdct.prdct_name = this.form.prdct_name[i].value;
-               prdct.prdct_thumbnail = this.form.prdct_thumbnail[i].value;
-               prdct.sum = parseInt(this.form.sum[i].value);
-               console.log(prdct.sum);
-               console.log(prdct);
-               
-               console.log(prdct);
-               order.push(prdct);
-            }
-         }
+      <ul class="pagination justify-content-center">
+         <c:if test="${!empty paging}">      
+            <c:if test="${paging.prevBlockPage gt 0}">
+               <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
+            </c:if>
          
-         sessionStorage.setItem("order", JSON.stringify(order));
-         window.location.assign("/order/orderInput");
+            <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+               <c:choose>
+                  <c:when test="${i ne curPage}">
+                     <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+                  </c:otherwise>
+               </c:choose>
+            </c:forEach>
          
-      //}
-   }
-};
+            <c:if test="${paging.nextBlockPage gt 0}">
+               <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
+            </c:if>
+         </c:if>
+      </ul>
+   </footer>
+   
 
+
+<form id="orderForm" name="orderForm" method="post"></form>
+
+<form id="cartForm" name="cartForm" action="/user/cartPage" method="get">
+     <input type="hidden" name="curPage" value="${curPage}">
+</form>
+
+<form id="deleteCartForm" name="deleteCartForm" method="post" style="display: none;">
+    <input type="hidden" id="deleteUserId" name="userId" value="${cartItem.userId}">
+    <input type="hidden" id="deleteProductIdk" name="productIdk" value="${cartItem.productIdk}">
+</form>
+
+<script>
+$.ajax({
+    type: 'POST',
+    url: '/user/cartDelete',
+    data: {
+        userId: $("#deleteUserId").val(),
+        productIdk: $("#deleteProductIdk").val()
+    },
+    dataType: "json",
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader("AJAX", "true");
+    },
+    success: function (response) {
+        if (response.code == 0) {
+            alert("상품이 삭제되었습니다.");
+        } else if (response.code == 500) {
+            alert("상품 삭제 중 오류가 발생했습니다.");
+        } else {
+            alert("알 수 없는 오류가 발생했습니다.");
+        }
+    },
+    error: function (xhr, status, error) {
+        alert("장바구니 삭제 중 오류 발생: " + error);
+    }
+});
 
 </script>
-</head>
-<body>
-<div class="container">
-   
-      <!-- 장바구니    -->
-      <form id="cart" name="form" method="post" action="${pageContext.request.contextPath}/order/orderInput?${_csrf.parameterName}=${_csrf.token}" onsubmit="nullCheck(); return false;">
-      <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-      
-      <div class="container" style="text-align: center;">
-            <br />
-            <h3>Shopping Bag</h3>
-            <br />
 
-            <table class="table cart_table" style="width:100%">
-               <colgroup style="text-align: center;">
-                  <col width="10%">
-                  <col width="15%">
-                  <col width="30%">
-                  <col width="15%">
-                  <col width="10%">
-                  <col width="10%">
-                  <col width="10%">
-               </colgroup>
-               <thead>
-               <tr style="text-align: center;">
-  <th scope="col" class="checkbox-column"><input type="checkbox" id="checkall"></th>
-  <th scope="col" class="image-column">이미지</th>
-  <th scope="col" class="product-column">상품명(옵션)</th>
-  <th scope="col" class="price-column">판매가</th>
-  <th scope="col" class="quantity-column">수량</th>
-  <th scope="col" class="total-price-column">주문금액</th>
-  <th scope="col" class="delete-column"><i onclick="allCartDelete()" style="cursor: pointer; ">삭제</i></th>
-</tr>
-               </thead>
-<c:if test="${!empty list}">
-<c:forEach var="cartMy" items="${list}" varStatus="status">	
-			  <div class="content-box">
-			    <div class="checkbox-column"><input type="checkbox" name="" id=""></div>
-			    <div class="num">${commuMy.commuIdk}</div>
-			     <div class="title"><a href="/community/view?commuIdk=${commuMy.commuIdk}">${commuMy.commuTitle}</a></div>
-			    <div class="date">${commuMy.regDate}</div>
-			    <div class="count"><fmt:formatNumber type="number" maxFractionDigits="3" value="${commuMy.commuViews}" /></div>
-			    <div class="delete"><button class="btnDelete" onClick="fn_boardDelete(${commuMy.commuIdk})">X</button></div>
-			  </div>
-	</c:forEach>
-</c:if>		  
-
-               <tbody id="getCart">
-                  <input type="hidden" name="prdct_id" />
-                  <input type="hidden" name="order_amount" />
-                  <input type="hidden" name="order_color" />
-                  <input type="hidden" name="order_size" />
-                  <input type='hidden' name="sum" />
-                  <input type="hidden" name="prdct_name" />
-                  <input type="hidden" name="prdct_thumbnail" />
-               </tbody>
-               <tfoot>
-                        <tr class="gift-division">
-                        <td>
-                        </td>
-                        <td colspan="4">
-                           
-                        </td>
-                        <td colspan="3">
-                        <span class="cart-total">총 상품가격<span class="total">  0원</span></span> 
-                        <span id="total-price"></span>
-                        </td>
-                     </tr>
-                  
-               </tfoot>
-            </table>
-
-         <button type="submit" class="btn btn-primary">주문하기</button>
-         <br /> <br />
-   </div>
-   </form>
-
-   <!-- footer -->
-   
-</div>
-
-      <!--Required JS files-->
-      <script src="/assets/js/jquery-2.2.4.min.js"></script>
-      <script src="/assets/js/vendor/popper.min.js"></script>
-      <script src="/assets/js/vendor/bootstrap.min.js"></script>
-      <script src="/assets/js/vendor/owl.carousel.min.js"></script>
-      <script src="/assets/js/vendor/isotope.pkgd.min.js"></script>
-      <script src="/assets/js/vendor/jquery.barfiller.js"></script>
-      <script src="/assets/js/vendor/loopcounter.js"></script>
-      <script src="/assets/js/vendor/slicknav.min.js"></script>
-      <script src="/assets/js/active.js"></script>
+ 
 </body>
 </html>
