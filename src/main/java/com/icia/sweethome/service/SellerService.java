@@ -316,6 +316,20 @@ public class SellerService {
 		return list;
 		
 	}
+	
+	public int deliveryStatusUpdate(Order order) {
+		int count = 0;
+		
+		try
+		{
+			count = sellerDao.deliveryStatusUpdate(order);
+		}
+		catch(Exception  e)
+		{
+			logger.error("[SellerService] deliveryStatusUpdate Exception" , e);
+		}
+		return count;
+	}
 }
 
 

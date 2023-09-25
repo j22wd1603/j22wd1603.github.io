@@ -563,4 +563,10 @@ AND O.USER_ID = U.USER_ID
     AND D.PRODUCT_IDK = P.PRODUCT_IDK
     ORDER BY ORDER_DETAIL_IDK DESC
 </select>
+
+<update id="deliveryStatusUpdate" parameterType="com.icia.sweethome.model.Order">
+UPDATE ORDERS
+SET DELIVERY_STATUS = #{deliveryStatus}
+WHERE ORDER_IDK = #{orderIdk}
+</update>
 </mapper>

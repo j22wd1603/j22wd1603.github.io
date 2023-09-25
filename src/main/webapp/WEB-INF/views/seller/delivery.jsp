@@ -53,15 +53,15 @@ function fn_delivery(productIdk, bbsStatus,index)
 	var msg ="";
 	var status ="";
 	if(bbsStatus == 'Y'){
-		msg = "배송완료 하시겠습까";
+		msg = "선택된 값은 배송완료 입니다.";
 		status = bbsStatus;
 	}
 	else if(bbsStatus == 'R'){
-		msg = "배송하시겠습까";
+		msg = "선택된 값은 배송중 입니다.";
 		status = bbsStatus;
 	}
 	else{
-		msg = "배송 전으로 돌리시겠습니까?";
+		msg = "선택된 값은 배송준비중 입니다.";
 		status = bbsStatus;
 	}
 	

@@ -34,7 +34,7 @@ $(document).ready(function() {
 	   var regPhone2 = /^[0-9]{3,4}$/;
 	   var regPhone3 = /^[0-9]{4}$/;
 	   var name = /^[가-힣a-zA-Z]+$/;
-	   var address = /^[가-힣a-zA-Z0-9\s\-]+$/;
+	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)]+$/;
 
 	   if(deliveryRadio.checked){		   
 		   if(trimCheck("deliveryName","수령인을 입력해주세요"))return;

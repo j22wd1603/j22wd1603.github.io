@@ -45,6 +45,8 @@ public interface SellerDao {
 	
     public List<OrderComplete> orderComplete(int orderIdk);
     public Pay orderPaySelect(int orderIdk);
+    
+    public int deliveryStatusUpdate(Order order);
 	
 }
 
