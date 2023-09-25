@@ -54,6 +54,11 @@ function fn_pageInit()
 </script>
 </head>
 <body>
+
+    <%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
+
+
+
 	<li>회원</li>
 	<div style="width:90%; margin:auto; margin-top:5rem;">
 		<div style="display:flex; margin-bottom:0.8rem;">
