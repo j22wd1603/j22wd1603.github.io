@@ -57,10 +57,9 @@ function fn_pageInit()
 
     <%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
 
-	<li>회원</li>
 	<div style="width:90%; margin:auto; margin-top:5rem;">
 		<div style="display:flex; margin-bottom:0.8rem;">
-			<h2 style="margin-right:auto; color: #525252;">커뮤니티 리스트</h2>
+			<h2 style="margin-right:auto; color: #525252;">커뮤니티 관리</h2>
 			<form class="d-flex" name="searchForm" id="searchForm" method="post" style="place-content: flex-end;">
 				<select id="status" name="status" style="font-size: 1rem; width: 6rem; height: 3rem;">
 					<option value="">상태</option>
@@ -70,8 +69,9 @@ function fn_pageInit()
 				<select id="searchType" name="searchType" style="font-size: 1rem; width: 8rem; height: 3rem; margin-left:.5rem; ">
 					<option value="">검색타입</option>
 					<option value="1">회원아이디</option>
-					<option value="2">회원명</option>
-				</select>
+					<option value="2">글 제목</option>
+					<option value="3">댓글 내용</option>
+				</select>				
 				<input name="searchValue" id="searchValue" class="form-control me-sm-2" style="width:15rem; margin-left:.5rem;" type="text" value="">
 				<a class="btn my-2 my-sm-0" href="javascript:void(0)" onclick="fn_search()" style="width:7rem; margin-left:.5rem; background-color: rgb(239, 239, 239); border-color:rgb(118, 118, 118);">조회</a>
 				<input type="hidden" name="curPage" value="" />
@@ -82,8 +82,8 @@ function fn_pageInit()
 				<thead style="border-bottom: 1px solid #c4c2c2;">
 				<tr class="table-thead-main">
 					<th scope="col" style="width:15%;">아이디</th>
-					<th scope="col">이름</th>
-					<th scope="col">이메일</th>
+					<th scope="col">제목</th>
+					<th scope="col">내용</th>
 					<th scope="col">상태</th>
 					<th scope="col">등록일</th>
 				</tr>
