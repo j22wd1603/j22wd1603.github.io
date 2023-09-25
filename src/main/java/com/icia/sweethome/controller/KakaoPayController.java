@@ -112,7 +112,6 @@ public class KakaoPayController
 		if(product != null) {
 			itemName = product.getProductName();
 		}
-		int quantity = HttpUtil.get(request, "quantity1", (int)0);
 		int totalAmount =0;
 		if(order != null) {
 			totalAmount = order.getActualPrice();

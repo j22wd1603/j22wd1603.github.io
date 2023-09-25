@@ -1,5 +1,6 @@
 package com.icia.sweethome.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,7 +91,12 @@ public class OrderController {
 			order.setEndRow(paging.getEndRow());
 
 			list = orderService.orderList(order);
-
+			
+			for(int i=0;i<list.size();i++) {
+				List<OrderDetail> param = new ArrayList<OrderDetail>();
+				param = orderService.orderDetailSelect(list.get(i).getOrderIdk());
+				list.get(i).setOrderDetailList(param);
+			}
 		}
 		
 		

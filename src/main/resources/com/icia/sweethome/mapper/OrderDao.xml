@@ -75,7 +75,7 @@ SELECT  ORDER_IDK,
 							NVL(TO_CHAR(ORDER_DATE, 'YYYY.MM.DD'), '') AS ORDER_DATE
 					   FROM ORDERS
 					  WHERE USER_ID = #{userId}
-					  ORDER BY ORDER_DATE DESC))
+					  ORDER BY ORDER_IDK DESC))
 WHERE RNUM <![CDATA[>=]]> #{startRow}
 AND RNUM <![CDATA[<=]]> #{endRow} 
 </select>
@@ -96,8 +96,7 @@ AND RNUM <![CDATA[<=]]> #{endRow}
 	       NVL(TO_CHAR(ORDER_DATE, 'YYYY.MM.DD'), '') AS ORDER_DATE
 	  FROM ORDERS
 	 WHERE USER_ID = #{value}
-	 ORDER BY ORDER_DATE DESC
-	 
+	 ORDER BY ORDER_IDK DESC
 	</select>
 	
 	<!--  0919 내 주문내역 카운트 조회 -->

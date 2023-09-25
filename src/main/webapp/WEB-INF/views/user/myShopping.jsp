@@ -8,15 +8,8 @@
 <%@ include file="/WEB-INF/views/include/userNavigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-
-
-<!DOCTYPE html>
-<html>
-<head>
-
-
 
 <style>
 
@@ -337,8 +330,13 @@ ul.info li {
 
 </style>
 <script type="text/javascript">
-function fn_view(orderIdk)
+function fn_view(orderIdk,status)
 {
+	if(status == 'N'){
+		alert("주문상품이 미결제 입니다. 주문을 먼저해주세요.");
+		return;
+	}
+	
 	document.myForm.orderIdk.value = orderIdk;
 	document.myForm.action = "/user/myShoppingDetail";
 	document.myForm.submit();
@@ -351,8 +349,54 @@ function fn_list(curPage)
 	document.myForm.action = "/user/myShopping";
 	document.myForm.submit();
 }
+function fn_pay(orderIdk,index) {
+	   var productIds = $("input[name='productIdk"+index+"[]']").map(function() {
+        return $(this).val();
+    }).get();
+    var quantities = $("input[name='quantity"+index+"[]']").map(function() {
+        return $(this).val();
+    }).get();
 
-
+$.ajax({
+   type : "POST",
+   url:"/kakao/payReady",
+   data:{
+      orderId:orderIdk,
+      productIdk1:productIds[0],
+      productIdk:productIds,
+      quantity:quantities
+   },
+   datatype:"JSON",
+   success:function(response)
+   {
+      if(response.code == 0)
+      {
+         var tId = response.data.tId;
+         var pcUrl = response.data.pcUrl;
+         
+         $("#orderId").val(orderIdk);
+         $("#tId").val(tId);
+         $("#pcUrl").val(pcUrl);
+         
+         var win = window.open('', 'kakaoPopUp', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=540,height=700,left=100,top=100');
+         
+         $("#kakaoForm").submit();
+      }
+      else
+      {
+         alert("오류가 발생하였습니다.");
+      }
+   },
+   error:function(error)
+   {
+      icia.common.error(error);
+   }
+});
+}
+function movePage()
+{
+   location.href = "/user/myShopping";
+}
 </script>
 </head>
 <body>
@@ -394,7 +438,7 @@ function fn_list(curPage)
    				<td>
    					${myShopping.orderDate}
    				</td>
-   				<td><a href="javascript:void(0)" onclick="fn_view(${myShopping.orderIdk})">${myShopping.orderIdk}</td>
+   				<td><a href="javascript:void(0)" onclick="fn_view(${myShopping.orderIdk},'${myShopping.payStatus}')">${myShopping.orderIdk}</a></td>
    			
    				
    		<c:choose>
@@ -402,7 +446,12 @@ function fn_list(curPage)
 			<td class="text-center">결제완료</td>
 			</c:when>
 			<c:otherwise>
-			<td class="text-center">미결제</td>
+			<c:forEach var="product" items="${myShopping.orderDetailList}" varStatus="loop">
+    			<input type="hidden" name="productIdk${status.index}[]" value="${product.quantity}" />
+    			<input type="hidden" name="quantity${status.index}[]" value="${product.quantity}" />
+			</c:forEach>
+		
+			<td class="text-center"><a href="javascript:void(0)" onclick="fn_pay(${myShopping.orderIdk},${status.index})">미결제</a></td>	
 			</c:otherwise>
 		</c:choose>
 
@@ -465,7 +514,11 @@ function fn_list(curPage)
 	<input type="hidden" name="curPage" value="${curPage}" />
 	</form>
 </div>
-
+   <form name="kakaoForm" id="kakaoForm" method="post" target="kakaoPopUp" action="/kakao/payPopUp">
+      <input type="hidden" name="orderId" id="orderId" value="" />
+      <input type="hidden" name="tId" id="tId" value="" />
+      <input type="hidden" name="pcUrl" id="pcUrl" value="" />
+   </form>
    
 </body>
 </html>
