@@ -50,7 +50,7 @@ public class CommunityController {
     @Autowired
     private CommunityDao communityDao;
     
-    //파일 저장 경로
+    //파일 저장 경로 ㅎㅎ
     @Value("#{env['upload.save.dir.community']}")
     private String UPLOAD_SAVE_DIR_COMMUNITY;      //커뮤니티 저장 경로
     
