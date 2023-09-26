@@ -1,7 +1,6 @@
-
 /********** Template CSS **********/
 :root {
-    --primary: #9e0e0b;
+    --primary: #a5a5a5;
     --light: #F8F8F8;
     --dark: #252525;
 }
@@ -92,7 +91,7 @@ h6,
 
 .btn-outline-body {
     color: var(--primary);
-    border-color: #777777;
+    border-color: #252525;
 }
 
 .btn-outline-body:hover {
@@ -123,7 +122,7 @@ h6,
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
+    color: #9e0e0b; 
 }
 
 .navbar.sticky-top {
@@ -268,6 +267,8 @@ h6,
 .fact-item:hover .fact-icon {
     background: var(--dark);
 }
+
+
 
 .fact-item .fact-icon i {
     color: var(--primary);
@@ -511,13 +512,14 @@ h6,
 /*** Footer ***/
 .footer .btn.btn-link {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
     padding: 0;
     text-align: left;
     color: #777777;
     font-weight: normal;
     text-transform: capitalize;
     transition: .3s;
+    background: #ffffff;
 }
 
 .footer .btn.btn-link::before {
@@ -527,44 +529,50 @@ h6,
     font-weight: 900;
     color: var(--primary);
     margin-right: 10px;
+    background: #ffffff;
 }
 
 .footer .btn.btn-link:hover {
     color: var(--primary);
     letter-spacing: 1px;
     box-shadow: none;
+    background: #ffffff;
 }
 
 .footer .form-control {
     border-color: #777777;
+    background: #ffffff;
 }
 
 .footer .copyright {
     padding: 25px 0;
     font-size: 15px;
     border-top: 1px solid rgba(256, 256, 256, .1);
+    background: #ffffff;
 }
 
 .footer .copyright a {
     color: var(--light);
+    background: #ffffff;
 }
 
 .footer .copyright a:hover {
     color: var(--primary);
+    background: #ffffff;
 }
 
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  background: #1bc2a200;
+  background: #ffffff;
 }
 
 ul li {
   display: block;
   position: relative;
   float: left;
-  background: #1bc2a200;
+  background: #9e0e0b;
 }
 
 li ul { display: none; }
@@ -574,7 +582,7 @@ ul li a {
   padding: 1em;
   text-decoration: none;
   white-space: nowrap;
-  color: #000;
+  color: #fff;
 }
 
 ul li a:hover { background: #2c3e50; }
@@ -604,6 +612,7 @@ ul:after {
 }
 
 ul:after { clear: both; }
+
 
 
 /*shop banner 슬라이드*/
@@ -858,6 +867,10 @@ input#check_btn:checked + label:before{
    width:auto;
 }
 
+.category-container> ul{
+   background-color: #9e0e0b; 
+}
+.category-container> ul  a:hover { background: #7e0707; }
 .category-container-second {
     height: 50px;
     width: auto;
