@@ -18,7 +18,7 @@
 	<result column="PRODUCT_VIEWS" property="productViews"/>
 </resultMap>
 
-<resultMap type="com.icia.sweethome.model.Review" id="productReviewResultMap" >
+<resultMap type="com.icia.sweethome.model.Review" id="reviewResultMap" >
     <id column="REVIEW_IDK" property="reviewIdk" />
     <result column="PRODUCT_IDK"  property="productIdk"/>
     <result column="ORDER_IDK" property="orderIdk"/>
@@ -253,7 +253,7 @@ UPDATE PRODUCT
 </select>
 
 <!-- shop - productDetail 리뷰조회 리스트    //질문할거 : 파라미터타입 int? 모델로 받아도 되나요 ?-->
-<select id="productReviewList" parameterType="int" resultMap="productReviewResultMap">
+<select id="reviewList" parameterType="int" resultMap="reviewResultMap">
 SELECT
     PR.REVIEW_IDK AS REVIEW_IDK,
     PR.PRODUCT_IDK AS PRODUCT_IDK,
@@ -367,7 +367,7 @@ WHERE	USER_ID = #{userId}
 </delete>
 
 <!--  0918 마이페이지 내 리뷰  -->
-<select id="boardMyReview" parameterType ="com.icia.sweethome.model.Review" resultMap="productReviewResultMap">
+<select id="boardMyReview" parameterType ="com.icia.sweethome.model.Review" resultMap="reviewResultMap">
 SELECT REVIEW_IDK,
 	   PRODUCT_IDK,
 	   ORDER_IDK,
