@@ -23,6 +23,12 @@
   color: #333;
 }
 
+.card-body .title{
+	width:79%;
+	text-align: left;
+}
+
+
 *{
 	margin:0;
 	padding:0;

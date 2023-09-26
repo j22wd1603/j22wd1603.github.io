@@ -24,6 +24,10 @@
     /* 다른 스타일 속성들... */
 }
 
+.card-body .title{
+	width:79%;
+	text-align: left;
+}
 
 .card {
 

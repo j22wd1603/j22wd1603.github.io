@@ -215,9 +215,10 @@ display: flex;
 }
 
 .card-body .title{
-	width:79%
+	width:79%;
 	text-align: left;
 }
+
 
 .card-body .delete button{
 	background-color: #fff;
@@ -283,6 +284,7 @@ a{
     overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
     text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
     text-align: left;
+    
 }
 .whitebox{
 
@@ -298,7 +300,7 @@ a{
 	
 }
 .mytitle {
-
+text-align: left;
 	color:#000000;
 	font-weight:bold;
 	font-size:18px;

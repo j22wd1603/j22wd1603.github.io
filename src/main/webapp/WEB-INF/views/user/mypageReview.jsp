@@ -16,6 +16,13 @@
 * {
     font-family: 'Gothic A1', sans-serif;
 }
+
+.card-body .title{
+	width:79%;
+	text-align: left;
+}
+
+
 .card {
 
 	
