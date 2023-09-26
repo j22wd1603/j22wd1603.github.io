@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
     
     <!-- Topbar Start -->
 
@@ -8,7 +11,11 @@
                      (String)request.getAttribute("AUTH_COOKIE_NAME")) != null)
    {
 %>
-
+<style>
+*{
+font-family: 'Gothic A1', sans-serif;
+}
+</style>
 <div class="container-fluid bg-dark p-0 wow fadeIn" data-wow-delay="0.1s">
     <div class="row gx-0 d-none d-lg-flex">
         <div class="col-lg-7 px-5 text-start">

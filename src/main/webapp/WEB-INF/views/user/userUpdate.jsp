@@ -447,6 +447,12 @@ ol, ul {
     border-radius: 20px;
     width:90%;
 }
+
+.form-control:disabled, .form-control:read-only {
+    background-color: #a5a5a5;
+    opacity:0.8; 
+    color : #fff;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
