@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.icia.sweethome.dao.CommunityDao;
 import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
 import com.icia.sweethome.model.Paging;
@@ -47,9 +44,7 @@ public class CommunityController {
     @Autowired
     private UserService userService;	
     
-    @Autowired
-    private CommunityDao communityDao;
-    
+   
     //파일 저장 경로 ㅎㅎ
     @Value("#{env['upload.save.dir.community']}")
     private String UPLOAD_SAVE_DIR_COMMUNITY;      //커뮤니티 저장 경로
@@ -308,7 +303,7 @@ public class CommunityController {
 		//조회 값
 		String searchValue = HttpUtil.get(request, "searchValue", "");
 		//현재 페이지
-		int curPage = HttpUtil.get(request, "curPage", 0);
+		int curPage = HttpUtil.get(request, "curPage", 1);
 		//정렬타입(1.최신순, 2.과거순, 3.인기순)
 		String sortType = HttpUtil.get(request, "sortType", "");
 		//임시저장 조회 객체
@@ -1303,7 +1298,6 @@ public class CommunityController {
 		public Response<Object> myDelete(HttpServletRequest request, HttpServletResponse response)
 		{
 			Response<Object> ajaxResponse = new Response<Object>();
-			String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 			int commuIdk = HttpUtil.get(request, "commuIdk", (int)0);
 			Community info = null;
 			
