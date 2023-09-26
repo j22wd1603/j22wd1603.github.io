@@ -78,7 +78,7 @@ font-family: 'Gothic A1', sans-serif;
     
   <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
   <a href="/index" class="navbar-brand ms-4 ms-lg-0">
-       <h1 class="text-primary m-0"><img class="me-3" src="/resources/images/product/big/logo1.jpg" alt="Icon"></h1>
+       <h1 class="text-primary m-0"><img class="me-3" src="/resources/images/product/big/logo2.jpg" alt="Icon"></h1>
   </a>
   <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
