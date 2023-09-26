@@ -1,3 +1,4 @@
+
 package com.icia.sweethome.service;
 
 import java.util.List;
@@ -804,7 +805,24 @@ public class CommunityService
 				}
 					
 				return count;
-			}			
+			}	
+			
+	//마이페이지에 내게시글 삭제시 조회
+	public Community boardMyCommInfo(Community community)
+	{
+		Community info = null;
+		
+		try
+		{
+			info = communityDao.boardMyCommInfo(community);
+		}
+		catch(Exception e)
+		{
+			logger.error("[communityService] boardMyCommInfo Exception", e);
+		}
+		
+		return info;
+	}
 }
    
 

@@ -834,49 +834,49 @@ public class UserController
 	}
 	
 	//마이페이지에 있는 내 스크랩 선택삭제 0920 윤하나 
-	@RequestMapping(value="/user/myScrapSelectDelete", method=RequestMethod.POST)
-	@ResponseBody
-	public Response<Object> myScrapSelectDelete(HttpServletRequest request) {
+		@RequestMapping(value="/user/myScrapSelectDelete", method=RequestMethod.POST)
+		@ResponseBody
+		public Response<Object> myScrapSelectDelete(HttpServletRequest request) {
+			
 		
-	
-		
-		Response<Object> ajaxResponse = new Response<Object>();
-		String myScrapSelectDelete = HttpUtil.get(request, "valueArr", "");
-		int count = 0;
-		
-		if(myScrapSelectDelete != null)
-		{
-		String[] result = myScrapSelectDelete.split(",");
-		
-		if(result.length > 0)
-		{
- 			for(int i = 0; i < result.length; i++)
- 			{
- 				logger.debug("i : [" + i + "] -> : " + result[i]);
- 				count = communityService.myScrapSelectDelete(Integer.parseInt(result[i]));
- 			}
- 			
- 			if(count > 0)
- 			{
- 				ajaxResponse.setResponse(0, "success");
- 			}
- 			else
- 			{
- 				ajaxResponse.setResponse(500, "server error");
- 			}
+			
+			Response<Object> ajaxResponse = new Response<Object>();
+			String myScrapSelectDelete = HttpUtil.get(request, "valueArr", "");
+			int count = 0;
+			
+			if(myScrapSelectDelete != null)
+			{
+			String[] result = myScrapSelectDelete.split(",");
+			
+			if(result.length > 0)
+			{
+	 			for(int i = 0; i < result.length; i++)
+	 			{
+	 				logger.debug("i : [" + i + "] -> : " + result[i]);
+	 				count = communityService.myScrapSelectDelete(Integer.parseInt(result[i]));
+	 			}
+	 			
+	 			if(count > 0)
+	 			{
+	 				ajaxResponse.setResponse(0, "success");
+	 			}
+	 			else
+	 			{
+	 				ajaxResponse.setResponse(500, "server error");
+	 			}
+			}
+			else
+			{
+				ajaxResponse.setResponse(403, "bad Request");
+			}
+			
+			}
+			else
+			{
+				ajaxResponse.setResponse(400, "bad Request");
+			}
+			
+			return ajaxResponse;
 		}
-		else
-		{
-			ajaxResponse.setResponse(403, "bad Request");
-		}
-		
-		}
-		else
-		{
-			ajaxResponse.setResponse(400, "bad Request");
-		}
-		
-		return ajaxResponse;
-	}
 
-}
+	}

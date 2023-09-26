@@ -1227,10 +1227,14 @@ public class CommunityController {
 		public Response<Object> mySelectDelete(HttpServletRequest request) {
 			
 			//String[] mySelectDelete = request.getParameterValues("valueArr");
-			
+			String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 			Response<Object> ajaxResponse = new Response<Object>();
 			String mySelectDelete = HttpUtil.get(request, "valueArr", "");
 			int count = 0;
+			
+			Community info = null;
+			
+			//boardMyCommInfo
 			
 			if(mySelectDelete != null)
 			{
@@ -1244,9 +1248,26 @@ public class CommunityController {
 	 			
 	 			if(result.length > 0)
 	 			{
+	 				info = new Community();
+	 				
 		 			for(int i = 0; i < result.length; i++)
 		 			{
 		 				logger.debug("i : [" + i + "] -> : " + result[i]);
+		 				
+		 				info.setUserId(cookieUserId);
+		 				info.setCommuIdk(Integer.parseInt(result[i]));
+		 				
+		 				info = communityService.boardMyCommInfo(info);
+		 				
+		 				if(StringUtil.equals(info.getFileCheck(), "Y") && !StringUtil.isEmpty(info.getFileExt()))
+		 				{
+							FileUtil.deleteFile(UPLOAD_SAVE_DIR_COMMUNITY + 
+									FileUtil.getFileSeparator() + (info.getCommuIdk() + "." +info.getFileExt()));
+		 				}
+		 				
+		 				communityService.boardMyLikesDelete(info.getCommuIdk());
+		 				communityService.myScrapSelectDelete(info.getCommuIdk());
+		 				
 		 				count = communityService.mySelectDelete(Integer.parseInt(result[i]));
 		 			}
 		 			
@@ -1283,6 +1304,7 @@ public class CommunityController {
 			Response<Object> ajaxResponse = new Response<Object>();
 			String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 			int commuIdk = HttpUtil.get(request, "commuIdk", (int)0);
+			Community info = null;
 			
 			logger.debug("=================================");
 			logger.debug("board delete -> commuIdk : " + commuIdk);
@@ -1291,6 +1313,7 @@ public class CommunityController {
 			if(commuIdk > 0)
 			{
 				Community  comm = communityService.boardSelect(commuIdk);
+				info = new Community();
 				
 				if(comm != null)
 				{
@@ -1300,6 +1323,9 @@ public class CommunityController {
 						{
 							FileUtil.deleteFile(UPLOAD_SAVE_DIR_COMMUNITY + comm.getCommuIdk() + "." + comm.getFileExt());
 						}
+						
+						communityService.boardMyLikesDelete(info.getCommuIdk());
+		 				communityService.myScrapSelectDelete(info.getCommuIdk());
 
 						ajaxResponse.setResponse(0, "success");
 					}
@@ -1329,6 +1355,7 @@ public class CommunityController {
 				{
 					int commuIdk = HttpUtil.get(request, "commuIdk", 0);
 					Response<Object> ajaxResponse = new Response<Object>();
+					Community info = null;
 					
 					logger.debug("==================================");
 					logger.debug("commuIdk : " + commuIdk);
@@ -1340,32 +1367,37 @@ public class CommunityController {
 						
 						if(check > 0)
 						{
-							logger.debug("111111111111111111111111111111111111111111111");
+							info = new Community();
+							
 							if(communityService.boardMyLikesDelete(commuIdk) > 0)
 							{
-								ajaxResponse.setResponse(0, "Success"); // 로그인 성공
+								
+								communityService.boardMyLikesDelete(info.getCommuIdk());
+								
+								ajaxResponse.setResponse(0, "Success"); 
 							}
 							else
 							{
-								ajaxResponse.setResponse(-1, "Passwords do not match"); // 비밀번호 불일치
+								ajaxResponse.setResponse(-1, "Passwords do not match"); 
 							}
 						}
 						else
 						{
 							logger.debug("해당 스크랩 정보가 존재하지 않음. ");
-							ajaxResponse.setResponse(404, "Not Found"); // 사용자 정보 없음 (Not Found)
+							ajaxResponse.setResponse(404, "Not Found"); 
 						}
 					}
 					else
 					{
-						ajaxResponse.setResponse(400, "Bad Request"); // 파라미터가 올바르지 않음 (Bad Request)
-					}
+						ajaxResponse.setResponse(400, "Bad Request");
+						
 					
 					if(logger.isDebugEnabled())
 					{
 						logger.debug("[UserController] /user/myScrapDelete response\n" + JsonUtil.toJsonPretty(ajaxResponse));
 					}
 					
+					}
 					return ajaxResponse;
 				}
 		

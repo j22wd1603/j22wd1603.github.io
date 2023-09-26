@@ -1,3 +1,4 @@
+
 package com.icia.sweethome.dao;
 
 import java.util.List;
@@ -152,5 +153,8 @@ public interface CommunityDao
    
    //마이페이지에서 내 스크랩 선택삭제
    public int myScrapSelectDelete(int commuIdk);
+   
+   //마이페이지에 내게시글 삭제시 조회
+   public Community boardMyCommInfo(Community community);
 }
 

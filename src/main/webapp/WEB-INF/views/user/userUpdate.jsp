@@ -1,3 +1,4 @@
+
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <!DOCTYPE html>
@@ -117,6 +118,8 @@ div {
     -moz-align-items: center;
     align-items: center;
     margin-bottom: 60px;
+    position: relative;
+    left: 150px;
 }
 
 @media (min-width: 768px){

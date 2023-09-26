@@ -18,12 +18,6 @@
     <result column="FILE_EXT" property="fileExt" />
 </resultMap>
 
-
-
-
-
-
-
 <resultMap id="commentResultMap" type="com.icia.sweethome.model.Comment">
     <id column="COMMENT_IDK" property="commentIdk" />
     <result column="COMMU_IDK" property="commuIdk" />
@@ -93,7 +87,7 @@ SELECT COMMU_IDK,
        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-      NVL(A.FILE_EXT, '') AS FILE_EXT 
+	   NVL(A.FILE_EXT, '') AS FILE_EXT 
   FROM COMMU_BOARD A, USERS B
  WHERE A.COMMU_IDK = #{value}
    AND A.USER_ID = B.USER_ID   
@@ -140,7 +134,7 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-                  NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
                   FROM COMMU_BOARD A, USERS B
                  WHERE A.COMMU_TAB = #{value}
                    AND A.USER_ID = B.USER_ID
@@ -192,7 +186,7 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-                  NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
                   FROM COMMU_BOARD A, USERS B
                  WHERE A.COMMU_TAB = #{value}
                    AND A.USER_ID = B.USER_ID
@@ -246,7 +240,7 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-                  NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
                   FROM COMMU_BOARD A, USERS B
                  WHERE A.COMMU_TAB = #{value}
                    AND A.USER_ID = B.USER_ID
@@ -295,24 +289,24 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-                  NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
                   FROM COMMU_BOARD A, USERS B
                  WHERE A.COMMU_TAB = #{value}
                    AND A.USER_ID = B.USER_ID
                    AND TO_CHAR(A.REG_DATE, 'MM') = TO_CHAR(SYSDATE, 'MM')
                    AND A.COMMU_STATUS = 'Y'
-               <choose>
-                  <when test='commuTab == "1"'>   
-             ORDER BY COMMU_LIKES DESC
-                     </when>
-                     <when test='commuTab == "2"'>
-             ORDER BY COMMU_LIKES DESC
-                     </when>
-                     <when test='commuTab == "3"'>
-             ORDER BY COMMU_VIEWS DESC
-                     </when>
-               </choose>
-             ))                        
+				   <choose>
+				      <when test='commuTab == "1"'>   
+				 ORDER BY COMMU_LIKES DESC
+				         </when>
+				         <when test='commuTab == "2"'>
+				 ORDER BY COMMU_LIKES DESC
+				         </when>
+				         <when test='commuTab == "3"'>
+				 ORDER BY COMMU_VIEWS DESC
+				         </when>
+				   </choose>
+				 ))                        
                  
  WHERE  RNM <![CDATA[>=]]> 1
    AND  RNM <![CDATA[<=]]> 3
@@ -394,20 +388,20 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-                  NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT       
                   FROM COMMU_BOARD A, USERS B
                   
-               <choose>
-                  <when test='commuTab == "1"'>   
-             WHERE A.COMMU_TAB = '1'
-                     </when>
-                     <when test='commuTab == "2"'>
-             WHERE A.COMMU_TAB = '2'
-                     </when>
-                     <when test='commuTab == "3"'>
-             WHERE A.COMMU_TAB = '3'
-                     </when>
-               </choose>                   
+				   <choose>
+				      <when test='commuTab == "1"'>   
+				 WHERE A.COMMU_TAB = '1'
+				         </when>
+				         <when test='commuTab == "2"'>
+				 WHERE A.COMMU_TAB = '2'
+				         </when>
+				         <when test='commuTab == "3"'>
+				 WHERE A.COMMU_TAB = '3'
+				         </when>
+				   </choose>                   
                  AND A.USER_ID = B.USER_ID                   
 <if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>    
    <choose>
@@ -427,17 +421,17 @@ SELECT COMMU_IDK,
                  ORDER BY A.REG_DATE DESC, A.COMMU_TITLE ASC
 </if>
 <if test='sortType != null and sortType != ""'>
-   <choose>
-      <when test='sortType == "1"'>   
-             ORDER BY A.REG_DATE DESC
-      </when>
-      <when test='sortType == "2"'>
-             ORDER BY A.REG_DATE ASC
-      </when>
-      <when test='sortType == "3"'>
-             ORDER BY A.COMMU_LIKES DESC
-      </when>
-   </choose>               
+	<choose>
+		<when test='sortType == "1"'>   
+				 ORDER BY A.REG_DATE DESC
+		</when>
+		<when test='sortType == "2"'>
+				 ORDER BY A.REG_DATE ASC
+		</when>
+		<when test='sortType == "3"'>
+				 ORDER BY A.COMMU_LIKES DESC
+		</when>
+	</choose>				   
 </if>
 ))
  WHERE RNM <![CDATA[>=]]> #{startRow}
@@ -508,21 +502,21 @@ SELECT A.COMMENT_IDK,
 
 <!-- 선행처리기(게시글 시퀀스번호 생성 -->
 <select id="commentSeq" resultType="int">
-   SELECT SEQ_COMMENT_SEQ.NEXTVAL FROM DUAL
+	SELECT SEQ_COMMENT_SEQ.NEXTVAL FROM DUAL
 </select>
 
 <!-- 게시물 등록 -->
 <insert id="commentInsert" parameterType="com.icia.sweethome.model.Comment">
 
 INSERT INTO COMMENT_TABLE (
-      COMMENT_IDK,
-      COMMU_IDK,
-      COMMENT_STATUS,
-      REG_DATE,
-      PARENT_IDK,
-      COMMENT_CONTENT,
-      USER_ID,
-      GROUP_IDK
+	   COMMENT_IDK,
+	   COMMU_IDK,
+	   COMMENT_STATUS,
+	   REG_DATE,
+	   PARENT_IDK,
+	   COMMENT_CONTENT,
+	   USER_ID,
+	   GROUP_IDK
 ) VALUES (
     #{commentIdk},
     #{commuIdk},
@@ -542,12 +536,12 @@ INSERT INTO COMMENT_TABLE (
 
 DELETE FROM COMMENT_TABLE
 <choose>
-   <when test='parentIdk == "1"'>
+	<when test='parentIdk == "1"'>
  WHERE GROUP_IDK = #{commentIdk}
-   </when>
-   <when test='parentIdk == "0"'>
+	</when>
+	<when test='parentIdk == "0"'>
  WHERE COMMENT_IDK = #{commentIdk}
-   </when>   
+	</when>	
 </choose>
 
  
@@ -673,22 +667,36 @@ DELETE FROM COMMU_SAVE
 
 <!-- 임시 저장 테이블에서 조회 -->
 <select id="saveSelect" parameterType="string" resultMap="communityResultMap">
-SELECT COMMENT_IDK,
-        COMMU_IDK,
-        COMMENT_STATUS,
-        REG_DATE,
-        MOD_DATE,
-        DELETE_DATE,
-        PARENT_IDK,
-        COMMENT_CONTENT,
-        USER_ID,
-        GROUP_IDK
+SELECT USER_ID,
+       COMMU_TAB,
+       COMMU_TITLE,
+       COMMU_CONTENT,
+       REG_DATE
   FROM COMMU_SAVE
  WHERE USER_ID = #{value}
 </select>
 
 <!-- 위 인호 @@@@ 아래 하나 -->
 
+<!-- 마이페이지에 내게시글 삭제시 조회 -->
+<select id="boardMyCommInfo" parameterType="com.icia.sweethome.model.Community" resultMap="communityResultMap">
+SELECT COMMU_IDK,
+       NVL(COMMU_TAB,'') AS COMMU_TAB,
+       NVL(USER_ID,'') AS USER_ID,
+       NVL(COMMU_TITLE,'') AS COMMU_TITLE,
+       NVL(COMMU_CONTENT,'') AS COMMU_CONTENT,
+       NVL(COMMU_VIEWS,'') AS COMMU_VIEWS,
+       NVL(COMMU_LIKES,'') AS COMMU_LIKES,
+       NVL(COMMU_STATUS,'') AS COMMU_STATUS,
+       TO_CHAR(REG_DATE,'YYYY.MM.DD') AS REG_DATE,
+       TO_CHAR(MOD_DATE,'YYYY.MM.DD') AS MOD_DATE,
+       TO_CHAR(DELETE_DATE,'YYYY.MM.DD') AS DELETE_DATE,
+       NVL(FILE_CHECK,'N') AS FILE_CHECK,
+       NVL(FILE_EXT, '') AS FILE_EXT
+  FROM COMMU_BOARD
+ WHERE USER_ID = #{userId}
+   AND COMMU_IDK = #{commuIdk}
+</select>
 
 <!-- 마이페이지 게시물 조회 -->
 <select id="boardMyList" parameterType="com.icia.sweethome.model.Community" resultMap="communityResultMap">
@@ -748,14 +756,14 @@ FROM (SELECT
 
 <!-- 마이페이지 게시물 수 조회 -->
 <select id="boardMyListCount" parameterType="com.icia.sweethome.model.Community" resultType="int">
-      SELECT
-           COUNT(COMMU_IDK) AS CNT
-       FROM
-           COMMU_BOARD
-       WHERE USER_ID = #{userId}
-   <if test='searchValue != null and searchValue != ""'>
-         AND COMMU_TITLE LIKE '%' || #{commuTitle} || '%'
-   </if>
+	   SELECT
+	        COUNT(COMMU_IDK) AS CNT
+	    FROM
+	        COMMU_BOARD
+	    WHERE USER_ID = #{userId}
+	<if test='searchValue != null and searchValue != ""'>
+	      AND COMMU_TITLE LIKE '%' || #{commuTitle} || '%'
+	</if>
 </select>
 
 
@@ -927,3 +935,4 @@ DELETE FROM COMMU_SCRAP
 </delete>
 
 </mapper>
+
