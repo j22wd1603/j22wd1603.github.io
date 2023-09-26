@@ -25,10 +25,17 @@
 }
 
 .card-body .title{
-	width:79%;
+	
 	text-align: left;
 }
 
+
+a{
+    
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+  }
+  
+  
 .card {
 
 	
@@ -38,7 +45,7 @@
     display: inline-block;
     border-radius: 20px;
     text-align:center;
-        border: 1px solid #ccc;
+     border: 1px solid #ccc;
 
 
 
@@ -289,7 +296,7 @@ body{
 }
 
 .title {
-    width: 200px; /* 원하는 폭으로 설정하세요 */
+  	width: 100px; /* 원하는 폭으로 설정하세요 */
     white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
     text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
     display: flex;
