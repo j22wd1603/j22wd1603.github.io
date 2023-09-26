@@ -536,7 +536,7 @@ function setInputAddress() {
                         </div>
                
                         <div class="orderPage-container-remote">
-                           <div class="orderPage-container-section-title2">리모컨만들거약</div>
+                           <div class="orderPage-container-section-title2">결제정보</div>
                              <div class="final">
                                 <table>
                                      <tr>
@@ -560,9 +560,18 @@ function setInputAddress() {
                                          <td><input id="actualPrice" type="text" readonly="readonly" value="<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice - discountPrice}" />원" style="text-align: right;"></td>
                                      </tr>
                                 </table>
+                                 <div>
+								    <input type="checkbox" id="orderAgreement" name="orderAgreement">
+								    <label for="orderAgreement" style="font-size: 11px;">주문동의</label>
+								    <p style="font-size: 8px;">제품의 상품명, 상품가격, 배송정보를 확인하였으며, 구매에 동의합니다.</br>(전자상거래법 제 8조 제2장)</p>
+								</div>			
+                                
                                 <input type="button" id="btnOrder" name="btnOrder" value="결제하기">
                             </div>
-                     </div>
+                     	</div>
+                     	
+                     	
+                     	
                </section>
              </form>
     </section>

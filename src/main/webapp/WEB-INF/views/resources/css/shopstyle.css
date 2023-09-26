@@ -707,11 +707,11 @@ ul:after { clear: both; }
 
 .mainname {
     font-size: 70px;
-    color: #B78D65;
+    color: #9e0e0b;
     margin: 40px auto; 
     text-align: center;
-    border-top: 3px solid #B78D65;
-    border-bottom: 3px solid #B78D65; 
+    border-top: 3px solid #9e0e0b;
+    border-bottom: 3px solid #9e0e0b; 
 }
 
 
@@ -1084,9 +1084,9 @@ input#check_btn:checked + label:before{
     height:50px;
     line-height: 50px; 
     text-align: center;
-    border-top: 3px solid #B78D65;
-    border-bottom: 3px solid #B78D65; 
-    color:#B78D65;
+    border-top: 3px solid #9e0e0b;
+    border-bottom: 3px solid #9e0e0b; 
+    color:#9e0e0b;
    
 }
 
@@ -1095,7 +1095,7 @@ input#check_btn:checked + label:before{
     margin-left: auto; 
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #B78D65;
+    background-color: #9e0e0b;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -1316,7 +1316,7 @@ input#check_btn:checked + label:before{
 .orderPage > .order > form > table td { text-align: center; color: #000000; font-size:15px;}
 
 .orderPage > .order > form > table td:last-child {
-    color: #B78D65;
+    color: #9e0e0b;
     font-weight: bold;
 }
 
@@ -1410,13 +1410,68 @@ tbody {
 /* 우측 섹션 컨테이너 */
 .orderPage-container-remote {
     flex: 1;
-    height:600px;
+    height: 100%;
     padding: 20px;
-    background-color: #e0e0e0;
-    margin-right:110px;
-    margin-left:20px;
+    margin-right: 110px;
+     margin-top: 40px;
+    background-color: #7070705e;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 63px; 
+     max-width: 430px;
 }
-         
+
+.orderPage-container-section-title2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+     margin-top: 10px;
+}
+
+.final {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.final >table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.final >table td {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.final >table td:first-child {
+    font-weight: bold;
+    width: 50%;
+}
+
+#btnOrder {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #9e0e0b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px auto; /* 위아래 여백은 20px, 좌우 여백은 자동으로 가운데 정렬 */
+    text-align: center; /* 버튼 내 텍스트를 수평 가운데 정렬 */
+}
+
+
+#btnOrder:hover {
+    background-color:  #870d0a;
+}
+        
         
         
  /*인풋*/
@@ -1968,7 +2023,7 @@ tbody {
   border-radius: 80px;
   background: #fff;
   border-image: linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
-  border: 4px solid #b78d65;
+  border: 4px solid #9e0e0b;
 }
 
 .hidden-input {
