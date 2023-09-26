@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <head>
     <%@ include file="/WEB-INF/views/include/head.jsp" %>
@@ -11,7 +14,19 @@ function fn_view(commuIdk)
 	document.bbsForm.action = "/community/view";
 	document.bbsForm.submit();
 }
+
 </script>
+<style>
+
+*{
+ 	font-family: 'Gothic A1', sans-serif;
+}
+
+h1{
+	font-family: 'Gothic A1', sans-serif;
+}
+
+</style>
 </head>
 
 <body>
@@ -36,7 +51,7 @@ function fn_view(commuIdk)
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-1 text-white animated slideInDown">금주의 <br> 베스트셀러</h1>
+                                <h1 class="display-1 text-white animated slideInDown" style="font-family: 'Gothic A1', sans-serif;";>금주의 <br> 베스트셀러</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">만명의 유저들이 선택한 이번주 베스트셀러 가구들을 구경하세요</p>
                                 <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
                             </div>
