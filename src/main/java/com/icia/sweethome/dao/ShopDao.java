@@ -15,7 +15,7 @@ public interface ShopDao {
 
 	public int shopListCount(Shop shop);
 	public int shopListViewCount(Shop shop);
-	public List<Review> productReviewList (int productIdk);
+	
 
 	//조회수 증가
 	public int shopListViewCntPlus(int productIdk);
@@ -35,6 +35,11 @@ public interface ShopDao {
 	 
 	 public int cartDelete(Cart cart);
 	 
+	 
+	 //리뷰 
+	 public List<Review> reviewList (int productIdk);
+	 
+	 public int reviewInsert(Review review);
 	 
 	//마이페이지의 내 리뷰 0913 윤하나
 	public List<Review> boardMyReview(Review review);

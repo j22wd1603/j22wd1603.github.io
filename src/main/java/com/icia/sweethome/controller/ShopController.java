@@ -239,7 +239,7 @@ public class ShopController {
 			
 		
 		shop = shopService.productSelect(productIdk);			
-		review = shopService.productReviewList(productIdk);
+		review = shopService.reviewList(productIdk);
 	
 	    model.addAttribute("shop", shop);
 	    model.addAttribute("review",review);

@@ -107,21 +107,40 @@ public class ShopService
 		return count;
 	}
 	
+//리뷰
 	
-	public List<Review> productReviewList(int productIdk)
+	public List<Review> reviewList(int productIdk)
 	{
 		List<Review> review = null;
 
 		try
 		{
-			review = shopDao.productReviewList(productIdk);	
+			review = shopDao.reviewList(productIdk);	
 		}
 		catch(Exception  e)
 		{
-			logger.error("[ShopService] productReviewList Exception" , e);
+			logger.error("[ShopService] reviewList Exception" , e);
 		}
 		return review;
 	}
+	
+	
+	 public int reviewInsert(Review review)
+	   {
+	      int count = 0;
+	      
+	      try
+	      {
+	         count =  shopDao.reviewInsert(review);
+	      }
+	      catch(Exception e)
+	      {
+	         logger.error("[ShopService]reviewInsert Exception", e);
+	      }
+	      
+	      return count;
+	      
+	   }
 
 	public List<Cart> cartSelect(Cart cart)
 	   {
