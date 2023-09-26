@@ -197,7 +197,7 @@ $(document).ready(function() {
 		            <option value="3" <c:if test="${commuTab eq '3'}">selected</c:if>>질문 게시판</option>
 		         </select>	
 			
-				<input type="text" name="userName" id="userName" maxlength="20" value="${user.userId}" style="ime-mode:active;" class="form-control mt-4 mb-2" placeholder="이름을 입력해주세요." readonly />
+				<input type="text" name="userName" id="userName" maxlength="20" value="${user.userNickname}(${user.userId})" style="ime-mode:active;" class="form-control mt-4 mb-2" placeholder="이름을 입력해주세요." readonly />
 				<input type="text" name="communityTitle" id="communityTitle" maxlength="100" style="ime-mode:active;" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
 				<div class="form-group">
 					<textarea class="form-control" rows="10" name="communityContent" id="communityContent" style="ime-mode:active;" placeholder="내용을 입력해주세요" required></textarea>

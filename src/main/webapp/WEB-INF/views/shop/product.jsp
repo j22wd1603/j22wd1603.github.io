@@ -13,7 +13,6 @@
 </head>
  
 <body> 
-
 	<header>
 		<nav>
 			<!-- 상세 카테고리-->

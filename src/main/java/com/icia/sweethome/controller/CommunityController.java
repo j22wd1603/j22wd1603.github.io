@@ -23,8 +23,10 @@ import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
 import com.icia.sweethome.model.Paging;
 import com.icia.sweethome.model.Response;
+import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
 import com.icia.sweethome.service.CommunityService;
+import com.icia.sweethome.service.SellerService;
 import com.icia.sweethome.service.UserService;
 import com.icia.sweethome.util.CookieUtil;
 import com.icia.sweethome.util.FileData;
@@ -42,10 +44,13 @@ public class CommunityController {
 	private CommunityService communityService;
 	
     @Autowired
-    private UserService userService;	
+    private UserService userService;
+    
+    @Autowired
+    private SellerService sellerService;	
     
    
-    //파일 저장 경로 ㅎㅎ
+    //파일 저장 경로
     @Value("#{env['upload.save.dir.community']}")
     private String UPLOAD_SAVE_DIR_COMMUNITY;      //커뮤니티 저장 경로
     
@@ -615,7 +620,7 @@ public class CommunityController {
 	      
 			
 			return "/community/updateForm";
-		}		
+		}	
 		
 		//게시물 수정
 		   @RequestMapping(value="/community/updateProc", method=RequestMethod.POST)
@@ -1441,5 +1446,53 @@ public class CommunityController {
  			}
  			
  			return ajaxResponse;
- 		}	
+ 		}
+//============송민기==================
+		@RequestMapping(value = "/community/writeShareForm", method = RequestMethod.POST)
+		public String writeShareForm(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);	      
+			User user = userService.userSelect(userId);
+			
+	       if (userId == null || user == null) {
+		   		response.setContentType("text/html; charset=UTF-8");
+		        PrintWriter out = response.getWriter();
+		        out.println("<script>alert('로그인이 필요합니다');");
+		        out.println("location.href = '/user/loginPage'; </script>");
+		        out.flush();
+	           return "redirect:/";
+	       }
+	       
+	       int productIdk = HttpUtil.get(request, "shareProductIdk", 0);
+	       Shop product = null;
+	       if(productIdk != 0) {
+	    	   product = sellerService.productSelect(productIdk);
+	       }
+			
+			model.addAttribute("user",user);
+			model.addAttribute("product",product);
+			
+			return "/community/writeShareForm";
+		}
+		
+		   @RequestMapping(value="/community/writeShareProc", method=RequestMethod.POST)
+		   @ResponseBody
+		   public Response<Object> writeShareProc(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException
+		   {
+		      Response<Object> ajaxResponse = new Response<Object>();
+				String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);	      
+				User user = userService.userSelect(userId);
+					
+				if (userId == null || user == null) {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('로그인이 필요합니다');");
+					out.println("location.href = '/user/loginPage'; </script>");
+					out.flush();
+				}
+		      
+
+		      
+		      return ajaxResponse;
+		   }	
+
 }
