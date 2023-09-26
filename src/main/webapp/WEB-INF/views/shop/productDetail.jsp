@@ -59,13 +59,15 @@ function go_order() {
 		    
 		<div class="productdetail-sideinfo">
 				<div id="productdetail-sideinfo-brandname">
-					<p>${shop.productBrandName}</p>
+					<p>${shop.productBrandName}</p>					
 				</div> 
-			              
-				<div id="productdetail-sideinfo-name">
-				    <h2>${shop.productName}</h2>
-				</div>
-			        
+			<div id="productdetail-sideinfo-name">
+			    <h2 style="display: inline-block; margin-right: 10px;">${shop.productName}</h2>
+			    <a href="/community/myroom">
+			        <img src="/resources/images/product/big/share2.png" alt="공유" style="vertical-align: middle; width: 25px; height: 25px;">
+			    </a>
+			</div>
+    
 				<div id="productdetail-sideinfo-price">
 					<p><fmt:formatNumber type="number" maxFractionDigits="3" value="${shop.productPrice}" />원</p>
 				</div>
