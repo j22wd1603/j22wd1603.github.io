@@ -1402,6 +1402,7 @@ tbody {
    
 }
 
+
 .orderPage-container-section-title2{
    font-size:20px;
    font-weight: bold;
@@ -1409,6 +1410,11 @@ tbody {
    margin-left:140px;
    margin-bottom:20px;
    margin-top:60px;
+}
+.orderPage-container-section-title2>h1{
+   font-size:25px;
+   margin-top:20px;
+
 }
 
 .orderPage-container-section-title>h1{

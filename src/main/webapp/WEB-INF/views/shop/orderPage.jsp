@@ -257,7 +257,7 @@ function setInputAddress() {
       <main class="orderPage">
             <section class="order">
                 <nav>
-                   <div class="orderPage-container-section-title2">주문상품 (${fn:length(productList)})</div>
+                   <div class="orderPage-container-section-title2"><h1>주문상품 (${fn:length(productList)})</h1></div>
                </nav>
                <form name="viewForm" action="#">
                     <table style="border: 0">
