@@ -48,8 +48,13 @@ function fn_search()
 	document.searchForm.submit();
 }
 
-function fn_delivery(orderIdk,index)
+function fn_delivery(orderIdk,index,payStatus)
 {
+	if(payStatus == 'N'){
+		alert("미결제 상품입니다.");
+		return;
+	}
+	
 	var msg ="";
 	var status = $("#bbsDeliveryStatus"+index).val();
 	if(status == 'Y'){
@@ -159,7 +164,7 @@ function fn_delivery(orderIdk,index)
 						<option value="N" <c:if test="${delivery.deliveryStatus == 'N'}">selected</c:if>>배송준비중</option>
 					</select>
 				</th>
-							<th rowspan="${row}"><input type="button" onclick="fn_delivery(${delivery.orderIdk},${status.index})" value="배송"></th>
+							<th rowspan="${row}"><input type="button" onclick="fn_delivery(${delivery.orderIdk},${status.index},'${delivery.payStatus}')" value="배송"></th>
 						</tr>
 						<c:forEach items="${delivery.deliveryList}" var="deliveryDetail" varStatus="status2">
 						<tr>
