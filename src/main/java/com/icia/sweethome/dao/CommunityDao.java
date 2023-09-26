@@ -8,6 +8,7 @@ import com.icia.sweethome.model.Community;
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository("communityDao")
 public interface CommunityDao 
 {

@@ -1271,6 +1271,7 @@ public class CommunityController {
 		 				count = communityService.mySelectDelete(Integer.parseInt(result[i]));
 		 			}
 		 			
+		 			
 		 			if(count > 0)
 		 			{
 		 				ajaxResponse.setResponse(0, "success");

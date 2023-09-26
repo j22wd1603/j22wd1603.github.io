@@ -17,6 +17,7 @@ import com.icia.sweethome.dao.CommunityDao;
 import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
 
+
 @Service("communityService")
 public class CommunityService 
 {
