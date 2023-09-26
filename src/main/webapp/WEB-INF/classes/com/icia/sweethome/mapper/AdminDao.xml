@@ -1,25 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.icia.sweethome.dao.AdminDao">
-  
-    <resultMap type="com.icia.sweethome.model.Admin" id="adminResultMap">
-     <id column="ADMIN_ID" property="adminId" />
-     <result column="ADMIN_PWD" property="adminPwd" />
-     <result column="ADMIN_NAME" property="adminName" />
-     <result column="ADMIN_PHONE" property="adminPhone" />
-     <result column="ADMIN_EMAIL" property="adminEmail" />
-  	</resultMap>
 
-  <select id="adminSelect" parameterType="String" resultMap="adminResultMap">     
-SELECT
-       NVL(ADMIN_ID, '') AS ADMIN_ID,
-       NVL(ADMIN_PWD, '') AS ADMIN_PWD,
-       NVL(ADMIN_NAME, '') AS ADMIN_NAME,
-       NVL(ADMIN_PHONE, '') AS ADMIN_PHONE,
-       NVL(ADMIN_EMAIL, '') AS ADMIN_EMAIL
- FROM ADMIN
-WHERE ADMIN_ID = #{value}
-  </select>   
+<!-- 관리자 객체 -->  
+<resultMap type="com.icia.sweethome.model.Admin" id="adminResultMap">
+  <id column="ADMIN_ID" property="adminId" />
+  <result column="ADMIN_PWD" property="adminPwd" />
+  <result column="ADMIN_NAME" property="adminName" />
+  <result column="ADMIN_PHONE" property="adminPhone" />
+  <result column="ADMIN_EMAIL" property="adminEmail" />
+</resultMap>
+
+<!-- 게시글 객체 -->  	
+<resultMap id="communityResultMap" type="com.icia.sweethome.model.Community">
+    <id column="COMMU_IDK" property="commuIdk" />
+    <result column="COMMU_TAB" property="commuTab" />
+    <result column="USER_ID" property="userId" />
+    <result column="COMMU_TITLE" property="commuTitle" />
+    <result column="COMMU_CONTENT" property="commuContent" />
+    <result column="COMMU_VIEWS" property="commuViews" />
+    <result column="COMMU_LIKES" property="commuLikes" />
+    <result column="COMMU_STATUS" property="commuStatus" />
+    <result column="REG_DATE" property="regDate" />   
+    <result column="MOD_DATE" property="modDate" />
+    <result column="DELETE_DATE" property="deleteDate" />
+    <result column="FILE_CHECK" property="fileCheck" />
+    <result column="FILE_EXT" property="fileExt" />
+</resultMap>  	
+
+<!-- 댓글 객체 -->
+<resultMap id="commentResultMap" type="com.icia.sweethome.model.Comment">
+    <id column="COMMENT_IDK" property="commentIdk" />
+    <result column="COMMU_IDK" property="commuIdk" />
+    <result column="COMMENT_STATUS" property="commentStatus" />
+    <result column="REG_DATE" property="regDate" />
+    <result column="MOD_DATE" property="modDate" />
+    <result column="DELETE_DATE" property="deleteDate" />
+    <result column="PARENT_IDK" property="parentIdk" />
+    <result column="COMMENT_CONTENT" property="commentContent" />
+    <result column="USER_ID" property="userId" />   
+    <result column="GROUP_IDK" property="groupIdk" />
+    <result column="IMAGE_FILE_EXT" property="imageFileExt" />
+</resultMap>
+
+<!-- 관리자 조회 -->
+<select id="adminSelect" parameterType="String" resultMap="adminResultMap">     
+	SELECT
+	       NVL(ADMIN_ID, '') AS ADMIN_ID,
+	       NVL(ADMIN_PWD, '') AS ADMIN_PWD,
+	       NVL(ADMIN_NAME, '') AS ADMIN_NAME,
+	       NVL(ADMIN_PHONE, '') AS ADMIN_PHONE,
+	       NVL(ADMIN_EMAIL, '') AS ADMIN_EMAIL
+	 FROM ADMIN
+	WHERE ADMIN_ID = #{value}
+</select>   
+
+
+<!-- 커뮤니티 관리자 시작 -->
+  
+<!-- 관리자 댓글 조회 -->  
+<select id="adminCommentSelect" parameterType="com.icia.sweethome.model.Comment" resultMap="commentResultMap">
+     SELECT
+	      COMMENT_IDK,
+	      COMMU_IDK,
+	      COMMENT_STATUS,
+	      REG_DATE,
+	      MOD_DATE,
+	      DELETE_DATE,
+	      PARENT_IDK,
+	      COMMENT_CONTENT,
+	      USER_ID,
+	      GROUP_IDK
+	FROM
+	      COMMENT_TABLE
+	WHERE DBMS_LOB.INSTR(COMMENT_CONTENT, #{commentContent}) > 0
+      AND COMMENT_STATUS = #{commentStatus}	
+</select>  
+
+<!-- 관리자 게시글 조회 -->
+<select id="adminBoardSelect" parameterType="com.icia.sweethome.model.Community" resultMap="communityResultMap">
+	   SELECT
+	    COMMU_IDK,
+	    COMMU_TAB,
+	    USER_ID,
+	    COMMU_TITLE,
+	    COMMU_CONTENT,
+	    COMMU_VIEWS,
+	    COMMU_LIKES,
+	    COMMU_STATUS,
+	    REG_DATE,
+	    MOD_DATE,
+	    DELETE_DATE,
+	    FILE_CHECK,
+	    FILE_EXT
+	FROM
+	    COMMU_BOARD	
+   <choose>
+      <when test='searchType == "1"'>              
+				WHERE USER_ID = #{userId}
+        </when>
+        <when test='searchType == "2"'> 
+				WHERE COMMU_TITLE = #{commuTitle}
+        </when>
+
+    </choose>		
+    
+      AND COMMU_STATUS = #{commuStatus}
+</select>
+
+<!-- 커뮤니티 관리자 끝 -->
+
+
+<!-- 유저 관리자 시작 -->
+<!-- 유저 관리자 끝 -->
+
+<!-- 쇼핑몰 관리자 시작 -->
+<!-- 쇼핑몰 관리자 끝 -->
+
+<!-- 관리자 시작 -->
+<!-- 관리자 끝 -->
+
+<!-- 관리자 시작 -->
+<!-- 관리자 끝 -->
+  
+  
 
  
 </mapper>

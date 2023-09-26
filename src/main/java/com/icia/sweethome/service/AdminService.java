@@ -22,16 +22,6 @@ public class AdminService
    @Autowired
    private AdminDao adminDao;
    
-   /**
-    * <pre>
-    * 메소드명   : userSelect
-    * 작성일     : 2021. 1. 20.
-    * 작성자     : daekk
-    * 설명       : 사용자 조회
-    * </pre>
-    * @param userId 사용자 아이디
-    * @return User
-    */
    public Admin adminSelect(String userId)
    {
       Admin admin = null;
