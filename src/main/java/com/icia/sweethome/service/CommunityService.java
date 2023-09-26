@@ -735,7 +735,7 @@ public class CommunityService
 				return count;
 			}
 			
-			// 마이페이지에서 내 스크랩 삭제 0913 윤하나 
+			// 마이페이지에서 내 좋아요 삭제 0913 윤하나 
 			public int boardMyLikesDelete(int commuIdk)
 			{
 				int count = 0;
@@ -743,6 +743,7 @@ public class CommunityService
 				try
 				{
 					count = communityDao.boardMyLikesDelete(commuIdk);
+					count = communityDao.boardLikesCntMinus(commuIdk);
 				}
 				catch(Exception e)
 				{

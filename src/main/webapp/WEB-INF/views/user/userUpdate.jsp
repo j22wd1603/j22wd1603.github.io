@@ -38,7 +38,7 @@
      margin-right: auto;
     margin-left: auto;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
-    padding: 150px;
+    padding: 100px;
     color: #292929;
 }
 @media (min-width: 1024px){
@@ -119,7 +119,7 @@ div {
     align-items: center;
     margin-bottom: 60px;
     position: relative;
-    left: 150px;
+    left: 70px;
 }
 
 @media (min-width: 768px){
@@ -170,7 +170,6 @@ body, html {
     border: 1px solid #cccccc;
     border-radius: 3px;
     background-color: #ffffff;
-    color: #ffffff;
   }
 .userInfo_form_group {
     max-width: 400px;
@@ -313,7 +312,7 @@ label {
 .edit_userInfo_form_title {
 
     padding-top: 30px;
-    width: 150px;
+    width: 170px;
     text-align : left;
 }
 
@@ -386,6 +385,7 @@ body, html {
 
 .image-single-input {
     display: block;
+    padding-top: 10px;
 }
 
 ol, ul {
@@ -443,7 +443,7 @@ ol, ul {
     font-weight: bold;
     -webkit-transition: .1s color;
     transition: .1s color;
-    padding : 50px;
+    padding : 60px;
     border-radius: 20px;
     width:90%;
 }
@@ -844,7 +844,7 @@ function previewImage(input) {
     	   </div>
     	  </div>
     	 </div>
-    	 <button type="button" class="button-color-blue" id="btnReg" >변경하기</button>
+    	 <button type="" class="button-color-blue" id="btnReg" >변경하기</button>
     </form>
 
 </div>
