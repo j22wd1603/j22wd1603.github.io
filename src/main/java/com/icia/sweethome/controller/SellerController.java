@@ -137,8 +137,9 @@ public class SellerController {
 				int orderIdk =0;
 				
 				try {
-					orderIdk = (int) request.getSession().getAttribute("orderIdk");
+					orderIdk = Integer.parseInt((String) request.getSession().getAttribute("orderIdk"));
 				} catch (Exception e) {
+					request.getSession().invalidate();
 					return "redirect:/";
 				}
 			    
@@ -243,7 +244,6 @@ public class SellerController {
 		             json.addProperty("orderIdk", orderIdk);
 		             
 		             ajaxResponse.setResponse(0, "success", json);
-		             request.getSession().setAttribute("orderIdk", orderIdk);
 		         } else {
 		             ajaxResponse.setResponse(-1, "fail");
 		         }

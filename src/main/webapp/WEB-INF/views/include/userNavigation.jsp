@@ -359,10 +359,10 @@ width:7px;
             </div>
          </div>
            
-            <div class="user-dropdown">
+         <div class="user-dropdown">
             <button class="user-dropbtn">SHOP</button>
             <div class="user-dropdown-content">
-               <a href="/user/cart">장바구니</a>
+               <a href="/user/cartPage">장바구니</a>
               <a href="/user/myShopping">주문조회</a>
                <a href="/user/mypageReview">리뷰</a>
             </div>

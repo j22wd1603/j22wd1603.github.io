@@ -356,7 +356,7 @@ function fn_pay(orderIdk,index) {
     var quantities = $("input[name='quantity"+index+"[]']").map(function() {
         return $(this).val();
     }).get();
-
+    
 $.ajax({
    type : "POST",
    url:"/kakao/payReady",
@@ -395,7 +395,7 @@ $.ajax({
 }
 function movePage()
 {
-   location.href = "/user/myShopping";
+   location.href = "/shop/orderComplete";
 }
 </script>
 </head>
@@ -447,7 +447,7 @@ function movePage()
 			</c:when>
 			<c:otherwise>
 			<c:forEach var="product" items="${myShopping.orderDetailList}" varStatus="loop">
-    			<input type="hidden" name="productIdk${status.index}[]" value="${product.quantity}" />
+    			<input type="hidden" name="productIdk${status.index}[]" value="${product.productIdk}" />
     			<input type="hidden" name="quantity${status.index}[]" value="${product.quantity}" />
 			</c:forEach>
 		

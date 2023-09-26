@@ -2,6 +2,7 @@ package com.icia.sweethome.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,11 +76,16 @@ public class KakaoPayController
 		String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 		
 		String itemCode = HttpUtil.get(request, "productIdk1", "");
-		logger.debug("itemCode : "+itemCode);
+
 		Shop product = null;
 		
 		String[] productIds = request.getParameterValues("productIdk[]");
 	    String[] quantities = request.getParameterValues("quantity[]");
+	    
+		if(!StringUtil.equals(itemCode, "") && !StringUtil.isEmpty(itemCode)) {
+			itemCode = productIds[0];
+		}
+		
 	    String productIdsText = "";
 	    int totalQuantity = 0;
 
@@ -96,7 +102,7 @@ public class KakaoPayController
 	    }
 	     if (productIds != null && productIds.length > 0) {
 	         if (productIds.length > 1) {
-	             productIdsText = "외 " + (productIds.length - 1) + "건";
+	             productIdsText = " 외 " + (productIds.length - 1) + "건";
 	         }
 	     } else {
 	         productIdsText = "";
@@ -150,6 +156,12 @@ public class KakaoPayController
 			json.addProperty("pcUrl", kakaoPayReady.getNext_redirect_pc_url());
 			
 			ajaxResponse.setResponse(0, "success", json);
+			
+			request.getSession().invalidate();
+			HttpSession session = request.getSession(true);
+			session.setAttribute("orderIdk", orderId);
+			session.setMaxInactiveInterval(600); // 10분
+			
 		}
 		else
 		{
