@@ -582,59 +582,59 @@
 			 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
 			 
 				<c:if test="${shopTabCode eq 'A'}">
-				      <h4 class="section-title">FURNITURE</h4>
-				      <h1 class="display-5 mb-4">가구</h1>
+				      <h4 class="category-title">FURNITURE</h4>
+				      <h1 class="big-title">가구</h1>
 				            
 					<c:if test="${shopDetailTabCode eq 'AA'}">
-					             <h1 class="display-5 mb-4">침대</h1>
+					             <h1 class="small-title">침대</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'AB'}">
-					             <h1 class="display-5 mb-4">쇼파</h1>
+					             <h1 class="small-title">쇼파</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'AC'}">
-					             <h1 class="display-5 mb-4">수납</h1>
+					             <h1 class="small-title">수납</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'AD'}">
-					             <h1 class="display-5 mb-4">의자</h1>
+					             <h1 class="small-title">의자</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'AE'}">
-					             <h1 class="display-5 mb-4">테이블</h1>
+					             <h1 class="small-title">테이블</h1>
 					</c:if>
 				</c:if>
 				
 				<c:if test="${shopTabCode eq 'B'}">
-				      <h4 class="section-title">ELECTRONICES</h4>
-				      <h1 class="display-5 mb-4">가전</h1>
+				      <h4 class="category-title">ELECTRONICES</h4>
+				      <h1 class="big-title">가전</h1>
 				            
 					<c:if test="${shopDetailTabCode eq 'BA'}">
-					             <h1 class="display-5 mb-4">TV</h1>
+					             <h1 class="small-title">TV</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'BB'}">
-					             <h1 class="display-5 mb-4">냉장고</h1>
+					             <h1 class="small-title">냉장고</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'BC'}">
-					             <h1 class="display-5 mb-4">세탁기&건조기</h1>
+					             <h1 class="small-title">세탁기&건조기</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'BD'}">
-					             <h1 class="display-5 mb-4">에어컨</h1>
+					             <h1 class="small-title">에어컨</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'BE'}">
-					             <h1 class="display-5 mb-4">주방가전</h1>
+					             <h1 class="small-title">주방가전</h1>
 					</c:if>
 				</c:if>
 				
 				<c:if test="${shopTabCode eq 'C'}">
-				      <h4 class="section-title">STUFF</h4>
-				      <h1 class="display-5 mb-4">잡화</h1>
+				      <h4 class="category-title">STUFF</h4>
+				      <h1 class="big-title">잡화</h1>
 				            
 					<c:if test="${shopDetailTabCode eq 'CA'}">
-					             <h1 class="display-5 mb-4">조명</h1>
+					             <h1 class="small-title">조명</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'CB'}">
-					             <h1 class="display-5 mb-4">패브릭</h1>
+					             <h1 class="small-title">패브릭</h1>
 					</c:if>
 					<c:if test="${shopDetailTabCode eq 'CC'}">
-					             <h1 class="display-5 mb-4">데코&식물</h1>
+					             <h1 class="small-title">데코&식물</h1>
 					</c:if>
 				</c:if>
 		   </div>
