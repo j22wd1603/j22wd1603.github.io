@@ -183,6 +183,9 @@ FROM(SELECT ROWNUM AS RNUM
            <if test='productName != null and productName !="" '>
            		AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
            </if>
+           <if test='productStatus != null and productStatus != ""'>    
+                AND PRODUCT_STATUS = #{productStatus}
+           </if>
            ORDER BY PRODUCT_VIEWS DESC))
 WHERE RNUM <![CDATA[>=]]> #{startRow}
 AND RNUM <![CDATA[<=]]> #{endRow}  
@@ -194,9 +197,12 @@ AND RNUM <![CDATA[<=]]> #{endRow}
 SELECT COUNT(PRODUCT_IDK)
 FROM PRODUCT
 WHERE 1=1
-<if test='productName != null and productName !="" '>
-	AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
-</if>
+	<if test='productName != null and productName !="" '>
+		AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
+	</if>
+	<if test='productStatus != null and productStatus != ""'>    
+	   AND PRODUCT_STATUS = #{productStatus}
+	 </if>
 </select>
 
 
@@ -354,9 +360,10 @@ SELECT COUNT(C.PRODUCT_IDK)
 </select>
 
 
-<delete id="cartDelete" parameterType="int">
+<delete id="cartDelete" parameterType="com.icia.sweethome.model.Cart">
 DELETE FROM CART
-WHERE PRODUCT_IDK = #{productIdk} 
+WHERE	USER_ID = #{userId}
+    AND PRODUCT_IDK = #{productIdk}
 </delete>
 
 <!--  0918 마이페이지 내 리뷰  -->
