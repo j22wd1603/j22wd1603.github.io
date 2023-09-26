@@ -269,7 +269,17 @@ public class UserController
 	@RequestMapping(value = "/user/mypageReview")
 	public String myReview(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		
+		//지현 사용
+		int productIdk = HttpUtil.get(request, "productIdk", 0);
+	    int reviewIdk = HttpUtil.get(request, "reviewIdk", 0);
+	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);
+	    String reviewContent = HttpUtil.get(request, "reviewContent", "");
+	    String regDate = HttpUtil.get(request, "regDate", "");
+	    String productName = HttpUtil.get(request, "productName", "");
+	    
+		    
+		    
+		    
 		String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);		
 		String searchValue = HttpUtil.get(request, "searchValue");
 		//현재 페이지
@@ -292,6 +302,15 @@ public class UserController
 
 		review.setUserId(cookieUserId);
 		
+		
+		review.setOrderIdk(orderIdk);
+		review.setProductIdk(productIdk);
+		review.setProductName(productName);
+		review.setReviewIdk(reviewIdk);
+		
+		
+		
+		
 		totalCount = shopService.boardMyReviewCount(review);
 		
 		if(totalCount > 0)
@@ -313,6 +332,9 @@ public class UserController
 		
 		return "/user/mypageReview";
 	}
+	
+	
+
 	
 	
 

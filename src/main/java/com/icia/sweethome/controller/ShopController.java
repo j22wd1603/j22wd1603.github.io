@@ -248,6 +248,33 @@ public class ShopController {
 	    return "/shop/productDetail"; 
 	}
 		
+		
+	@RequestMapping(value = "/shop/review")
+	public String review(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		List<Review> reviewList = null;
+	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	    User user = userService.userSelect(userId);
 
+	    int productIdk = HttpUtil.get(request, "productIdk", 0);
+	    int reviewIdk = HttpUtil.get(request, "reviewIdk", 0);
+	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);
+	    String reviewContent = HttpUtil.get(request, "reviewContent", "");
+	    String regDate = HttpUtil.get(request, "regDate", "");
+	    String productName = HttpUtil.get(request, "productName", "");
+	    
+	    reviewList = shopService.reviewList(productIdk);
+	    Review review = new Review();
+
+	    review.setProductIdk(productIdk);
+	  
+
+	    model.addAttribute("reviewList", reviewList);
+
+	    
+
+	    return "/shop/review";
+	}
+
+		
 	
 }
