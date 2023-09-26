@@ -503,7 +503,7 @@ function fn_boardDelete(idk)
                   <style data-emotion="css vxgh1s">.css-vxgh1s{margin:0 -10px;}</style>
                   <div class="css-vxgh1s e17n0xi1"></div>
                                 	<div class="btn">
-			  <a href="/user/myShopping">리뷰쓰러가기</a>
+			  <a href="/shop/review">리뷰쓰러가기</a>
 			</div>
                </div>
  
