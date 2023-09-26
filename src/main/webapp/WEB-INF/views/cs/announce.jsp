@@ -119,7 +119,9 @@ a {
   box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
   margin-right: 5px; /* select 박스 오른쪽 여백 설정 */
   margin-bottom: 5px; /* 
+  float: right;
 }
+
 </style>
 
 <link href="/resources/css/csstyle.css" rel="stylesheet">
@@ -160,22 +162,21 @@ function fn_list(curPage)
 </head>
 <body>
 <div class="container">
-   
-   <div class="d-flex">
-      <div style="width:50%;">
-      </br>
-         <h2>공지사항</h2>
-      </div>
-      <div class="ml-auto input-group" style="width:50%;">
-         <select name="_searchType" id="_searchType" class="custom-select custom-styled">
+
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <h1 class="display-1 text-white animated slideInDown" style="text-align: left;"><a class="text-white" href="/cs/announce">공지사항</a></h1>
+        </div>
+    </div>
+    <div class="ml-auto input-group justify-content-end" >
+         <select name="_searchType" id="_searchType" class="custom-select custom-styled" style="width:auto;border: 1px solid #ccc; margin-right: 2px; text-align: center;">
             <option value="">조회 항목</option>
             <option value="1" <c:if test='${searchType eq "1"}'>selected</c:if>>제목</option>
             <option value="2" <c:if test="${searchType eq '2'}">selected</c:if>>내용</option>
          </select> 
-         <input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="input-styling" maxlength="20" style="width:auto;ime-mode:active;" placeholder="조회값을 입력하세요." />
-         <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1">조회</button>
-      </div>
-    </div>
+         <input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="input-styling" maxlength="20" style="width:auto;ime-mode:active;border: 1px solid #ccc; text-align: center;" placeholder="조회값을 입력하세요." />
+         <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1" style="vertical-align: middle;">조회</button>
+   </div>
    <table>
       <thead>
       <tr style="background-color: #B78D65;">
