@@ -29,16 +29,17 @@
 				<div class="dropdown">
 					<button class="dropbtn">OPTION</button>
 					<div class="dropdown-content">
-						<a href="/shop/product?shopTabCode=${shopTabCode}&orderBy=regDate_desc">NEW</a>
-						<a href="/shop/product?shopTabCode=${shopTabCode}&orderBy=productPrice_desc">Price(High)</a>
-						<a href="/shop/product?shopTabCode=${shopTabCode}&orderBy=productPrice_asc">Price(Low)</a>
+						<a href="/shop/product?shopTabCode=${shopTabCode}&shopDetailTabCode=${shopDetailTabCode}">ALL</a>
+						<a href="/shop/product?shopTabCode=${shopTabCode}&shopDetailTabCode=${shopDetailTabCode}&productBrandName=${productBrandName}&orderBy=regDate_desc">NEW</a>
+						<a href="/shop/product?shopTabCode=${shopTabCode}&shopDetailTabCode=${shopDetailTabCode}&productBrandName=${productBrandName}&orderBy=productPrice_desc">Price(High)</a>
+						<a href="/shop/product?shopTabCode=${shopTabCode}&shopDetailTabCode=${shopDetailTabCode}&productBrandName=${productBrandName}&orderBy=productPrice_asc">Price(Low)</a>
 					</div>
 				</div>
 				<div class="dropdown">
 					<button class="dropbtn">BRAND</button>
 					<div class="dropdown-content">
 					<c:forEach var="brandName" items="${brandList}">
-						<a href="/shop/product?shopTabCode=${shopTabCode}&productBrandName=${brandName}">${brandName}</a>
+						<a href="/shop/product?shopTabCode=${shopTabCode}&shopDetailTabCode=${shopDetailTabCode}&productBrandName=${brandName}&orderBy=${orderBy}">${brandName}</a>
 					</c:forEach>
 					</div>
 				</div>   

@@ -134,6 +134,8 @@ public class ShopController {
 		model.addAttribute("shopDetailTabCode", shopDetailTabCode);
 		model.addAttribute("detailList",detailList);
 		model.addAttribute("brandList",brandList);
+		model.addAttribute("productBrandName",productBrandName);
+		model.addAttribute("orderBy",orderBy);
 
 	    return "/shop/product";
 	}

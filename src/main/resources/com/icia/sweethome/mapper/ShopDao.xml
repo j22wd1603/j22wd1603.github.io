@@ -122,19 +122,13 @@
  		 	<when test='orderBy == "productPrice_asc"'>
  			ORDER BY PRODUCT_PRICE ASC
  			</when>
- 		</choose>
-	</if>
-	
-	<if test='orderBy != null and orderBy != ""'>   
-		<choose>
  			<when test='orderBy == "regDate_desc"'>
  			ORDER BY REG_DATE DESC
  			</when>	 	
  		</choose>
 	</if>
-	
 	<if test='orderBy == null or orderBy == ""'>  
-            ORDER BY PRODUCT_CODE ASC
+            ORDER BY PRODUCT_IDK DESC
     </if>
             
             )
@@ -447,6 +441,19 @@ WHERE 1=1
 AND SHOP_TAB_CODE = #{shopTabCode}
 <if test="shopDetailTabCode != null and shopDetailTabCode != ''">
 	AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
+</if>
+<if test='orderBy != null and orderBy != ""'>   
+	<choose>
+		<when test='orderBy == "productPrice_desc"'>
+		ORDER BY PRODUCT_PRICE DESC
+		</when>
+	 	<when test='orderBy == "productPrice_asc"'>
+		ORDER BY PRODUCT_PRICE ASC
+		</when>
+		<when test='orderBy == "regDate_desc"'>
+		ORDER BY REG_DATE DESC
+		</when>	 	
+	</choose>
 </if>
 </select>
 
