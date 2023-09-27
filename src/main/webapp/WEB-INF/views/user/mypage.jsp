@@ -221,8 +221,8 @@ display: flex;
 }
 
 .card-body .title{
-	width:120%;
-	text-align: left;
+	width:150%;
+	overflow: hidden; 
 }
 
 
@@ -274,11 +274,14 @@ padding: 10px;
 
 a{
     white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
-    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    max-width:100px;
   }
 .btn a{
 	padding: 10px;
 	background-color: #8b1411;
+	overflow: hidden; 
 	color: #fff;
 	border-radiu: 10px;
 	border-radius: 5px;
@@ -290,6 +293,7 @@ a{
     overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
     text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
     text-align: left;
+    text-overflow: ellipsis;
     
 }
 .whitebox{
