@@ -8,7 +8,6 @@
 
  <script src="/resources/js/roulette.js"></script>
 
-
 </head>
 
 <body>
@@ -21,12 +20,6 @@
           <img class="banner-images" src="/resources/images/product/big/shopbanner2.jpg">
           <img class="banner-images" src="/resources/images/product/big/shopbanner.jpg">
          </div>
-      </div>
-      <div class="list-button">
-        <span class="list-button-item active"></span> 
-        <span class="list-button-item"></span> 
-        <span class="list-button-item"></span> 
-        <span class="list-button-item"></span> 
       </div> 
    </header>
    
@@ -86,19 +79,17 @@
   </section>
 
      
-         
-   
-   
+
   <section>
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h4 class="section-title2">ALL ITEM</h4>
                 <h1 class="display-5 mb-4">ALL</h1>
-
-               <form action="/shop/shop" method="get">
-                <input type="text" name="productName" placeholder="제품 이름">
-               <button class ="buttonA" type="submit">검색</button>
+               <form id="bestForm" name="bestForm" action="/shop/shop" method="get">
+	              <input type="text" name="productName" class="search-input" placeholder="제품 이름" value="${productName}">
+	              <input type="hidden" name="curPage" value="${curPage}">
+				  <button type="button" id="buttonA" class="search-button" onclick="search()">검색</button>
             </form>
          </div>
                   
@@ -120,10 +111,35 @@
                 </c:forEach>
             </div>
         </div>
-    </div>
+    </div>      
   </section>
+  
+   <footer>	
+	<ul class="pagination justify-content-center">
+		<c:if test="${!empty paging}">		
+			<c:if test="${paging.prevBlockPage gt 0}">
+				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
+			</c:if>
+		
+			<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+				<c:choose>
+					<c:when test="${i ne curPage}">
+						<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		
+			<c:if test="${paging.nextBlockPage gt 0}">
+				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
+			</c:if>
+		</c:if>
+	</ul>
+</footer>
 
-   
+ 
 <script>
       //페이지 로드 시 모달 자동으로 열기
       window.addEventListener("load", function () {
@@ -156,5 +172,6 @@
             }
         });
     </script>
+    
 </body>
 </html>

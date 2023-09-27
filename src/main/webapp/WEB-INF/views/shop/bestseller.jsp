@@ -28,9 +28,9 @@ function search()
 	        <h4 class="section-title2">BEST ITEM</h4>
 	        <h1 class="display-5 mb-4">BEST</h1>
 	            <form id="bestForm" name="bestForm" action="/shop/bestseller" method="get">
-				    <input type="text" name="productName" placeholder="제품 이름" value="${productName}">
-				    <input type="hidden" name="curPage" value="${curPage}">
-				    <button type="button" ="buttonA" onclick="search()">검색</button>
+				  <input type="text" name="productName" class="search-input" placeholder="제품 이름" value="${productName}">
+				  <input type="hidden" name="curPage" value="${curPage}">
+				  <button type="button" id="buttonA" class="search-button" onclick="search()">검색</button>
 				</form>
 			</div>
 	      		
