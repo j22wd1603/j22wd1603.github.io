@@ -1,7 +1,10 @@
 package com.icia.sweethome.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +56,10 @@ public class CommunityController {
     //파일 저장 경로
     @Value("#{env['upload.save.dir.community']}")
     private String UPLOAD_SAVE_DIR_COMMUNITY;      //커뮤니티 저장 경로
+    
+    //파일 저장 경로
+    @Value("#{env['upload.save.dir']}")
+    private String UPLOAD_SAVE_DIR;      //이미지 저장 경로
     
     
     private static final int LIST_COUNT = 12;   //한 페이지의 게시물 수
@@ -1436,7 +1443,7 @@ public class CommunityController {
 	 			}
 	 			else
 	 			{
-	 				ajaxResponse.setResponse(403, "bad Request");
+	 				ajaxResponse.setResponse(400, "bad Request");
 	 			}
  			
  			}
@@ -1476,7 +1483,7 @@ public class CommunityController {
 		
 		   @RequestMapping(value="/community/writeShareProc", method=RequestMethod.POST)
 		   @ResponseBody
-		   public Response<Object> writeShareProc(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException
+		   public Response<Object> writeShareProc(HttpServletRequest request, HttpServletResponse response) throws IOException
 		   {
 		      Response<Object> ajaxResponse = new Response<Object>();
 				String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);	      
@@ -1489,10 +1496,52 @@ public class CommunityController {
 					out.println("location.href = '/user/loginPage'; </script>");
 					out.flush();
 				}
-		      
-
-		      
-		      return ajaxResponse;
-		   }	
+				int productIdk = HttpUtil.get(request, "productIdk", 0);
+				Shop product = sellerService.productSelect(productIdk);
+				
+				int commuIdk = 0;
+				String commuTab = HttpUtil.get(request, "commuTab","");
+				String communityTitle = HttpUtil.get(request, "communityTitle","");
+				String communityContent = HttpUtil.get(request, "communityContent","");
+				
+				
+				if(productIdk!=0 && !StringUtil.equals(commuTab, "")&& !StringUtil.equals(communityTitle, "")&& !StringUtil.equals(communityContent, "")) {
+					commuIdk = communityService.communitySeq();
+					Community param = new Community();
+					
+					param.setUserId(userId);
+					param.setCommuIdk(commuIdk);
+					param.setCommuTab(commuTab);
+					param.setCommuTitle(communityTitle);
+					param.setCommuContent(communityContent);
+				
+			        try {
+			            // 원본 파일 경로와 대상 파일 경로를 설정합니다.
+			            File productFile = new File(UPLOAD_SAVE_DIR + "\\product\\small\\"+ product.getProductCode()+"."+product.getProductFileExt());
+			            File commuFile = new File(UPLOAD_SAVE_DIR_COMMUNITY+commuIdk+"."+product.getProductFileExt());
+			            
+			            // 파일을 대상 경로로 복사합니다.
+			            Files.copy(productFile.toPath(), commuFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			            
+			            param.setFileCheck("Y");
+			            param.setFileExt(product.getProductFileExt());
+			            
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			            return ajaxResponse;
+			        }
+			
+					if(communityService.boardInsert(param)>0) {
+						ajaxResponse.setResponse(0, "success");
+					}else {
+				        ajaxResponse.setResponse(-1, "SQL Fail");
+					}
+				}
+				else {
+					ajaxResponse.setResponse(400, "bad Request");
+				}
+				
+				return ajaxResponse;	
+		   }
 
 }

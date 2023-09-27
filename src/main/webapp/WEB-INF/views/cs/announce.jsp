@@ -6,21 +6,41 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <style>
 body {
-  padding:1.5em;
   background: #ffffff
+}
+
+
+*{
+font-family: 'Gothic A1', sans-serif;
 }
 
 table {
   border: 1px #a39485 solid;
-  font-size: .9em;
-  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  position: relative;
+  box-shadow: 3px 3px 50px #e6e6e6;
   width: 100%;
   border-collapse: collapse;
-  border-radius: 5px;
+  border-radius: 20px;
   overflow: hidden;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  transition: .1s color;
+  margin: auto;
+  border: 1px dashed #dbdbdb;
+    color: #757575;
 }
+
+.container{
+
+  padding:1.5em;
+  
+ }
 
 th {
   text-align: left;
@@ -122,9 +142,13 @@ a {
   float: right;
 }
 
+a{    
+	text-align: left;
+}
+
 </style>
 
-<link href="/resources/css/csstyle.css" rel="stylesheet">
+
 <script type="text/javascript">
 $(document).ready(function() {
     
@@ -158,28 +182,44 @@ function fn_list(curPage)
    document.bbsForm.action = "/cs/announce";
    document.bbsForm.submit();
 }
+
+
 </script>
 </head>
 <body>
-<div class="container">
-
-    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+<main>
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
-            <h1 class="display-1 text-white animated slideInDown" style="text-align: left;"><a class="text-white" href="/cs/announce">공지사항</a></h1>
+            <h2 class="display-1 text-white animated slideInDown"><a class="text-white" href="/community/blog">공지사항</a></h2>
         </div>
     </div>
-    <div class="ml-auto input-group justify-content-end" >
-         <select name="_searchType" id="_searchType" class="custom-select custom-styled" style="width:auto;border: 1px solid #ccc; margin-right: 2px; text-align: center;">
+</main>
+<div class="container" >
+    <div class="ml-auto input-group justify-content-end" style="margin-bottom: 30px;   line-height : center;" >
+         <select name="_searchType" id="_searchType" class="custom-select custom-styled" style="width:auto; border: 1px solid #ccc; margin-right: 2px; text-align: center; padding: 10px ;
+    margin-bottom: 15px; border: 1px solid #999; border-radius: 10px; font-size: 16px;">
             <option value="">조회 항목</option>
             <option value="1" <c:if test='${searchType eq "1"}'>selected</c:if>>제목</option>
             <option value="2" <c:if test="${searchType eq '2'}">selected</c:if>>내용</option>
          </select> 
-         <input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="input-styling" maxlength="20" style="width:auto;ime-mode:active;border: 1px solid #ccc; text-align: center;" placeholder="조회값을 입력하세요." />
-         <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1" style="vertical-align: middle;">조회</button>
+         <input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="input-styling" maxlength="20" style="width:auto; ime-mode:active; border: 1px solid #ccc; text-align: center; width:auto; border: 1px solid #ccc; text-align: center; padding: 10px;
+    margin-bottom: 15px; border: 1px solid #999; border-radius: 10px; font-size: 16px;" placeholder="조회값을 입력하세요." />
+         <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1" style="padding: 10px 15px 10px 15px;
+    margin-left: auto; margin-right: auto;
+    border-radius: 10px;
+    top : 1px;
+    height: 50px;
+    background-color: #73685d;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    -webkit-transition: .1s color;
+    transition: .1s color;
+     border:none;">조회</button>
    </div>
    <table>
       <thead>
-      <tr style="background-color: #B78D65;">
+      <tr>
          <th scope="col" class="text-center" style="width:10%">번호</th>
          <th scope="col" class="text-center" style="width:55%">제목</th>
          <th scope="col" class="text-center" style="width:15%">날짜</th>
@@ -214,7 +254,7 @@ function fn_list(curPage)
    </table>
    </br>
    <nav>
-      <ul class="pagination justify-content-center">
+      <ul class="pagination justify-content-center" ">
 <c:if test="${!empty paging}">      
    <c:if test="${paging.prevBlockPage gt 0}">
          <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
@@ -223,16 +263,17 @@ function fn_list(curPage)
    <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
       <c:choose>
          <c:when test="${i ne curPage}">
-         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+         <li class="page-item" style="border-radius: 10px; background: none;"><a class="page-link" style="border-radius: 10px;" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
          </c:when>
          <c:otherwise>
-         <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+         <li class="page-item active" ><a class="page-link"  style="  background: none; border-radius: 10px;" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
          </c:otherwise>
       </c:choose>
    </c:forEach>
    
    <c:if test="${paging.nextBlockPage gt 0}">
-         <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
+         <li class="page-item"   style="background: none;"><a class="page-link" style="border-radius: 10px;  background-color: none;" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
+         
    </c:if>
 </c:if>
       </ul>

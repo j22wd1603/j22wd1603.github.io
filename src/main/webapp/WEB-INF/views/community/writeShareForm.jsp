@@ -65,8 +65,7 @@ $(document).ready(function() {
 				if(response.code == 0)
 				{
 					alert("공유가 완료되었습니다.");
-					document.bbsForm.action = "/community/free";
-					document.bbsForm.submit();
+					location.href = "/community/free"
 				}
 				else if(response.code == 400)
 				{
@@ -113,7 +112,7 @@ $(document).ready(function() {
 	            <option value="2" selected="selected">자유 게시판</option>
 	         </select>
 			<input type="text" name="user" id="user" maxlength="20" value="${user.userNickname}(${user.userId})" style="ime-mode:active;" class="form-control mt-4 mb-2" placeholder="이름을 입력해주세요." readonly />
-			<input type="text" name="communityTitle" id="communityTitle" maxlength="100" value="[공유]${product.productName} : " style="ime-mode:active;" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
+			<input type="text" name="communityTitle" id="communityTitle" maxlength="100" value="[공유]${product.productName} : 추천상품" style="ime-mode:active;" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
 				<div class="form-group">
 				    <div class="row">
 				        <div class="col-md-3">
@@ -121,16 +120,14 @@ $(document).ready(function() {
 				        </div>
 				        <div class="col-md-9">
 				            <textarea class="form-control" name="communityContent" id="communityContent" style="text-align:left; resize: none; height: 300px;" placeholder="내용을 입력해주세요" required>
-				                Sweethome 쇼핑몰 ${user.userNickname} 님이 아래 상품을 공유합니다:
-				
-				                상품명: ${product.productName}
-				                가격: ${product.productPrice} 원
-				                브랜드: ${product.productBrandName}
-				
-				                더 많은 정보와 구매 링크는 아래에서 확인하세요!
-				                http://sweethome.co.kr:8088/shop/productDetail?productIdk=${product.productIdk}
-				
-				                이제 Sweethome 쇼핑몰의 멋진 상품을 함께 공유하고 소통해요!
+Sweethome 쇼핑몰 백예린친구 님이 아래 상품을 공유합니다:
+상품명: ${product.productName}
+가격: <fmt:formatNumber type="number" maxFractionDigits="3" value="${product.productPrice}" />원
+브랜드: 판둘
+더 많은 정보와 구매 링크는 아래에서 확인하세요!
+http://sweethome.co.kr:8088/shop/productDetail?productIdk=${product.productIdk}
+
+이제 Sweethome 쇼핑몰의 멋진 상품을 함께 공유하고 소통해요!
 				            </textarea>
 				        </div>
 				    </div>
