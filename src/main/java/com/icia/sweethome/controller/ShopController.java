@@ -13,8 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.icia.sweethome.model.Cart;
 import com.icia.sweethome.model.Paging;
+import com.icia.sweethome.model.Response;
 import com.icia.sweethome.model.Review;
 import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
@@ -23,6 +27,7 @@ import com.icia.sweethome.service.ShopService;
 import com.icia.sweethome.service.UserService;
 import com.icia.sweethome.util.CookieUtil;
 import com.icia.sweethome.util.HttpUtil;
+import com.icia.sweethome.util.JsonUtil;
 
 @Controller("shopController")
 public class ShopController {
@@ -246,6 +251,189 @@ public class ShopController {
 	    model.addAttribute("user",user);
 	    
 	    return "/shop/productDetail"; 
+	}
+	
+	@RequestMapping(value="/shop/cart", method=RequestMethod.POST)
+	@ResponseBody
+	public Response<Object> cart(HttpServletRequest request, HttpServletResponse response) {
+	    Response<Object> ajaxResponse = new Response<Object>();
+	    int productIdk = HttpUtil.get(request, "productIdk", 0);
+	    int quantity = HttpUtil.get(request, "quantity", 0);
+	    int finalPrice = HttpUtil.get(request, "finalPrice", 0);
+	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	    User user = userService.userSelect(userId);
+	   
+	    List<Cart> cartSelect = null;
+	    int count = 0;
+
+	    if (user != null) {
+	        if (productIdk > 0 && quantity > 0 && finalPrice > 0) {
+	            Cart cart = new Cart();
+	            cart.setUserId(userId);
+	            cart.setProductIdk(productIdk);
+	            cart.setQuantity(quantity);
+	            cart.setFinalPrice(finalPrice);
+
+	            // 장바구니에 상품을 추가, 업데이트
+	            cartSelect = shopService.cartSelect(cart);
+
+	            if (cartSelect != null && cartSelect.size() > 0) {                
+	                int existingQuantity = cartSelect.get(0).getQuantity();
+	                int updatedQuantity = existingQuantity + quantity;
+	                
+	                if (updatedQuantity <= 10) 
+	                {             
+	                    count = shopService.cartUpdate(cart);
+	                    
+	                    if (count > 0) {
+	                        ajaxResponse.setResponse(0, "장바구니 업데이트 성공");
+	                    } 
+	                    else 
+	                    {
+	                        ajaxResponse.setResponse(500, "장바구니 업데이트 실패");
+	                    }
+	                } 
+	                else 
+	                {
+	                    // 수량 초과 시 에러 응답
+	                    ajaxResponse.setResponse(408, "수량 초과 에러");
+	                }
+	            } 
+	            else 
+	            {                
+	                count = shopService.cartInsert(cart);
+	                
+	                if (count > 0) 
+	                {
+	                    ajaxResponse.setResponse(0, "장바구니 추가 성공");
+	                } 
+	                else 
+	                {
+	                    ajaxResponse.setResponse(500, "장바구니 추가 실패");
+	                }
+	            }
+	        } 
+	        else 
+	        {
+	            ajaxResponse.setResponse(400, "매개변수 오류");
+	        }
+	    } 
+	    else 
+	    {
+	        ajaxResponse.setResponse(404, "사용자를 찾을 수 없음");
+	    }
+
+
+
+	    if (logger.isDebugEnabled()) 
+	    {
+	        logger.debug("[ShopController]/shop/cart response\n" + JsonUtil.toJsonPretty(ajaxResponse));
+	    }
+
+	    return ajaxResponse;
+	}
+	
+	
+	@RequestMapping(value = "/shop/cartDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<Object> cartDelete(HttpServletRequest request) {
+	    Response<Object> ajaxResponse = new Response<Object>();
+	   	
+	    String productIdkList = HttpUtil.get(request, "productIdk", "");
+	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	    User user = userService.userSelect(userId);
+	    Cart cart = null;
+	    
+	    int productIdk = 0;
+	    int deleteCount = 0;
+
+	    if (user != null) {
+	    	String[] productList = productIdkList.split(",");   //코드가 ,로 잘려서 (선택하게 한개 이상이면 473,250이런식으로 되니까
+	    	cart = new Cart();
+	    	
+	    	cart.setUserId(userId);
+	    	
+	    	for(int i = 0; i < productList.length; i++)
+	    	{
+	    		productIdk = Integer.parseInt(productList[i]);
+	    		cart.setProductIdk(productIdk);
+	    		deleteCount += shopService.cartDelete(cart);
+	    	}
+	    	
+            if (deleteCount == productList.length) {
+                ajaxResponse.setResponse(0, "상품이 삭제되었습니다.");
+            } 
+            else 
+            {
+                ajaxResponse.setResponse(500, "상품 삭제 중 오류가 발생했습니다.");
+            }
+            
+	    } else {
+	        ajaxResponse.setResponse(404, "사용자를 찾을 수 없음");
+	    }
+
+	    if (logger.isDebugEnabled()) {
+	        logger.debug("[ShopController]/shop/cartDelete response\n" + JsonUtil.toJsonPretty(ajaxResponse));
+	    }
+
+	    return ajaxResponse;
+	}
+	
+	
+	@RequestMapping(value ="/shop/cartPage")
+	public String cartPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+	      
+		
+		//쿠키값
+			String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+			User user = userService.userSelect(userId);
+			//현재 페이지
+			int curPage = HttpUtil.get(request, "curPage", 1);
+			int totalCount = 0;
+			Paging paging = null;
+			
+			int productIdk = HttpUtil.get(request, "productIdk", 0);	
+			//브랜드네임
+			String productBrandName = HttpUtil.get(request, "productBrandName", "");
+			//제품이름
+			String productName = HttpUtil.get(request, "productName", "");
+			String productFileExt = HttpUtil.get(request, "productFileExt", "");
+			
+			String productCode = HttpUtil.get(request, "productCode", "");
+			int productPrice = HttpUtil.get(request, "productPrice", 0); 
+
+			List<Cart> cartList = null;
+				
+			Cart cart = new Cart();
+			cart.setUserId(userId);
+			cart.setProductIdk(productIdk);
+			cart.setProductName(productName);
+			cart.setProductBrandName(productBrandName);
+			cart.setProductFileExt(productFileExt);
+			cart.setProductCode(productCode);
+			cart.setProductPrice(productPrice);
+			
+
+			totalCount = shopService.cartListCount(cart);
+			
+			if(totalCount > 0)
+			{
+				paging = new Paging("/user/cartPage", totalCount, LIST_COUNT, PAGE_COUNT, curPage, "curPage");
+				
+				cart.setStartRow(paging.getStartRow());
+				cart.setEndRow(paging.getEndRow());
+				
+				cartList = shopService.cartList(cart);
+		
+			}
+			 model.addAttribute("cartList",cartList);
+			 model.addAttribute("user",user);
+			 model.addAttribute("curPage", curPage);
+			 model.addAttribute("paging", paging);
+			
+			
+			 
+		    return "/shop/cartPage"; 
 	}
 		
 		

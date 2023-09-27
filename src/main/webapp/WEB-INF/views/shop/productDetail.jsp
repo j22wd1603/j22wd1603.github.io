@@ -130,7 +130,7 @@ function fn_share(productIdk) {
 				        <p>선택하신 상품이 장바구니에 담겼습니다.</p>
 				        <span>
 				            <button onclick="continueShopping()" class="continue-shopping-button">계속 쇼핑하기</button>
-				            <button onclick="window.location.href='/user/cartPage'" class="add-to-cart-button">장바구니 보기</button>
+				            <button onclick="window.location.href='/shop/cartPage'" class="add-to-cart-button">장바구니 보기</button>
 
 				        </span>
 				    </div>
@@ -321,7 +321,7 @@ function continueShopping() {
 function goToCartPage() {
 	  $.ajax({
 	        type: 'POST',
-	        url: '/user/cart',
+	        url: '/shop/cart',
 	        data: {	
 	        	userId: $("#cartUserId").val(),
 	            productIdk: $("#cartProductIdk").val(),
