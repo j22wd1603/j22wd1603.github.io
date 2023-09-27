@@ -8,9 +8,9 @@
 <%@ include file="/WEB-INF/views/include/userNavigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/293152e236.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/293152e236.js"></script>
 
 <style>
 * {
@@ -564,7 +564,7 @@ $(function(){
                   <style data-emotion="css vxgh1s">.css-vxgh1s{margin:0 -10px;}</style>
                   <div class="css-vxgh1s e17n0xi1"></div>
                                 	<div class="btn">
-			  <a href="write.html">글쓰기</a>
+			  <a href="/community/writeForm">글쓰기</a>
 			</div>
                </div>
  
@@ -647,24 +647,12 @@ $(function(){
 		<input type="hidden" name="searchValue" value="${searchValue}" />
 		<input type="hidden" name="curPage" value="${curPage}" />
 	</form>
-            
-         </section>
-        
+
            </div>
        </div>
        </div>
-      </div>
-    <script src="https://assets.ohou.se/web/dist/js/303-cc24ad1d9e85c42571e5.js"></script><script src="https://assets.ohou.se/web/dist/js/216-0bc0ba0ef0ac66fbf9ac.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/vendor-6b87d1d93ea2d1fc895a.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/249-d537f9b2c8ddc093de63.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/preamble-4fe6ebba0c5449779ac3.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/229-22c7eb30e20c7d1b5dac.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/3-025202b5dd6b27304bff.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/9-68c0a77a985baf7f2766.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/10-7d989bbe00a02aa61c92.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/28-2bb5fa41a80506787368.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/30-a3d34d9b99f4d6c927d3.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/36-95c220cf50b7abe229a4.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/33-e245169af5016dc77e34.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/38-237a2b9058258b71fd7a.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/40-361d3756e3f34f51a855.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/43-95df487d827a9a93acb6.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/56-e8dc65841a7ab9442166.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/66-e8c6d59bf2aa292020c8.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/173-dbb81211de882c820ecc.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/App-5da5e615b9384cefcd9b.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/runtime-297be27a2ebcb724c754.js"></script>
+       
+
  </body>
  </html>
  
