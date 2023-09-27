@@ -89,7 +89,7 @@ public class AdminService
    
    
    
-   
+//관리자 고객센터   
 //======================================================================================
    public List<User> userList(User user) {
 	    List<User> list = null;

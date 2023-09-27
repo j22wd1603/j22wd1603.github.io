@@ -35,6 +35,8 @@
 
 
 
+
+
 <!-- 선행처리기(시퀀스번호 생성) -->
 <select id="communitySeq" resultType="int">
    SELECT SEQ_COMMUNITY_SEQ.NEXTVAL FROM DUAL
