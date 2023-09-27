@@ -6,6 +6,8 @@
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 
+
+
  <script src="/resources/js/roulette.js"></script>
 <script>
 function search()
