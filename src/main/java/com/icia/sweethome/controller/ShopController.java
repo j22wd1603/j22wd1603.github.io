@@ -42,8 +42,7 @@ public class ShopController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private SellerService sellerService;
+
 
 	private static final int LIST_COUNT = 12;		//한페이지의 게시물 수
 	private static final int PAGE_COUNT = 5;		//페이징 수 
@@ -52,57 +51,26 @@ public class ShopController {
 		@RequestMapping(value = "/shop/shop")
 		public String shop(Model model, HttpServletRequest request, HttpServletResponse response) {
 			
-			// 검색타입
-			String searchType = HttpUtil.get(request, "searchType");
-			//검색내용
-			String searchValue = HttpUtil.get(request, "searchValue");	
-			
-			String productName = HttpUtil.get(request, "productName");
-			//브랜드네임
-			String productBrandName = HttpUtil.get(request, "productBrandName");
-			//제품이름
-			String productDescription = HttpUtil.get(request, "productDescription");
-			//제품내용
-			//현재페이지 번호 
-			int curPage = HttpUtil.get(request, "curPage", 1);
-			//총조회수
-			int totalCount = 0;
-			//페이징
-			Paging paging =null;
+			String productName = HttpUtil.get(request, "productName","");
 			
 			List<Shop> list = null;
 			List<Shop> listView = null;
 			
 			Shop shop = new Shop();
-		
-			
-			totalCount = shopService.shopListCount(shop);
-			
-			if(totalCount >0)
-			{
-				
-				paging = new Paging("/shop/shop", totalCount , LIST_COUNT, PAGE_COUNT , curPage , "curPage");
-				
-				shop.setStartRow(paging.getStartRow());
-				shop.setEndRow(paging.getEndRow());
+			shop.setProductName(productName);
 
-				list = shopService.shopList(shop);
-				listView = shopService.shopListView(shop);
-			}
+			list = shopService.shopList(shop);
 			
+			Shop bestShop = new Shop();
+			bestShop.setStartRow(1);
+			bestShop.setEndRow(8);
 			
+			listView = shopService.shopListView(bestShop);
 			
 			model.addAttribute("list" , list);	
-			model.addAttribute("listView" , listView);	
-			model.addAttribute("searchType" , searchType);
-			model.addAttribute("searchValue" , searchValue);
-			model.addAttribute("curPage" , curPage);
-			model.addAttribute("paging" , paging);
-			model.addAttribute("productBrandName",productBrandName);
-			model.addAttribute("productName",productName);
-			model.addAttribute("productDescription",productDescription);
+			model.addAttribute("listView" , listView);
+			model.addAttribute("productName" , productName);
 	
-
 			return "/shop/shop";
 		}
 

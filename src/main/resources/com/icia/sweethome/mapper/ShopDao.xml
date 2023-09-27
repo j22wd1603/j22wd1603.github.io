@@ -95,6 +95,9 @@
 	
 	<if test='productBrandName != null and productBrandName != ""'>    
 		 	AND PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+	</if> 
+	<if test='productName != null and productName != ""'>    
+		 	AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
 	</if>  
 	<if test='productPrice != null and productPrice != ""'>    
 		 	AND PRODUCT_PRICE LIKE '%' || #{productPrice} || '%'

@@ -7,6 +7,12 @@
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 
  <script src="/resources/js/roulette.js"></script>
+<script>
+function search()
+{
+	document.shopForm.submit();
+}
+</script>
 
 </head>
 
@@ -57,21 +63,19 @@
          
          <div class="row g-0 team-items">
                   <c:forEach var="shop" items="${listView}" varStatus="loop">
-                     <c:if test="${loop.index < 8}">
-                          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                              <div class="team-item position-relative">
-                                  <div class="position-relative">
-                                       <a href="/shop/productDetail?productIdk=${shop.productIdk}">
-                                  <img class="img-fluid" src="/resources/images/product/small/${shop.productCode}.${shop.productFileExt}" alt="${shop.productName}">
-                              </a>
-                                  </div>
-                                  <div class="bg-light text-center p-4">
-                                      <h3 class="mt-2">${shop.productName}</h3>
-                                      <span class="text-primary">${shop.productBrandName}</span>
-                                  </div>
+                      <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                          <div class="team-item position-relative">
+                              <div class="position-relative">
+                                   <a href="/shop/productDetail?productIdk=${shop.productIdk}">
+                              <img class="img-fluid" src="/resources/images/product/small/${shop.productCode}.${shop.productFileExt}" alt="${shop.productName}">
+                          </a>
+                              </div>
+                              <div class="bg-light text-center p-4">
+                                  <h3 class="mt-2">${shop.productName}</h3>
+                                  <span class="text-primary">${shop.productBrandName}</span>
                               </div>
                           </div>
-                    </c:if>
+                      </div>
                   </c:forEach>
          </div>
       </div>
@@ -86,10 +90,9 @@
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h4 class="section-title2">ALL ITEM</h4>
                 <h1 class="display-5 mb-4">ALL</h1>
-               <form id="bestForm" name="bestForm" action="/shop/shop" method="get">
-	              <input type="text" name="productName" class="search-input" placeholder="제품 이름" value="${productName}">
-	              <input type="hidden" name="curPage" value="${curPage}">
-				  <button type="button" id="buttonA" class="search-button" onclick="search()">검색</button>
+            <form id="shopForm" name="shopForm" action="/shop/shop" method="get">
+	              <input type="text" id="productName" name="productName" class="search-input" placeholder="제품 이름" value="${productName}">
+				  <button type="button" id="buttonA" name="buttonA" class="search-button" onclick="search()">검색</button>
             </form>
          </div>
                   
@@ -113,32 +116,6 @@
         </div>
     </div>      
   </section>
-  
-   <footer>	
-	<ul class="pagination justify-content-center">
-		<c:if test="${!empty paging}">		
-			<c:if test="${paging.prevBlockPage gt 0}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
-			</c:if>
-		
-			<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-				<c:choose>
-					<c:when test="${i ne curPage}">
-						<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		
-			<c:if test="${paging.nextBlockPage gt 0}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
-			</c:if>
-		</c:if>
-	</ul>
-</footer>
-
  
 <script>
       //페이지 로드 시 모달 자동으로 열기
