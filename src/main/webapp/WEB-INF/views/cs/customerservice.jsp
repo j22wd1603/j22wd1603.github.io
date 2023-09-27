@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
-<link href="/resources/css/csstyle.css" rel="stylesheet">
+
   
  <style>
  .custom-radio-input2 {
@@ -30,9 +30,102 @@
     color: #fff;
     border-color: #B78D65;
   }
+  
+  .title{
+  
+    box-shadow: 3px 3px 50px #e6e6e6;
+    border-radius: 20px;
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font: inherit;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: space-between;
+    -webkit-align-items: space-between;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    border: 1px dashed #dbdbdb;
+    color: #757575;
+    font-size: 13px;
+    font-weight: bold;
+    -webkit-transition: .1s color;
+    transition: .1s color;
+    margin: auto;
+  
+}
+
+.form-control{
+  
+    box-shadow: 3px 3px 50px #e6e6e6;
+    border-radius: 20px;
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font: inherit;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: space-between;
+    -webkit-align-items: space-between;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    border: 1px dashed #dbdbdb;
+    color: #757575;
+    font-size: 13px;
+    font-weight: bold;
+    -webkit-transition: .1s color;
+    transition: .1s color;
+    margin: auto;
+
+}
+
+.form-group2{
+	 justify-content: space-between;
+	 font-size: 13px;
+	 margin: auto;
+}
+
+.btn btn-primary{
+    padding: 10px;
+    background-color: #8b1411;
+    color: #fff;
+    border-radiu: 10px;
+    border-radius: 5px;
+
+}
+
+.btn{
+	display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #777;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0px;
+    transition: color 0.15s
+  }
+
+input{
+	margin-top:20px;
+}
  </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	
     
 
 	$("#questionTitle").focus();
@@ -143,6 +236,8 @@ function previewImage(input) {
         preview.src = '#';
     }
 }
+
+
 </script>
 </head>
 <body>
@@ -164,8 +259,8 @@ function previewImage(input) {
 </div>
 </br>
 			<div style="display: flex; flex-direction: column; align-items: center;">
-    <input type="text" name="questionTitle" id="questionTitle" maxlength="100" style="ime-mode: active; width: 100%; max-width: 600px; height: 40px;" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
-    <div class="form-group" style="width: 100%; max-width: 600px;">
+    <input type="text" name="questionTitle" id="questionTitle" maxlength="100" style="ime-mode: active; width: 100%; max-width: 800px; height: 40px;" class="title" placeholder="제목을 입력해주세요." required />
+    <div class="form-group" style="width: 100%; max-width: 800px;">
         <textarea class="form-control" rows="15" name="questionContent" id="questionContent" style="ime-mode: active; width: 100%; height: 300px;" placeholder="내용을 입력해주세요" required></textarea>
     </div>
 </div>
@@ -173,7 +268,7 @@ function previewImage(input) {
             <div class="form-group2" style="text-align: center;">
     <label for="profilePicture" style="font-size: 17px;"></label>
     <input type="file" id="profilePicture" name="profilePicture" style="display: inline-block; vertical-align: top;" onchange="previewImage(this);" />
-    <img id="preview" style="font-size: 15px; display: inline-block; max-width: 100%; max-height: 200px;" />
+   
 </div>
 		<div class="form-group row" style="text-align: center;">
 			<div class="col-sm-12">
