@@ -121,7 +121,7 @@ function deleteValue()
 	    if (confirm("장바구니 물품을 삭제 하시겠습니까?") == true) {
 	        $.ajax({
 	            type: 'POST',
-	            url: '/user/cartDelete',
+	            url: '/shop/cartDelete',
 	            data: {
 	                productIdk: checkValue
 	            },
@@ -132,7 +132,7 @@ function deleteValue()
 	            success: function (response) {
 	                if (response.code == 0) {
 	                    alert("상품이 삭제되었습니다.");
-	                    location.href = "/user/cartPage";	                   
+	                    location.href = "/shop/cartPage";	                   
 	                } else if (response.code == 500) {
 	                    alert("상품 삭제 중 오류가 발생했습니다.");
 	                } else {
@@ -232,7 +232,7 @@ function fn_list(curPage)
 
 <form id="orderForm" name="orderForm" method="post"></form>
 
-<form id="cartForm" name="cartForm" action="/user/cartPage" method="get">
+<form id="cartForm" name="cartForm" action="/shop/cartPage" method="get">
      <input type="hidden" name="curPage" value="${curPage}">
 </form>
 

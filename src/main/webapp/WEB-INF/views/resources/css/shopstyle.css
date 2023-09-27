@@ -585,7 +585,8 @@ ul li a {
   color: #fff;
 }
 
-ul li a:hover { background: #2c3e50; }
+ul li a:hover { background: #ffffff; }
+
 
 li:hover > ul {
   display: block;
@@ -2149,4 +2150,65 @@ tbody {
 }
 .search-button:hover {
   background-color: #561414;
+}
+
+
+/*shop 아이콘 카테고리*/
+.main_category_direct {
+    margin-top: 52px
+}
+
+.main_category_direct .category_direct_list {
+    display: flex;
+    justify-content: center
+}
+
+.main_category_direct .category_direct_list .category_direct_item {
+    position: relative;
+    width: 80px;
+    margin: 0 20px
+}
+
+.main_category_direct .category_direct_list .category_direct_item a:hover p {
+    color: #222
+}
+
+.main_category_direct .category_direct_list .category_direct_item a:hover .new {
+    color: #fff
+}
+
+.main_category_direct .category_direct_list .category_direct_item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 32px
+}
+
+.main_category_direct .category_direct_list .category_direct_item p {
+    width: 100%;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.43;
+    text-align: center;
+    color: #222;
+
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.main_category_direct .category_direct_list .category_direct_item .new {
+    display: flex;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.38;
+    text-align: center;
+    color: #fff;
+    background-color: #f52644
 }

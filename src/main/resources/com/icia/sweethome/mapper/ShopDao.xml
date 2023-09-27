@@ -128,7 +128,7 @@
  		</choose>
 	</if>
 	<if test='orderBy == null or orderBy == ""'>  
-            ORDER BY PRODUCT_IDK DESC
+            ORDER BY PRODUCT_CODE ASC
     </if>
             
             )

@@ -91,9 +91,7 @@ font-family: 'Gothic A1', sans-serif;
               <div class="dropdown-menu border-0 m-0">
               	<a href="/shop/shop" class="dropdown-item">쇼핑 메인</a>
                     <a href="/shop/product?shopTabCode=A" class="dropdown-item">가구</a>
-
                     <a href="/shop/product?shopTabCode=B" class="dropdown-item">가전</a>
-
                     <a href="/shop/product?shopTabCode=C" class="dropdown-item">잡화</a>
               </div>
             </div>

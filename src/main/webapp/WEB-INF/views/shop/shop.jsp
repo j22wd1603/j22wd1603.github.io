@@ -7,8 +7,6 @@
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 
 
-
- <script src="/resources/js/roulette.js"></script>
 <script>
 function search()
 {
@@ -34,23 +32,54 @@ function search()
    
    
    
- <!-- 모달 -->
+ <!-- 모달
     <div id="rouletteModal" class="rouletteModal">
         <div class="rouletteModal-content">
           <p>집가고싶다 </p>
             <span class="rouletteModal-close">&times;</span>
             <!-- 룰렛 추가 -->
-            <div class="roulette">
+         <!--    <div class="roulette">
                 <div class="roulette-bg"><div class="roulette-wacu"></div></div>
                 <div class="roulette-arrow"></div>
                 <button class="roulette-btn">START</button>
             </div>
         </div>
     </div>
-
-
-
-   
+ -->
+	<section>
+		<div class="main_category_direct">
+		    <ul class="category_direct_list">
+		                    <li class="category_direct_item">
+				                <a href="/shop/bestseller">
+				                    <img src="/resources/images/shop/best.png" alt="베스트">
+				                    <p> 베스트</p>
+				                </a>
+				            </li>
+		                    <li class="category_direct_item">
+				                <a href="https://mustit.co.kr/etc/selling_event?click=mainMenu">
+				                    <img src="/resources/images/shop/promotion.png" alt="기획전">
+				                    <p>기획전</p>
+				                </a>
+				            </li>
+		                   
+		                    
+		                    <li class="category_direct_item">
+				                <a href="https://mustit.co.kr/review/list?list_type=other&amp;click=mainMenu">
+				                    <img src="/resources/images/shop/review.png" alt="리뷰">
+				                    <p>리뷰</p>
+				                 </a>
+				            </li>
+		                    <li class="category_direct_item">
+				                <a href="/community/blog">
+				                    <img src="/resources/images/shop/community.png" alt="커뮤니티">
+				                    <p>커뮤니티</p>
+				                </a>
+				            </li>			       
+		            </ul>
+		</div>
+  </section>   
+  
+  
   <section>
      <div class="container-xxl py-5">
        <div class="container">
