@@ -142,21 +142,31 @@ WHERE 1=1
 
 <update id="boardStatusUpdate" parameterType="int">
 	UPDATE COMMU_BOARD
-	   SET COMMU_STATUS =
-	  CASE
-	    WHEN COMMU_STATUS = 'Y' THEN 'N'
-	    WHEN COMMU_STATUS = 'N' THEN 'Y'
-	   END   
+	SET DELETE_DATE =
+	    CASE
+	        WHEN DELETE_DATE IS NULL THEN SYSDATE
+	        ELSE NULL
+	    END,   
+	    COMMU_STATUS =
+	    CASE
+	        WHEN COMMU_STATUS = 'Y' THEN 'N'
+	        WHEN COMMU_STATUS = 'N' THEN 'Y'
+	    END   
 	WHERE COMMU_IDK = #{commuIdk}
 </update>
 
 <update id="commentStatusUpdate" parameterType="int">
 	UPDATE COMMENT_TABLE
-	   SET COMMENT_STATUS =
-	  CASE
-	    WHEN COMMENT_STATUS = 'Y' THEN 'N'
-	    WHEN COMMENT_STATUS = 'N' THEN 'Y'
-	   END   
+	SET DELETE_DATE = 
+	    CASE
+	        WHEN DELETE_DATE IS NULL THEN SYSDATE
+	        ELSE NULL
+	    END,
+	    COMMENT_STATUS =
+	      CASE
+	        WHEN COMMENT_STATUS = 'Y' THEN 'N'
+	        WHEN COMMENT_STATUS = 'N' THEN 'Y'
+	      END   
 	WHERE COMMENT_IDK = #{commentIdk}
 </update>
 

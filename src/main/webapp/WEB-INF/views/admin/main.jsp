@@ -455,7 +455,7 @@ body {
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#userId").focus();
+		$("#adminId").focus();
 
 		$("#btnLogin").on("click", function() {
 
@@ -467,15 +467,15 @@ body {
 
 function fn_loginCheck() {
 	
-		if ($.trim($("#userId").val()).length <= 0) {
+		if ($.trim($("#adminId").val()).length <= 0) {
 			alert("아이디를 입력하세요.");
-			$("#userId").focus();
+			$("#adminId").focus();
 			return;
 		}
 
-		if ($.trim($("#userPwd").val()).length <= 0) {
+		if ($.trim($("#adminPwd").val()).length <= 0) {
 			alert("비밀번호를 입력하세요.");
-			$("#userPwd").focus();
+			$("#adminPwd").focus();
 			return;
 		}
 
@@ -483,8 +483,8 @@ function fn_loginCheck() {
 			type : "POST",
 			url : "/admin/login",
 			data : {
-				userId : $("#userId").val(),
-				userPwd : $("#userPwd").val()
+				adminId : $("#adminId").val(),
+				adminPwd : $("#adminPwd").val()
 			},
 			datatype : "JSON",
 			beforeSend : function(xhr) {
@@ -498,16 +498,16 @@ function fn_loginCheck() {
 				} else {
 					if (response.code == -1) {
 						alert("비밀번호가 올바르지 않습니다.");
-						$("#userPwd").focus();
+						$("#adminPwd").focus();
 					} else if (response.code == 404) {
 						alert("아이디와 일치하는 사용자 정보가 없습니다.");
-						$("#userId").focus();
+						$("#adminId").focus();
 					} else if (response.code == 400) {
 						alert("파라미터 값이 올바르지 않습니다.");
-						$("#userId").focus();
+						$("#adminId").focus();
 					} else {
 						alert("오류가 발생하였습니다.");
-						$("#userId").focus();
+						$("#adminId").focus();
 					}
 				}
 			},
@@ -539,14 +539,11 @@ function openPopup() {
 	<section class="container_member">
 		<article class="half">
 			<h1>SWEET HOME</h1>
-			<div class="tabs">
-				<a id="userLoginAtag" style="color: #263238;" onclick="form_change('user')"><span id="userLoginSpan" class="tab active">Admin Login</span></a>
-			</div>
 			<div id="userLoginPage" class="content" style="display: block;">
 				<div class="signin-cont cont">
 					<form name="form1" method="post">
-						<input type="text" name="userId" id="userId" class="inpt" required="required" placeholder="Admin ID"> <label for="userId">ID</label>
-						<input type="password" name="userPwd" id="userPwd" class="inpt" required="required"	placeholder="Admin Password"> <label for="userPwd">Password</label>
+						<input type="text" name="adminId" id="adminId" class="inpt" required="required" placeholder="Admin ID"> <label for="adminId">ID</label>
+						<input type="password" name="adminPwd" id="adminPwd" class="inpt" required="required"	placeholder="Admin Password"> <label for="adminPwd">Password</label>
 						<!--                   <input type="checkbox" id="remember" class="checkbox" checked> -->
 						<!--                   <label for="remember">Remember me</label> -->
 

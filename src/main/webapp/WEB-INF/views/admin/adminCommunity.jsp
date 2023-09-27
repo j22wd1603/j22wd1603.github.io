@@ -38,6 +38,94 @@ function fn_search()
 }
 
 
+function fn_boardUpdate(commuIdk, commuStatus)
+{
+    var confirmationMessage = "";
+    
+    if (commuStatus == "Y") {
+        confirmationMessage = "게시글을 정지 하시겠습니까?";
+    } else if (commuStatus == "N") {
+        confirmationMessage = "게시글 정지를 해제 하시겠습니까?";
+    }
+
+    if (confirmationMessage !== "" && confirm(confirmationMessage))
+    {
+        $.ajax({
+            type: "POST",
+            url: "/admin/boardUpdate",
+            data: {
+            	commuIdk: commuIdk,
+            	commuStatus: commuStatus
+            },
+            dataType: "JSON",
+            beforeSend: function (xhr)
+            {
+                xhr.setRequestHeader("AJAX", "true");
+            },
+            success: function (response)
+            {
+                if (response.code == 0)
+                {
+                    alert("게시글이 정지 또는 정지 해제 되었습니다.");
+                    location.href = "/admin/adminCommunity";
+                }
+                else if (response.code == 400)
+                {
+                    alert("파라미터 값이 올바르지 않습니다.");
+                }
+            },
+            error: function (xhr, status, error)
+            {
+                icia.common.error(error);
+            }
+        });
+    }
+}
+
+
+function fn_commentUpdate(commentIdk, commentStatus)
+{
+    var confirmationMessage = "";
+    if (commentStatus == "Y") {
+        confirmationMessage = "댓글을 정지 하시겠습니까?";
+    } else if (commentStatus == "N") {
+        confirmationMessage = "댓글 정지를 해제 하시겠습니까?";
+    }
+
+    if (confirmationMessage !== "" && confirm(confirmationMessage))
+    {
+        $.ajax({
+            type: "POST",
+            url: "/admin/commentUpdate",
+            data: {
+            	commentIdk: commentIdk,
+            	commentStatus: commentStatus
+            },
+            dataType: "JSON",
+            beforeSend: function (xhr)
+            {
+                xhr.setRequestHeader("AJAX", "true");
+            },
+            success: function (response)
+            {
+                if (response.code == 0)
+                {
+                    alert("댓글이 정지 또는 정지 해제 되었습니다.");
+                    location.href = "/admin/adminCommunity";
+                }
+                else if (response.code == 400)
+                {
+                    alert("파라미터 값이 올바르지 않습니다.");
+                }
+            },
+            error: function (xhr, status, error)
+            {
+                icia.common.error(error);
+            }
+        });
+    }
+}
+
 </script>
 </head>
 <body>
@@ -96,7 +184,7 @@ function fn_search()
 		                <td>${boardList.regDate}</td>
 		                <td>${boardList.modDate}</td>
 		                <td>${boardList.deleteDate}</td>
-		                <td>${boardList.commuStatus}</td>
+						<td><button onClick="fn_boardUpdate('${boardList.commuIdk}', '${boardList.commuStatus}')">${boardList.commuStatus}</button></td>
 		            </tr>
 		        </c:forEach>
 		    </c:if>				
@@ -142,11 +230,12 @@ function fn_search()
 		                <td>${commentList.regDate}</td>
 		                <td>${commentList.modDate}</td>
 		                <td>${commentList.deleteDate}</td>
-		                <td>${commentList.commentStatus}</td>
+						<td><button onClick="fn_commentUpdate('${commentList.commentIdk}', '${commentList.commentStatus}')">${commentList.commentStatus}</button></td>
 		            </tr>
 		        </c:forEach>
-		    </c:if>				
-
+		    </c:if>			
+		    
+		    
 
 		
 

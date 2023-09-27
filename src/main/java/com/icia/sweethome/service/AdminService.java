@@ -82,7 +82,19 @@ public class AdminService
       return list;
    }  
    
-   
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public int boardStatusUpdate(int commuIdk) {
+		
+	    int count = adminDao.boardStatusUpdate(commuIdk);
+	    return count;
+	}   
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public int commentStatusUpdate(int commentIdk) {
+		
+	    int count = adminDao.commentStatusUpdate(commentIdk);
+	    return count;
+	}     
    
    
 

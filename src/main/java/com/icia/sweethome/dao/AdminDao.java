@@ -35,6 +35,12 @@ public interface AdminDao {
    
     //댓글 조회
     public List<Comment> adminCommentSelect(Comment comment);		
+    
+    //게시글 상태 업데이트
+    public int boardStatusUpdate(int commuIdk);
+    
+    //댓글 상태 업데이트
+    public int commentStatusUpdate(int commentIdk);
 	
 //고객센터
 //=========================================================================================

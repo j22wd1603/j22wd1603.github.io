@@ -43,7 +43,11 @@ public class AdminController {
 	
     //쿠키명
     @Value("#{env['auth.cookie.name']}")
-    private String AUTH_COOKIE_NAME;	   	
+    private String AUTH_COOKIE_NAME;	 
+    
+    //어드민쿠키명
+    @Value("#{env['auth.cookie.adminName']}")
+    private String AUTH_COOKIE_ADMIN_NAME;	   	
     
 	@Autowired
 	private CommunityService communityService;
@@ -108,20 +112,20 @@ public class AdminController {
 	@ResponseBody
 	public Response<Object> login(HttpServletRequest request, HttpServletResponse response)
 	{
-		String userId = HttpUtil.get(request, "userId");
-		String userPwd = HttpUtil.get(request, "userPwd");
+		String adminId = HttpUtil.get(request, "adminId");
+		String adminPwd = HttpUtil.get(request, "adminPwd");
 		Response<Object> ajaxResponse = new Response<Object>();
 
-		if(!StringUtil.isEmpty(userId) && !StringUtil.isEmpty(userPwd))
+		if(!StringUtil.isEmpty(adminId) && !StringUtil.isEmpty(adminPwd))
 		{
-			Admin admin = adminService.adminSelect(userId);
+			Admin admin = adminService.adminSelect(adminId);
 			
 			if(admin != null)
 			{
 				
-				if(StringUtil.equals(admin.getAdminPwd(), userPwd))
+				if(StringUtil.equals(admin.getAdminPwd(), adminPwd))
 				{
-					CookieUtil.addCookie(response, "/", -1, AUTH_COOKIE_NAME, CookieUtil.stringToHex(userId));
+					CookieUtil.addCookie(response, "/", -1, AUTH_COOKIE_ADMIN_NAME, CookieUtil.stringToHex(adminId));
 					
 					ajaxResponse.setResponse(0, "Success"); // 로그인 성공
 				}
@@ -147,8 +151,19 @@ public class AdminController {
 		}
 		
 		return ajaxResponse;
-	}	
+	}
 	
+	//로그아웃
+	@RequestMapping(value="/admin/loginOut", method=RequestMethod.GET)
+	public String loginOut(HttpServletRequest request, HttpServletResponse response)
+	{
+		if(com.icia.sweethome.util.CookieUtil.getCookie(request,"ADMIN_ID") != null)
+		{
+			CookieUtil.deleteCookie(request, response, "/", "ADMIN_ID");
+		}
+			
+		return "/admin/main";		//재접속하라는 명령(URL을 다시 가리킴)
+	}	
 
 //유저
 //=====================================================================================================================
@@ -248,6 +263,65 @@ public class AdminController {
 			
 			return "/admin/adminCommunity";
 		}
+		
+		//게시글 상태 업데이트
+		@RequestMapping(value = "/admin/boardUpdate", method = RequestMethod.POST)//회원정지
+		@ResponseBody
+		public Response<Object> boardUpdate(HttpServletRequest request, HttpServletResponse response) {
+		    Response<Object> ajaxResponse = new Response<Object>();
+		    
+        	
+		    int commuIdk = HttpUtil.get(request, "commuIdk", 0);
+		    String commuStatus = HttpUtil.get(request, "commuStatus", "");
+		    
+		    if(commuIdk != 0 && "Y".equals(commuStatus) || "N".equals(commuStatus))
+		    {
+		    	adminService.boardStatusUpdate(commuIdk);
+		    	
+		        ajaxResponse.setCode(0); // 성공
+
+		    }
+		    else
+		    {
+		        ajaxResponse.setCode(400); // 실패
+		    }
+		    
+
+		    return ajaxResponse;
+		}
+		
+		//게시글 상태 업데이트
+		@RequestMapping(value = "/admin/commentUpdate", method = RequestMethod.POST)//회원정지
+		@ResponseBody
+		public Response<Object> commentUpdate(HttpServletRequest request, HttpServletResponse response) {
+		    Response<Object> ajaxResponse = new Response<Object>();
+		    
+        	
+		    int commentIdk = HttpUtil.get(request, "commentIdk", 0);
+		    String commentStatus = HttpUtil.get(request, "commentStatus", "");
+		    
+		    
+		    if(commentIdk != 0 && "Y".equals(commentStatus) || "N".equals(commentStatus))
+		    {
+		    	adminService.commentStatusUpdate(commentIdk);
+		    	
+		        ajaxResponse.setCode(0); // 성공
+
+		    }
+		    else
+		    {
+		        ajaxResponse.setCode(400); // 실패
+		    }
+		    
+
+		    return ajaxResponse;
+		}	
+		
+
+		
+		
+		
+
 	
 	
 //고객센터

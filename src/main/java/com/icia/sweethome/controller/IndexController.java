@@ -38,6 +38,10 @@ public class IndexController
 	@Autowired
 	private CommunityService communityService;
 	
+    //어드민쿠키명
+    @Value("#{env['auth.cookie.adminName']}")
+    private String AUTH_COOKIE_ADMIN_NAME;	   	
+	
 
 	@Autowired
     private ShopService shopService;
@@ -60,6 +64,13 @@ public class IndexController
 		List<Shop> listView = null;
 		
 		Shop shop = new Shop();
+		
+
+		if(com.icia.sweethome.util.CookieUtil.getCookie(request,"ADMIN_ID") != null)
+		{
+			CookieUtil.deleteCookie(request, response, "/", "ADMIN_ID");
+		}		
+		
 	
 		
 		totalCount = shopService.shopListCount(shop);
