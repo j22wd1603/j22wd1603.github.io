@@ -121,11 +121,11 @@ $(document).ready(function() {
 				        <div class="col-md-9">
 				            <textarea class="form-control" name="communityContent" id="communityContent" style="text-align:left; resize: none; height: 300px;" placeholder="내용을 입력해주세요" required>
 Sweethome 쇼핑몰 백예린친구 님이 아래 상품을 공유합니다:
-상품명: 스윙 VIP 테이블 램프
-가격: 1,380,600 원
+상품명: ${product.productName}
+가격: <fmt:formatNumber type="number" maxFractionDigits="3" value="${product.productPrice}" />원
 브랜드: 판둘
 더 많은 정보와 구매 링크는 아래에서 확인하세요!
-[상품 링크](http://sweethome.co.kr:8088/shop/productDetail?productIdk=380)
+http://sweethome.co.kr:8088/shop/productDetail?productIdk=${product.productIdk}
 
 이제 Sweethome 쇼핑몰의 멋진 상품을 함께 공유하고 소통해요!
 				            </textarea>
