@@ -316,7 +316,27 @@ public class ShopService
 			}
 				
 			return count;
-		}   
+		}  
+		
+		// 송민기
+		public List<Shop> productDetailselct(String code) {
+			List<Shop> detialCodeList= null;
+			
+			try
+			{
+				detialCodeList = shopDao.productDetailselct(code);
+			}
+			catch(Exception e)
+			{
+				logger.error("[shopService] productDetailselct Exception", e);
+			}
+				
+			return detialCodeList;
+		}
+		
+		public List<String> productBrandselct(Shop code){
+			return shopDao.productBrandSelct(code);
+		}
 }
 
 

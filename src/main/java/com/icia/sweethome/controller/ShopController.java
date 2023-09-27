@@ -1,5 +1,7 @@
 package com.icia.sweethome.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +24,12 @@ import com.icia.sweethome.model.Response;
 import com.icia.sweethome.model.Review;
 import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
-import com.icia.sweethome.service.SellerService;
 import com.icia.sweethome.service.ShopService;
 import com.icia.sweethome.service.UserService;
 import com.icia.sweethome.util.CookieUtil;
 import com.icia.sweethome.util.HttpUtil;
 import com.icia.sweethome.util.JsonUtil;
+import com.icia.sweethome.util.StringUtil;
 
 
 
@@ -50,112 +52,92 @@ public class ShopController {
 	private static final int PAGE_COUNT = 5;		//페이징 수 
 
 	//샵 메인 리스트
-		@RequestMapping(value = "/shop/shop")
-		public String shop(Model model, HttpServletRequest request, HttpServletResponse response) {
-			
-			String productName = HttpUtil.get(request, "productName","");
-			
-			List<Shop> list = null;
-			List<Shop> listView = null;
-			
-			Shop shop = new Shop();
-			shop.setProductName(productName);
+	@RequestMapping(value = "/shop/shop")
+	public String shop(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		String productName = HttpUtil.get(request, "productName","");
+		
+		List<Shop> list = null;
+		List<Shop> listView = null;
+		
+		Shop shop = new Shop();
+		shop.setProductName(productName);
 
-			list = shopService.shopList(shop);
-			
-			Shop bestShop = new Shop();
-			bestShop.setStartRow(1);
-			bestShop.setEndRow(8);
-			
-			listView = shopService.shopListView(bestShop);
-			
-			model.addAttribute("list" , list);	
-			model.addAttribute("listView" , listView);
-			model.addAttribute("productName" , productName);
+		list = shopService.shopList(shop);
+		
+		Shop bestShop = new Shop();
+		bestShop.setStartRow(1);
+		bestShop.setEndRow(8);
+		
+		listView = shopService.shopListView(bestShop);
+		
+		model.addAttribute("list" , list);	
+		model.addAttribute("listView" , listView);
+		model.addAttribute("productName" , productName);
+
+		return "/shop/shop";
+	}
+
 	
-			return "/shop/shop";
-		}
+	
+	//shop product
+	@RequestMapping(value="/shop/product")
+	public String product(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		//카테고리
+		String shopTabCode = HttpUtil.get(request, "shopTabCode");	//가구:A, 가전 : B, 잡화 : C
 		
-		
-		//shop product
-		@RequestMapping(value="/shop/product")
-		public String product(Model model, HttpServletRequest request, HttpServletResponse response) {
-
-		      
-			//카테고리
-			String shopTabCode = HttpUtil.get(request, "shopTabCode", "");	//가구:A, 가전 : B, 잡화 : C
-			//정렬값 조회
-			String orderBy = HttpUtil.get(request, "orderBy", "");
-			//상세카테고리
-			String shopDetailTabCode = HttpUtil.get(request, "shopDetailTabCode", "");
-			//브랜드명 검색
-			String productBrandName = HttpUtil.get(request, "productBrandName", "");
-			//제품 코드
-			String productCode = HttpUtil.get(request, "productCode", "");
-			
-			int productPrice = HttpUtil.get(request, "productPrice", 0);
-			
-			int productStatus  =HttpUtil.get(request, "productStatus", 0);
-			
-			String regDate =  HttpUtil.get(request, "regDate", "");
-			
-			// 검색타입
-			String searchType = HttpUtil.get(request, "searchType");
-			//검색내용
-			String searchValue = HttpUtil.get(request, "searchValue");	
-			//현재페이지 번호 
-			int curPage = HttpUtil.get(request, "curPage", 1);
-			//총조회수
-			int totalCount = 0;
-			//페이징
-			Paging paging =null;
-			
-			List<Shop> list = null;
-			
-			
-			Shop shop = new Shop();
-			
-			shop.setShopTabCode(shopTabCode);
-			shop.setShopDetailTabCode(shopDetailTabCode);
-			shop.setProductBrandName(productBrandName);
-			shop.setProductCode(productCode);
-			shop.setProductPrice(productPrice);
-			shop.setRegDate(regDate);
-			shop.setOrderBy(orderBy);
-			
-			totalCount = shopService.shopListCount(shop);
-			
-			if(totalCount >0)
-			{
-				
-				paging = new Paging("/shop/product", totalCount , LIST_COUNT, PAGE_COUNT , curPage , "curPage");
-				
-				shop.setStartRow(paging.getStartRow());
-				shop.setEndRow(paging.getEndRow());
-				
-			
-				list = shopService.shopList(shop);
-				
-			}
-			
-			model.addAttribute("list" , list);					
-			model.addAttribute("shopTabCode", shopTabCode);
-			model.addAttribute("shopDetailTabCode", shopDetailTabCode);
-			model.addAttribute("productCode", productCode);
-			model.addAttribute("searchType" , searchType);
-			model.addAttribute("searchValue" , searchValue);
-			model.addAttribute("curPage" , curPage);
-			model.addAttribute("paging" , paging);
-			model.addAttribute("productBrandName",productBrandName);
-			model.addAttribute("regDate",regDate);
-			model.addAttribute("productPrice",productPrice);
-
-		    return "/shop/product";
+		if(StringUtil.isEmpty(shopTabCode)) {
+			response.setContentType("text/html; charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        out.println("<script>alert('잘못된 접근입니다.');");
+	        out.println("location.href = '/user/loginPage'; </script>");
+			return "/";
 		}
 		
+		//정렬값 조회
+		String orderBy = HttpUtil.get(request, "orderBy", "");
+		//상세카테고리
+		String shopDetailTabCode = HttpUtil.get(request, "shopDetailTabCode", "");
+		//브랜드명 검색
+		String productBrandName = HttpUtil.get(request, "productBrandName", "");
+		//제품 코드
+		String productCode = HttpUtil.get(request, "productCode", "");
+		
+		int productPrice = HttpUtil.get(request, "productPrice", 0);
+
+		String regDate =  HttpUtil.get(request, "regDate", "");
+
+		List<Shop> detailList = shopService.productDetailselct(shopTabCode);
+		Shop param = new Shop();
+		param.setShopTabCode(shopTabCode);
+		param.setShopDetailTabCode(shopDetailTabCode);
+		List<String> brandList = shopService.productBrandselct(param);
+		
+		List<Shop> list = null;
 		
 		
+		Shop shop = new Shop();
+		
+		shop.setShopTabCode(shopTabCode);
+		shop.setShopDetailTabCode(shopDetailTabCode);
+		shop.setProductBrandName(productBrandName);
+		shop.setProductCode(productCode);
+		shop.setProductPrice(productPrice);
+		shop.setRegDate(regDate);
+		shop.setOrderBy(orderBy);
+		
+		list = shopService.shopList(shop);
+			
+		model.addAttribute("list" , list);					
+		model.addAttribute("shopTabCode", shopTabCode);
+		model.addAttribute("shopDetailTabCode", shopDetailTabCode);
+		model.addAttribute("detailList",detailList);
+		model.addAttribute("brandList",brandList);
+
+	    return "/shop/product";
+	}
+
 		@RequestMapping(value ="/shop/bestseller")
 		public String bestseller(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
@@ -164,8 +146,7 @@ public class ShopController {
 		int curPage = HttpUtil.get(request, "curPage", 1);
 		//총조회수
 		int totalCount = 0;
-		
-		int productStatus  =HttpUtil.get(request, "productStatus", 0);
+
 		//페이징
 		Paging paging =null;
 		

@@ -51,7 +51,12 @@ public interface ShopDao {
 	public int boardMyReviewDelete(int productIdk);
 	
 	public int boardMyReviewCount(Review review);
-		
+	
+	//민기
+	public List<Shop> productDetailselct(String code);
+	
+	public List<String> productBrandSelct(Shop code);
+
 }
 
 

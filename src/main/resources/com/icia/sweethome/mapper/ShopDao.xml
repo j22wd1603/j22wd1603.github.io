@@ -2,21 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace ="com.icia.sweethome.dao.ShopDao">				
 
-<resultMap type="com.icia.sweethome.model.Shop" id="shopResultMap" >
-	<id column="PRODUCT_IDK" property="productIdk"/>
-	<result column="SHOP_TAB_CODE" property="shopTabCode"/>
-	<result column="SHOP_DETAIL_TAB_CODE" property="shopDetailTabCode"/>
-	<result column="PRODUCT_CODE" property="productCode"/>
-	<result column="SELLER_ID" property="sellerId"/>
-	<result column="PRODUCT_NAME" property="productName"/>
-	<result column="PRODUCT_PRICE" property="productPrice"/>
-	<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
-	<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
-	<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
-	<result column="PRODUCT_STATUS" property="productStatus"/>
-	<result column="REG_DATE" property="regDate"/>
-	<result column="PRODUCT_VIEWS" property="productViews"/>
-</resultMap>
+	<resultMap type="com.icia.sweethome.model.Shop" id="shopResultMap" >
+		<id column="PRODUCT_IDK" property="productIdk"/>
+		<result column="SHOP_TAB_CODE" property="shopTabCode"/>
+		<result column="SHOP_DETAIL_TAB_CODE" property="shopDetailTabCode"/>
+		<result column="PRODUCT_CODE" property="productCode"/>
+		<result column="SELLER_ID" property="sellerId"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_PRICE" property="productPrice"/>
+		<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
+		<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
+		<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
+		<result column="PRODUCT_STATUS" property="productStatus"/>
+		<result column="REG_DATE" property="regDate"/>
+		<result column="PRODUCT_VIEWS" property="productViews"/>
+		
+		<result column="SHOP_TAB_NAME" property="shopTabName"/>
+		<result column="SHOP_DETAIL_TAB_NAME" property="shopDetailTabName"/>
+	</resultMap>
 
 <resultMap type="com.icia.sweethome.model.Review" id="reviewResultMap" >
     <id column="REVIEW_IDK" property="reviewIdk" />
@@ -428,5 +431,23 @@ WHERE  PRODUCT_IDK = #{value}
 DELETE FROM PRODUCT_REVIEW
  WHERE PRODUCT_IDK = #{value}
 </delete>
+
+<!-- product 디테일 카테고리 검색 송민기 -->
+<select id="productDetailselct" parameterType ="String" resultMap="shopResultMap">
+SELECT SHOP_DETAIL_TAB_CODE
+      ,SHOP_DETAIL_TAB_NAME
+FROM SHOP_DETAIL_TAB
+WHERE SHOP_DETAIL_TAB_CODE LIKE #{value} || '_'
+</select>
+
+<select id="productBrandSelct" parameterType ="com.icia.sweethome.model.Shop" resultType="String">
+SELECT DISTINCT PRODUCT_BRAND_NAME
+FROM PRODUCT
+WHERE 1=1
+AND SHOP_TAB_CODE = #{shopTabCode}
+<if test="shopDetailTabCode != null and shopDetailTabCode != ''">
+	AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
+</if>
+</select>
 
 </mapper>
