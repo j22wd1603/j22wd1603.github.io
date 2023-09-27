@@ -140,12 +140,23 @@ body{
   	
 }
 
+.date{
+ 	max-width: 150px;
+}
 .num {
-  width:40px 
+  max-width: 100px;
 }
 
+.card-body.date{
+ 
+ 	max-width: 200px;
+ 
+ }
+
+
 .num, .title, .date, .count, .delete {
-  flex: 1; /* 요소들이 동일한 너비로 가로 정렬되도록 설정 */
+  display: flex;
+  float: left;
 }
 
 /* 마지막 항목에는 선 제거 */
@@ -161,6 +172,12 @@ body{
   width:100%;
 
 }
+
+.card-body .title{
+	width:150%;
+	overflow: hidden; 
+}
+
 
 .card-body input[type="search"]{
 
@@ -178,7 +195,7 @@ body{
 	padding: 10px 15px 10px 15px;
 	margin-left:1 10px;
 	border-radius: 10px;
-	background-color: #db7093;
+	background-color: #8b1411;
 	color: #fff;
 }
 
@@ -228,6 +245,7 @@ body{
 	margin: 3px;
 	margin-top: 20px;
 	box-shadow: 0 5px 10px #f1f1f1;
+	color:#6c757d;
 }
 
 .number li a.active {
@@ -242,7 +260,7 @@ body{
     margin-bottom: 0.5rem;
     font-weight: 600;
     line-height: 1.2;
-    color: #db7093;
+    color: #8b1411;
     padding-left: 670px;
     padding-right: 20px;
     
@@ -251,7 +269,7 @@ body{
 .btn a{
     
 	padding: 10px;
-	background-color: #db7093;
+	background-color: #8b1411;
 	color: #fff;
 	width: 150px; /* 원하는 가로 크기로 조정 */
 	border-radius: 5px;
@@ -1035,13 +1053,13 @@ function fn_list(curPage)
             <div class="date">${csMy.regDate}</div>	
             <c:choose>
 			    <c:when test="${csMy.ansStatus eq 'Y'}">
-			        <div class="date complete">답변완료</div>
+			        <div class="num">답변완료</div>
 			    </c:when>
 			    <c:when test="${csMy.ansStatus eq 'N'}">
-			        <div class="date">미답변</div>
+			        <div class="num">미답변</div>
 			    </c:when>
 			    <c:otherwise>
-			        <div class="date">알 수 없음</div>
+			        <div class="num">알 수 없음</div>
 			    </c:otherwise>
 			</c:choose>	   
         </div>

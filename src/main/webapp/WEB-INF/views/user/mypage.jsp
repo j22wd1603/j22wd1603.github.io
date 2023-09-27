@@ -252,6 +252,7 @@ padding: 10px;
 	margin: 3px;
 	margin-top: 20px;
 	box-shadow: 0 5px 10px #f1f1f1;
+	color:#6c757d;
 }
 
 .number li a.active {
@@ -273,15 +274,12 @@ padding: 10px;
 }
 
 a{
-    white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    max-width:100px;
+
+     text-align: center;
   }
 .btn a{
 	padding: 10px;
 	background-color: #8b1411;
-	overflow: hidden; 
 	color: #fff;
 	border-radiu: 10px;
 	border-radius: 5px;

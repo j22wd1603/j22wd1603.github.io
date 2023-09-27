@@ -24,8 +24,8 @@
 }
 
 .card-body .title{
-	width:79%;
-	text-align: left;
+	width:150%;
+	overflow: hidden; 
 }
 
 
@@ -123,7 +123,7 @@ body{
 	padding: 10px 15px 10px 15px;
 	margin-left:1 10px;
 	border-radius: 10px;
-	background-color: #db7093;
+	background-color: #8b1411;
 	color: #fff;
 }
 
@@ -184,6 +184,7 @@ body{
 	margin: 3px;
 	margin-top: 20px;
 	box-shadow: 0 5px 10px #f1f1f1;
+	color:#6c757d;
 }
 
 .number li a.active {
