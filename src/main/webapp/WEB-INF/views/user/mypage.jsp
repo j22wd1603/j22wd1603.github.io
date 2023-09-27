@@ -109,7 +109,8 @@
 
 li{
 
-list-style:non;
+
+color:#6c757d;
 
 }
 
@@ -118,8 +119,9 @@ ul{
 margin:auto;}
 
 a{
-coloer: inherit;
+
 text-decoration:none;
+color:#9e0e0b;
 }
 
 body{
@@ -157,7 +159,11 @@ body{
 
 }
 .num, .title, .date, .count, .delete {
-  flex: 1; /* 요소들이 동일한 너비로 가로 정렬되도록 설정 */
+  	flex: 1; /* 요소들이 동일한 너비로 가로 정렬되도록 설정 */
+    display: flex; /* .num 요소들 내부에서도 정렬을 수행 */
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center;
+    
 }
 
 /* 마지막 항목에는 선 제거 */
@@ -215,7 +221,7 @@ display: flex;
 }
 
 .card-body .title{
-	width:79%;
+	width:120%;
 	text-align: left;
 }
 
@@ -258,7 +264,7 @@ padding: 10px;
     margin-bottom: 0.5rem;
     font-weight: 600;
     line-height: 1.2;
-    color: #db7093;
+    color: #8b1411;
     padding-left: 700px;
     padding-right: 20px;
     
@@ -272,7 +278,7 @@ a{
   }
 .btn a{
 	padding: 10px;
-	background-color: #db7093;
+	background-color: #8b1411;
 	color: #fff;
 	border-radiu: 10px;
 	border-radius: 5px;
@@ -537,7 +543,7 @@ $(function(){
                <div class="up-box">
                  
                     <h1 class="mytitle">내 게시글
-                        <style data-emotion="css 1vy2ypg">.css-1vy2ypg{margin-left:.4ch;color:#35c5f0;}</style>
+                        <style data-emotion="css 1vy2ypg">.css-1vy2ypg{margin-left:.4ch;color:#8b1411;}</style>
                           <c:choose>
 						    <c:when test="${empty list}">
 						        <span class="css-1vy2ypg e17n0xi0">0</span>
@@ -573,7 +579,7 @@ $(function(){
 			  <!-- 검색어 입력하기 -->
 			  <div class="card-body">
 			    <input type="search" id="_searchValue" name="_searchValue" value="${searchValue}" placeholder="검색어를 입력하세요.">
-			    <a class="search" href="javascript:void(0)" onclick="fn_mySearch()">검색</a>
+			    <a class="search" style="background-color:#8b1411;" href="javascript:void(0)" onclick="fn_mySearch()">검색</a>
 			    
 			  <!-- 내용을 html로 작성하기 -->
 			 
@@ -606,16 +612,16 @@ $(function(){
 <c:if test="${!empty paging}">	
 			  <ul class="number">	
 	<c:if test="${paging.prevBlockPage gt 0}">
-			<li><a href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">&lt;</a></li>
+			<li><a href="javascript:void(0)" style="color:#6c757d;" onclick="fn_list(${paging.prevBlockPage})">&lt;</a></li>
 	</c:if>
 	
 	<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
 		<c:choose>
 			<c:when test="${i ne curPage}">
-			<li><a href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+			<li><a href="javascript:void(0)" style="color:#6c757d;" onclick="fn_list(${i})">${i}</a></li>
 			</c:when>
 			<c:otherwise>
-			<li><a href="javascript:void(0)" class="active">${i}</a></li>
+			<li><a href="javascript:void(0)" style="color:#6c757d;" class="active">${i}</a></li>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
