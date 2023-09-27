@@ -44,6 +44,12 @@ function go_order() {
 	document.orderForm.action = "/shop/orderPage";
 	document.orderForm.submit();
 }
+
+function fn_share(productIdk) {
+	document.shareForm.shareProductIdk.value = productIdk;
+	document.shareForm.action = "/community/writeShareForm";
+	document.shareForm.submit();
+}
 </script>
 </head>
 
@@ -63,7 +69,7 @@ function go_order() {
 				</div> 
 			<div id="productdetail-sideinfo-name">
 			    <h2 style="display: inline-block; margin-right: 10px;">${shop.productName}</h2>
-			    <a href="/community/myroom">
+			    <a href="#" onclick="fn_share(${shop.productIdk})">
 			        <img src="/resources/images/product/big/share2.png" alt="공유" style="vertical-align: middle; width: 25px; height: 25px;">
 			    </a>
 			</div>
@@ -104,6 +110,9 @@ function go_order() {
 				    <button onclick="go_order()" class="order-button">주문하기</button>
 				    <button onclick="goToCartPage()" class="cart-button">장바구니</button>
 				</div>
+				<form id="shareForm" name="shareForm" method="post">
+				    <input type="hidden" id="shareProductIdk" name="shareProductIdk" value="">			
+				</form>
 						
 				<!-- 장바구니 -->
 				<form id="addToCartForm" name="addToCartForm" method="post" style="display: none;">
@@ -128,11 +137,7 @@ function go_order() {
 				</div>			
 		</div>
 	</div>
-		
 	
-		
-
-				
 	<!-- 화면 아랫단 -->		
 	<div class="detail-category-container-second">
 	    <ul class="detail-ul">

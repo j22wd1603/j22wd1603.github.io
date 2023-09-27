@@ -228,7 +228,7 @@ $(document).ready(function() {
 				<div class="form-group">
 					<textarea class="form-control" rows="10" name="communityContent" id="communityContent" style="ime-mode:active;" placeholder="내용을 입력해주세요" required>${community.commuContent}</textarea>
 				</div>
-				<input type="file" multiple id="communityFile" name="communityFile" class="form-control mb-2" placeholder="파일을 선택하세요." required />
+				<input type="file" id="communityFile" name="communityFile" class="form-control mb-2" placeholder="파일을 선택하세요." required />
 				<div class="form-group row">
 					<div class="col-sm-12">
 						<button type="button" id="btnWrite" class="btn btn-primary" title="저장">저장</button>

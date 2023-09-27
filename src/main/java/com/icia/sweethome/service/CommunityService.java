@@ -251,7 +251,7 @@ public class CommunityService
    }
    
    //게시판 등록
-   public int boardInsert(Community community) throws Exception   
+   public int boardInsert(Community community)
    {  
       int count = 0;
       
