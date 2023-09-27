@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.icia.sweethome.model.Admin;
 import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
+import com.icia.sweethome.model.Question;
+import com.icia.sweethome.model.User;
 
 @Repository("adminDao")
 public interface AdminDao {
@@ -32,12 +34,15 @@ public interface AdminDao {
     public List<Community> adminBoardSelect(Community community);	
    
     //댓글 조회
-    public List<Community> adminCommentSelect(Comment comment);		
+    public List<Comment> adminCommentSelect(Comment comment);		
 	
 //고객센터
 //=========================================================================================
 	
-
+    public List<User> userList(User user);
+	public int userStatusUpdate(User user);
+	public Question questionSelect(String question);
+	public List<Question> userQuestion(Question user);
 	
 
 }

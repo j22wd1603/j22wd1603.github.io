@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.sweethome.model.Admin;
+import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
 import com.icia.sweethome.model.Paging;
+import com.icia.sweethome.model.Question;
 import com.icia.sweethome.model.Response;
 import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
@@ -48,6 +50,8 @@ public class AdminController {
 
 	@Autowired
     private ShopService shopService;
+	@Autowired
+	private UserService userService;
 	
 	
 	//관리자 메인페이지
@@ -149,13 +153,7 @@ public class AdminController {
 //유저
 //=====================================================================================================================
 	
-	
-		@RequestMapping(value = "/admin/adminUser")
-		public String adminUser(Model model, HttpServletRequest request, HttpServletResponse response) {
-			
-			
-			return "/admin/adminUser";
-		}		
+
 
 	
 //쇼핑몰
@@ -185,12 +183,71 @@ public class AdminController {
 		@RequestMapping(value = "/admin/adminCommunity")
 		public String adminCommunity(Model model, HttpServletRequest request, HttpServletResponse response) {
 			
-		    //쿠키 값
-		    String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	
+			return "/admin/adminCommunity";
+		}
+		
+		
+		@RequestMapping(value = "/admin/communityList")
+		public String communityList(Model model, HttpServletRequest request, HttpServletResponse response) {
+			
+			List<Community> boardList = null; 	// 게시글 리스트 객체
+			List<Comment> commentList = null; 	// 댓글 리스트 객체
+			
+			Community boardSearch = new Community();
+			Comment commentSearch = new Comment();
+			
+		    String searchType = HttpUtil.get(request, "searchType", "");
+		    String searchValue = HttpUtil.get(request, "searchValue", "");
+		    String userSearch = HttpUtil.get(request, "userSearch", "");
+		    String userValue = HttpUtil.get(request, "userValue", "");
+		    String status = HttpUtil.get(request, "status", "");
+		    
+		    //1이면 제목으로 게시글 조회
+		    if(StringUtil.equals(searchType, "1"))
+		    {
+		    	boardSearch.setSearchType(searchType);
+			    boardSearch.setCommuTitle(searchValue);
+			    boardSearch.setUserId(userValue);	
+			    boardSearch.setCommuStatus(status);		
+			    
+	    		boardList = adminService.adminBoardSelect(boardSearch);
+	    		
+			    model.addAttribute("boardList", boardList);
+			    
+		    }
+		    //2이면 내용으로 댓글 조회
+		    else if(StringUtil.equals(searchType, "2"))
+		    {
+		    	commentSearch.setSearchType(searchType);
+	    		commentSearch.setCommentContent(searchValue);
+	    		commentSearch.setUserId(userValue);
+	    		commentSearch.setCommentStatus(status);		
+	    		
+	    		commentList = adminService.adminCommentSelect(commentSearch);
+	    		
+			    model.addAttribute("commentList", commentList);
+		    }
+		    //회원아이디와 상태를 이용하여 조회 할 때
+		    else
+		    {
+		    	boardSearch.setUserId(userValue);
+			    boardSearch.setCommuStatus(status);		
+	    		commentSearch.setUserId(userValue);
+	    		commentSearch.setCommentStatus(status);		
+	    		
+	    		boardList = adminService.adminBoardSelect(boardSearch);
+	    		commentList = adminService.adminCommentSelect(commentSearch);	
+	    		
+	    		
+			    model.addAttribute("boardList", boardList);
+			    model.addAttribute("commentList", commentList);	    		
+		    }
+
 
 			
 			return "/admin/adminCommunity";
-		}			
+		}
 	
 	
 //고객센터
@@ -199,12 +256,51 @@ public class AdminController {
 
 		@RequestMapping(value = "/admin/adminCs")
 		public String adminCs(Model model, HttpServletRequest request, HttpServletResponse response) {
-			
-			
+
+			List<User> list = null;
+
+			User user = new User();
+
+			list = adminService.userList(user);
+			model.addAttribute("list",list);
 			return "/admin/adminCs";
 		}
 		
-		
+		@RequestMapping(value = "/admin/userStatus", method = RequestMethod.POST)//회원정지
+		@ResponseBody
+		public Response<Object> status(HttpServletRequest request, HttpServletResponse response) {
+		    Response<Object> ajaxResponse = new Response<Object>();
+
+		    String userId = HttpUtil.get(request, "userId", "");
+		    String userStatus = HttpUtil.get(request, "userStatus", "");
+		    User user = userService.userSelect(userId);
+		    if ("Y".equals(userStatus) || "N".equals(userStatus)) {
+		        adminService.userStatusUpdate(user);
+		        ajaxResponse.setCode(0); // 성공 코드
+		    } else {
+		        ajaxResponse.setCode(400); // 파라미터 값이 올바르지 않음을 나타내는 코드
+		    }
+
+		    return ajaxResponse;
+		}
+		@RequestMapping(value = "/admin/adminUser")
+		public String adminUser(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+		{
+			String userId = HttpUtil.get(request, "userId", "");
+			Question user = new Question();
+			List<Question> list = null;
+			user.setUserId(userId);
+
+			list = adminService.userQuestion(user);
+		    if (list != null) {
+		        System.out.println("Received list with " + list.size() + " items.");
+		    } else {
+		        System.out.println("Received an empty list.");
+		    }
+			
+			model.addAttribute("list", list);
+			return "/admin/adminUser";
+		}
 		
 	
 		

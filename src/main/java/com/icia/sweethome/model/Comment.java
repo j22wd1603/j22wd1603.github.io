@@ -17,7 +17,8 @@ public class Comment implements Serializable
 	private String userId;				//사용자 아이디
 	private int groupIdk;				//그룹 번호
 	private String imageFileExt;		//프로필 이미지 확장자
-	
+	private String searchType;			//관리자에서 (1:게시글, 2:댓글)
+	private String searchValue;			//검색값	
 
 	public Comment()
 	{
@@ -32,7 +33,29 @@ public class Comment implements Serializable
 		userId = "";
 		groupIdk = 0;
 		imageFileExt = "";
+		searchType = "";
+		searchValue = "";
 		
+	}
+
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+
+	public String getSearchValue() {
+		return searchValue;
+	}
+
+
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
 	}
 
 
