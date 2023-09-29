@@ -21,10 +21,10 @@ function search()
    <!--banner -->
       <div class="banner-container">
         <div class="banner">
-          <img class="banner-images" src="/resources/images/product/big/shopbanner3.jpg">
-          <img class="banner-images" src="/resources/images/product/big/shopbanner.jpg">
-          <img class="banner-images" src="/resources/images/product/big/shopbanner2.jpg">
-          <img class="banner-images" src="/resources/images/product/big/shopbanner.jpg">
+          <img class="banner-images" src="/resources/images/shop/shopbanner3.jpg">
+          <img class="banner-images" src="/resources/images/shop/shopbanner.jpg">
+          <img class="banner-images" src="/resources/images/shop/shopbanner2.jpg">
+          <img class="banner-images" src="/resources/images/shop/shopbanner.jpg">
          </div>
       </div> 
    </header>

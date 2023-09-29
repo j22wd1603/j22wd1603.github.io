@@ -475,9 +475,7 @@ function setInputAddress() {
                                        <label>
                                            <input type="radio" name="paymentChoice" value="kakao" id="kakaoRadio" checked="checked">카카오페이
                                        </label>
-                                       <label>
-                                           <input type="radio" name="paymentChoice" value="virtual" id="virtualRadio">가상계좌
-                                       </label>   
+                                      
                                    </td>
                                </tr>
                            </table>
@@ -506,7 +504,9 @@ function setInputAddress() {
                            <div id="kakaoTable" style="display: block;">
                                <table>
                                    <tr>
-                                       <td>kakaoPay</td>
+                                       <td>
+                                       		<img src="/resources/images/shop/kakaopay.jpg" alt="kakaoPay" width="100px"  height="40px" >
+                                       </td>
                                    </tr>
                                </table>
                            </div>
@@ -616,7 +616,6 @@ function setInputAddress() {
         if (bankRadio.checked) {
             bankTable.style.display = 'block'; 
             kakaoTable.style.display = 'none'; 
-            virtualTable.style.display ='none';
         }
     });
 
@@ -627,20 +626,10 @@ function setInputAddress() {
         if (kakaoRadio.checked) {
             kakaoTable.style.display = 'block'; 
             bankTable.style.display = 'none'; 
-            virtualTable.style.display ='none';
         }
     });
     
-    const virtualRadio = document.getElementById('virtualRadio');
-    const virtualTable = document.getElementById('virtualTable');
-
-    virtualRadio.addEventListener('change', function() {
-        if (virtualRadio.checked) {
-           virtualTable.style.display = 'block';
-            bankTable.style.display = 'none'; 
-            kakaoTable.style.display = 'none'; 
-        }
-    });
+    
   	//배송에 쓰이는 스크립트
     const deliveryRadio = document.getElementById('deliveryRadio');
     const deliveryTable = document.getElementById('deliveryTable');

@@ -7,26 +7,19 @@
 </head>
 <body>
     <h1>리뷰 작성 폼</h1>
-<c:forEach items="${reviewList}" var="review">
-    <form action="/shop/review" method="post">
-        <label for="userId">사용자 아이디:</label>
-   <input type="text" name="userId" value="${userId}" readonly><br><br>
-        
-        <label for="productIdk">프로덕트 아이디케이:</label>
-        <input type="text" name="productIdk" value="${review.productIdk}" readonly><br><br>
-        
-        <label for="productName">프로덕트 네임:</label>
-        <input type="text" name="productName" value="${review.productName}" readonly><br><br>
-        
-        <label for="orderIdk">오더 아이디케이:</label>
-        <input type="text" name="orderIdk" value="${review.orderIdk}" readonly><br><br>
-        
-        <label for="reviewContent">리뷰 컨텐트:</label>
-        <textarea name="reviewContent" rows="4" cols="50"></textarea><br><br>
-        
-        <input type="submit" value="리뷰 작성">
-    </form>
-</c:forEach>
 
+
+<div class="star-rating space-x-4 mx-auto">
+	<input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+	<label for="5-stars" class="star pr-4">★</label>
+	<input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+	<label for="4-stars" class="star">★</label>
+	<input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+	<label for="3-stars" class="star">★</label>
+	<input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+	<label for="2-stars" class="star">★</label>
+	<input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+	<label for="1-star" class="star">★</label>
+</div>
 </body>
 </html>

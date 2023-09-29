@@ -333,6 +333,7 @@ public class ShopController {
 	}
 	
 	
+	
 	@RequestMapping(value ="/shop/cartPage")
 	public String cartPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 	      
@@ -355,8 +356,11 @@ public class ShopController {
 			String productCode = HttpUtil.get(request, "productCode", "");
 			int productPrice = HttpUtil.get(request, "productPrice", 0); 
 
+			int LIST_COUNT = 5;
+			
 			List<Cart> cartList = null;
-				
+
+			
 			Cart cart = new Cart();
 			cart.setUserId(userId);
 			cart.setProductIdk(productIdk);
@@ -365,13 +369,13 @@ public class ShopController {
 			cart.setProductFileExt(productFileExt);
 			cart.setProductCode(productCode);
 			cart.setProductPrice(productPrice);
-			
+	
 
 			totalCount = shopService.cartListCount(cart);
 			
 			if(totalCount > 0)
 			{
-				paging = new Paging("/user/cartPage", totalCount, LIST_COUNT, PAGE_COUNT, curPage, "curPage");
+				paging = new Paging("/shop/cartPage", totalCount, LIST_COUNT, PAGE_COUNT, curPage, "curPage");
 				
 				cart.setStartRow(paging.getStartRow());
 				cart.setEndRow(paging.getEndRow());
@@ -379,12 +383,12 @@ public class ShopController {
 				cartList = shopService.cartList(cart);
 		
 			}
+			
 			 model.addAttribute("cartList",cartList);
 			 model.addAttribute("user",user);
 			 model.addAttribute("curPage", curPage);
 			 model.addAttribute("paging", paging);
-			
-			
+	
 			 
 		    return "/shop/cartPage"; 
 	}
