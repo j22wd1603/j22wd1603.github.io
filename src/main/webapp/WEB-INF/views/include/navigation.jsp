@@ -95,7 +95,7 @@ font-family: 'Gothic A1', sans-serif;
                     <a href="/shop/product?shopTabCode=C" class="dropdown-item">잡화</a>
               </div>
             </div>
-            <a href="/shop/bestseller" class="nav-item nav-link active">BEST ITEM</a>
+            <a href="/shop/bestItem" class="nav-item nav-link active">BEST ITEM</a>
             <div class="nav-item dropdown">
                 <a href="/community/blog" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">COMMUNITY</a>
                 <div class="dropdown-menu border-0 m-0">

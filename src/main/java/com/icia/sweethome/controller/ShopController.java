@@ -143,8 +143,8 @@ public class ShopController {
 	    return "/shop/product";
 	}
 
-		@RequestMapping(value ="/shop/bestseller")
-		public String bestseller(Model model, HttpServletRequest request, HttpServletResponse response) {
+		@RequestMapping(value ="/shop/bestItem")
+		public String bestItem(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		String productName = HttpUtil.get(request, "productName","");
 		//현재페이지 번호 
@@ -165,7 +165,7 @@ public class ShopController {
 		if(totalCount > 0)
 		{
 			
-			paging = new Paging("/shop/bestseller", totalCount , LIST_COUNT, PAGE_COUNT , curPage , "curPage");
+			paging = new Paging("/shop/bestItem", totalCount , LIST_COUNT, PAGE_COUNT , curPage , "curPage");
 			
 			shop.setStartRow(paging.getStartRow());
 			shop.setEndRow(paging.getEndRow());
@@ -181,7 +181,7 @@ public class ShopController {
 
 
 
-    return "/shop/bestseller";
+    return "/shop/bestItem";
 }
 	
 		

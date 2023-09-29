@@ -50,7 +50,7 @@ function search()
 		<div class="main_category_direct">
 		    <ul class="category_direct_list">
 		                    <li class="category_direct_item">
-				                <a href="/shop/bestseller">
+				                <a href="/shop/bestItem">
 				                    <img src="/resources/images/shop/best.png" alt="베스트">
 				                    <p> 베스트</p>
 				                </a>
@@ -89,7 +89,7 @@ function search()
          </div>
          
          <div class="text-center">
-           <a href="/shop/bestseller" class="btn btn-primary">View More Products</a>
+           <a href="/shop/bestItem" class="btn btn-primary">View More Products</a>
          </div>
          
          <div class="row g-0 team-items">

@@ -51,8 +51,8 @@ h1{
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-1 text-white animated slideInDown" style="font-family: 'Gothic A1', sans-serif;";>금주의 <br> 베스트셀러</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-3">만명의 유저들이 선택한 이번주 베스트셀러 가구들을 구경하세요</p>
+                                <h1 class="display-1 text-white animated slideInDown" style="font-family: 'Gothic A1', sans-serif;";>금주의 <br> 베스트 아이템</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-3">만명의 유저들이 선택한 이번주 베스트 아이템 가구들을 구경하세요</p>
                                 <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
                             </div>
                         </div>
@@ -278,7 +278,7 @@ h1{
    <div class="container-xxl py-5">
   <div class="container">
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-      <h1 class="display-5 mb-4"><a href="/shop/bestseller" style="color:black">베스트 셀러</a></h1>
+      <h1 class="display-5 mb-4"><a href="/shop/bestItem" style="color:black">베스트 아이템</a></h1>
     </div>
     <div class="row g-0 team-items">
       <c:forEach var="shop" items="${listView}" varStatus="status">
