@@ -2,24 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace ="com.icia.sweethome.dao.ShopDao">				
 
-	<resultMap type="com.icia.sweethome.model.Shop" id="shopResultMap" >
-		<id column="PRODUCT_IDK" property="productIdk"/>
-		<result column="SHOP_TAB_CODE" property="shopTabCode"/>
-		<result column="SHOP_DETAIL_TAB_CODE" property="shopDetailTabCode"/>
-		<result column="PRODUCT_CODE" property="productCode"/>
-		<result column="SELLER_ID" property="sellerId"/>
-		<result column="PRODUCT_NAME" property="productName"/>
-		<result column="PRODUCT_PRICE" property="productPrice"/>
-		<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
-		<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
-		<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
-		<result column="PRODUCT_STATUS" property="productStatus"/>
-		<result column="REG_DATE" property="regDate"/>
-		<result column="PRODUCT_VIEWS" property="productViews"/>
-		
-		<result column="SHOP_TAB_NAME" property="shopTabName"/>
-		<result column="SHOP_DETAIL_TAB_NAME" property="shopDetailTabName"/>
-	</resultMap>
+<resultMap type="com.icia.sweethome.model.Shop" id="shopResultMap" >
+	<id column="PRODUCT_IDK" property="productIdk"/>
+	<result column="SHOP_TAB_CODE" property="shopTabCode"/>
+	<result column="SHOP_DETAIL_TAB_CODE" property="shopDetailTabCode"/>
+	<result column="PRODUCT_CODE" property="productCode"/>
+	<result column="SELLER_ID" property="sellerId"/>
+	<result column="PRODUCT_NAME" property="productName"/>
+	<result column="PRODUCT_PRICE" property="productPrice"/>
+	<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
+	<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
+	<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
+	<result column="PRODUCT_STATUS" property="productStatus"/>
+	<result column="REG_DATE" property="regDate"/>
+	<result column="PRODUCT_VIEWS" property="productViews"/>	
+	<result column="SHOP_TAB_NAME" property="shopTabName"/>
+	<result column="SHOP_DETAIL_TAB_NAME" property="shopDetailTabName"/>
+</resultMap>
 
 <resultMap type="com.icia.sweethome.model.Review" id="reviewResultMap" >
     <id column="REVIEW_IDK" property="reviewIdk" />
@@ -135,6 +134,39 @@
           )       
 </select>
 
+<!-- shop - product 상세 카테고리 -->
+<select id="productDetailselct" parameterType ="String" resultMap="shopResultMap">
+SELECT SHOP_DETAIL_TAB_CODE
+      ,SHOP_DETAIL_TAB_NAME
+FROM SHOP_DETAIL_TAB
+WHERE SHOP_DETAIL_TAB_CODE LIKE #{value} || '_'
+</select>
+
+<!-- shop - product 분류 옵션 (브랜드, 가격) -->
+<select id="productBrandSelct" parameterType ="com.icia.sweethome.model.Shop" resultType="String">
+SELECT DISTINCT PRODUCT_BRAND_NAME
+FROM PRODUCT
+WHERE 1=1
+AND SHOP_TAB_CODE = #{shopTabCode}
+<if test="shopDetailTabCode != null and shopDetailTabCode != ''">
+	AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
+</if>
+<if test='orderBy != null and orderBy != ""'>   
+	<choose>
+		<when test='orderBy == "productPrice_desc"'>
+		ORDER BY PRODUCT_PRICE DESC
+		</when>
+	 	<when test='orderBy == "productPrice_asc"'>
+		ORDER BY PRODUCT_PRICE ASC
+		</when>
+		<when test='orderBy == "regDate_desc"'>
+		ORDER BY REG_DATE DESC
+		</when>	 	
+	</choose>
+</if>
+</select>
+
+
 
 <!-- shop - besItem 페이지 리스트 -->
 <select id = "shopListView" parameterType ="com.icia.sweethome.model.Shop" resultMap = "shopResultMap">
@@ -224,14 +256,6 @@ WHERE 1=1
 </select>
 
 
-<!-- shop - 조회수 업데이트 , productSelect에서 씀 -->
-<update id="shopListViewCntPlus" parameterType="int">
-UPDATE PRODUCT
-   SET PRODUCT_VIEWS = PRODUCT_VIEWS + 1
- WHERE PRODUCT_IDK = #{value}
-</update>
-
-
 
 <!-- shop - productDetail -->
 <select id="productSelect" parameterType="int" resultMap="shopResultMap">
@@ -252,7 +276,14 @@ UPDATE PRODUCT
     WHERE PRODUCT_IDK = #{value}
 </select>
 
-<!-- shop - productDetail 리뷰조회 리스트    //질문할거 : 파라미터타입 int? 모델로 받아도 되나요 ?-->
+<!-- shop - 조회수 업데이트(샵서비스productSelect에서 사용) -> 베스트 아이템 뽑을때 조회수로 뽑아서-->
+<update id="shopListViewCntPlus" parameterType="int">
+UPDATE PRODUCT
+   SET PRODUCT_VIEWS = PRODUCT_VIEWS + 1
+ WHERE PRODUCT_IDK = #{value}
+</update>
+
+<!-- shop - productDetail 리뷰조회 리스트   -->
 <select id="reviewList" parameterType="int" resultMap="reviewResultMap">
 SELECT
     PR.REVIEW_IDK AS REVIEW_IDK,
@@ -366,7 +397,29 @@ WHERE	USER_ID = #{userId}
     AND PRODUCT_IDK = #{productIdk}
 </delete>
 
-<!--  0918 마이페이지 내 리뷰  -->
+<!-- shop - review -->
+<insert id="reviewInsert" parameterType="com.icia.sweethome.model.Review" >
+INSERT INTO PRODUCT_REVIEW (
+    REVIEW_IDK,
+    PRODUCT_IDK, 
+    ORDER_IDK, 
+    USER_ID, 
+    REVIEW_CONTENT, 
+    REG_DATE
+) VALUES (
+	'#{reviewIdk}',
+    '#{productIdk}',
+    '#{orderIdk}',
+    '#{userId}',
+    '#{reviewContent}',
+   sysdate
+)
+</insert>
+
+
+
+
+<!-- user - review(마이페이지) -->
 <select id="boardMyReview" parameterType ="com.icia.sweethome.model.Review" resultMap="reviewResultMap">
 SELECT REVIEW_IDK,
 	   PRODUCT_IDK,
@@ -399,7 +452,6 @@ SELECT REVIEW_IDK,
    AND RNUM <![CDATA[<=]]> #{endRow}
 </select>
 
-<!--  0918 마이페이지 내 리뷰 전체 카운트 조회 -->
 <select id="boardMyReviewCount" parameterType ="com.icia.sweethome.model.Review" resultType="int">
 SELECT NVL(COUNT(R.REVIEW_IDK), 0) AS CNT
   FROM PRODUCT_REVIEW R, USERS U, PRODUCT P
@@ -408,7 +460,6 @@ SELECT NVL(COUNT(R.REVIEW_IDK), 0) AS CNT
    AND R.PRODUCT_IDK = P.PRODUCT_IDK
 </select>
 
-<!-- 마이페이지에서 내 좋아요 존재 여부 확인 0913 윤하나 -->
 <select id="boardMyReviewSearch" parameterType="int" resultType="int">
 SELECT REVIEW_IDK,
 	   PRODUCT_IDK,
@@ -420,41 +471,9 @@ SELECT REVIEW_IDK,
 WHERE  PRODUCT_IDK = #{value}
 </select>
 
-<!-- 마이페이지에서 내 좋아요 삭제 0913 윤하나 -->
 <delete id="boardMyReviewDelete" parameterType="int">
 DELETE FROM PRODUCT_REVIEW
  WHERE PRODUCT_IDK = #{value}
 </delete>
-
-<!-- product 디테일 카테고리 검색 송민기 -->
-<select id="productDetailselct" parameterType ="String" resultMap="shopResultMap">
-SELECT SHOP_DETAIL_TAB_CODE
-      ,SHOP_DETAIL_TAB_NAME
-FROM SHOP_DETAIL_TAB
-WHERE SHOP_DETAIL_TAB_CODE LIKE #{value} || '_'
-</select>
-
-<select id="productBrandSelct" parameterType ="com.icia.sweethome.model.Shop" resultType="String">
-SELECT DISTINCT PRODUCT_BRAND_NAME
-FROM PRODUCT
-WHERE 1=1
-AND SHOP_TAB_CODE = #{shopTabCode}
-<if test="shopDetailTabCode != null and shopDetailTabCode != ''">
-	AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
-</if>
-<if test='orderBy != null and orderBy != ""'>   
-	<choose>
-		<when test='orderBy == "productPrice_desc"'>
-		ORDER BY PRODUCT_PRICE DESC
-		</when>
-	 	<when test='orderBy == "productPrice_asc"'>
-		ORDER BY PRODUCT_PRICE ASC
-		</when>
-		<when test='orderBy == "regDate_desc"'>
-		ORDER BY REG_DATE DESC
-		</when>	 	
-	</choose>
-</if>
-</select>
 
 </mapper>

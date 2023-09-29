@@ -8,55 +8,47 @@ import com.icia.sweethome.model.Cart;
 import com.icia.sweethome.model.Review;
 @Repository("shopDao")
 public interface ShopDao {
-	
+	//샵,페이징
 	public List<Shop> shopList(Shop shop);
-	public List<Shop> shopListView(Shop shop);
-	public Shop productSelect (int productIdk);
-
 	public int shopListCount(Shop shop);
-	public int shopListViewCount(Shop shop);
-	
-
-	//조회수 증가
-	public int shopListViewCntPlus(int productIdk);
-	
-	//카트등록
-	 public int cartInsert(Cart cart);
-	 
-	 public int  cartUpdate(Cart cart);
-
-	 
-	 //cartPage에 리스트
-	 public List<Cart> cartList (Cart cart);
-	 
-	 public List<Cart> cartSelect (Cart cart);
-	 
-	 public int cartListCount (Cart cart);
-	 
-	 public int cartDelete(Cart cart);
-	 
-	 
-	 //리뷰 
-	 public List<Review> reviewList (int productIdk);
-	 
-	 public int reviewInsert(Review review);
-	 
-	//마이페이지의 내 리뷰 0913 윤하나
-	public List<Review> boardMyReview(Review review);
-	   
-	// 마이페이지에서 내 리뷰 존재 여부 확인 0913 윤하나 
-	public int boardMyReviewSearch(int productIdk);
-	   
-	//마이페이지에서 내 리뷰 삭제
-	public int boardMyReviewDelete(int productIdk);
-	
-	public int boardMyReviewCount(Review review);
-	
-	//민기
+		
+	//프로덕트 카테고리 
 	public List<Shop> productDetailselct(String code);
-	
 	public List<String> productBrandSelct(Shop code);
 
+	
+	//베스트아이템, 페이징
+	public List<Shop> shopListView(Shop shop);
+	public int shopListViewCount(Shop shop);
+	
+	
+	//프로덕트디테일, 조회수 증가
+	public Shop productSelect (int productIdk);
+	public int shopListViewCntPlus(int productIdk);
+	
+	//카트 조회, 인서트, 업데이트, 델리트, 페이징
+	 public List<Cart> cartSelect (Cart cart);	 
+	 public int cartInsert(Cart cart);	 
+	 public int  cartUpdate(Cart cart);
+	 public int cartDelete(Cart cart);
+	 public int cartListCount (Cart cart);	 
+	 	
+	 //cartPage 리스트
+	 public List<Cart> cartList (Cart cart);
+	
+	 
+	 //리뷰 
+	 public List<Review> reviewList (int productIdk); 
+	 public int reviewInsert(Review review);
+	 
+	 
+	//user 마이페이지 리뷰, 리뷰존재여부, 삭제
+	public List<Review> boardMyReview(Review review);
+	public int boardMyReviewSearch(int productIdk);
+	public int boardMyReviewDelete(int productIdk);	
+	public int boardMyReviewCount(Review review);
+	
+	
 }
 
 

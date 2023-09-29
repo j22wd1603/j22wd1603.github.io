@@ -22,7 +22,7 @@ public class ShopService
 	private ShopDao shopDao;
 
 	//---------------------------------------------------------------------------
-	//샵 리스트 
+	//shop - shop, product 
 	public List<Shop> shopList(Shop shop) {
 	    List<Shop> list = null;
 	    
@@ -36,27 +36,48 @@ public class ShopService
 	    
 	    return list;
 	}
-	
-	
-	//샵 리스트 조회수 많은애 
-		public List<Shop> shopListView(Shop shop)
+			
+
+	//shop - product 카테고리
+	public List<Shop> productDetailselct(String code) {
+		List<Shop> detialCodeList= null;
+		
+		try
 		{
-			List<Shop> listView = null;
-				
-			try
-			{
-				listView = shopDao.shopListView(shop);
-			}
-			catch(Exception  e)
-			{
-				logger.error("[ShopService] shopListView Exception" , e);
-			}
-			return listView;
+			detialCodeList = shopDao.productDetailselct(code);
 		}
-		
-		
-		
+		catch(Exception e)
+		{
+			logger.error("[shopService] productDetailselct Exception", e);
+		}
+			
+		return detialCodeList;
+	}
 	
+	
+	public List<String> productBrandselct(Shop code){
+		return shopDao.productBrandSelct(code);
+	}	
+	
+	
+	//shop - bestItem
+	public List<Shop> shopListView(Shop shop)
+	{
+		List<Shop> listView = null;
+			
+		try
+		{
+			listView = shopDao.shopListView(shop);
+		}
+		catch(Exception  e)
+		{
+			logger.error("[ShopService] shopListView Exception" , e);
+		}
+		return listView;
+	}
+	
+	
+	//shop - productDetail
 	public Shop productSelect(int productIdk)
 	{
 		Shop shop = null;
@@ -107,7 +128,8 @@ public class ShopService
 		return count;
 	}
 	
-//리뷰
+	
+	//shop - review
 	
 	public List<Review> reviewList(int productIdk)
 	{
@@ -141,7 +163,9 @@ public class ShopService
 	      return count;
 	      
 	   }
+	 
 
+	 //shop - cart
 	public List<Cart> cartSelect(Cart cart)
 	   {
 		List<Cart>  cartSelect = null;
@@ -244,8 +268,13 @@ public class ShopService
 	      
 	   }
 	 
-	
-	 //마이페이지의 내 리뷰 0918 윤하나
+	 
+	 
+	 
+	 
+	 
+	 
+	 //user - review
 		public List<Review> boardMyReview(Review review)
 		{
 			List<Review> list = null;
@@ -261,11 +290,8 @@ public class ShopService
 			   
 			return list;
 		}
-		
-
-		
-		
-		//마이페이지의 리뷰 건수 조회 0919 윤하나
+				
+		//리뷰 건수
 		public int boardMyReviewCount(Review review)
 		{
 			int count = 0;
@@ -282,9 +308,7 @@ public class ShopService
 			return count;
 		}
 		
-		
-		
-		// 마이페이지에서 내 좋아요 존재 여부 확인 0918 윤하나 
+		// 리뷰 존재여부
 		public int boardMyReviewSearch(int productIdk)
 		{
 			int count = 0;
@@ -301,7 +325,7 @@ public class ShopService
 			return count;
 		}
 		
-		// 마이페이지에서 내 스크랩 삭제 0913 윤하나 
+		// 리뷰 삭제
 		public int boardMyReviewDelete(int productIdk)
 		{
 			int count = 0;
@@ -318,25 +342,6 @@ public class ShopService
 			return count;
 		}  
 		
-		// 송민기
-		public List<Shop> productDetailselct(String code) {
-			List<Shop> detialCodeList= null;
-			
-			try
-			{
-				detialCodeList = shopDao.productDetailselct(code);
-			}
-			catch(Exception e)
-			{
-				logger.error("[shopService] productDetailselct Exception", e);
-			}
-				
-			return detialCodeList;
-		}
-		
-		public List<String> productBrandselct(Shop code){
-			return shopDao.productBrandSelct(code);
-		}
 }
 
 

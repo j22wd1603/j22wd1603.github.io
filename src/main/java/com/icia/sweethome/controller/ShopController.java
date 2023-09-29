@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.sweethome.model.Cart;
+import com.icia.sweethome.model.OrderDetail;
 import com.icia.sweethome.model.Paging;
 import com.icia.sweethome.model.Response;
 import com.icia.sweethome.model.Review;
 import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
+import com.icia.sweethome.service.OrderService;
 import com.icia.sweethome.service.ShopService;
 import com.icia.sweethome.service.UserService;
 import com.icia.sweethome.util.CookieUtil;
@@ -46,7 +48,8 @@ public class ShopController {
 	@Autowired
 	private UserService userService;
 	
-
+	@Autowired
+	private OrderService orderService;
 
 	private static final int LIST_COUNT = 12;		//한페이지의 게시물 수
 	private static final int PAGE_COUNT = 5;		//페이징 수 
@@ -393,33 +396,53 @@ public class ShopController {
 		    return "/shop/cartPage"; 
 	}
 		
-		
-	@RequestMapping(value = "/shop/review")
-	public String review(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		List<Review> reviewList = null;
+	@RequestMapping(value = "/shop/review", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<Object> review(HttpServletRequest request) {
+	    Response<Object> ajaxResponse = new Response<Object>();
 	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 	    User user = userService.userSelect(userId);
+	    if (user != null) {
+	        String reviewContent = request.getParameter("reviewContent");
+	        
+	        if (reviewContent != null) {
+	            Review review = new Review();
+	            review.setUserId(userId);
+	            review.setReviewContent(reviewContent);
+	          
 
-	    int productIdk = HttpUtil.get(request, "productIdk", 0);
-	    int reviewIdk = HttpUtil.get(request, "reviewIdk", 0);
-	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);
-	    String reviewContent = HttpUtil.get(request, "reviewContent", "");
-	    String regDate = HttpUtil.get(request, "regDate", "");
-	    String productName = HttpUtil.get(request, "productName", "");
-	    
-	    reviewList = shopService.reviewList(productIdk);
-	    Review review = new Review();
+	            int count = shopService.reviewInsert(review);
 
-	    review.setProductIdk(productIdk);
-	  
+	            if (count > 0) {
+	                ajaxResponse.setResponse(0, "리뷰가 등록되었습니다.");
+	            } else {
+	                ajaxResponse.setResponse(500, "리뷰 등록 중 오류가 발생했습니다.");
+	            }
+	        } else {
+	            ajaxResponse.setResponse(400, "리뷰 내용을 찾을 수 없습니다.");
+	        }
+	    } else {
+	        ajaxResponse.setResponse(401, "사용자를 찾을 수 없습니다.");
+	    }
 
-	    model.addAttribute("reviewList", reviewList);
+	    if (logger.isDebugEnabled()) {
+	        logger.debug("[ShopController]/shop/review response\n" + JsonUtil.toJsonPretty(ajaxResponse));
+	    }
 
-	    
-
-	    return "/shop/review";
+	    return ajaxResponse;
 	}
 
+	@RequestMapping(value ="/shop/reviewPage")
+	public String reviewPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+	      
 		
-	
+		//쿠키값
+			String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+			User user = userService.userSelect(userId);
+		
+			 
+		    return "/shop/reviewPage"; 
+	}
 }
+
+
