@@ -16,7 +16,7 @@
   .custom-radio-label2 {
     display: inline-block;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -26,13 +26,14 @@
 
   /* 선택된 라디오 버튼 라벨 스타일 */
   .custom-radio-input2:checked + .custom-radio-label2 {
-    background-color: #B78D65;
+    background-color: #8b1411;
     color: #fff;
-    border-color: #B78D65;
+    border-color: #8b1411;
+    padding-top:100px;
   }
   
   .title{
-  
+    
     box-shadow: 3px 3px 50px #e6e6e6;
     border-radius: 20px;
     position: relative;
@@ -111,7 +112,6 @@
     vertical-align: middle;
     cursor: pointer;
     user-select: none;
-    background-color: transparent;
     border: 1px solid transparent;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
@@ -122,6 +122,49 @@
 input{
 	margin-top:20px;
 }
+
+.custom-radio-group{
+	margin-top:40px;	
+}
+
+.col-sm-12{
+	margin-top:10px;	
+	margin-bottom:50px;
+
+}
+
+
+
+
+.btn-primary{
+	position: relative;
+	left: 337px;
+	display: inline-block;
+	margin-top:10px;
+    padding: 10px 5px;
+    font-size: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+.btn-secondary{
+	position: relative;
+	left: 340px;
+	display: inline-block;
+	margin-top:10px;
+    padding: 10px 5px;
+    font-size: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+  
  </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -272,8 +315,8 @@ function previewImage(input) {
 </div>
 		<div class="form-group row" style="text-align: center;">
 			<div class="col-sm-12">
-				<button type="button" id="btnWrite" class="btn btn-primary" title="저장">작성하기</button>
-				<button type="button" id="btnList" class="btn btn-secondary" title="리스트">취소</button>
+				<button type="button" id="btnWrite" class="btn-primary" title="저장">작성하기</button>
+				<button type="button" id="btnList" class="btn-secondary" title="리스트">취소</button>
 			</div>
 		</div> 
 	</form>
