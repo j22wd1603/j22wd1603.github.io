@@ -49,7 +49,7 @@ $(document).ready(function() {
 			  if(response.code == 0)
 			  {
 				 alert("게시물이 수정 되었습니다");
-				 location.href ="/cs/inquirylist";
+				 location.href ="/user/mypageMyQ";
 				 /*
 				 document.bbsForm.action = "/board/list";
 				 document.bbsForm.submit();
@@ -86,7 +86,7 @@ $(document).ready(function() {
    });
    
    $("#btnList").on("click", function() {
-		document.bbsForm.action = "/cs/inquirylist";
+		document.bbsForm.action = "/user/mypageMyQ";
 		document.bbsForm.submit();
    });
 
@@ -114,11 +114,9 @@ $(document).ready(function() {
          <textarea class="form-control" rows="10" name="questionContent" id="questionContent" style="ime-mode:active;" placeholder="내용을 입력해주세요" required>${question.questionContent}</textarea>
       </div>
       <div class="form-group2">
-                <label for="profilePicture" style="font-size: 17px; ">프로필 사진 업로드</label>
                 <input type="file" id="profilePicture" name="profilePicture" style="margin: 0 auto; display: block;" />
-				<input type="button" class="btn" onclick="profilePicture()" style="display: block; margin: 0 auto;" value="프로필 사진 업로드" />
+				<input type="button" class="btn" onclick="profilePicture()" style="display: block; margin: 0 auto;" />
                 <br>
-                <img id="preview" src="#" alt="프로필 미리보기" style=" font-size: 15px; display: block; margin: 0 auto;" />
             </div>
 <c:if test="${question.fileCheck eq 'Y'}">
       <div style="margin-bottom:0.3em;">[첨부파일 :${question.questionIdk}.${question.fileExt}]</div>

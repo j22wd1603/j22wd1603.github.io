@@ -150,7 +150,7 @@ public class CsController {
 
 	
 	//게시물 등록(aJax)
-		@RequestMapping(value="/cs/write", method=RequestMethod.POST)
+		@RequestMapping(value="/cs/writeProc", method=RequestMethod.POST)
 		@ResponseBody
 		public Response<Object> writeProc(MultipartHttpServletRequest request, HttpServletResponse response)
 		{

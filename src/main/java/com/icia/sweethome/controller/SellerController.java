@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
+import com.icia.sweethome.model.Cart;
 import com.icia.sweethome.model.Coupon;
 import com.icia.sweethome.model.Delivery;
 import com.icia.sweethome.model.DeliveryDetail;
@@ -35,6 +36,7 @@ import com.icia.sweethome.model.Seller;
 import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
 import com.icia.sweethome.service.SellerService;
+import com.icia.sweethome.service.ShopService;
 import com.icia.sweethome.service.UserService;
 import com.icia.sweethome.util.CookieUtil;
 import com.icia.sweethome.util.FileData;
@@ -56,7 +58,8 @@ public class SellerController {
 	
 	@Autowired
 	private SellerService sellerService;
-	
+	@Autowired
+	private ShopService shopService;
 	@Autowired
 	private UserService userService;
 	
@@ -125,43 +128,51 @@ public class SellerController {
 
 
 	
-		 @RequestMapping(value = "/shop/orderComplete", method = { RequestMethod.GET, RequestMethod.POST })
-			public String orderComplete(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
-				
-				String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-				User user = userService.userSelect(userId);
-				if(userId == null || user==null) {
-					loginChack(response);
-					return "redirect:/";
-				}
-				int orderIdk =0;
-				
-				try {
-					orderIdk = Integer.parseInt((String) request.getSession().getAttribute("orderIdk"));
-				} catch (Exception e) {
-					request.getSession().invalidate();
-					return "redirect:/";
-				}
-			    
-				
-				Order order = null;
-				Pay pay = null;
-				List<OrderComplete> orderComplete = null;
-			    
-				pay = sellerService.orderPaySelect(orderIdk);			//결제정보
-				order = sellerService.orderSelect(orderIdk);		 	//주문 정보
-				orderComplete = sellerService.orderComplete(orderIdk);	//주문 상품정보
-				
-				
-				model.addAttribute("orderComplete",orderComplete);
-				model.addAttribute("order", order);
-				model.addAttribute("user", user);
-				model.addAttribute("pay", pay);
-				
-				request.getSession().invalidate();
-				
-				return "/shop/orderComplete";
-			}
+	@RequestMapping(value = "/shop/orderComplete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String orderComplete(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+		String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+		User user = userService.userSelect(userId);
+		if(userId == null || user==null) {
+			loginChack(response);
+			return "redirect:/";
+		}
+		int orderIdk =0;
+
+		try {
+			orderIdk = Integer.parseInt((String) request.getSession().getAttribute("orderIdk"));
+		} catch (Exception e) {
+			request.getSession().invalidate();
+			return "redirect:/";
+		}
+
+
+		Order order = null;
+		Pay pay = null;
+		List<OrderComplete> orderComplete = null;
+	    Cart cart = new Cart();
+	    cart.setUserId(userId);
+	    
+		pay = sellerService.orderPaySelect(orderIdk);			//결제정보
+		order = sellerService.orderSelect(orderIdk);		 	//주문 정보
+		orderComplete = sellerService.orderComplete(orderIdk);	//주문 상품정보
+
+		if (orderComplete != null && !orderComplete.isEmpty()) {
+		    for (OrderComplete orderItem : orderComplete) {
+		        int productIdk = orderItem.getProductIdk();
+	    		cart.setProductIdk(productIdk);
+		        shopService.cartDelete(cart);
+		    }
+		}
+		model.addAttribute("orderComplete",orderComplete);
+		model.addAttribute("order", order);
+		model.addAttribute("user", user);
+		model.addAttribute("pay", pay);
+
+		request.getSession().invalidate();
+
+		return "/shop/orderComplete";
+	}
 	
 		 @RequestMapping(value ="/shop/order", method = RequestMethod.POST)
 		 @ResponseBody

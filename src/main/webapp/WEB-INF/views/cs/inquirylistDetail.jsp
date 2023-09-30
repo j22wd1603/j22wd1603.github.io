@@ -28,7 +28,7 @@
     background-color: white; /* 배경색 설정 (예: 회색) */
 }
 .custom-button {
-  background-color: #B78D65; /* 배경색 */
+  background-color: #9E0E0B; /* 배경색 */
   color: white; /* 텍스트 색상 */
   border: none; /* 테두리 제거 */
   border-radius: 5px; /* 둥근 테두리 */
@@ -39,7 +39,7 @@
 }
 
 .custom-button:hover {
-  background-color: #B78D65; /* 마우스 오버 시 배경색 변경 */
+  background-color: #9E0E0B; /* 마우스 오버 시 배경색 변경 */
 }
 </style>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
@@ -154,10 +154,10 @@ $(document).ready(function() {
       
    </div>
 
-   <button type="button" id="btnList" class="btn btn-secondary">리스트</button>
+   <button type="button" id="btnList" class="custom-button">리스트</button>
 <c:if test="${boardMe eq 'Y' and counsel.ansStatus eq 'N'}">
-    <button type="button" id="btnUpdate" class="btn btn-secondary">수정</button>
-    <button type="button" id="btnDelete" class="btn btn-secondary">삭제</button>
+    <button type="button" id="btnUpdate" class="custom-button">수정</button>
+    <button type="button" id="btnDelete" class="custom-button">삭제</button>
 </c:if>
 
    <br/>
