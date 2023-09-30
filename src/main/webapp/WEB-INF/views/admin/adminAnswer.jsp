@@ -43,84 +43,27 @@
 }
 </style>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
 
 <script type="text/javascript">
 $(document).ready(function() {
 
    $("#btnList").on("click", function() {
-		document.bbsForm.action = "/user/mypageMyQ";
+		document.bbsForm.action = "/admin/adminCs";
 		document.bbsForm.submit();
    });
    
    $("#btnReply").on("click", function() {
-		document.bbsForm.action = "/cs/inquiryReply";
+		document.bbsForm.action = "/admin/adminReply";
 		document.bbsForm.submit();
    });
-   
 
-   $("#btnUpdate").on("click", function() {
-		document.bbsForm.action = "/cs/inquiryUpdate";
-		document.bbsForm.submit();
-   });
-   
-   $("#btnDelete").on("click", function(){
-		if(confirm("게시물을 삭제 하시겠습니까?") == true)
-		{
-			$.ajax({
-				type:"POST",
-				url:"/cs/inquirylistdelete",
-				data:{
-					questionIdk:<c:out value="${questionIdk}"/>	
-				},
-				datatype:"JSON",
-				beforeSend:function(xhr)
-				{
-					xhr.setRequestHeader("AJAX", "true");
-				},
-				success:function(response)
-				{
-					if(response.code == 0)
-					{
-						alert("게시물이 삭제 되었습니다");
-						location.href = "/cs/mypageMyQ";	
-					}
-					else if(response.code == 400)
-					{
-						alert("파라미터 값이 올바르지 않습니다.");		
-					}
-					else if(response.code == 403)
-					{
-						alert("본인글이 아니므로 삭제할 수 없습니다.");
-					}
-					else if(response.code == 404)
-					{
-						alert("해당 게시물을 찾을 수 없습니다.");
-						location.href = "/cs/mypageMyQ";
-					}
-					else if(response.code == -999)
-					{
-						alert("답변 게시물이 존재하여 삭제할수 없습니다.");		
-					}
-					else
-					{
-						alert("게시물 삭제시 오류가 발생하였습니다.");
-					}
-					
-				},
-				error:function(xhr, status, error)
-				{
-					icia.common.error(error);	
-				}			
-			});	
-		}
-   }); 
    
 });
 </script>
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <div class="container1">
 </br>   
    <div class="row" style="margin-right:0; margin-left:0;">
@@ -155,10 +98,7 @@ $(document).ready(function() {
    </div>
 
    <button type="button" id="btnList" class="btn btn-secondary">리스트</button>
-<c:if test="${boardMe eq 'Y' and counsel.ansStatus eq 'N'}">
-    <button type="button" id="btnUpdate" class="btn btn-secondary">수정</button>
-    <button type="button" id="btnDelete" class="btn btn-secondary">삭제</button>
-</c:if>
+   <button type="button" id="btnReply" class="btn btn-secondary">답변</button>
 
    <br/>
    <br/>

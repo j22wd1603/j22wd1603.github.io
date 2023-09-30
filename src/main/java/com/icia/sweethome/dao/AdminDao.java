@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.icia.sweethome.model.Admin;
 import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
+import com.icia.sweethome.model.Cs;
 import com.icia.sweethome.model.Question;
 import com.icia.sweethome.model.User;
 
@@ -49,7 +50,8 @@ public interface AdminDao {
 	public int userStatusUpdate(User user);
 	public Question questionSelect(String question);
 	public List<Question> userQuestion(Question user);
-	
+	public int noticeInsert(Cs cs);
+	public int noticeDelete(Cs cs);
 
 }
 

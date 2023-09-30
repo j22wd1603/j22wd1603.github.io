@@ -200,7 +200,7 @@ function fn_list(curPage)
     margin-bottom: 15px; border: 1px solid #999; border-radius: 10px; font-size: 16px;">
             <option value="">조회 항목</option>
             <option value="1" <c:if test='${searchType eq "1"}'>selected</c:if>>제목</option>
-            <option value="2" <c:if test="${searchType eq '2'}">selected</c:if>>내용</option>
+            <option value="2" <c:if test='${searchType eq "2"}'>selected</c:if>>내용</option>
          </select> 
          <input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="input-styling" maxlength="20" style="width:auto; ime-mode:active; border: 1px solid #ccc; text-align: center; width:auto; border: 1px solid #ccc; text-align: center; padding: 10px;
     margin-bottom: 15px; border: 1px solid #999; border-radius: 10px; font-size: 16px;" placeholder="조회값을 입력하세요." />

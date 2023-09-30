@@ -81,7 +81,7 @@ public class CsController {
 //공지사항
 	@RequestMapping(value = "/cs/announce")
 	public String list(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-		// 조회항목(1:작성자, 2:제목, 3:내용)
+		// 조회항목(1:제목, 2:내용)
 		String searchType = HttpUtil.get(request, "searchType", "");
 		// 조회값
 		String searchValue = HttpUtil.get(request, "searchValue", "");
@@ -150,7 +150,7 @@ public class CsController {
 
 	
 	//게시물 등록(aJax)
-		@RequestMapping(value="/cs/writeProc", method=RequestMethod.POST)
+		@RequestMapping(value="/cs/write", method=RequestMethod.POST)
 		@ResponseBody
 		public Response<Object> writeProc(MultipartHttpServletRequest request, HttpServletResponse response)
 		{
@@ -307,7 +307,7 @@ public class CsController {
 			int curPage = HttpUtil.get(request, "curPage", (int)1);
 			//본인글 여부
 			User user = userService.userSelect(cookieUserId);
-
+		
 			String boardMe = "N";
 			if(cookieUserId == null || user==null) {
 				loginChack(response);
@@ -325,15 +325,15 @@ public class CsController {
 					 boardMe = "Y"; 
 				 }
 				 if(question.getAnsStatus().equals("Y"))
-					{
-						answer = csService.answerSelect(questionIdk);
-					}
+				{
+					answer = csService.answerSelect(questionIdk);
+				}
+
 				 
 			}
 			
 			
-			
-			//model.addAttribute("boardMe", boardMe);
+			model.addAttribute("boardMe", boardMe);
 			model.addAttribute("questionIdk", questionIdk);
 			model.addAttribute("counsel", question);
 			model.addAttribute("searchType", searchType);
@@ -623,20 +623,5 @@ public class CsController {
 			return ajaxResponse;
 			
 		}
-		@RequestMapping(value = "/cs/test", method=RequestMethod.GET)
-		public String test(Model model, HttpServletRequest request, HttpServletResponse response) {
-			String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-			
-			User user = userService.userSelect(cookieUserId);
-			
-			model.addAttribute("user", user); 	//첫번째 인수는 jsp에서 사용할 이름
-			return "/cs/test";
-		}
-		
-		@RequestMapping(value = "/cs/test2")
-		public String test2(ModelMap model, HttpServletRequest request, HttpServletResponse response) 
-		{
-			
-			return "/cs/test2";
-		}
+
 }

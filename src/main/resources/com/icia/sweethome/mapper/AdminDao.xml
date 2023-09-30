@@ -253,7 +253,30 @@ WHERE 1=1
         ORDER BY QUESTION_IDK DESC  ))
   </select>
 <!-- 관리자 끝 -->
-  
+  <insert id="noticeInsert" parameterType="com.icia.sweethome.model.Cs">
+<!-- 선행처리기(시퀀스번호 생성) -->
+<selectKey resultType="int" keyProperty="noticeIdk" order="BEFORE">
+	SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO NOTICE (
+    NOTICE_IDK,
+    ADMIN_ID,
+    NOTICE_TITLE,
+    NOTICE_CONTENT,
+    REG_DATE
+) VALUES (
+    #{noticeIdk},
+    #{adminId},
+    #{noticeTitle},
+    #{noticeContent},
+    SYSDATE
+)
+ </insert>
+ 
+ <delete id="noticeDelete" parameterType="com.icia.sweethome.model.Cs">
+DELETE FROM NOTICE
+WHERE NOTICE_IDK = #{noticeIdk}
+</delete>
   
 
  

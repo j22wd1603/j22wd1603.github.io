@@ -14,6 +14,7 @@ import com.icia.sweethome.dao.UserDao;
 import com.icia.sweethome.model.Admin;
 import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
+import com.icia.sweethome.model.Cs;
 import com.icia.sweethome.model.Question;
 import com.icia.sweethome.model.User;
 
@@ -154,5 +155,33 @@ public class AdminService
 	    }
 	    
 	    return user;
+	}
+	//게시판 등록
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public int noticeInsert(Cs cs) throws Exception
+	{	//Propagation.REQUIRED : 트랜젝션이 있으면 그 트랜젝선에서 실행,
+		//없으면 새로운 트랜젝션을 실행(기본설정)
+		int count = 0;
+		count = adminDao.noticeInsert(cs);
+
+		return count;
+	}
+
+	//공지사항 삭제
+	public int noticeDelete(Cs cs)
+	{  
+		int count = 0;
+
+		try
+		{
+			count =  adminDao.noticeDelete(cs);
+		}
+		catch(Exception e)
+		{
+			logger.error("[ShopService]cartDelete Exception", e);
+		}
+
+		return count;
+
 	}
 }

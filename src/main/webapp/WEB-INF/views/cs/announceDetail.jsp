@@ -40,7 +40,7 @@ $(document).ready(function() {
     background-color: white; /* 배경색 설정 (예: 회색) */
 }
 .custom-button {
-  background-color: #B78D65; /* 배경색 */
+  background-color: #9E0E0B; /* 배경색 */
   color: white; /* 텍스트 색상 */
   border: none; /* 테두리 제거 */
   border-radius: 5px; /* 둥근 테두리 */
@@ -51,7 +51,7 @@ $(document).ready(function() {
 }
 
 .custom-button:hover {
-  background-color: #B78D65; /* 마우스 오버 시 배경색 변경 */
+  background-color: #9E0E0B; /* 마우스 오버 시 배경색 변경 */
 }
 </style>
 </head>

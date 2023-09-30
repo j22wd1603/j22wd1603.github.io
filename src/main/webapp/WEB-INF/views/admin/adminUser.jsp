@@ -47,19 +47,21 @@ $("document").ready(function(){
 			<table class="table table-hover" style="border:1px solid #c4c2c2;">
 				<thead style="border-bottom: 1px solid #c4c2c2;">
 				<tr class="table-thead-main">
-					<th>글 번호</th>
-					<th scope="col" style="width:15%;">아이디</th>
-					<th scope="col">제목</th>
-					<th scope="col">등록일</th>
+					<th style="width: 30px;">글 번호</th>
+					<th scope="col" style="width: 50px;">아이디</th>
+					<th scope="col" style="width: 100px;">제목</th>
+					<th scope="col" style="width: 300px;">내용</th>
+					<th scope="col" style="width: 100px;">등록일</th>
 				</tr>
 				</thead>
 				<tbody>
 <c:if test="${not empty list}">
         <c:forEach var="list" items="${list}" varStatus="loop">
 				<tr>							      
-				 <td><a href="/cs/inquirylistDetail?questionIdk=${list.questionIdk }">${list.questionIdk }</a></td>
+				 <td>${list.questionIdk }</td>
 				    <td>${list.userId}</td>
-				    <td><a href="/cs/inquirylistDetail?questionIdk=${list.questionIdk }">${list.questionTitle }</a></td>
+				    <td>${list.questionTitle }</td>
+				    <td><a href="/admin/adminAnswer?questionIdk=${list.questionIdk }">${list.questionContent }</a></td>
 				    <td>${list.regDate }</td>
 				</tr>
 </c:forEach>
