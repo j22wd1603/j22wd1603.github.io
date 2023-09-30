@@ -319,6 +319,7 @@ function previewImage(input) {
 				<button type="button" id="btnList" class="btn-secondary" title="리스트">취소</button>
 			</div>
 		</div> 
+	
 	</form>
 	  <form name="bbsForm" id="bbsForm" method="post">
 		<input type="hidden" name="questionCategory" value="${questionCategory}" />
