@@ -2025,26 +2025,42 @@ tbody {
     text-align: center;
     width: 100%;
     height: auto;
+    margin-top: 50px;
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+    justify-content: center; /* 가로 정렬 */
 }
+
+
 
 /* 테이블 스타일 */
 .cartList table {
-    width: 1300px;
-    border-collapse: collapse;
-    margin: 0 auto; 
+    width: 1200px;
     margin-bottom: 30px;
-  margin-top: 30px;
+    margin-top: 20px;
+    border-collapse: collapse; /* 테이블 셀 간격을 없앰 */
 }
 
 .cartList th, .cartList td {
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
+    border-left: none; 
+    border-right: none;
 }
 
 
+
+
+.cartList th, .cartList td {
+    padding: 20px;
+    text-align: center;
+}
+
+
+
 .cartList th {
-    background-color: #920d0d75;
+    background-color: #fff;
 }
 
 
@@ -2059,14 +2075,14 @@ tbody {
 
 
 .cartList td img {
-    width: 100px; /* 이미지의 원하는 너비 설정 */
-    height: auto; /* 이미지의 원래 높이에 맞게 비율 유지 */
+    width: 100px; 
+    height: auto; 
 }
 
 
 .cartList td img {
-    display: inline-block; /* 이미지를 인라인 블록 요소로 표시 */
-    visibility: visible; /* 이미지 표시 설정 */
+    display: inline-block; 
+    visibility: visible;
 }
 
 /* 행 hover 효과 */
@@ -2074,41 +2090,147 @@ tbody {
     background-color: #f5f5f5;
 }
 
-
-/*버튼*/
-
+/*삭제버튼*/
 .button-container-cart {
     height:100px;
-    text-align:right;
+    text-align:left;
+    margin-left:160px;
+     
+}
+
+#deleteButton,#deleteButton-all {
+    background-color: #ffffff;
+    color: #000000;
+   border: 1px solid #bfbfbf;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 10px;
+   margin-left:10px;
   
-}
-#orderButton{
-    background-color: #800020;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    text-align: center;
-    margin-left: 10px;
-    margin-right: 140px; 
-}
-
-#deleteButton {
-    background-color: #800020;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
     text-align: center;
 
 }
-#orderButton:hover, .deleteButton:hover {
-    background-color: #5a0019;
+
+/*페이징버튼*/
+.paging {
+    display: flex;
+   margin-left:950px;
 }
+
+.paging .page-item {
+    margin: 0; 
+    padding: 0; 
+    display: inline-block;
+}
+
+.paging .page-link {
+    background-color: transparent; 
+    color: #000; 
+    border: none; 
+    cursor: pointer;
+    font-size: 12px; 
+}
+
+.paging .page-link:hover {
+    text-decoration: underline; 
+}
+
+.button-container-cart, .paging {
+    display: inline-block;
+    margin-bottom:10px;
+}
+
+
+
+#orderButton:hover, #deleteButton:hover,#deleteButton-all:hover {
+    background-color: #989494;
+}
+
+  #selectAllCheckbox {
+        margin-left: 140px;
+        float: left;
+    }
+    #selectAllCheckbox+label {
+        
+        float: left;
+    }
+    
+    
+  .cartList td strong {
+    font-weight: bold;
+    color: #9e0e0b;
+}
+    
+/*총결제*/    
+.total-container-cart {
+    height: 170px;
+    width: 1000px;
+    border: 1px solid #000;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label{
+	font-size:15px;
+    margin-right:70px;
+    text-align:center;	
+}
+
+.box-txt{
+	font-size:25px;
+margin-left:10
+}
+
+.box-txt2 {
+    font-size: 25px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background-color: #9a9a9a;
+    text-align: center; 
+    line-height: 20px; 
+    color: #000;
+}
+
+/*주문버튼*/
+.totalbutton-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top:40px;
+     margin-bottom:50px;
+}
+
+#orderButton, #orderButton-all {
+    width: 350px;
+    height: 60px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#orderButton {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    margin-right: 10px; 
+}
+
+#orderButton-all {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+
+
+
+
+
+
+
 
 /* 서치 바, 버튼 스타일 */
 .search-container {

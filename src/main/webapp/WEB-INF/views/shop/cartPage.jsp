@@ -163,72 +163,129 @@ function fn_list(curPage)
    <header><h1 id="cart-title">SHOPPING BAG</h1></header>
 
      <section>
-       <div class="cartList">
-           <table border="1">
-               <tr>
-                   <th class="select-checkbox">
-                       <input type="checkbox" id="selectAllCheckbox">
-                       <label for="selectAllCheckbox">전체 선택</label>
-                   </th>
-                   <th></th>
-                   <th>브랜드</th>
-                   <th>상품명</th>
-                   <th>판매가</th>
-                   <th>수량</th>
-                   <th>배송비</th>
-                   <th>최종 가격</th>
-                   <th>장바구니 등록일</th>
-               </tr>
-               <c:forEach var="cartItem" items="${cartList}">
+	     <header>
+	       <div class="orderPage-container-section-title2"><h1>Shopping Bag (${fn:length(cartList)})</h1></div>
+	   	</header>	 
+	   		 
+	     <main>   
+	     	<input type="checkbox" id="selectAllCheckbox">
+	        <label for="selectAllCheckbox">전체선택</label>
+	         <div class="cartList">
+	          <table >
+	               <tr>
+	                   <th></th>
+	                    <th></th>
+	                   <th>상품정보</th>
+	                   <th>판매가</th>
+	                   <th>수량</th>
+	                   <th>배송비</th>
+	                   <th>최종 가격</th>
+	                   <th>장바구니 등록일</th>
+	               </tr>
+	               <c:forEach var="cartItem" items="${cartList}">
                    <tr>
                        <td class="select-checkbox">
                            <input type="checkbox" class="productCheckbox" name="selectedProduct" value="${cartItem.productIdk}">
                        </td>
-                       <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}"alt="${cartItem.productName}"></td>
-                       <td>${cartItem.productBrandName}</td>
-                       <td>${cartItem.productName}</td>
+                       <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}"></td>
+                       <td>
+					        <div class="product-info">
+					        	<div class="brand">${cartItem.productBrandName}</div>
+					        	<div class="product-name">${cartItem.productName}</div>
+					        </div>
+					    </td>
                        <td><fmt:formatNumber value="${cartItem.productPrice}" type="number" pattern="#,##0"/></td>
                        <td class="quantity">${cartItem.quantity}</td>
                        <td>무료배송</td>
-                       <td><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></td>
+                       <td><strong><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></strong></td>
                        <td>${cartItem.cartRegDate}</td>
                    </tr>
-               </c:forEach>      
-           </table>           
-       </div>
-       
-       <div class="button-container-cart">
-	   		<button id="deleteButton" onClick="deleteValue()">삭제</button>
-	       <button id="orderButton">주문 페이지로 이동</button>
-   		</div>
+               	   </c:forEach>      
+	           </table>           
+	      	 </div>
+	       
+	       <div class="button-container-cart">
+		   		<button id="deleteButton" onClick="deleteValue()">선택삭제</button>
+		   		<button id="deleteButton-all" onClick="deleteValue()">전체삭제</button>
+		   		
+		   		<div class="paging">
+				   <c:if test="${!empty paging}">      
+		            <c:if test="${paging.prevBlockPage gt 0}">
+		               <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
+		            </c:if>
+		         
+		            <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+		               <c:choose>
+		                  <c:when test="${i ne curPage}">
+		                     <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+		                  </c:when>
+		                  <c:otherwise>
+		                     <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+		                  </c:otherwise>
+		               </c:choose>
+		            </c:forEach>
+		         
+		            <c:if test="${paging.nextBlockPage gt 0}">
+		               <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
+		            </c:if>
+		         </c:if>
+				</div>   
+		   </div>
+		   
+		   
+		   
+		    
+		  <div>
+		    <h6 style="font-size: 10px; text-align: right; margin-right: 250px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
+		</div>
+
+	   			
+		    
+	   		<div class="total-container-cart">
+	   			<ul>
+					<li>
+		                <div class="label">총 상품금액</div>
+		                <div id="price">
+		                  <div class="box-txt">
+		                    <strong><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></strong></div>
+		                </div>
+		              </li>		              		
+		              <li>  
+		                <div class="label"> </div>
+		                	<div class="box txt">+</div>
+		              </li>   		
+		              <li>
+		              	<div class="label">배송비</div>
+		              	<div id="shipment">
+		                	<div class="box-txt">0원</div>
+		                </div>
+		              </li>
+		               <li>  
+		                <div class="label"> </div>
+		                	<div class="box txt">=</div>
+		              </li>
+		              <li>
+		                <div class="label">결제예정금액</div>
+		                <div id="allprice">
+		                  <div class="box-txt2">
+		                    <strong><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></strong></div>
+		                </div>
+		              </li>
+	   			</ul>
+	   			
+	   			
+	   		</div>
+			<div class="totalbutton-container">
+	           <button id="orderButton">선택상품주문</button>
+	           <button id="orderButton-all" value=#selectAllCheckbox>전체상품주문</button>
+	           </div>
+	        
+	   </main>
    </section>
+	
+	<footer>
+	</footer>
   
-          
-   <footer>   
-   	 <ul class="pagination justify-content-center">
-         <c:if test="${!empty paging}">      
-            <c:if test="${paging.prevBlockPage gt 0}">
-               <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
-            </c:if>
-         
-            <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-               <c:choose>
-                  <c:when test="${i ne curPage}">
-                     <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li class="page-item active"><a class="page-link" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
-                  </c:otherwise>
-               </c:choose>
-            </c:forEach>
-         
-            <c:if test="${paging.nextBlockPage gt 0}">
-               <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
-            </c:if>
-         </c:if>
-      </ul>
-   </footer>
-   
 
 <form id="orderForm" name="orderForm" method="post"></form>
 

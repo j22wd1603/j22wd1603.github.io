@@ -359,7 +359,7 @@ public class ShopController {
 			String productCode = HttpUtil.get(request, "productCode", "");
 			int productPrice = HttpUtil.get(request, "productPrice", 0); 
 
-			int LIST_COUNT = 5;
+			int LIST_COUNT = 7;
 			
 			List<Cart> cartList = null;
 
