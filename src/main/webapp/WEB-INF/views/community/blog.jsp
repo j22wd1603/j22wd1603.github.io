@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<script src="https://kit.fontawesome.com/293152e236.js" crossorigin="anonymous"></script>
 
 <head>
     <%@ include file="/WEB-INF/views/include/head.jsp" %>
@@ -39,14 +40,15 @@
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <h1 class="display-1 text-white animated slideInDown"><a class="text-white" href="/community/blog">Community</a></h1>
-			<button type="button" id="btnWrite" class="btn btn-secondary mb-3 mx-1" style="background-color:#B78D65; border:none; border-radius:1px;"><a href="/community/writeForm" style="color:white;"">글쓰기</a></button>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb text-uppercase mb-0">
+			
+            <nav aria-label="breadcrumb animated slideInDown" >
+                <ol class="breadcrumb text-uppercase mb-0" >
                     <li class="breadcrumb-item"><a class="text-white" href="/community/myroom">마이룸</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="/community/free">자유게시판</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="/community/ask">질문게시판</a></li>
                 </ol>
             </nav>
+            <button type="button" id="btnWrite" class="btn btn-secondary mb-3 mx-1" style="background-color: #a5a5a5; border:none; border-radius:7px;  position:relative; top: 20px;"><a href="/community/writeForm" style="color:white;"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> 글쓰기</a></button>
         </div>
     </div>
     <!-- Page Header End -->
