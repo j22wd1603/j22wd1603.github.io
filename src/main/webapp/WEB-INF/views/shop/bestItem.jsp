@@ -55,11 +55,11 @@ function search()
 	 </div>
 </section>
  
- <footer>	
+<footer>	
 	<ul class="pagination justify-content-center">
 		<c:if test="${!empty paging}">		
 			<c:if test="${paging.prevBlockPage gt 0}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})"><i class="fas fa-arrow-left"></i></a></li>
 			</c:if>
 		
 			<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
@@ -74,11 +74,12 @@ function search()
 			</c:forEach>
 		
 			<c:if test="${paging.nextBlockPage gt 0}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})">다음블럭</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.nextBlockPage})"><i class="fas fa-arrow-right"></i></a></li>
 			</c:if>
 		</c:if>
 	</ul>
 </footer>
+
    
 
 </body>
