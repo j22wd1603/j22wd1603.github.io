@@ -22,9 +22,9 @@
             <form id="reviewForm">
                 <div class="form-group">
                     <label for="username">ID:</label>
-                    <input type="text" id="username" name="username" value="${userId}" readonly>     
+                    <input type="text" id="username" name="username" value="${orderCompleteList.userId}" readonly>     
                     <label for="productname">제품명:</label>
-                    <input type="text" id="productname" name="productname" required value="${productName}" readonly>               
+                    <input type="text" id="productname" name="productname" required value="${orderCompleteList.productName}" readonly>               
                 </div>
 		    <div class="form-group">
 			    <div class="star_rating">

@@ -414,7 +414,6 @@ public class ShopController {
 
 	        if (reviewContent != null && !reviewContent.isEmpty()) {
 	            Review review = new Review();
-	            review.setUserId(userId);
 	            review.setReviewContent(reviewContent);
 	            review.setRating(rating); // Review 객체에 별점 설정
 
@@ -439,35 +438,32 @@ public class ShopController {
 	    return ajaxResponse;
 	}
 
-
-
 	@RequestMapping(value = "/shop/reviewPage")
 	public String reviewPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 	    // 쿠키값
 	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 	    User user = userService.userSelect(userId);
-	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);    
+	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);
 
 	    if (user != null) {
-	        // 리뷰 작성 페이지에서 필요한 데이터를 가져오기 위해 sellerService의 orderComplete 메서드를 호출
-	        List<OrderComplete> orderCompleteList = sellerService.orderComplete(orderIdk); 
+	        // 주문 정보 가져오기
+	        List<OrderComplete> orderComplete = sellerService.orderComplete(orderIdk);
 
-	        if (orderCompleteList != null && !orderCompleteList.isEmpty()) {
-	            model.addAttribute("userId", userId); 
-	            model.addAttribute("productName", orderCompleteList.get(0).getProductName()); 
+	        if (orderComplete != null) {
+	            model.addAttribute("orderComplete", orderComplete);
+	            model.addAttribute("userId", userId);
 	        } else {
-	            // 주문 정보가 없을 경우 오류 메시지를 JavaScript로 표시
 	            String errorMessage = "주문 정보를 찾을 수 없습니다.";
 	            model.addAttribute("errorMessage", errorMessage);
 	        }
 	    } else {
-	        // 사용자를 찾을 수 없을 경우 오류 메시지를 JavaScript로 표시
 	        String errorMessage = "사용자를 찾을 수 없습니다.";
 	        model.addAttribute("errorMessage", errorMessage);
 	    }
 
 	    return "/shop/reviewPage";
 	}
+
 
 }
 
