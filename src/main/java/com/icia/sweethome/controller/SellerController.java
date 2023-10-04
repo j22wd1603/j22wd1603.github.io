@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -88,7 +90,7 @@ public class SellerController {
 		return SCode; 
 	}
 	
-	@RequestMapping(value = "/shop/orderPage", method = RequestMethod.POST)
+	@PostMapping(value = "/shop/orderPage")
 	   public String orderPage(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 	       String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 	       User user = userService.userSelect(userId);
@@ -174,7 +176,7 @@ public class SellerController {
 		return "/shop/orderComplete";
 	}
 	
-		 @RequestMapping(value ="/shop/order", method = RequestMethod.POST)
+		 @PostMapping(value ="/shop/order")
 		 @ResponseBody
 		 public Response<Object> order(HttpServletRequest request, HttpServletResponse response) {
 		     
@@ -265,7 +267,8 @@ public class SellerController {
 		     
 		     return ajaxResponse;
 		 }
-	@RequestMapping(value ="/shop/fnCoupon", method = RequestMethod.POST)
+		 
+	@PostMapping(value ="/shop/fnCoupon")
 	@ResponseBody
 	public Response<Object> fnCoupon(HttpServletRequest request, HttpServletResponse response) {
 		Response<Object> ajaxResponse = new Response<Object>();
@@ -309,7 +312,7 @@ public class SellerController {
 		return "/seller/write";
 	}
 	
-	@RequestMapping(value="/seller/writeProc", method=RequestMethod.POST)
+	@PostMapping(value="/seller/writeProc")
 	@ResponseBody
 	public Response<Object> writeProc(MultipartHttpServletRequest request, HttpServletResponse response, @SessionAttribute(name = "sellerId", required = false) String sellerId)
 	{
@@ -456,7 +459,7 @@ public class SellerController {
 		return ajaxResponse;
 	}
 	
-	@RequestMapping(value="/seller/delete", method=RequestMethod.POST)
+	@PostMapping(value="/seller/delete")
 	@ResponseBody
 	public Response<Object> delete(HttpServletRequest request, HttpServletResponse response, @SessionAttribute(name = "sellerId", required = false) String sellerId)
 	{
@@ -584,7 +587,6 @@ public class SellerController {
 			return "redirect:/";
 		}
 
-		Seller seller = sellerService.sellerSelect(sellerId);
 		String status = HttpUtil.get(request, "status","");
 		String searchType = HttpUtil.get(request, "searchType","");
 		String searchValue = HttpUtil.get(request, "searchValue","");
@@ -659,7 +661,7 @@ public class SellerController {
 		return "/seller/delivery";
 	}
 	
-	@RequestMapping(value="/seller/login", method=RequestMethod.POST)
+	@PostMapping(value="/seller/login")
 	@ResponseBody
 	public Response<Object> login(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -713,7 +715,7 @@ public class SellerController {
         return "redirect:/";
     }
 	
-	@RequestMapping(value ="/seller/deliveryStatus", method = RequestMethod.POST)
+	@PostMapping(value = "/seller/deliveryStatus")
 	@ResponseBody
 	public Response<Object> deliveryStatus(HttpServletRequest request, HttpServletResponse response) {
 		Response<Object> ajaxResponse = new Response<Object>();

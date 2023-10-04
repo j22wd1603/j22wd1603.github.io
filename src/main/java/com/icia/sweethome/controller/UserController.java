@@ -15,13 +15,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.icia.sweethome.model.Cart;
+import com.google.gson.JsonObject;
 import com.icia.sweethome.model.Community;
 import com.icia.sweethome.model.Paging;
 import com.icia.sweethome.model.Question;
@@ -118,8 +119,7 @@ public class UserController
 	@RequestMapping(value = "/user/mypageReview")
 	public String myReview(Model model, HttpServletRequest request, HttpServletResponse response) {		
 
-		String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);		
-		String searchValue = HttpUtil.get(request, "searchValue");
+		String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 		//현재 페이지
 		int curPage = HttpUtil.get(request, "curPage", 1);
 		
@@ -730,4 +730,21 @@ public class UserController
 			return ajaxResponse;
 		}
 
+		//이메일 인증
+		@PostMapping("/user/mailCheck")
+		@ResponseBody
+		public Response<Object> mailCheck(HttpServletRequest request, HttpServletResponse response) {
+			String email = HttpUtil.get(request,"eamil","");
+			Response<Object> ajaxResponse = new Response<Object>();
+			
+			System.out.println("이메일 인증 이메일 : " + email);
+			
+	        JsonObject json = new JsonObject();
+	        json.addProperty("data", userService.joinEmail(email));
+			
+	        ajaxResponse.setResponse(0, "Success", json);
+	        
+			return ajaxResponse;	
+		}
+		
 	}

@@ -459,10 +459,53 @@ $(document).ready(function() {
             icia.common.error(error);
          }
       });
-      
-
-
    });
+   
+	$("#mailCheckBtn").click(function() {
+		const eamil = $("#userEmail1").val() + $("#userEmail2").val(); // 이메일 주소값
+		console.log("완성된 이메일 : " + eamil); // 이메일 오는지 확인
+		const checkInput = $("#mailCheckInput") // 인증번호 입력하는곳 
+		
+		$.ajax({
+			type : "POST",
+			url : "/user/mailCheck",
+		    data:{
+		    	eamil:eamil
+		    },
+		    datatype:"JSON",
+			success : function(response) {
+				var data = response.data.data;
+				console.log("data : " +  data);
+				checkInput.attr("disabled",false);
+				code =response.data.data;
+				alert("인증번호가 전송되었습니다.")
+			},
+		    error:function(error)
+		    {
+		    	icia.common.error(error);
+		    }		
+		}); // end ajax
+	}); // end send eamil
+	
+	// 인증번호 비교 
+	// blur -> focus가 벗어나는 경우 발생
+	$("#mailCheckInput").blur(function () {
+		const inputCode = $(this).val();
+		const $msg = $("#mailCheckMsg");
+		
+		if(inputCode === code){
+			$msg.html("인증번호가 일치합니다.");
+			$msg.css("color","green");
+			$("#mailCheckBtn").attr("disabled",true);
+			$("#userEamil1").attr("readonly",true);
+			$("#userEamil2").attr("readonly",true);
+			$("#userEmail2").attr("onFocus", "this.initialSelect = this.selectedIndex");
+	        $("#userEmail2").attr("onChange", "this.selectedIndex = this.initialSelect");
+		}else{
+			$msg.html("인증번호가 불일치 합니다. 다시 확인해주세요!.");
+			$msg.css("color","red");
+		}
+	});
 });
 
 function fn_userReg()
@@ -618,24 +661,22 @@ function previewImage(input) {
         // 사용자 주소 필드에 설정
         document.getElementById("userAddress").value = fullAddress;
     }
+    
+function agree() {
+    // 체크박스 상태 확인
+    var checkBox = document.getElementById("agreement");
+    
+    if (checkBox.checked == true) {
+        // 동의한 경우에 실행할 동작
+        alert("동의하셨습니다.");
+        // 이후에 원하는 작업을 수행할 수 있습니다.
+    } else {
+        // 동의하지 않은 경우에 실행할 동작
+        alert("동의하지 않으셨습니다.");
+        // 이후에 원하는 작업을 수행할 수 있습니다.
+    }
+}
 </script>
-
- <script>
-        function agree() {
-            // 체크박스 상태 확인
-            var checkBox = document.getElementById("agreement");
-            
-            if (checkBox.checked == true) {
-                // 동의한 경우에 실행할 동작
-                alert("동의하셨습니다.");
-                // 이후에 원하는 작업을 수행할 수 있습니다.
-            } else {
-                // 동의하지 않은 경우에 실행할 동작
-                alert("동의하지 않으셨습니다.");
-                // 이후에 원하는 작업을 수행할 수 있습니다.
-            }
-        }
-    </script>
     
 
 </head>
@@ -646,7 +687,6 @@ function previewImage(input) {
        <h3 style="margin-left: 20px;">회원가입</h3>
        
    	<form name="regForm" id="regForm" method="post" enctype="multipart/form-data">
-    <div class="container2">
 
     <div class="row mt-2">
         <div class="col-12">
@@ -673,10 +713,26 @@ function previewImage(input) {
                     <label for="userName" style="font-size: 17px;" >사용자 이름</label>
                     <input type="text" class="form-control" id="userName" name="userName" placeholder="사용자 이름" maxlength="15"  />
                 </div>
-                <div class="form-group">
-                    <label for="userEmail" style="font-size: 17px;" >사용자 이메일</label>
-                    <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="사용자 이메일" maxlength="30" />
-                </div>
+                
+                <div class="form-group email-form">
+					<label for="email" style="font-size: 17px;">사용자 이메일</label>
+					<div class="input-group">
+					<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일" >
+					<select class="form-control" name="userEmail2" id="userEmail2" >
+					<option>@naver.com</option>
+					<option>@daum.net</option>
+					<option>@gmail.com</option>
+					</select>
+				</div>   
+				<div class="input-group-addon">
+					<button type="button" class="btn btn-primary" id="mailCheckBtn">본인인증</button>
+				</div>
+				<div class="mail-check-box">
+					<input class="form-control" id="mailCheckInput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+				</div>
+					<span id="mailCheckMsg"></span>
+				</div>
+                
                 <div class="form-group">
                   <label for="userName" style="font-size: 17px;" >전화번호</label>
              <div class="phone">
@@ -701,7 +757,7 @@ function previewImage(input) {
                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
                <input type="text" id="sample6_extraAddress" placeholder="참고항목">
                      <!-- 입력 완료 버튼 -->
-                <input type="button" onclick="setInputAddress()"  style=" background-color :#a5a5a5; display: block; margin: 0 auto;" value="입력 완료"></button>
+                <input type="button" onclick="setInputAddress()"  style=" background-color :#a5a5a5; display: block; margin: 0 auto;" value="입력 완료">
                 </div>
                 <br>
                 
@@ -730,6 +786,7 @@ function previewImage(input) {
          
                 <input type="hidden" id="userPwd" name="userPwd" value="" />
                 <input type="hidden" id="userPhone" name="userPhone" value="" />
+                <input type="hidden" id="userEmail" name="userEmail" value="" />
 
                 <br>
                 <button type="button" id="btnReg" class="btn btn-primary" style="width: 350px; margin: 0 auto; display: block;">등록</button>
@@ -738,19 +795,5 @@ function previewImage(input) {
     </div>
        </div>
 </form>
-<!--JavaScript Libraries >
-       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-       <script src="/resources/lib/wow/wow.min.js"></script>
-       <script src="/resources/lib/easing/easing.min.js"></script>
-       <script src="/resources/lib/waypoints/waypoints.min.js"></script>
-       <script src="/resources/lib/counterup/counterup.min.js"></script>
-       <script src="/resources/lib/owlcarousel/owl.carousel.min.js"></script>
-       <script src="/resources/lib/tempusdominus/js/moment.min.js"></script>
-       <script src="/resources/lib/tempusdominus/js/moment-timezone.min.js"></script>
-       <script src="/resources/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-   
-       < Template Javascript -->
-       <!-- script src="/resources/js/main.js"></script -->
 </body>
 </html>

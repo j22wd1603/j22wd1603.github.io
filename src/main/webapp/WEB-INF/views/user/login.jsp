@@ -12,7 +12,7 @@
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
 
 <!-- Icon Font Stylesheet -->
@@ -31,7 +31,7 @@
 <link href="/resources/css/style.css" rel="stylesheet">
 
 
-<style rel="stylesheet">
+<style>
 
 
 @charset "UTF-8";
@@ -569,35 +569,22 @@ function fn_loginCheck()
                      <input type="button" id="btnLogin" value="로그인" class="submit"> 
 <!--                      <a href="/index" class="more">비밀번호를 잃어버리셨나요?</a> -->
                   </div>
-                  
+              </form>
            <div class="loginUtil">
                     <a href="/user/find_id" class="btnLogin">아이디찾기</a>
                     <a href="/user/find_password" class="btnLogin">비밀번호찾기</a>
-                    <a href="/member/join.html" class="btnLogin">회원가입</a>
+                    <a href="/user/join" class="btnLogin">회원가입</a>
                 </div>
-         
-        <use xlink:href="#icon-arrow-right"></use>
-        
-      </svg></p>
-        <svg xmlns="http://www.w3.org/2000/svg" class="icons">
-         </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icons"> </svg>
 
   </div>
-  
-  
 
-               </form>
                
             </div>
-            
-
-         </div>
       </article>
    </section>
    
    
  <div style="height: 470px"></div>
-          
-   </script>
 </body>
 </html>
