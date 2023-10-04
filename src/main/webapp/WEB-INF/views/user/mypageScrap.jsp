@@ -952,11 +952,10 @@ function deleteValue() {
              <div class="upbox-content">
                <div class="css-rd2t8e e17n0xi3">
                   <style data-emotion="css dyhp2o">.css-dyhp2o{color:#000000;font-weight:bold;font-size:18px;line-height:1;}</style>
-                    <h1 class="css-dyhp2o e17n0xi2" font-size: 18px;">내 스크랩
-                        <style data-emotion="css 1vy2ypg">.css-1vy2ypg{margin-left:.4ch;color:#35c5f0;}</style>
+                    <h1 class="css-dyhp2o e17n0xi2">내 스크랩
                    		<c:choose>
 						    <c:when test="${empty list}">
-						        <span class="css-1vy2ypg e17n0xi0">0</span>
+						        <span class="css-1vy2ypg e17n0xi0" style="margin-left:.4ch;color:#35c5f0;">0</span>
 						    </c:when>
 						    <c:otherwise>
 						        <c:set var="postCount" value="0" />
@@ -965,7 +964,7 @@ function deleteValue() {
 						            <c:set var="postCount" value="${postCount + 1}" />
 						        </c:forEach>
 						        <!-- 게시물 갯수를 출력 -->
-						        <span class="css-1vy2ypg e17n0xi0">${postCount}</span>
+						        <span class="css-1vy2ypg e17n0xi0" style="margin-left:.4ch;color:#35c5f0;">${postCount}</span>
 						    </c:otherwise>
 						</c:choose>
                      </h1>

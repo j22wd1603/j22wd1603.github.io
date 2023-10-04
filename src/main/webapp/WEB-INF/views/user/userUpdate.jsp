@@ -1,4 +1,3 @@
-
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <!DOCTYPE html>
@@ -7,30 +6,11 @@
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <%@ include file="/WEB-INF/views/include/userNavigation.jsp" %>
-<link href="/resources/css/shopstyle.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/293152e236.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/293152e236.js"></script>
 <style>
-
-* {
-    font-family: 'Gothic A1', sans-serif;
-}
-
-
-
-</style>
-
-<style>
-.layout>* {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 auto;
-    -moz-box-flex: 0;
-    -moz-flex: 0 0 auto;
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-}
 
 .userInfo.container {
 	width:70%
@@ -61,15 +41,6 @@
     min-height: 1px;
     }
 }
-@media (min-width: 375px){
-.container {
-    margin-right: auto;
-    margin-left: auto;
-    width: calc(100% - 30px);
-    max-width: 100%;
-    box-sizing: border-box;
-    min-height: 1px;
-}}
 .container {
     margin-right: auto;
     margin-left: auto;
@@ -78,34 +49,7 @@
     box-sizing: border-box;
     min-height: 1px;
 }
-blockquote, body, code, dd, div, dl, dt, fieldset, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
-    margin: 0;
-    padding: 0;
-}
-.layout>* {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 auto;
-    -moz-box-flex: 0;
-    -moz-flex: 0 0 auto;
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-}
-div {
-    display: block;
-}
-.layout {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-direction: normal;
-    -webkit-box-orient: vertical;
-    -webkit-flex-direction: column;
-    -moz-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
+
 .userInfoheader {
     display: -webkit-box;
     display: -webkit-flex;
@@ -122,15 +66,6 @@ div {
     left: 70px;
 }
 
-@media (min-width: 768px){
-body, html {
-    font-size: 15px;
-    }
-}
-
-body, html {
-    line-height: 1;
-   }
 .userInfoheader_title {
     font-size: 30px;
     font-weight: 900;
@@ -213,32 +148,8 @@ body, html {
     border-color: #a5a5a5;
     color: #fff;
     border-radius: 5px; /* 모서리를 둥글게 하는 부분입니다. */
-    
-    
-
 }
 
-
-.image-single-input_entry_button {
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: 1px solid transparent;
-    background: none;
-    font-family: inherit;
-    font-weight: 700;
-    text-decoration: none;
-    text-align: center;
-    transition: color .1s,background-color .1s,border-color.1s;
-    border-radius: 4px;
-    cursor: pointer;
- }
  
 @media (max-width: 767px){
 .button-color-blue {
@@ -270,9 +181,6 @@ body, html {
     flex: 1 1 0px;
 }
 
-label {
-    cursor: default;
-}
 
 
 .expert-form-group.userInfo_form-item__group .form-control {
@@ -346,30 +254,13 @@ label {
     color: #f77;
 }	
 
-.layout>* {
+.layout* {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 auto;
     -moz-box-flex: 0;
     -moz-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-}
-blockquote, body, code, dd, div, dl, dt, fieldset, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
-    margin: 0;
-    padding: 0;
-}
-* {
-    -webkit-tap-highlight-color: rgba(255,255,255,0);
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-user agent stylesheet
-div {
-    display: block;
-}
-
-body, html {
-    line-height: 1;
-    font-size: 13px;
 }
 
 .email-input_domain, .email-input_local {
@@ -800,11 +691,11 @@ function previewImage(input) {
     	 <div class="expert-form-group_input">
     	  <div class="edit_userInfo">
     	   <div class="input-group email-input">
-    	     <span><input id="phone1" type="text" class="form-control" size="7px" maxlength="3"></span>
+    	     <span><input id="phone1" type="text" class="form-control" size="4.5px" maxlength="3"></span>
     	     <span class="input_separator">-</span>
-    	     <span><input id="phone2" type="text" class="form-control" size="9px" maxlength="4"></span>
+    	     <span><input id="phone2" type="text" class="form-control" size="7px" maxlength="4"></span>
     	     <span class="input_separator">-</span>
-    	     <span><input id="phone3" type="text" class="form-control" size="9px" maxlength="4" ></span>
+    	     <span><input id="phone3" type="text" class="form-control" size="7px" maxlength="4" ></span>
     	     </div>
     	     </div>
     	    </div>
@@ -820,9 +711,10 @@ function previewImage(input) {
 	    	   <div class="image-single-input-wrap">
 	    	    <ul class="image-single-input">
 	    	     <li class="image-single-input_entry">
-	    	     <img id="preview" src="/resources/images/profile/${user.userId}.${user.imageFileExt}" style="width: 200px; height: 200px;" class="image-single-input_entry_button" onclick="document.getElementById('profilePicture').click();" />
+	    	     <img id="preview" src="/resources/images/profile/${user.userId}.${user.imageFileExt}" style="width: 200px; height: 200px;border: none;" onclick="document.getElementById('profilePicture').click();" />
 					<input type="file" accept="image/*" id="profilePicture" name="profilePicture" style="display: none;" onchange="previewImage(this);">
-	    	     
+	    	     </li>
+	    	     </ul>
 	    	    </div>
 	    	  </div>
 	    	 </div>
@@ -836,7 +728,7 @@ function previewImage(input) {
     	<div class="expert-form-group_content">
     	 <div class="expert-form-group_input">
     	  <div class="edit_userInfo">
-    	     <input value="${user.userAddress}" id="userName" class="form-control"  maxlength="30" >
+    	     <input value="${user.userAddress}" id="userAddress" class="form-control"  maxlength="30" >
     	     <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호">
                <input type="button" onclick="sample6_execDaumPostcode()" class="form-control" value="우편번호 찾기"><br>
                <input class="form-control" id="sample6_address" placeholder="주소"><br>
@@ -850,15 +742,12 @@ function previewImage(input) {
     	   </div>
     	  </div>
     	 </div>
-    	 <button type="" class="button-color-blue" id="btnReg" >변경하기</button>
+    	 <button type="button" class="button-color-blue" id="btnReg" >변경하기</button>
     </form>
 
 </div>
- 
-          
-       
+
     </div>
- 
 
     <form name="myForm" id="myForm" method="post">
       <input type="hidden" name="commuIdk" value="" />
@@ -866,20 +755,8 @@ function previewImage(input) {
       <input type="hidden" name="curPage" value="${curPage}" />
    </form>
 
-   
-   
        </div>
-    <script src="https://assets.ohou.se/web/dist/js/303-cc24ad1d9e85c42571e5.js"></script><script src="https://assets.ohou.se/web/dist/js/216-0bc0ba0ef0ac66fbf9ac.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/vendor-6b87d1d93ea2d1fc895a.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/249-d537f9b2c8ddc093de63.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/preamble-4fe6ebba0c5449779ac3.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/229-22c7eb30e20c7d1b5dac.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/3-025202b5dd6b27304bff.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/9-68c0a77a985baf7f2766.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/10-7d989bbe00a02aa61c92.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/28-2bb5fa41a80506787368.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/30-a3d34d9b99f4d6c927d3.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/36-95c220cf50b7abe229a4.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/33-e245169af5016dc77e34.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/38-237a2b9058258b71fd7a.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/40-361d3756e3f34f51a855.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/43-95df487d827a9a93acb6.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/56-e8dc65841a7ab9442166.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/66-e8c6d59bf2aa292020c8.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/173-dbb81211de882c820ecc.chunk.js"></script><script src="https://assets.ohou.se/web/dist/js/App-5da5e615b9384cefcd9b.chunk.js"></script>
-    <script src="https://assets.ohou.se/web/dist/js/runtime-297be27a2ebcb724c754.js"></script>
+
  </body>
  </html>
 
