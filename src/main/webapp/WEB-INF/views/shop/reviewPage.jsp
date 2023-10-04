@@ -22,24 +22,25 @@
             <form id="reviewForm">
                 <div class="form-group">
                     <label for="username">ID:</label>
-                    <input type="text" id="username" name="username" value="${orderComplete.userId}" readonly>
+                    <input type="text" id="username" name="username" value="${orderCompleteList.userId}" readonly>     
                     <label for="productname">제품명:</label>
-                    <input type="text" id="productname" name="productname" required value="${orderComplete.productName}" readonly>
-                    <label for="orderIdk">주문 ID:</label>
-                    <input type="text" id="orderIdk" name="orderIdk" required value="${orderComplete.orderIdk}" readonly>
+                    <input type="text" id="productname" name="productname" required value="${orderCompleteList.productName}" readonly>               
                 </div>
-                <div class="form-group">
-                    <div class="star_rating">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                    </div>
-                    <label for="reviewContent">리뷰 내용:</label>
-                    <input type="text" id="reviewContent" name="reviewContent" placeholder="리뷰 내용" required>
-                </div>
-                <button type="submit" class="review-button">리뷰 등록</button>
+		    <div class="form-group">
+			    <div class="star_rating">
+				    <span class="star" data-value="1">&#9733;</span>
+				    <span class="star" data-value="2">&#9733;</span>
+				    <span class="star" data-value="3">&#9733;</span>
+				    <span class="star" data-value="4">&#9733;</span>
+				    <span class="star" data-value="5">&#9733;</span>
+				</div>
+			    <label for="review">리뷰 내용:</label>
+			    <input type="text" id="reviewContent" name="reviewContent" placeholder="리뷰 내용" required>
+			</div>
+
+			<button type="submit" class="review-button">리뷰 등록</button>
+
+                
             </form>
             <!-- 오류 메시지를 표시할 공간 추가 -->
             <div id="errorMessage" style="color: red;"></div>
@@ -47,10 +48,8 @@
     </main>
 </div>
 
-<script>
-   var orderIdk = <%= request.getAttribute("orderIdk") %>; // 이렇게 orderIdk 값을 받아옵니다.
-   // orderIdk 변수를 사용하여 필요한 작업을 수행하세요.
-</script>
+
+
 <script>
 $(document).ready(function() {
     // 별점을 클릭했을 때의 처리
