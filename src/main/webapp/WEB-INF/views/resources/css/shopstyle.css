@@ -958,7 +958,9 @@ input#check_btn:checked + label:before{
     justify-content: space-between;
 }
 
-.cart-button, .order-button {
+
+
+.cart-button {
     flex: 1;
     cursor: pointer;
   background: transparent;
@@ -974,9 +976,29 @@ input#check_btn:checked + label:before{
   background-position: 1% 50%;
   background-size: 300% 300%;
   text-decoration: none;
-  margin: 0.625rem;
-  border: 2px solid rgb(222 55 58 / 80%);
-  height:90px;
+  margin: 0 0.625rem;
+  border: 1px solid #000;
+  height:80px;
+}
+.order-button {
+    flex: 1;
+    cursor: pointer;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: #fff;
+  border-radius: 0;
+  padding: 18px 80px 20px;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgb(154 18 20 / 52%), rgb(154 18 20 / 80%), #000, #000);
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0 0.625rem;
+  border: 1px solid #000;
+  height:80px;
 }
 
 .cart-button:hover {
@@ -2336,136 +2358,63 @@ margin-left:10
 
 
 /*리뷰 별점*/
-
-
-
-.review-body h1 {
-   color: #fff;
+/* 스크롤 가능한 리뷰 내용 입력란 */
+#reviewContent {
+	width:600px;
+    height: 300px; /* 초기 높이 설정 (콘텐츠 내용에 따라 늘어납니다) */
+    overflow-y: auto; /* 세로 스크롤 바 설정 */
 }
+
+/* 리뷰 폼 스타일 */
+.review-form {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.star_rating {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.star {
+    cursor: pointer;
+}
+
+.star.selected {
+    color: gold; /* 별점 클릭 시 색상 변경 */
+}
+
+.review-button {
+    background-color: #9e0e0b;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 리뷰 페이지 전체 스타일 */
 .review-body {
-   
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #f7f7f7;
+    padding: 20px;
 }
 
-.review-body header {
+#review-title {
     background-color: #9e0e0b;
     color: #fff;
     text-align: center;
     padding: 20px 0;
-}
-
-
-
-.review-body main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.review-body .review-form, .review-body .reviews {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-.review-form{
-	margin-top: 30px;
-}
-.review-body h2 {
-    font-size: 20px;
-}
-
-.review-body .form-group {
-    margin-bottom: 20px;
-}
-
-.review-body .form-group>label {
-    display: block;
+    font-size: 28px;
     font-weight: bold;
-}
-
-.review-body input[type="text"],
-.review-body select,
-.review-body textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.review-body textarea {
-    resize: vertical;
-}
-
-
-.review-body button[type="submit"] {
-    background-color: #800020;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.review-body button[type="submit"]:hover {
-    background-color: #5c0218;
-}
-
-
-.review-body .review-list {
-    list-style: none;
-    padding: 0;
-}
-
-.review-body .review-list li {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.review-body .user-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.review-body .username {
-    font-weight: bold;
-}
-
-.review-body .rating {
-    color: #f39c12;
-    font-weight: bold;
-}
-
-.star_rating {
-  width: 100%; 
-  box-sizing: border-box; 
-  display: inline-flex; 
-  float: left;
-  flex-direction: row; 
-  justify-content: flex-start;
-}
-.star_rating .star {
-  width: 25px; 
-  height: 25px; 
-  margin-right: 10px;
-  display: inline-block; 
-  background: url('/resources/images/shop/starblank.png') no-repeat; 
-  background-size: 100%; 
-  box-sizing: border-box; 
-}
-.star_rating .star.on {
-  width: 25px; 
-  height: 25px;
-  margin-right: 10px;
-  display: inline-block; 
-  background: url('/resources/images/shop/star.png') no-repeat;
-  background-size: 100%; 
-  box-sizing: border-box; 
 }

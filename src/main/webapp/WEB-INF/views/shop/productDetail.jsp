@@ -107,7 +107,7 @@ function fn_share(productIdk) {
 				</form>
 		
 				<div class="button-container">
-				    <button onclick="go_order()" class="order-button">주문하기</button>
+				    <button onclick="go_order()" class="order-button">즉시구매</button>
 				    <button onclick="goToCartPage()" class="cart-button">장바구니</button>
 				</div>
 				<form id="shareForm" name="shareForm" method="post">

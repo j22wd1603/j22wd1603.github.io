@@ -28,7 +28,10 @@
     <result column="REVIEW_CONTENT"  property="reviewContent"/>
     <result column="REG_DATE"  property="regDate"/>
     <result column="PRODUCT_NAME"  property="productName"/>
+    <result column="RATING"  property="rating"/>
 </resultMap>
+
+
 
 <resultMap type="com.icia.sweethome.model.Cart" id="cartResultMap" >
     <id column="USER_ID" property="userId" />
@@ -397,6 +400,7 @@ WHERE	USER_ID = #{userId}
     AND PRODUCT_IDK = #{productIdk}
 </delete>
 
+
 <!-- shop - review -->
 <insert id="reviewInsert" parameterType="com.icia.sweethome.model.Review" >
 INSERT INTO PRODUCT_REVIEW (
@@ -405,17 +409,20 @@ INSERT INTO PRODUCT_REVIEW (
     ORDER_IDK, 
     USER_ID, 
     REVIEW_CONTENT, 
-    REG_DATE
+    REG_DATE,
+    PRODUCT_NAME,
+    RATING
 ) VALUES (
-	'#{reviewIdk}',
-    '#{productIdk}',
-    '#{orderIdk}',
-    '#{userId}',
-    '#{reviewContent}',
-   sysdate
+	#{reviewIdk},
+    #{productIdk},
+    #{orderIdk},
+    #{userId},
+    #{reviewContent},
+   sysdate,
+   #{productName},
+   #{rating}
 )
 </insert>
-
 
 
 

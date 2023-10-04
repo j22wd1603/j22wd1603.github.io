@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.sweethome.model.Cart;
+import com.icia.sweethome.model.OrderComplete;
 import com.icia.sweethome.model.OrderDetail;
 import com.icia.sweethome.model.Paging;
 import com.icia.sweethome.model.Response;
@@ -26,6 +27,7 @@ import com.icia.sweethome.model.Review;
 import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.User;
 import com.icia.sweethome.service.OrderService;
+import com.icia.sweethome.service.SellerService;
 import com.icia.sweethome.service.ShopService;
 import com.icia.sweethome.service.UserService;
 import com.icia.sweethome.util.CookieUtil;
@@ -50,6 +52,9 @@ public class ShopController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private SellerService sellerService;
 
 	private static final int LIST_COUNT = 12;		//한페이지의 게시물 수
 	private static final int PAGE_COUNT = 5;		//페이징 수 
@@ -402,14 +407,16 @@ public class ShopController {
 	    Response<Object> ajaxResponse = new Response<Object>();
 	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 	    User user = userService.userSelect(userId);
+
 	    if (user != null) {
 	        String reviewContent = request.getParameter("reviewContent");
-	        
-	        if (reviewContent != null) {
+	        int rating = Integer.parseInt(request.getParameter("rating")); // 별점을 숫자로 받아옴
+
+	        if (reviewContent != null && !reviewContent.isEmpty()) {
 	            Review review = new Review();
 	            review.setUserId(userId);
 	            review.setReviewContent(reviewContent);
-	          
+	            review.setRating(rating); // Review 객체에 별점 설정
 
 	            int count = shopService.reviewInsert(review);
 
@@ -419,7 +426,7 @@ public class ShopController {
 	                ajaxResponse.setResponse(500, "리뷰 등록 중 오류가 발생했습니다.");
 	            }
 	        } else {
-	            ajaxResponse.setResponse(400, "리뷰 내용을 찾을 수 없습니다.");
+	            ajaxResponse.setResponse(400, "리뷰 내용을 찾을 수 없거나 비어 있습니다.");
 	        }
 	    } else {
 	        ajaxResponse.setResponse(401, "사용자를 찾을 수 없습니다.");
@@ -432,17 +439,36 @@ public class ShopController {
 	    return ajaxResponse;
 	}
 
-	@RequestMapping(value ="/shop/reviewPage")
+
+
+	@RequestMapping(value = "/shop/reviewPage")
 	public String reviewPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-	      
-		
-		//쿠키값
-			String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-			User user = userService.userSelect(userId);
-		
-			 
-		    return "/shop/reviewPage"; 
+	    // 쿠키값
+	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+	    User user = userService.userSelect(userId);
+	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);    
+
+	    if (user != null) {
+	        // 리뷰 작성 페이지에서 필요한 데이터를 가져오기 위해 sellerService의 orderComplete 메서드를 호출
+	        List<OrderComplete> orderCompleteList = sellerService.orderComplete(orderIdk); 
+
+	        if (orderCompleteList != null && !orderCompleteList.isEmpty()) {
+	            model.addAttribute("userId", userId); 
+	            model.addAttribute("productName", orderCompleteList.get(0).getProductName()); 
+	        } else {
+	            // 주문 정보가 없을 경우 오류 메시지를 JavaScript로 표시
+	            String errorMessage = "주문 정보를 찾을 수 없습니다.";
+	            model.addAttribute("errorMessage", errorMessage);
+	        }
+	    } else {
+	        // 사용자를 찾을 수 없을 경우 오류 메시지를 JavaScript로 표시
+	        String errorMessage = "사용자를 찾을 수 없습니다.";
+	        model.addAttribute("errorMessage", errorMessage);
+	    }
+
+	    return "/shop/reviewPage";
 	}
+
 }
 
 

@@ -13,6 +13,7 @@ public class Review implements Serializable
    private String reviewContent;
    private String regDate;
    private String productName;
+   private int rating;
    
    private int startRow;
    private int endRow;
@@ -26,7 +27,7 @@ public class Review implements Serializable
       reviewContent="";
       regDate="";
       productName = "";
-      
+      rating = 0;
       startRow = 0;
       endRow = 0;
    }
@@ -102,6 +103,14 @@ public String getProductName() {
    public void setRegDate(String regDate) {
       this.regDate = regDate;
    }
+	
+	public int getRating() {
+		return rating;
+	}
+	
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
    
    
    
