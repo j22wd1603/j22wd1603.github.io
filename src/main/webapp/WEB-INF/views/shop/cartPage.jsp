@@ -269,20 +269,18 @@ function fn_list(curPage)
 
 <body>
 
-   <header><h1 id="cart-title">SHOPPING BAG</h1></header>
+   <header><h1 id="cart-title">CART</h1></header>
 
      <section>
 	     <header>
-	       <div class="orderPage-container-section-title2"><h1>Shopping Bag (${fn:length(cartList)})</h1></div>
+	       <div class="orderPage-container-section-title2"><h1>MY CART (${fn:length(cartList)})</h1></div>
 	   	</header>	 
 	   		 
-	     <main>   
-	     	<input type="checkbox" id="selectAllCheckbox">
-	        <label for="selectAllCheckbox">전체선택</label>
+	     <main>       
 	         <div class="cartList">
 	          <table >
 	               <tr>
-	                   <th></th>
+	                   <th><input type="checkbox" id="selectAllCheckbox"><label for="selectAllCheckbox">전체선택</label></th>
 	                    <th></th>
 	                   <th>상품정보</th>
 	                   <th>판매가</th>
@@ -345,7 +343,7 @@ function fn_list(curPage)
 		   
 		    
 		  <div>
-		    <h6 style="font-size: 10px; text-align: right; margin-right: 250px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
+		    <h6 style="font-size: 10px; text-align: right; margin-top:10px; margin-right: 250px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
 		</div>
 
 	   			

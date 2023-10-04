@@ -2039,6 +2039,7 @@ tbody {
     color: #fff;
     text-align: center;
     padding: 20px 0;
+     margin-bottom: 30px;
 }
 
 
@@ -2047,7 +2048,7 @@ tbody {
     text-align: center;
     width: 100%;
     height: auto;
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     align-items: center; /* 세로 정렬 */
     justify-content: center; /* 가로 정렬 */
@@ -2059,7 +2060,7 @@ tbody {
 .cartList table {
     width: 1200px;
     margin-bottom: 30px;
-    margin-top: 20px;
+    margin-top: 10px;
     border-collapse: collapse; /* 테이블 셀 간격을 없앰 */
 }
 
@@ -2126,7 +2127,7 @@ tbody {
    border: 1px solid #bfbfbf;
     padding: 8px 20px;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 12px;
    margin-left:10px;
   
     text-align: center;
@@ -2169,11 +2170,12 @@ tbody {
 }
 
   #selectAllCheckbox {
-        margin-left: 140px;
+        
         float: left;
     }
     #selectAllCheckbox+label {
-        
+         padding: 10px;
+    	text-align: center;
         float: left;
     }
     
@@ -2231,6 +2233,7 @@ margin-left:10
     font-size: 16px;
     text-align: center;
     cursor: pointer;
+    
 }
 
 #orderButton {
