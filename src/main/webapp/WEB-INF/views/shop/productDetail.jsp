@@ -84,7 +84,7 @@ function fn_share(productIdk) {
 					<div class="productdetail-sideinfo-button" id="detailButton" onclick="showInfo('detail')">상세정보</div>
 					<div class="productdetail-sideinfo-button" id="shippingButton" onclick="showInfo('shipping')">배송정보</div>
 						    <div id="productdetail-sideinfo-content">
-						        <div class="p" id="infoContent">${shop.productDescription}</div>
+						        <div class="p" id="infoContent"></div>
 						    </div>
 				</div>
 			
