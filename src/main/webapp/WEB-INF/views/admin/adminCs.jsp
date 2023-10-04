@@ -30,6 +30,10 @@
 .custom-button:hover {
   background-color: #9E0E0B; /* 마우스 오버 시 배경색 변경 */
 }
+ .custom-hr {
+    width: 80%; /* 선의 너비를 조절할 수 있습니다. */
+    margin: 0 auto; /* 가운데 정렬을 위해 사용합니다. */
+  }
 </style>
 <script type="text/javascript">
 $("document").ready(function(){
@@ -199,6 +203,7 @@ function filterUsers() {
         $(".user-row[data-status='Y']").hide();
     }
 }
+
 function fn_view(noticeIdk) {
     $.ajax({
         type: "GET",
@@ -387,17 +392,18 @@ function deleteValue()
       </tfoot>
    </table>
 	</div>
-	
+	 
 	
 	</div>
 	<form name="bbsForm" id="bbsForm" method="post">
    <input type="hidden" name="questionIdk" value="${questionIdk}" />
 </form>
 
-    <div id="noticeDetail" style="width: 50%; float: left;">
-    <h3 id="noticeTitle" style="text-align: right; margin-right: 250px;"></h3>
-    <p id="noticeContent"  style="text-align: right; margin-right: 350px;"></p>
-    </div>
+<div id="noticeDetail" style="width: 50%; float: left; display: none;">
+    <h3 id="noticeTitle" style="text-align: center;"></h3>
+    <hr class="custom-hr">
+    <p id="noticeContent" style="text-align: center; width: 80%; margin-right: 0; padding-left: 70px;"></p>
+</div>
     
 
 </body>

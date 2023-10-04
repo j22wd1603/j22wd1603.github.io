@@ -37,10 +37,33 @@
 
         // 현재 페이지 이외의 페이지의 "전체 선택" 체크박스 상태도 변경
         $(".otherPageSelectAllCheckbox").prop("checked", isChecked);
+       setTotalInfo($(".cart_info_td"));   
+
     });
 
+
  
-    
+    /* 체크여부에 따른 종합 정보 변화 */
+    $(".productCheckbox").on("change", function () {
+        /* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+        setTotalInfo();
+    });
+
+    /* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+    function setTotalInfo() {
+        let totalPrice = 0; // 총 가격
+
+        $(".cart_info_td").each(function (index, element) {
+            if ($(element).find(".productCheckbox").is(":checked") === true) {
+                // 선택한 상품의 최종 가격을 가져와서 총 가격에 더합니다.
+                totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+            }
+        });
+
+        // 총 가격을 화면에 업데이트
+        $(".totalPrice_span").text(totalPrice.toLocaleString());
+    }
+
     
     
  // 주문버튼
@@ -291,9 +314,11 @@ function fn_list(curPage)
 	               </tr>
 	               <c:forEach var="cartItem" items="${cartList}">
                    <tr>
-                       <td class="select-checkbox">
+                        <td class="select-checkbox cart_info_td">
                            <input type="checkbox" class="productCheckbox" name="selectedProduct" value="${cartItem.productIdk}">
+                           <input type="hidden" class="individual_totalPrice_input" value="${cartItem.quantity * cartItem.productPrice}">
                        </td>
+
                        <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}"></td>
                        <td>
 					        <div class="product-info">
@@ -354,7 +379,7 @@ function fn_list(curPage)
 		                <div class="label">총 상품금액</div>
 		                <div id="price">
 		                  <div class="box-txt">
-		                    <strong><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></strong></div>
+                      		<span class="totalPrice_span">0</span> 원
 		                </div>
 		              </li>		              		
 		              <li>  
@@ -374,8 +399,8 @@ function fn_list(curPage)
 		              <li>
 		                <div class="label">결제예정금액</div>
 		                <div id="allprice">
-		                  <div class="box-txt2">
-		                    <strong><fmt:formatNumber value="${cartItem.quantity * cartItem.productPrice}" type="number" pattern="#,##0"/></strong></div>
+		                  <div class="box-txt2 totalPrice_span">
+		                   </div>
 		                </div>
 		              </li>
 	   			</ul>

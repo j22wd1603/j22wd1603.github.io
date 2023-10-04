@@ -23,11 +23,8 @@
 		  <div class="collapse navbar-collapse" id="navbarCollapse">
 		      <div class="navbar-nav ms-auto p-4 p-lg-0">
 		          <a href="/admin/adminIndex" class="nav-item nav-link active">HOME</a>
-		          <a href="/admin/adminUser" class="nav-item nav-link active">회원 관리</a>
-		          <a href="/admin/adminShop" class="nav-item nav-link active">쇼핑 관리</a>
 		          <a href="/admin/adminCommunity" class="nav-item nav-link active">커뮤니티 관리</a>
 		          <a href="/admin/adminCs" class="nav-item nav-link active">고객센터 관리</a>
-		          <a href="/admin/adminSeller" class="nav-item nav-link active">판매자 관리</a>
 		          <a href="/admin/loginOut" class="nav-item nav-link active">로그아웃</a>
 		        </div>
 		    </div>
