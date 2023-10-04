@@ -262,9 +262,10 @@ function setInputAddress() {
                <form name="viewForm" action="#">
                     <table style="border: 0">
                         <tr>
+                        	<th></th>
                             <th>상품정보</th>
-                            <th>수량</th>
                             <th>판매가</th>
+                            <th>수량</th>
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
@@ -280,15 +281,18 @@ function setInputAddress() {
 	                        <tr>
 	                            <td>
 		                            <article>
-		                                <a href="javascript:void(0)"><img src="/resources/images/product/small/${product.productCode}.${product.productFileExt}"alt="${product.productName}"></a>
-		                                <div>
-		                                     <p>${product.productBrandName}</p>
-		                                     <p><a href="javascript:void(0)">${product.productName}</a><p>  
-		                                </div>
+		                                <a><img src="/resources/images/product/small/${product.productCode}.${product.productFileExt}"alt="${product.productName}"></a>
 		                            </article>
+		                          </td>
+		                          <td>       
+		                                <div>
+		                                    <p style="color: #808080; font-size: 12px; margin-top: 10px;">${product.productBrandName}</p>
+											<p>${product.productName}<p>  
+		                                </div>
+		                           
 	                            </td>
-	                            <td>${product.quantity}</td>
 	                            <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.productPrice}" />원</td>
+	                            <td>${product.quantity}</td> 
 	                            <td>무료배송</td>
 	                            <c:set var="price" value="${product.productPrice * product.quantity}"/>
 	                            <c:set var="totalPrice" value="${totalPrice + price}"/>

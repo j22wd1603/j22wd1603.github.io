@@ -297,7 +297,7 @@ function fn_list(curPage)
                        <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}"></td>
                        <td>
 					        <div class="product-info">
-					        	<div class="brand">${cartItem.productBrandName}</div>
+					        	<div class="brand" style="color: #808080; font-size: 12px;">${cartItem.productBrandName}</div>
 					        	<div class="product-name">${cartItem.productName}</div>
 					        </div>
 					    </td>

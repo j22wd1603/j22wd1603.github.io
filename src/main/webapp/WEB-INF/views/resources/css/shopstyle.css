@@ -1297,30 +1297,31 @@ input#check_btn:checked + label:before{
 }
 
 .orderPage > .order > form > table td > article {
-    padding: 6px;
+    padding: 5px;
     overflow: hidden;
+
 }
 
 .orderPage > .order > form > table td > article > a {
-    float: left;
+    float: center;
     display: inline-block;
 }
 
-.orderPage > .order > form > table td > article > a > img { width: 80px;}
+.orderPage > .order > form > table td > article > a > img { width: 90px;}
 
 .orderPage > .order > form > table td > article > div {
-    float: left;
+    float: center;
     margin-left: 10px;
 }
+
 
 .orderPage > .order > form > table td > article > div > h2 { text-align: left; }
 
 .orderPage > .order > form > table td > article > div > p {
-    text-align: left;
+    text-align: center;
     color: .777;
     margin-top: 4px;
 }
-
 
 tbody {
     margin: 0;
@@ -2079,11 +2080,12 @@ tbody {
 
 /* 테이블 스타일 */
 .cartList table {
-    width: 1200px;
+    width: 1250px;
     margin-bottom: 30px;
     margin-top: 10px;
     border-collapse: collapse; /* 테이블 셀 간격을 없앰 */
 }
+
 
 .cartList th, .cartList td {
     border: 1px solid #ccc;
@@ -2091,7 +2093,9 @@ tbody {
     text-align: center;
     border-left: none; 
     border-right: none;
+   font-size:14px;
 }
+
 
 
 
@@ -2138,7 +2142,7 @@ tbody {
 .button-container-cart {
     height:100px;
     text-align:left;
-    margin-left:160px;
+    margin-left:140px;
      
 }
 
@@ -2158,7 +2162,7 @@ tbody {
 /*페이징버튼*/
 .paging {
     display: flex;
-   margin-left:950px;
+   margin-left:980px;
 }
 
 .paging .page-item {
