@@ -43,7 +43,6 @@
 
 
  
-    /* 체크여부에 따른 종합 정보 변화 */
     $(".productCheckbox").on("change", function () {
         /* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
         setTotalInfo();
