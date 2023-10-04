@@ -5,21 +5,219 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
-<link href="/resources/css/userstyle.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/icia.common.js"></script>
 <script type="text/javascript" src="/resources/js/icia.ajax.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+
+
+
 
 <style>
-* {
-   -moz-box-sizing: border-box;
-   -webkit-box-sizing: border-box;
-   box-sizing: border-box;
-   font-family: 'Gothic A1', sans-serif;
+
+/*userstyle.css 추출*/
+
+
+
+
+
+
+
+
+/* Theme Colors */
+:root {
+    --accent-color       : #8d8d8d;
+    --dark-color         : #191919;
+    --light-color        : #fff;
+    --grey-color         : #dbdbdb;
+    --light-grey-color   : #fafafa;
+    --primary-color      : #6995B1;
+    --light-primary-color   : #eef1f3;
 }
+
+
+
+/*----------------------------------------------*/
+/* 2 GENERAL TYPOGRAPHY */
+/*----------------------------------------------*/
+
+
+::-moz-selection {
+  background: var(--primary-color);
+  color: var(--light-color);
+  text-shadow: none;
+}
+
+::-webkit-input-placeholder {
+    color: #7A7A7A; /* WebKit browsers */
+}
+:-ms-input-placeholder {
+    color: #7A7A7A;/* Internet Explorer 10+ */
+}
+
+/* Typography */
+/*----------------------------------------------*/
+
+
+h1.light, .h1, h2.light, .h2, h3.light, .h3, h4.light, .h4, h5.light, .h5, h6.light, .h6 {
+  color: var(--light-color);
+}
+h1, h2, h3 {
+  margin: 25px 0;
+  text-transform: capitalize;
+  text-align: center;
+}
+h5, h6 {
+  letter-spacing: 1px;
+}
+h1, .h1 {
+  font-size: 3em;
+  line-height: 1.4;
+}
+h2, .h2 {
+  font-size: 2em;
+  line-height: 1.4;
+}
+h3, .h3 {
+  font-size: 1.4em;
+  line-height: 1.4;
+}
+h4, .h4 {
+  font-size: 1.1em;
+  line-height: 1.4;
+}
+h5, .h5 {
+  font-size: .83em;
+  line-height: 1.25;
+}
+h6, .h6 {
+  font-size: .67em;
+  line-height: 1.1;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  font-weight: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+p {
+   font-family: var(--body-font);
+   font-size: 18px;
+   line-height: 1.8;
+   margin: 0 0 20px 0;
+}
+p.dark {
+    color: var(--dark-color);
+}
+p.light {
+    color: var(--light-color);
+}
+p:empty {
+  display: none;
+}
+small {
+  font-size: 85%;
+}
+mark {
+  background-color: var(--grey-color);
+  padding: 0.28rem;
+}
+dfn, cite, em, i {
+  font-style: italic;
+}
+::placeholder {
+    color: var(--grey-color);
+}
+
+
+/*------------------------------------------------
+/* 2.3 Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    height: 50px;
+    padding: 6px 15px;
+    background-color: var(--light-background-color);
+    border: 1px solid var(--grey-color);
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box; 
+  }
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+textarea {
+  min-height: 130px;
+  padding-top: 6px;
+  padding-bottom: 6px; }
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid var(--grey-color);
+  outline: 0; }
+label,
+legend {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: 600; 
+}
+fieldset {
+  padding: 0;
+  border-width: 0; 
+}
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline; }
+label > .label-body {
+  display: inline;
+  margin-left: .5rem;
+  font-weight: normal; }
+
+
+/*------------------------------------------------
+/* 2.7 Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+button,
+.button {
+  margin-bottom: 1rem; }
+input,
+textarea,
+select,
+fieldset {
+  margin-bottom: 1.5rem; }
+pre,
+blockquote,
+dl,
+figure,
+table,
+form {
+  margin-bottom: 2rem; 
+}
+
+
+/*userstyle.css 추출 끝*/
+
+
 
 p {
   margin-block: 1.5rem;
