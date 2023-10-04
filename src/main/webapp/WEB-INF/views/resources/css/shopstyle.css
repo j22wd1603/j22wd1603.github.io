@@ -1615,17 +1615,20 @@ input[type="radio"]:checked::before {
 
            
         }
+        
         .orderPage > .complete table tr {
             border-bottom: 1px solid #d3d3d3;
+            font-size:14px;
         }
         .orderPage > .complete table tr > th {
             padding: 12px 0;
             background: #fff;
             color: #383838;
-            font-size: 0.95em;
+             font-size:14px;
             text-align: center;
             letter-spacing: -0.1em;
         }
+        
         .orderPage > .complete > table td > article > a > img { width: 90px;}
         /* 주문정보 */
         .orderPage > .complete > .orderer table tr > td {
@@ -1655,7 +1658,7 @@ input[type="radio"]:checked::before {
             font-weight: bold;
             color: #ff006c;
         }
-        /* 배송정보 */
+   /* 배송정보 */
         .orderPage > .complete > .delivery table tr > td:nth-child(1) {
             width: 160px;
             background: #f2f2f2;
@@ -1672,8 +1675,7 @@ input[type="radio"]:checked::before {
         .orderPage > .complete > .alert {
             width: 100%;
             background-color: #f7f7f7;
-            padding: 10px;
-            padding-left: 24px;
+            padding: 30px;
             color: #999;
             box-sizing: border-box;
              margin-top:50px;
@@ -1682,16 +1684,13 @@ input[type="radio"]:checked::before {
             margin-left: -12px;
         }
         .orderPage > .complete > .alert > ul {
-            list-style: inherit;
+          background-color:#f7f7f7;
         }
-        .orderPage > .complete > .alert > ul > li {
-            line-height: 20px;
+
+        .orderPage > .complete > .alert > ul > li > span {                   
+          font-size:14px;
+          background-color:#c41b1b14;
         }
-        .orderPage > .complete > .alert > ul > li > span {
-            position: relative;
-            left: -6px;
-        }
-   
 tbody {
     margin: 0;
     font-family: "Open Sans",sans-serif;
@@ -1702,7 +1701,51 @@ tbody {
     -webkit-tap-highlight-color: rgba(0,0,0,0)
 }
 
+/*오더complete버튼*/
+.custom-btn-style {
+    display: inline-block;
+    padding: 5px 20px; /* 원하는 패딩 값으로 조정하세요 */
+    background-color: #ffffff; /* 배경색을 흰색으로 변경 */
+    color: black; /* 텍스트 색상을 파란색으로 변경 */
+    border: 2px solid #B78D65; /* 테두리 설정 및 색상을 B78D65(갈색)으로 변경 */
+    border-radius: 5px; /* 원하는 테두리 반경으로 변경하세요 */
+    font-size: 16px; /* 원하는 글꼴 크기로 변경하세요 */
+    text-align: center;
+    cursor: pointer;
+     margin-right: 10px; 
+}
 
+.custom-btn-style:hover {
+        color: #FFFFFF;
+    background: var(--primary);
+    border-color: var(--primary);
+    
+}
+.center-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5; /* 원하는 높이 값으로 변경하세요 */
+}
+.article-custom{
+    padding: 6px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.orderPage > .complete > table td {
+text-align: center;
+    color: #000000;
+    font-size: 15px;
+}
+.div-custom{
+    float: center;
+    margin-left: 5px;
+ margin-top: 10px;
+ }
+ .img-custom{
+ width: 80px;
+ float: left;
+ }
 
 /*디테일프로덕트 아랫단 상세*/
 .detail-ul {

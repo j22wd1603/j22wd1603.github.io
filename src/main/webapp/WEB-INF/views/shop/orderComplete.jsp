@@ -20,64 +20,13 @@ document.getElementById("csmain").addEventListener("click", function() {
 });
 });
 </script>
-<style>
-.custom-btn-style {
-    display: inline-block;
-    padding: 5px 20px; /* 원하는 패딩 값으로 조정하세요 */
-    background-color: #ffffff; /* 배경색을 흰색으로 변경 */
-    color: black; /* 텍스트 색상을 파란색으로 변경 */
-    border: 2px solid #B78D65; /* 테두리 설정 및 색상을 B78D65(갈색)으로 변경 */
-    border-radius: 5px; /* 원하는 테두리 반경으로 변경하세요 */
-    font-size: 16px; /* 원하는 글꼴 크기로 변경하세요 */
-    text-align: center;
-    cursor: pointer;
-     margin-right: 10px; 
-}
-
-.custom-btn-style:hover {
-        color: #FFFFFF;
-    background: var(--primary);
-    border-color: var(--primary);
-    
-}
-.center-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5; /* 원하는 높이 값으로 변경하세요 */
-}
-.article-custom{
-    padding: 6px;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-.orderPage > .complete > table td {
-text-align: center;
-    color: #000000;
-    font-size: 15px;
-}
-.div-custom{
-    float: center;
-    margin-left: 5px;
- margin-top: 10px;
- }
- .img-custom{
- width: 80px;
- float: left;
- }
-</style>
-
-
 </head>
 
 
 <body>
     <div id="wrapper">
-        
         <main class="orderPage">
-        
-            <section class="complete">
-               
+        	<section class="complete">
                 <article class="message">
                     <h2>
                         고객님의 주문이 정상적으로 완료되었습니다.
@@ -91,9 +40,9 @@ text-align: center;
                        <button type="button" id="csmain" class="custom-btn-style">고객센터</button>
                     </div>
                 </article>
-           
-           
-                   <div class="orderComplete-title">주문 완료 상품 (${fn:length(orderComplete)})</div>
+                
+                 <!-- 주문완료상품 -->
+           		<div class="orderComplete-title">주문 완료 상품 (${fn:length(orderComplete)})</div>
              		 <table style="border: 0">
                         <tr>
                         	<th></th>
@@ -136,7 +85,7 @@ text-align: center;
                      </table>
                
               
-                <!-- 주문정보 -->
+                <!-- 주문자정보 -->
                 <article class="orderer">
                      <div class="orderComplete-title">주문정보</div> 
                     <table style= "border=0;">
@@ -198,30 +147,15 @@ text-align: center;
                         <li>
                             <span>
                                 SWEET HOME은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 케이마켓은 상품, 거래정보 및 거래에 대하여 책임을 지지 않습니다.
-                            </span>
-                        </li>
-                        <li>
-                            <span>
+                            
                                 구매주문내역, 배송상태 확인, 구매영수증 출력, 구매취소/반품/교환은 사이트 상단의 주문/배송조회에서 확인 할 수 있습니다.
-                            </span>
-                        </li>
-                        <li>
-                            <span>
+                          
                                 고객님의 주문이 체결된 후 상품품절 및 단종 등에 의해 배송이 불가능할 경우, 전자상거래등에서의 소비자 보호에 관한 법률 제15조 2항에 의거하여 3영업일(공휴일 제외) 이내에 자동으로 취소될 수 있으며, 이 경우 취소 안내 메일이 고객님께 발송되오니 양지 바랍니다.
-                            </span>
-                        </li>
-                        <li>
-                            <span>
+                            
                                 극히 일부 상품에 대해 수량 부족, 카드결제승인 오류 등의 사례가 간혹 있을 수 있으니 `나의쇼핑정보`에서 다시 한번 확인해 주세요.
-                            </span>
-                        </li>
-                        <li>
-                            <span>
+                           
                                 현금 잔고로 구매하셨을 경우, 나의 쇼핑정보에서 입금확인이 되었는지를 다시 한번 확인해 주세요.
-                            </span>
-                        </li>
-                        <li>
-                            <span>
+                           
                                 배송 주소를 추가하거나 변경, 삭제 등의 관리는 `나의쇼핑정보 > 나의정보`에서 가능합니다.
                             </span>
                         </li>
@@ -229,7 +163,6 @@ text-align: center;
                 </article>
             </section>
         </main>
-    </div>
-    
+    </div>    
 </body>
 </html>
