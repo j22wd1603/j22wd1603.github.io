@@ -1626,32 +1626,32 @@ input[type="radio"]:checked::before {
             text-align: center;
             letter-spacing: -0.1em;
         }
-        
+        .orderPage > .complete > table td > article > a > img { width: 90px;}
         /* 주문정보 */
-        .orderPage > .complete > .order table tr > td {
+        .orderPage > .complete > .orderer table tr > td {
             padding: 10px;
             box-sizing: border-box;
         }
-        .orderPage > .complete > .order > table tr > td:nth-child(1) {
+        .orderPage > .complete > .orderer > table tr > td:nth-child(1) {
             width: 160px;
             background: #f2f2f2;
         }
-        .orderPage > .complete > .order table tr > td:nth-child(2) {
+        .orderPage > .complete > .orderer table tr > td:nth-child(2) {
             width: auto;
         }
-        .orderPage > .complete > .order table tr > td:nth-child(3) {
+        .orderPage > .complete > .orderer table tr > td:nth-child(3) {
             width: 100px;
             text-align: right;
             vertical-align: top;
             background: #f2f2f2;
         }
-        .orderPage > .complete > .order table tr > td:nth-child(4) {
+        .orderPage > .complete > .orderer table tr > td:nth-child(4) {
             width: 100px;
             text-align: right;
             vertical-align: top;
             background: #f2f2f2;
         }
-        .orderPage > .complete > .order table span {
+        .orderPage > .complete > .orderer table span {
             font-weight: bold;
             color: #ff006c;
         }
@@ -1668,7 +1668,7 @@ input[type="radio"]:checked::before {
             width: 200px;
             background: #f2f2f2;
         }
-        /* 꼭 알아두세요 */
+      
         .orderPage > .complete > .alert {
             width: 100%;
             background-color: #f7f7f7;
@@ -1676,6 +1676,7 @@ input[type="radio"]:checked::before {
             padding-left: 24px;
             color: #999;
             box-sizing: border-box;
+             margin-top:50px;
         }
         .orderPage > .complete > .alert > h1 {
             margin-left: -12px;
@@ -2101,7 +2102,7 @@ tbody {
 
 
 .cartList th, .cartList td {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
 

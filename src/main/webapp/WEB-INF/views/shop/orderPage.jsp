@@ -281,7 +281,7 @@ function setInputAddress() {
 	                        <tr>
 	                            <td>
 		                            <article>
-		                                <a><img src="/resources/images/product/small/${product.productCode}.${product.productFileExt}"alt="${product.productName}"></a>
+		                                 <a href="/shop/productDetail?productIdk=${product.productIdk}"><img src="/resources/images/product/small/${product.productCode}.${product.productFileExt}"alt="${product.productName}"></a>
 		                            </article>
 		                          </td>
 		                          <td>       

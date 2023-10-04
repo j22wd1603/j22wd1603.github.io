@@ -77,8 +77,7 @@ text-align: center;
         <main class="orderPage">
         
             <section class="complete">
-                <nav>               
-                </nav>
+               
                 <article class="message">
                     <h2>
                         고객님의 주문이 정상적으로 완료되었습니다.
@@ -91,24 +90,20 @@ text-align: center;
                        <button type="button" id="mypage" class="custom-btn-style">마이페이지</button>
                        <button type="button" id="csmain" class="custom-btn-style">고객센터</button>
                     </div>
-                    
                 </article>
-                
-               
-         
- 
-              <nav>
+           
+           
                    <div class="orderComplete-title">주문 완료 상품 (${fn:length(orderComplete)})</div>
-               </nav>
-               
-                    <table style="border: 0">
+             		 <table style="border: 0">
                         <tr>
-                            <th>상품정보</th>
-                            <th>수량</th>
+                        	<th></th>
+                            <th>상품정보</th>                          
                             <th>판매가</th>
+                             <th>수량</th>
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
+                        
                         <c:if test="${empty orderComplete}">
                         <tr>
                             <td colspan="5">주문 상품이 없습니다.</td>
@@ -116,87 +111,87 @@ text-align: center;
                         </c:if>
                         
                         <c:set var="totalPrice" value="0" />
-                        
                         <c:forEach var="product" items="${orderComplete}">
-                           <tr>
-                               <td>
-                                  <article class="article-custom">
-                                     <a href="/shop/productDetail?productIdk=${product.productIdk}"> <img class="img-custom" src="/resources/images/product/small/${product.productCode}.${product.productFileExt}"alt="${product.productName}" width="80"></a>
-                                      <div class="div-custom">
-                                           <p>${product.productBrandName}</p>
-                                           <p><a href="/shop/productDetail?productIdk=${product.productIdk}">${product.productName}</a><p>  
-                                      </div>
-                                  </article>
-                               </td>
-                               <td>${product.quantity}</td>
-                               <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.productPrice}" />원</td>
-                               <td>무료배송</td>
-                               <c:set var="price" value="${product.productPrice * product.quantity}"/>
-                               <c:set var="totalPrice" value="${totalPrice + price}"/>
-                               <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" />원</td>
-                               <c:remove var="price"/>
-                           </tr>
+	                        <tr>
+	                            <td>
+		                            <article>
+		                                 <a href="/shop/productDetail?productIdk=${product.productIdk}"><img src="/resources/images/product/small/${product.productCode}.${product.productFileExt}"alt="${product.productName}"></a>
+		                            </article>
+		                         </td>
+		                         <td>       
+	                                <div>
+	                                    <p style="color: #808080; font-size: 12px; margin-top: 10px;">${product.productBrandName}</p>
+										<p>${product.productName}<p>  
+	                                </div>
+	                             </td>	     
+	                            <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.productPrice}" />원</td>
+	                            <td>${product.quantity}</td> 
+	                            <td>무료배송</td>
+	                            <c:set var="price" value="${product.productPrice * product.quantity}"/>
+	                            <c:set var="totalPrice" value="${totalPrice + price}"/>
+	                            <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" />원</td>
+	                            <c:remove var="price"/>
+	                        </tr>
                         </c:forEach>
-
-                    </table>
+                     </table>
                
-                </article>
+              
                 <!-- 주문정보 -->
                 <article class="orderer">
-                     <div class="orderComplete-title">주문자 정보</div>
-                    <table border="0">
+                     <div class="orderComplete-title">주문정보</div> 
+                    <table style= "border=0;">
+                   		<tr>
+                            <td>주문자</td>
+							<td>${user.userName}</td>
+                        </tr>
+                        <tr>
+                            <td>연락처</td>
+                       		 <td>${fn:substring(user.userPhone,0,3)}-${fn:substring(user.userPhone,3,7)}-${fn:substring(user.userPhone,7,11)}</td>
                         <tr>
                             <td>주문번호</td>
                             <td>${order.orderIdk}</td>
-                            <td rowspan="3">총 결제금액</td>
-                            <td rowspan="3">
-                                <fmt:formatNumber type="number" maxFractionDigits="3" value="${order.actualPrice}" />원
-                            </td>
+                         
                         </tr>
                         <tr>
                             <td>결제방법</td>
                             <td>
-                            <c:choose>
-					        <c:when test="${pay.payMethodType eq 'CARD'}">
-					            카드결제
-					        </c:when>
-					        <c:when test="${pay.payMethodType eq 'MONEY'}">
-					        	현금결제
-					        </c:when>
-						    </c:choose>
-					    </td>
-                        </tr>
+	                            <c:choose>
+						        <c:when test="${pay.payMethodType eq 'CARD'}">
+						            카드결제
+						        </c:when>
+						        <c:when test="${pay.payMethodType eq 'MONEY'}">
+						        	현금결제
+						        </c:when>
+							    </c:choose>
+					    	</td>
+                        </tr>     
                         <tr>
-                            <td>주문자/연락처</td>
-                            <td>${user.userName}/${fn:substring(user.userPhone,0,3)}-${fn:substring(user.userPhone,3,7)}-${fn:substring(user.userPhone,7,11)}</td>
+                         <td rowspan="3">총 결제금액</td>
+                         <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.actualPrice}" />원</td>
                         </tr>
                     </table>
                 </article>
+                
                 <!-- 배송정보 -->
                 <article class="delivery">
                     <div class="orderComplete-title">배송지 정보</div>
                     <table border="0">
                         <tr>
                             <td>수취인</td>
-                            <td>${order.deliveryName}</td>
-                            <td>주문자 정보</td>
+                            <td>${order.deliveryName}</td>      
                         </tr>
                         <tr>
                             <td>연락처</td>
-                            <td>${fn:substring(order.deliveryPhone,0,3)}-${fn:substring(order.deliveryPhone,3,7)}-${fn:substring(order.deliveryPhone,7,11)}</td>
-                            <td rowspan="2">
-                                ${user.userName}
-                                <br> ${fn:substring(user.userPhone,0,3)}-${fn:substring(user.userPhone,3,7)}-${fn:substring(user.userPhone,7,11)}
-                            </td>
+                            <td>${fn:substring(order.deliveryPhone,0,3)}-${fn:substring(order.deliveryPhone,3,7)}-${fn:substring(order.deliveryPhone,7,11)}</td>                       
                         </tr>
                         <tr>
                             <td>배송지 주소</td>
                             <td>${order.deliveryAddress}</td>
                         </tr>
+                        
                     </table>
                 </article>
  
-                <!-- 꼭 알아두세요 -->
                 <article class="alert">
                     <h1>꼭 알아두세요.</h1>
                     <ul>

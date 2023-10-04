@@ -281,7 +281,7 @@ function fn_list(curPage)
 	          <table >
 	               <tr>
 	                   <th><input type="checkbox" id="selectAllCheckbox"><label for="selectAllCheckbox">전체선택</label></th>
-	                    <th></th>
+	                   <th></th>
 	                   <th>상품정보</th>
 	                   <th>판매가</th>
 	                   <th>수량</th>
