@@ -431,7 +431,7 @@ $(function(){
             <div class="css-n5l119 etfm1it0" id="userNickname">${user.userNickname}</div>
             <div class="css-oycm3d e1iro1t99">
                <style data-emotion="css 1uy49c8">.css-1uy49c8{margin:0 0 7px;display:block;font-size:13px;font-weight:400;line-height:19px;color:#828c94;}@media (min-width: 1024px){.css-1uy49c8{margin:0 0 13px;}}</style>
-               <dl class="css-1uy49c8 e1iro1t98"><style data-emotion="css 7haicw">.css-7haicw{display:inline-block;margin-right:5px;}</style>
+               <dl class="css-1uy49c8 e1iro1t98">
                 
                </dl>
               
@@ -440,8 +440,7 @@ $(function(){
      </div>
       <style data-emotion="css 1049nre">@media (min-width: 768px){.css-1049nre{border-top:1px solid #eaebef;padding:22px 12px 0;}}@media (min-width: 1024px){.css-1049nre{padding:24px 0 6px;}}</style>
       <div class="css-1049nre epl9oik0">
-         <style data-emotion="css 134c4us">.css-134c4us{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;color:#292929;}</style>
-            <div class="css-134c4us ekeuxnk0">
+            <div class="css-134c4us ekeuxnk0" style="display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;color:#292929;">
                <style data-emotion="css 1p9dybm">.css-1p9dybm{-webkit-flex:1 0 0px;-ms-flex:1 0 0px;flex:1 0 0px;display:block;min-width:0;box-sizing:border-box;text-align:center;padding:18px 16px 14px;-webkit-transition:.1s opacity;transition:.1s opacity;}.css-1p9dybm.focus-visible:focus{opacity:.7;}@media (min-width: 768px){.css-1p9dybm:hover,.css-1p9dybm:active{opacity:.7;}}@media (min-width: 768px){.css-1p9dybm{padding:0 16px;}}@media (min-width: 1024px){.css-1p9dybm{padding:0;}}</style>
                <a class="css-1p9dybm e1q26atk3" href="/user/mypageScrap">
                   <style data-emotion="css zpotx6">.css-zpotx6{margin:0 auto 4px;}.css-zpotx6 svg{width:28px;height:28px;}</style>
@@ -490,8 +489,8 @@ $(function(){
          <div class="css-vb69r7 e1ivswjr2"></div>
       </div>
       <style data-emotion="css 1ltj86z">.css-1ltj86z{box-sizing:border-box;width:100%;}@media all{.css-1ltj86z{padding-left:5px;padding-right:5px;}}@media (min-width: 375px){.css-1ltj86z{padding-left:5px;padding-right:5px;}}@media (min-width: 768px){.css-1ltj86z{padding-left:7.5px;padding-right:7.5px;}}@media (min-width: 1024px){.css-1ltj86z{padding-left:10px;padding-right:10px;}}@media (min-width: 1256px){.css-1ltj86z{padding-left:10px;padding-right:10px;}}@media (min-width: 1024px){.css-1ltj86z{width:66.66666666666666%;}}</style>
-      <div class="css-1ltj86z e15wafbq0"><style data-emotion="css 1ecfa5v">.css-1ecfa5v{max-width:700px;margin:0 auto;padding:50px 0 0;color:#292929;}</style>
-      <div class="css-1ecfa5v emjsage0">
+      <div class="css-1ltj86z e15wafbq0">
+      <div style="max-width:700px;margin:0 auto;padding:50px 0 0;color:#292929;">
 
     
          <section class="whitebox">
@@ -502,7 +501,7 @@ $(function(){
 
                           <c:choose>
 						    <c:when test="${empty list}">
-						        <span class="css-1vy2ypg e17n0xi0">0</span>
+						        <span style="margin-left:.4ch;color:#35c5f0;">0</span>
 						    </c:when>
 						    <c:otherwise>
 						        <c:set var="postCount" value="0" />
@@ -511,7 +510,7 @@ $(function(){
 						            <c:set var="postCount" value="${postCount + 1}" />
 						        </c:forEach>
 						        <!-- 게시물 갯수를 출력 -->
-						        <span class="css-1vy2ypg e17n0xi0">${postCount}</span>
+						        <span style="margin-left:.4ch;color:#35c5f0;">${postCount}</span>
 						    </c:otherwise>
 						</c:choose>
                      </h1>
