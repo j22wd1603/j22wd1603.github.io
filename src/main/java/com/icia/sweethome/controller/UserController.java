@@ -109,8 +109,6 @@ public class UserController
 
 		review.setUserId(cookieUserId);
 		
-		
-		
 		totalCount = shopService.boardMyReviewCount(review);
 		
 		if(totalCount > 0)

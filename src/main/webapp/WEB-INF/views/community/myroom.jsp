@@ -72,7 +72,6 @@
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <h1 class="display-1 text-white animated slideInDown"><a class="text-white" href="/community/blog">Community</a></h1>
-			<button type="button" id="btnWrite" class="btn btn-secondary mb-3" style="background-color:#B78D65; border:none; border-radius:1px;">글쓰기</button>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb text-uppercase mb-0">
                     <li class="breadcrumb-item text-primary active" aria-current="community/myroom">마이룸</li>
@@ -133,7 +132,7 @@
 	          </div>
 	        </c:if>	
         </c:if>
-        
+											
       	<c:if test="${commuBoard.commuStatus eq 'N'}">	
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
@@ -175,7 +174,9 @@
 			<div class="text-center" style="padding:5px;">
    				 <input type="text" style="width:196px; ime-mode:active;" name="_searchValue" id="_searchValue" value="${searchValue}" class="justify-content-center" maxlength="20" placeholder="조회값을 입력하세요." />
     		</div>
-    			 <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1" style="color:#35C5F0; background-color:white; font-weight:bold; border-radius:3px;">조회</button>
+    			 <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-radius:3px;">조회</button>
+    			 <button type="button" id="btnWrite" class="btn btn-secondary mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-radius:3px;">글쓰기</button>
+    			 
 	 </div>
 	    
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
@@ -189,18 +190,18 @@
 		 
 	      	<c:if test="${commuBoard.commuStatus eq 'Y'}">	
 		        <c:if test="${commuBoard.fileCheck eq 'Y'}">
-		          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
+		          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 		            <div class="team-item position-relative">  
 		            
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
-    						<img  class="img-fluid" style="object-fit: cover; height:407.98px; width:408px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
+    						<img  class="img-fluid" style="object-fit: cover; height:300px; width:300px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
 			              </div>
-			              <div class="bg-light text-center p-4">
+			              <div class="bg-light text-center p-3" style="table-layout:fixed; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
 			                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
 			                <h3 class="mt-2">${commuBoard.regDate}</h3>
 			                <h3 class="mt-2">${commuBoard.userId}</h3>
-			                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
+			                <span class="text-primary" style="float:left;"><img src="/resources/img/icons/eye.png" style="float:left"/>${commuBoard.commuViews}</span>
 			                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
 			              </div>
 		              	</a>
@@ -209,13 +210,13 @@
 		        </c:if>		
 		         
 		        <c:if test="${commuBoard.fileCheck ne 'Y'}">
-		          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+		          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 		            <div class="team-item position-relative">
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
 			                <img class="img-fluid" src="/resources/images/community/default.jpg">
 			              </div>
-			              <div class="bg-light text-center p-4">
+			              <div class="bg-light text-center p-3" style="table-layout:fixed; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
 			                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
 			                <h3 class="mt-2">${commuBoard.regDate}</h3>
 			                <h3 class="mt-2">${commuBoard.userId}</h3>
@@ -230,13 +231,13 @@
 	        
 	        
 	      	<c:if test="${commuBoard.commuStatus eq 'N'}">	
-		          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
+		          <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 		            <div class="team-item position-relative">  
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
 				                <img class="img-fluid" src="/resources/images/community/delete.jpg">
 			              </div>
-		              	  <div class="bg-light text-center p-4">
+		              	  <div class="bg-light text-center p-3">
 			                <h3 class="mt-2">운영정책에 의해 삭제된 게시물 입니다.</h3>
 			                <h3 class="mt-2">Delete: ${commuBoard.deleteDate}</h3>
 			                <h3 class="mt-2">${commuBoard.userId}</h3>

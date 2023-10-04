@@ -327,7 +327,7 @@ public class CommunityController {
 
 		
       //쿠키값 조회해서 없으면 /user/loginPage로 보내기
-      if(cookieUserId == "")
+      if(cookieUserId == "" || cookieUserId == null)
       {
     	  response.setContentType("text/html; charset=UTF-8");
     	  PrintWriter out = response.getWriter();
@@ -338,7 +338,7 @@ public class CommunityController {
       //사용자 정보 조회
       User user = userService.userSelect(cookieUserId);
       //임시저장 정보 조회
-      community = communityService.saveSelect(user.getUserId());
+      community = communityService.saveSelect(cookieUserId);
 
       
       if(community != null)

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.icia.sweethome.dao.ShopDao;
 import com.icia.sweethome.model.Shop;
 
+
 @Service ("indexService")
 public class IndexService 
 {

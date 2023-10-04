@@ -20,11 +20,13 @@ public class Community implements Serializable
 	private String deleteDate;					//삭제일자
 	private String fileCheck;				//첨부파일존재유무(Y:있음,N:없음)
 	private String fileExt;					//첨부파일확장자(COMMU_IDK.확장자)
-	private String searchType;			//검색타입(1:이름, 2:제목, 3:내용)
+	private String searchType;			//검색타입(1:이름, 2:제목, 3:내용) 관리자에서는 (1:게시글, 2:댓글)
 	private String searchValue;			//검색값
 	private String sortType;			//정렬타입(1.최신순 2.과거순 3.인기순)
 	private int startRow;			//시작 rownum
-	private int endRow;			//끝 rownum	
+	private int endRow;			//끝 rownum
+	
+	
 
 	public Community()
 	{

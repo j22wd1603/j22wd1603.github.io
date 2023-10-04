@@ -419,7 +419,7 @@ SELECT COMMU_IDK,
    </choose>                   
 </if>      
 
-<if test='sortType == null and sortType == ""'>
+<if test='sortType == ""'>
                  ORDER BY A.REG_DATE DESC, A.COMMU_TITLE ASC
 </if>
 <if test='sortType != null and sortType != ""'>

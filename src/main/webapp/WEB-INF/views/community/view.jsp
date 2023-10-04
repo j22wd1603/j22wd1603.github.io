@@ -397,6 +397,34 @@ function commentUpdateEvent(count){
 	}	
 }
 
+//대댓글 수정 버튼을 눌렀을 때 나오는 수정 폼
+function replyUpdateEvent(count){
+	
+	var btnReplyUpdate = document.getElementById('btnReplyUpdate' + count);
+	
+	var commentContent = document.getElementById('commentContent' + count);
+	
+	var commentUpdateContent = document.getElementById('commentUpdateContent' + count);
+		
+	//댓글 수정 버튼 숨기기 및 보이기
+	if(btnReplyUpdate.style.display != 'none'){
+		btnReplyUpdate.style.display = 'none';
+	}
+	else{
+		btnReplyUpdate.style.display = 'block';
+	}
+	
+	//수정 할 내용 보이기 및 숨기기
+	if(commentUpdateContent.style.display != 'none'){
+		commentUpdateContent.style.display = 'none';
+	}
+	else{
+		commentUpdateContent.style.display = 'block';
+	}	
+}
+
+
+
 //댓글 수정
 function commentUpdate(commentIdk, count){
 	
@@ -717,13 +745,10 @@ function commentInsert(commentIdk,count) {
 				            		<p style="margin:0px;">${commentList.regDate}</p>
 								
 								<div style="margin-left:3em; color:black;">${commentList.commentContent}</div>
-								
-								
-								
 							         <textarea class="form-control" rows="1" name="commentUpdateContent${count}" id="commentUpdateContent${count}" style="ime-mode:active; display:none;" placeholder="수정 할 내용을 입력해주세요." required></textarea>
 								<c:if test="${cookieUserId eq commentList.userId}">	
 									<button type="button" style="background-color:white; margin:5px; padding:0px; float:right; border:none; color:black" id="btnReplyDelete" name="btnReplyUpdate${count}" class="btn btn-secondary" onclick="commentDelete(${commentList.commentIdk})">삭제</button>
-									<button type="button" style="background-color:white; margin:5px; padding:0px; float:right; border:none; color:black" name="btnReplyEvent${count}" id="btnReplyEvent${count}" class="btn btn-secondary" onclick="commentUpdateEvent(${count})">수정</button>
+									<button type="button" style="background-color:white; margin:5px; padding:0px; float:right; border:none; color:black" name="btnReplyEvent${count}" id="btnReplyEvent${count}" class="btn btn-secondary" onclick="replyUpdateEvent(${count})">수정</button>
 									<button type="button" style="background-color:white; border:none; color:black; display: none;" name="btnReplyUpdate${count}" id="btnReplyUpdate${count}" class="btn btn-secondary" onclick="commentUpdate(${commentList.commentIdk},${count})">수정 완료</button>								
 								</c:if>
 							</td>
@@ -743,17 +768,17 @@ function commentInsert(commentIdk,count) {
 		</div>		
         <div class="container" style="margin-left:auto; margin-right:auto; width:825px; margin-top:50px;">
 			<c:if test="${community.commuTab eq '1'}">	
-				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#B78D65; border-radius:3px;">마이룸 가기</button>
+				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#9E0E0B; border-radius:3px;">마이룸 가기</button>
 			</c:if>
 			<c:if test="${community.commuTab eq '2'}">	
-				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#B78D65; border-radius:3px;">자유게시판 가기</button>
+				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#9E0E0B; border-radius:3px;">자유게시판 가기</button>
 			</c:if>		
 			<c:if test="${community.commuTab eq '3'}">	
-				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#B78D65; border-radius:3px;">질문게시판 가기</button>
+				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#9E0E0B; border-radius:3px;">질문게시판 가기</button>
 			</c:if>		
 			<c:if test="${boardMe eq 'Y'}">	
-				<button type="button" id="btnUpdate" class="btn btn-secondary" style="float:right; background-color:white; color:#B78D65; border-radius:3px;">수정</button>
-				<button type="button" id="btnDelete" class="btn btn-secondary" style="float:right; background-color:white; color:#B78D65; border-radius:3px;">삭제</button>
+				<button type="button" id="btnUpdate" class="btn btn-secondary" style="float:right; background-color:white; color:#9E0E0B; border-radius:3px;">수정</button>
+				<button type="button" id="btnDelete" class="btn btn-secondary" style="float:right; background-color:white; color:#9E0E0B; border-radius:3px;">삭제</button>
 			</c:if>				
 		</div>
 		<br/>
@@ -813,7 +838,7 @@ function commentInsert(commentIdk,count) {
 												<button type="button" style="background-color:#EFEFEF; color:black" id="btnReplyDelete" name="btnReplyUpdate${count}" class="btn btn-secondary" onclick="commentDelete(${commentList.commentIdk})">삭제</button>
 											</c:if>
 										</td>
-									</c:when>	
+									</c:when>
 									<c:when test="${commentList.parentIdk eq 0 && commentList.commentStatus eq 'N'}">									
 										<td>
 											<img src="/resources/img/icons/icon_reply.png" style="margin-left:1em; float:left"/>

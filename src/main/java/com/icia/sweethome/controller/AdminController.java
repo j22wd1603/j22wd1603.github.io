@@ -46,7 +46,7 @@ import com.icia.sweethome.util.StringUtil;
 @Controller("adminController")
 public class AdminController {
 	
-	private static Logger logger = LoggerFactory.getLogger(AdminController .class);
+	private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
 	private AdminService adminService;

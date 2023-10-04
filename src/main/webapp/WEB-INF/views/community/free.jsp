@@ -20,7 +20,7 @@
 		$("#btnWrite").on("click", function() {
 			document.bbsForm.commuIdk.value = "";
 			document.bbsForm.commuTab.value = "2";
-			document.bbsForm.action = "/community/free";
+			document.bbsForm.action = "/community/writeForm";
 			document.bbsForm.submit();
 		});
 		
