@@ -481,7 +481,7 @@ function fn_userReg()
 		timeout:600000,
 		beforeSend:function(xhr)
 		{
-			alert("test");
+			
 			xhr.setRequestHeader("AJAX", "true");
 		},
 		success:function(response)
@@ -503,6 +503,7 @@ function fn_userReg()
 	         }
 	         else if(response.code == 500)
 	         {
+	        	 
 	            alert("회원 가입 중 오류가 발생하였습니다.");
 	            $("#userId").focus();
 	         }
