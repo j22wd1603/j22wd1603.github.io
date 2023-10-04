@@ -13,21 +13,13 @@
 <script src="https://kit.fontawesome.com/293152e236.js"></script>
 
 <style>
-* {
-    font-family: 'Gothic A1', sans-serif;
-}
 .card {
-
-	
 	box-shadow: 3px 3px 50px #e6e6e6;
 	border-radius:20px;
 	position: relative;
     display: inline-block;
     border-radius: 20px;
     text-align:center;
-
-
-
     font: inherit;
     display: -webkit-box;
     display: -webkit-flex;
@@ -88,10 +80,6 @@
             justify-content: space-between;
             margin: 0 0 20px;
         }
-        
-</style>
-
-<style>
 
 .no-questions {
   display: flex;
@@ -100,33 +88,6 @@
   height: 300px; /* 필요한 높이 값으로 조정하세요. */
   font-size: 18px;
   color: #333;
-}
-
-*{
-	margin:0;
-	padding:0;
-}
-
-li{
-
-
-color:#6c757d;
-
-}
-
-ul{
-
-margin:auto;}
-
-a{
-
-text-decoration:none;
-color:#9e0e0b;
-}
-
-body{
-
-	display:block;
 }
 
 .content-box{
@@ -259,7 +220,7 @@ padding: 10px;
 	background-coler: rgb(252, 212, 205);
 }
 
-.btn{
+.userbtn{
     font-size: 16px;
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -268,16 +229,10 @@ padding: 10px;
     color: #8b1411;
     padding-left: 700px;
     padding-right: 20px;
-    
-	   
-	
+
 }
 
-a{
-
-     text-align: center;
-  }
-.btn a{
+.userbtn a{
 	padding: 10px;
 	background-color: #8b1411;
 	color: #fff;
@@ -301,7 +256,6 @@ a{
 	flex-direction: column;
 
 }
-
 .middlebox{
 
 	width:7px;
@@ -545,7 +499,7 @@ $(function(){
                <div class="up-box">
                  
                     <h1 class="mytitle">내 게시글
-                        <style data-emotion="css 1vy2ypg">.css-1vy2ypg{margin-left:.4ch;color:#8b1411;}</style>
+
                           <c:choose>
 						    <c:when test="${empty list}">
 						        <span class="css-1vy2ypg e17n0xi0">0</span>
@@ -561,11 +515,8 @@ $(function(){
 						    </c:otherwise>
 						</c:choose>
                      </h1>
-                  <style data-emotion="css vxgh1s">.css-vxgh1s{margin:0 -10px;}</style>
                   <div class="css-vxgh1s e17n0xi1"></div>
-                                	<div class="btn">
-			  <a href="/community/writeForm">글쓰기</a>
-			</div>
+                 <div class="userbtn"><a href="/community/writeForm">글쓰기</a></div>
                </div>
  
               
@@ -586,7 +537,7 @@ $(function(){
 			  <!-- 내용을 html로 작성하기 -->
 			 
 			  <div class="content-box">
-			  	<div class="check" type="button" style="overflow: none; text-overflow: none;" value="선택삭제" class="btn btn-outline-info" onClick="deleteValue()">선택삭제</button></div>
+			  	<div class="check">선택삭제</div>
 			  
 			  	<div class="num">글번호</div>
 			  	<div class="title" style="text-align: center;">제목</div>
@@ -612,7 +563,7 @@ $(function(){
 			   </div>
   
 <c:if test="${!empty paging}">	
-			  <ul class="number">	
+			  <ul class="number" style="margin:auto;">	
 	<c:if test="${paging.prevBlockPage gt 0}">
 			<li><a href="javascript:void(0)" style="color:#6c757d;" onclick="fn_list(${paging.prevBlockPage})">&lt;</a></li>
 	</c:if>
@@ -639,7 +590,7 @@ $(function(){
 			</c:if>
 		
 
-
+</section>
         </div>
          
  	<form name="myForm" id="myForm" method="post">

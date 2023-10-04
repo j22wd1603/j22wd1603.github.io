@@ -15,8 +15,6 @@ font-family: 'Gothic A1', sans-serif;
     padding: 30px;
     margin: 0;
     background-color: #ffffff;
-    
-    
 }
 .user-category-container-second {
 
@@ -76,9 +74,6 @@ font-family: 'Gothic A1', sans-serif;
   display: block;
 }
 
-
-</style>
-<style>
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 
 
@@ -91,8 +86,6 @@ font-family: 'Gothic A1', sans-serif;
     display: inline-block;
     border-radius: 20px;
     text-align:center;
-
-
 
     font: inherit;
     display: -webkit-box;
@@ -147,9 +140,6 @@ font-family: 'Gothic A1', sans-serif;
             justify-content: space-between;
             margin: 0 0 20px;
         }
- 
-
-<style>
 
 .no-questions {
   display: flex;
@@ -158,11 +148,6 @@ font-family: 'Gothic A1', sans-serif;
   height: 300px; /* 필요한 높이 값으로 조정하세요. */
   font-size: 18px;
   color: #333;
-}
-
-*{
-   margin:0;
-   padding:0;
 }
 
 li{
@@ -307,7 +292,7 @@ padding: 10px;
    background-coler: rgb(252, 212, 205);
 }
 
-.btn{
+.userbtn{
    /* position: absolute; 는 절대적인 값으로 상대적인 값이 필요하다. */
    /* 상대적인 값은 전체 영역을 담당하는 class="card"에 position: relative;를 추가한다. */
    position: absolute; /*절대적인 값*/
@@ -317,7 +302,7 @@ padding: 10px;
       
    
 }
-.btn a{
+.userbtn a{
    padding: 10px;
    background-color: #db7093;
    color: #fff;
@@ -362,7 +347,7 @@ width:7px;
          <div class="user-dropdown">
             <button class="user-dropbtn">SHOP</button>
             <div class="user-dropdown-content">
-               <a href="/user/cartPage">장바구니</a>
+               <a href="/shop/cartPage">장바구니</a>
               <a href="/user/myShopping">주문조회</a>
                <a href="/user/mypageReview">리뷰</a>
             </div>

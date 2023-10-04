@@ -8,22 +8,14 @@
 <%@ include file="/WEB-INF/views/include/userNavigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/293152e236.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/293152e236.js"></script>
 
 
 <style>
 
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-
-
-<style>
-* {
-    font-family: 'Gothic A1', sans-serif;
-}
-
-
 
 .card {
 
@@ -90,11 +82,6 @@
             justify-content: space-between;
        
 }
-        
-</style>
-
-<style>
-
 .no-questions {
   display: flex;
   justify-content: center;
@@ -102,32 +89,6 @@
   height: 300px; /* 필요한 높이 값으로 조정하세요. */
   font-size: 18px;
   color: #333;
-}
-
-*{
-	margin:0;
-	padding:0;
-}
-
-li{
-
-list-style:non;
-
-}
-
-ul{
-
-margin:auto;}
-
-a{
-coloer: inherit;
-text-decoration:none;
-}
-
-  	
-body{
-
-	display:block;
 }
 
 .content-box{
@@ -253,7 +214,7 @@ body{
 	margin-right: 10px; 
 }
 
-.btn{
+.userbtn{
 	
     font-size: 16px;
     margin-top: 0;
@@ -266,7 +227,7 @@ body{
     
 
 }
-.btn a{
+.userbtn a{
     
 	padding: 10px;
 	background-color: #8b1411;
@@ -842,7 +803,7 @@ function fn_list(curPage)
                         <svg width="1em" height="1em" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="css-1pjipdo e1s6kf710">
 
                         </svg>
-                        </a>
+
                     </div>
                 </div>
             </div>
@@ -957,26 +918,16 @@ function fn_list(curPage)
             }
         </style>
         <div class="css-1ltj86z e15wafbq0">
-            <style data-emotion="css 1ecfa5v">
-                .css-1ecfa5v {
-                    max-width: 700px;
-                    margin: 0 auto;
-                    padding: 50px 0 0;
-                    color: #292929;
-                }
-            </style>
-            <div class="css-1ecfa5v emjsage0">
+            <div class="css-1ecfa5v emjsage0" style="max-width: 700px;margin: 0 auto;padding: 50px 0 0;color: #292929;">
     
          <section class="whitebox">
              <div class="upbox">
 
                <div class="css-rd2t8e e17n0xi3">
-                  <style data-emotion="css dyhp2o">.css-dyhp2o{color:#000000;font-weight:bold;font-size:18px;line-height:1;}</style>
-                    <h1 class="css-dyhp2o e17n0xi2" font-size: 18px;">내 질문
-                        <style data-emotion="css 1vy2ypg">.css-1vy2ypg{margin-left:.4ch;color:#35c5f0;}</style>
+                    <h1 class="css-dyhp2o e17n0xi2" style="color:#000000;font-weight:bold;font-size:18px;line-height:1;">내 질문
                              <c:choose>
 							    <c:when test="${empty list}">
-							        <span class="css-1vy2ypg e17n0xi0">0</span>
+							        <span class="css-1vy2ypg e17n0xi0" style="margin-left:.4ch;color:#35c5f0;">0</span>
 							    </c:when>
 							    <c:otherwise>
 							        <c:set var="postCount" value="0" />
@@ -985,18 +936,13 @@ function fn_list(curPage)
 							            <c:set var="postCount" value="${postCount + 1}" />
 							        </c:forEach>
 							        <!-- 게시물 갯수를 출력 -->
-							        <span class="css-1vy2ypg e17n0xi0">${postCount}</span>
+							        <span class="css-1vy2ypg e17n0xi0" style="margin-left:.4ch;color:#35c5f0;">${postCount}</span>
 							    </c:otherwise>
 						</c:choose>
-			
-                  <style data-emotion="css vxgh1s">.css-vxgh1s{margin:0 -10px;}</style>
                                 
-                  <div class="css-vxgh1s e17n0xi1"></div>
                  </h1>
                </div>
-               <div class="btn" style="text-align:right;">
-								  <a href="/cs/customerservice" >   질문하러가기  </a>
-								 </div>
+               <div class="userbtn" style="text-align:right;"> <a href="/cs/customerservice" >질문하러가기</a></div>
     
 		
            	 <!-- 게시판의 화면은 class="card"로 적용 -->
@@ -1068,7 +1014,7 @@ function fn_list(curPage)
 			   </div>
 
 <c:if test="${!empty paging}">	
-			  <ul class="number">	
+			  <ul class="number" style="margin:auto;">	
 	<c:if test="${paging.prevBlockPage gt 0}">
 			<li><a href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">&lt;</a></li>
 	</c:if>

@@ -10,19 +10,16 @@
 <script type="text/javascript" src="/resources/js/icia.common.js"></script>
 <script type="text/javascript" src="/resources/js/icia.ajax.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <style>
-
 * {
    -moz-box-sizing: border-box;
    -webkit-box-sizing: border-box;
    box-sizing: border-box;
    font-family: 'Gothic A1', sans-serif;
-   
 }
-
 
 p {
   margin-block: 1.5rem;
@@ -723,9 +720,9 @@ function agree() {
                 </div>
                 
                 <div class="form-group email-form">
-					<label for="email" style="font-size: 17px;">사용자 이메일</label>
+					<label for="userEmail1" style="font-size: 17px;">사용자 이메일</label>
 					<div class="input-group">
-					<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일" >
+					<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="사용자 이메일" >
 					<select class="form-control" name="userEmail2" id="userEmail2" >
 						<option>@naver.com</option>
 						<option>@daum.net</option>
@@ -770,7 +767,7 @@ function agree() {
                 <br>
                 
               <div class="form-group3">
-              <label for="formuse" style="margin-left: 130px;">이용약관</label>
+              <label for="agreement" style="margin-left: 130px;">이용약관</label>
                   <div class="term2" style="padding-top: 30px;">
       
                           <div class="box">

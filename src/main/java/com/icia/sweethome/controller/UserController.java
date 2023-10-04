@@ -699,27 +699,27 @@ public class UserController
 			{
 			String[] result = myScrapSelectDelete.split(",");
 			
-			if(result.length > 0)
-			{
-	 			for(int i = 0; i < result.length; i++)
-	 			{
-	 				logger.debug("i : [" + i + "] -> : " + result[i]);
-	 				count = communityService.myScrapSelectDelete(Integer.parseInt(result[i]));
-	 			}
-	 			
-	 			if(count > 0)
-	 			{
-	 				ajaxResponse.setResponse(0, "success");
-	 			}
-	 			else
-	 			{
-	 				ajaxResponse.setResponse(500, "server error");
-	 			}
-			}
-			else
-			{
-				ajaxResponse.setResponse(403, "bad Request");
-			}
+				if(result.length > 0)
+				{
+		 			for(int i = 0; i < result.length; i++)
+		 			{
+		 				logger.debug("i : [" + i + "] -> : " + result[i]);
+		 				count = communityService.myScrapSelectDelete(Integer.parseInt(result[i]));
+		 			}
+		 			
+		 			if(count > 0)
+		 			{
+		 				ajaxResponse.setResponse(0, "success");
+		 			}
+		 			else
+		 			{
+		 				ajaxResponse.setResponse(500, "server error");
+		 			}
+				}
+				else
+				{
+					ajaxResponse.setResponse(403, "bad Request");
+				}
 			
 			}
 			else
