@@ -98,6 +98,14 @@ function fn_share(productIdk) {
 					</div>
 				</div>
 				
+				<!-- 장바구니 -->
+				<form id="addToCartForm" name="addToCartForm" method="post" style="display: none;">
+				    <input type="hidden" id="cartUserId" name="userId" value="${user.userId}">
+				    <input type="hidden" id="cartProductIdk" name="productIdk" value="${shop.productIdk}">
+				    <input type="hidden" id="bbsQuantity" name="quantity" value="1">
+				    <input type="hidden" id="finalPriceFormField" name="finalPrice" value="${shop.productPrice}">
+				  
+				</form>
 				
 				<!-- 즉시구매-->							
 				<form id="orderForm" name="orderForm" method="post">
@@ -107,21 +115,14 @@ function fn_share(productIdk) {
 				</form>
 		
 				<div class="button-container">
-				    <button onclick="go_order()" class="order-button">즉시구매</button>
-				    <button onclick="goToCartPage()" class="cart-button">장바구니</button>
+				<button onclick="goToCartPage()" class="cart-button">장바구니</button>
+				    <button onclick="go_order()" class="order-button">즉시구매</button>				    
 				</div>
 				<form id="shareForm" name="shareForm" method="post">
 				    <input type="hidden" id="shareProductIdk" name="shareProductIdk" value="">			
 				</form>
 						
-				<!-- 장바구니 -->
-				<form id="addToCartForm" name="addToCartForm" method="post" style="display: none;">
-				    <input type="hidden" id="cartUserId" name="userId" value="${user.userId}">
-				    <input type="hidden" id="cartProductIdk" name="productIdk" value="${shop.productIdk}">
-				    <input type="hidden" id="bbsQuantity" name="quantity" value="1">
-				    <input type="hidden" id="finalPriceFormField" name="finalPrice" value="${shop.productPrice}">
-				  
-				</form>
+				
 						
 				<!-- 모달 -->
 				<div id="modal" class="modal" style="display: none;">
