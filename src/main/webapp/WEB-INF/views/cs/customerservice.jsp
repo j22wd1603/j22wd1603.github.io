@@ -29,7 +29,7 @@
     background-color: #8b1411;
     color: #fff;
     border-color: #8b1411;
-    padding-top:100px;
+    padding-top:10px;
   }
   
   .title{
