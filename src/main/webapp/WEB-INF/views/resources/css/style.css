@@ -572,7 +572,7 @@ ul li {
   display: block;
   position: relative;
   float: left;
-  background: #9e0e0b;
+  background: #8b1411;
 }
 
 li ul { display: none; }
@@ -701,7 +701,7 @@ a {text-decoration:none;}
 .openbtn {
   font-size: 20px;
   background-color: #fff;
-  color: #9e0e0b;
+  color: #8b1411;
   padding: 5px 15px;
   border: none;
 }

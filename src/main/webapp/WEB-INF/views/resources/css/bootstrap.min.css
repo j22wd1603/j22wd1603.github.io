@@ -18,7 +18,7 @@
     --bs-white: #fff;
     --bs-gray: #6c757d;
     --bs-gray-dark: #343a40;
-    --bs-primary: #9e0e0b;
+    --bs-primary: #8b1411;
     --bs-secondary: #6c757d;
     --bs-success: #198754;
     --bs-info: #0dcaf0;
@@ -194,12 +194,12 @@ sup {
 }
 
 a {
-    color: #9e0e0b;
+    color: #8b1411;
     text-decoration: none
 }
 
 a:hover {
-    color: #9e0e0b
+    color: #8b1411;
 }
 
 a:not([href]):not([class]),a:not([href]):not([class]):hover {
@@ -2879,8 +2879,8 @@ textarea.form-control-lg {
 
 .btn-primary:disabled,.btn-primary.disabled {
     color: #000;
-    background-color:  #9e0e0b;
-    border-color: #9e0e0b;
+    background-color:  #8b1411;
+    border-color: #8b1411;
 }
 
 .btn-secondary {
@@ -3129,14 +3129,14 @@ textarea.form-control-lg {
 }
 
 .btn-outline-primary {
-    color:  #9e0e0b;
-    border-color:  #9e0e0b;
+    color:  #8b1411;
+    border-color:  #8b1411;
 }
 
 .btn-outline-primary:hover {
     color: #000;
-    background-color: #9e0e0b;
-    border-color: #9e0e0b;
+    background-color: #8b1411;
+    border-color: #8b1411;
 }
 
 .btn-check:focus+.btn-outline-primary,.btn-outline-primary:focus {
@@ -3145,8 +3145,8 @@ textarea.form-control-lg {
 
 .btn-check:checked+.btn-outline-primary,.btn-check:active+.btn-outline-primary,.btn-outline-primary:active,.btn-outline-primary.active,.btn-outline-primary.dropdown-toggle.show {
     color: #000;
-    background-color: #9e0e0b;
-    border-color: #9e0e0b;
+    background-color: #8b1411;
+    border-color: #8b1411;
 }
 
 .btn-check:checked+.btn-outline-primary:focus,.btn-check:active+.btn-outline-primary:focus,.btn-outline-primary:active:focus,.btn-outline-primary.active:focus,.btn-outline-primary.dropdown-toggle.show:focus {
@@ -3154,7 +3154,7 @@ textarea.form-control-lg {
 }
 
 .btn-outline-primary:disabled,.btn-outline-primary.disabled {
-    color: #9e0e0b;
+    color: #8b1411;
     background-color: transparent
 }
 
@@ -3370,7 +3370,7 @@ textarea.form-control-lg {
 
 .btn-link {
     font-weight: 400;
-    color: #9e0e0b;
+    color: #8b1411;
     text-decoration: none
 }
 
@@ -3702,7 +3702,7 @@ textarea.form-control-lg {
 .dropdown-item.active,.dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #9e0e0b;
+    background-color: #8b1411;
 }
 
 .dropdown-item.disabled,.dropdown-item:disabled {
@@ -3747,7 +3747,7 @@ textarea.form-control-lg {
 
 .dropdown-menu-dark .dropdown-item.active,.dropdown-menu-dark .dropdown-item:active {
     color: #fff;
-    background-color: #9e0e0b;
+    background-color: #8b1411;
 }
 
 .dropdown-menu-dark .dropdown-item.disabled,.dropdown-menu-dark .dropdown-item:disabled {
@@ -3863,7 +3863,7 @@ textarea.form-control-lg {
 .nav-link {
     display: block;
     padding: .5rem 1rem;
-    color:#9e0e0b;
+    color:#8b1411;
     transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out
 }
 
@@ -3874,7 +3874,7 @@ textarea.form-control-lg {
 }
 
 .nav-link:hover,.nav-link:focus {
-    color: #927151
+    color: #927151;
 }
 
 .nav-link.disabled {
@@ -3926,7 +3926,7 @@ textarea.form-control-lg {
 
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link {
     color: #fff;
-    background-color:  #9e0e0b;
+    background-color:  #8b1411;
 }
 
 .nav-fill>.nav-link,.nav-fill .nav-item {
@@ -4650,7 +4650,7 @@ textarea.form-control-lg {
 .page-link {
     position: relative;
     display: block;
-    color:  #9e0e0b;
+    color:  #8b1411;
     background-color: #fff;
     border: 1px solid #dee2e6;
     transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out
@@ -4892,7 +4892,7 @@ textarea.form-control-lg {
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color:  #9e0e0b;
+    background-color:  #8b1411;
     transition: width 0.6s ease
 }
 
@@ -4981,8 +4981,8 @@ textarea.form-control-lg {
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #9e0e0b;
-    border-color: #9e0e0b;
+    background-color: #8b1411;
+    border-color: #8b1411;
 }
 
 .list-group-item+.list-group-item {
@@ -7716,7 +7716,7 @@ textarea.form-control-lg {
 }
 
 .text-primary {
-    color: #9e0e0b !important
+    color: #8b1411; !important
 }
 
 .text-secondary {
@@ -7772,7 +7772,7 @@ textarea.form-control-lg {
 }
 
 .bg-primary {
-    background-color: #9e0e0b !important
+    background-color: #8b1411; !important
 }
 
 .bg-secondary {
