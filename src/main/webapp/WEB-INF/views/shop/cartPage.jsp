@@ -95,7 +95,7 @@
     //전체상품주문
     $(document).ready(function () {
         // "전체상품주문" 버튼 클릭 시
-        $("#orderButton-all").click(function () {
+        $("#orderButtonAll").click(function () {
             var selectedProducts = [];
 
             // 모든 상품 체크박스를 선택하거나 해제
@@ -384,7 +384,7 @@ function fn_list(curPage)
 	   		</div>
 			<div class="totalbutton-container">
 	           <button id="orderButton">선택상품주문</button>
-	           <button id="orderButton-all" value=#selectAllCheckbox>전체상품주문</button>
+	           <button id="orderButtonAll" value=#selectAllCheckbox>전체상품주문</button>
 	           </div>
 	        
 	   </main>

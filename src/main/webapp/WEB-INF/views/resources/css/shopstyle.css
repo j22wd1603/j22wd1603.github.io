@@ -2165,7 +2165,7 @@ tbody {
 
 
 
-#orderButton:hover, #deleteButton:hover,#deleteButton-all:hover {
+#deleteButton:hover,#deleteButton-all:hover {
     background-color: #989494;
 }
 
@@ -2220,36 +2220,64 @@ margin-left:10
 
 /*주문버튼*/
 .totalbutton-container {
-    display: flex;
+	 display: flex;
     justify-content: center; 
     align-items: center;
     margin-top:40px;
      margin-bottom:50px;
 }
 
-#orderButton, #orderButton-all {
-    width: 350px;
-    height: 60px;
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer;
-    
+#orderButtonAll {
+  cursor: pointer;
+  background: transparent;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: #fff;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgb(154 18 20 / 52%), rgb(154 18 20 / 80%), #000, #000);
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0 0.625rem;
+  border: 1px solid #000;
+  height:80px;
+   width:350px;
 }
 
 #orderButton {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
-    margin-right: 10px; 
+   cursor: pointer;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: rgb(0 0 0);
+  border-radius: 0;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgb(154 18 20 / 52%), rgb(154 18 20 / 80%), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0 0.625rem;
+  border: 1px solid #000;
+  height:80px;
+  width: 350px;
 }
 
-#orderButton-all {
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #fff;
+
+
+#orderButton:hover {
+   color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: #white;
+  background-position: 99% 50%;
 }
 
-
+#orderButtonAll:hover {
+     color: #fff;
+  border: 1px solid rgba(223,190,106,0);
+  color: #white;
+  background-position: 99% 50%;
+}
 
 
 
