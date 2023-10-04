@@ -927,23 +927,39 @@ input#check_btn:checked + label:before{
 
 
 #productdetail-quantity {
-    margin-top: 10px; 
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
     margin-left: 10px;
 }
 
 #productdetail-quantity label {
-    display: inline-block;
     font-weight: bold;
-     color:black;
+    color: black;
+    margin-right: 10px;
 }
 
 #productdetail-quantity input {
-    width: 50px; 
-    padding: 3px;
-    border: 1px solid #000;
-    cursor: pointer; 
+    width: 70px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    margin-right: 10px; /* 인풋 오른쪽 여백 추가 */
 }
-    
+
+#productdetail-quantity span {
+    font-size: 9px; /* 폰트 크기를 7px로 설정 */
+    margin: 0; /* 기본 마진 제거 */
+}
+
+#productdetail-quantity input:focus {
+    border: 1px solid #9e0e0b;
+}
+
         
 #productdetail-final-price {
     margin-top: 10px; 
@@ -952,6 +968,10 @@ input#check_btn:checked + label:before{
     font-weight: bold; 
     color: #9e0e0b ;
 }
+
+
+
+
 
 .button-container {
     display: flex;
@@ -1692,6 +1712,7 @@ tbody {
     display: flex; 
     justify-content: center; 
     align-items: center;
+    margin-top:40px;
   
 }
 

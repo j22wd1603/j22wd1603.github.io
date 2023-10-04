@@ -92,6 +92,7 @@ function fn_share(productIdk) {
 					<div id="productdetail-quantity">
 					    <label for="quantity">수량:</label>
 					    <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
+						<span>*최대 수량:10개,  이상 주문시 고객센터에 문의 바랍니다.</span>
 					</div>
 					<div id="productdetail-final-price">
 					    <p>최종 가격: <span id="finalPrice" name="finalPrice" >${shop.productPrice}</span></p>
