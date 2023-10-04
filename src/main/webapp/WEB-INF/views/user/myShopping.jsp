@@ -9,15 +9,8 @@
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <style>
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gothic A1', sans-serif;
-}
 .container .mypage .header, .container.mypage .content {
     width: auto;
     min-width: 1560px;

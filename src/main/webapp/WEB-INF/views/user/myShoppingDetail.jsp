@@ -6,25 +6,14 @@
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <%@ include file="/WEB-INF/views/include/userNavigation.jsp" %>
-<link href="/resources/css/shopstyle.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-
-
-<!DOCTYPE html>
-<html>
-<head>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
 
 
 
 <style>
 
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gothic A1', sans-serif;
-}
 .container .mypage .header, .container.mypage .content {
     width: auto;
     min-width: 1560px;
@@ -78,16 +67,6 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Gothic A1', sans-serif;
 }
 
-
-
-html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, form, dl, dt, dd, ol, ul, li, input, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: top;
-    background: transparent;
-    font-family: 'Gothic A1', sans-serif;
-}
 
 /*cart area*/
 a {
@@ -230,10 +209,8 @@ element.style {
     padding-left: 10px;
     vertical-align: middle;
 }
-ol, ul {
-    list-style: none;
-}
-.n-prd-row .info li {
+
+.n-prd-row .infoul {
     font-size: 14px;
     line-height: 22px;
 }
@@ -271,15 +248,6 @@ ol, ul {
     -moz-transition: border 0.2s, background 0.2s ease-in-out;
     -o-transition: border 0.2s, background 0.2s ease-in-out;
     transition: border 0.2s, background 0.2s ease-in-out;
-}
-
-
-html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, form, dl, dt, dd, ol, ul, li, input, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: top;
-    background: transparent;
 }
 
 .container.mypage {
@@ -341,22 +309,6 @@ button {
     transition: border 0.2s, background 0.2s ease-in-out;
 }
 
-html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, form, dl, dt, dd, ol, ul, li, input, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: top;
-    background: transparent;
-}
-
-dl, ol, ul, dt, dd, p {
-    margin: 0;
-    padding: 0;
-}
-* {
-    margin: 0;
-    padding: 0;
-}
 
 dd {
     display: block;
@@ -393,28 +345,15 @@ dt {
     padding-top: 20px;
 }
 
-ol, ul {
-    list-style: none;
-}
 
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-
-html, body, h1, h2, h3, h4, h5, h6, ol, ul, div, li, dl, dt, dd, form, iframe, p, a, span, blockquote, i, figure, fieldset, img, table, th, td, input, textarea, select, caption, button, pre, small {
-    margin: 0;
-    padding: 0;
-    outline: none;
-}
 .info-value {
     font-weight: bold;
     margin: 0 30px 0 6px;
 }
 
-
+ul li{
+background: #ffffff;
+}
 
 
 </style>
@@ -464,7 +403,6 @@ html, body, h1, h2, h3, h4, h5, h6, ol, ul, div, li, dl, dt, dd, form, iframe, p
 <c:if test="${!empty orderDetailList}">	
 	<c:forEach var="detailList" items="${orderDetailList}" varStatus="status">
    			<tr>
-   				<div class="n-prd-row">
    				<td> <img src="/resources/images/product/small/${detailList.productCode}.${detailList.productFileExt}" width="100" height="100" />
    				</td>
    				<td>${detailList.orderIdk}</td>
@@ -480,14 +418,11 @@ html, body, h1, h2, h3, h4, h5, h6, ol, ul, div, li, dl, dt, dd, form, iframe, p
 					</c:when>
 					<c:otherwise>
 					<div class="btn-set btn-parents">
-	   				  <button type="button" class="n-btn btn-sm btn-accent" onclick="location.href='/shop/review'">미작성</button>
+	   				  <button type="button" class="n-btn btn-sm btn-accent" onclick="location.href='/shop/reviewPage'">미작성</button>
 	   				 </div>
 					</c:otherwise>
 				</c:choose>
    				</td>
-   				
-   				
-   				</div>
 		   		
 		   				
    			</tr>	
