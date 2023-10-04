@@ -55,9 +55,6 @@ body .inpt {
    
 }
 
-
-
-
  .box {
             border: 1px solid #000;
             padding: 10px;
@@ -66,8 +63,6 @@ body .inpt {
             margin: 0 auto;
             height: 100%;
         }
-
-
 
 * {
   -moz-box-sizing: border-box;
@@ -125,13 +120,7 @@ body .container_member .content .checkbox:checked + label:before {
     color: #999999;
     border: 1px solid #d9d9d9;
     background: transparent;
-
-
-
-
 }
-
-
 
 .form-group input {
     width: 100%;
@@ -146,7 +135,6 @@ body .container_member .content .checkbox:checked + label:before {
     
 }
 
- 
 .phone {
     margin: auto; /*중앙 정렬*/
     display: flex;
@@ -298,6 +286,7 @@ h3:hover::before {
 </style>
 
 <script type="text/javascript">
+var emailCheckStatus = false;
 $(document).ready(function() {
 
    $("#userId").focus();
@@ -308,10 +297,7 @@ $(document).ready(function() {
       var emptCheck = /\s/g;
       //영문 대소문자, 숫자로만 이루어진 4~12자리 정규식
       var idPwCheck = /^[a-zA-Z0-9]{4,12}$/;
-      
-      
-      
-      
+
       if($.trim($("#userId").val()).length <= 0)
       {
          alert("사용자 아이디를 입력하세요.");
@@ -372,7 +358,6 @@ $(document).ready(function() {
          return;
       }
       
-      
       if($.trim($("#userName").val()).length <= 0)
       {
          alert("사용자 이름을 입력하세요.");
@@ -381,10 +366,10 @@ $(document).ready(function() {
          return;
       }
       
-      if(!fn_validateEmail($("#userEmail").val()))
+      if($.trim($("#userEmail1").val()).length <= 0)
       {
-         alert("사용자 이메일 형식이 올바르지 않습니다.");
-         $("#userEmail").focus();
+         alert("사용자 이메일을 입력하세요.");
+         $("#userEmail1").focus();
          return;
       }
       
@@ -411,10 +396,30 @@ $(document).ready(function() {
          $("#phone3").focus();
          return;
       }
+      if (!$('#mailCheckBtn').prop('disabled')) {
+          alert("이메일 인증을 해주세요.");
+          $("#mailCheckBtn").focus();
+          return;
+      }
+      
+      if($.trim($("#mailCheckInput").val()).length <= 0)
+      {
+         alert("인증번호를 입력해주세요.");
+         $("#mailCheckInput").val("");
+         $("#mailCheckInput").focus();
+         return;
+      }
+      
+      if(!emailCheckStatus){
+    	  alert("인증번호가 다릅니다.");
+          $("#mailCheckInput").val("");
+          $("#mailCheckInput").focus();
+    	  return;
+      }
       
       //전화번호 조합
       $("#userPhone").val($("#phone1").val() + $("#phone2").val() + $("#phone3").val());
-      
+      $("#userEmail").val($("#userEmail1").val() + $("#userEmail2").val());
 
       
       $("#userPwd").val($("#userPwd1").val());
@@ -465,7 +470,7 @@ $(document).ready(function() {
 		const eamil = $("#userEmail1").val() + $("#userEmail2").val(); // 이메일 주소값
 		console.log("완성된 이메일 : " + eamil); // 이메일 오는지 확인
 		const checkInput = $("#mailCheckInput") // 인증번호 입력하는곳 
-		
+		$("#mailCheckBtn").attr("disabled",true);
 		$.ajax({
 			type : "POST",
 			url : "/user/mailCheck",
@@ -483,6 +488,7 @@ $(document).ready(function() {
 		    error:function(error)
 		    {
 		    	icia.common.error(error);
+				$("#mailCheckBtn").attr("disabled",false);
 		    }		
 		}); // end ajax
 	}); // end send eamil
@@ -501,9 +507,13 @@ $(document).ready(function() {
 			$("#userEamil2").attr("readonly",true);
 			$("#userEmail2").attr("onFocus", "this.initialSelect = this.selectedIndex");
 	        $("#userEmail2").attr("onChange", "this.selectedIndex = this.initialSelect");
+	        
+	        emailCheckStatus = true;
 		}else{
 			$msg.html("인증번호가 불일치 합니다. 다시 확인해주세요!.");
 			$msg.css("color","red");
+			
+			emailCheckStatus = false;
 		}
 	});
 });
@@ -591,8 +601,6 @@ function previewImage(input) {
 }
 
 </script>
-
-
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -719,9 +727,9 @@ function agree() {
 					<div class="input-group">
 					<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일" >
 					<select class="form-control" name="userEmail2" id="userEmail2" >
-					<option>@naver.com</option>
-					<option>@daum.net</option>
-					<option>@gmail.com</option>
+						<option>@naver.com</option>
+						<option>@daum.net</option>
+						<option>@gmail.com</option>
 					</select>
 				</div>   
 				<div class="input-group-addon">
@@ -790,8 +798,7 @@ function agree() {
 
                 <br>
                 <button type="button" id="btnReg" class="btn btn-primary" style="width: 350px; margin: 0 auto; display: block;">등록</button>
-          
-       
+
     </div>
        </div>
 </form>
