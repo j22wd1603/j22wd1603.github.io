@@ -1584,22 +1584,26 @@ input[type="radio"]:checked::before {
             margin-top: 16px;
            
         }
+         .orderPage > .complete > .message {
+           color: #000;
+           margin-top:70px;
+        
+      }
         .orderPage > .complete > .message > h2 {
             font-size: 32px;
             font-weight: bold;
             text-align: center;
-            color: #555;
             padding: 10px;
         }
-        .orderPage > .complete > .message > h2 > i {
-            font-size: 26px;
-        }
+    
         .orderPage > .complete > .message > p {
             font-size: 18px;
             font-weight: bold;
             padding: 10px;
             text-align: center;
+           
         }
+        
         
         .orderPage > .complete > article > h1 {
             font-weight: bold;

@@ -31,10 +31,7 @@ document.getElementById("csmain").addEventListener("click", function() {
                     <h2>
                         고객님의 주문이 정상적으로 완료되었습니다.
                         <i class="far fa-smile" aria-hidden="true"></i>
-                    </h2>
-                    <p>
-                        즐거운 쇼핑이 되셨습니까? 항상 고객님을 최우선으로 생각하는 SWEET HOME이 되겠습니다.
-                    </p>
+                    </h2>     
                     <div class="center-div">
                        <button type="button" id="mypage" class="custom-btn-style">마이페이지</button>
                        <button type="button" id="csmain" class="custom-btn-style">고객센터</button>
@@ -78,8 +75,10 @@ document.getElementById("csmain").addEventListener("click", function() {
 	                            <td>무료배송</td>
 	                            <c:set var="price" value="${product.productPrice * product.quantity}"/>
 	                            <c:set var="totalPrice" value="${totalPrice + price}"/>
-	                            <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" />원</td>
-	                            <c:remove var="price"/>
+		                          <td style="color: #9e0e0b;">
+									 <strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" />원</strong>
+								  </td>
+								<c:remove var="price"/>
 	                        </tr>
                         </c:forEach>
                      </table>
