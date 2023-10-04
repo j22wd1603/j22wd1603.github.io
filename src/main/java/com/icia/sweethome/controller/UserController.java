@@ -83,7 +83,38 @@ public class UserController
 		return "/user/userUpdate";
 	}
 	
+	@RequestMapping(value = "/user/idPopup")
+	   public String idPopup(Model model, HttpServletRequest request, HttpServletResponse response) { 
+	      return "/user/idPopup";
+	   }
+	   
+    @RequestMapping(value = "/user/pwdPopup")
+       public String pwdPopup(Model model, HttpServletRequest request, HttpServletResponse response) { 
+          return "/user/pwdPopup";
+       }
+   
+	// 아이디 찾기
+	@RequestMapping(value = "/user/userSearchId", method = RequestMethod.POST)
+	@ResponseBody
+	   public String userSearchId(@RequestParam("inputName_1") String userName, 
+	         @RequestParam("inputPhone_1") String userPhone) {
+	      
+	      String result = userService.get_searchId(userName, userPhone);
 	
+	      return result;
+	   }
+	   
+	// 비밀번호 찾기
+	@RequestMapping(value = "/user/userSearchPwd", method = RequestMethod.POST)
+	@ResponseBody
+	   public String userSearchPwd(@RequestParam("inputId") String userId, 
+	         @RequestParam("inputEmail_2") String userEmail) {
+	      
+	      String result = userService.get_searchPwd(userId, userEmail);
+	
+	      return result;
+	   }
+
 	@RequestMapping(value = "/user/mypageReview")
 	public String myReview(Model model, HttpServletRequest request, HttpServletResponse response) {		
 
