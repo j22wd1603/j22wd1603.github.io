@@ -238,16 +238,22 @@
 		            <div class="team-item position-relative">  
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
-				                <img class="img-fluid" src="/resources/images/community/delete.jpg" style="border-radius:5px;">
+            				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/delete.jpg">
 			              </div>
-		              	  <div class="bg-light text-center p-4">
+			              <div class="text-center p-4">
 			                <h3 class="mt-2">삭제된 게시물 입니다.</h3>
-			                <h3 class="mt-2">Delete: ${commuBoard.deleteDate}</h3>
-			                <h3 class="mt-2">${commuBoard.userId}</h3>
-			                <span class="text-primary" ><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}</span>
-           					<span class="text-primary" ><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>		                
-			              </div>	              	
-			             </a>              	
+							<div style="display: flex; align-items: center;">
+							    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+							        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+							    </div>
+							    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+							</div>
+						    
+			                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+           					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+			                <span style="color:black; float:right; font-weight: bold;"> Delete: ${commuBoard.deleteDate}</span>
+			              </div>
+		              	</a>
 		            </div>
 		          </div>
 	        </c:if>        	        
