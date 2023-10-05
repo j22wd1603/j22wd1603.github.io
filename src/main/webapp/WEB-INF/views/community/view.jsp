@@ -624,7 +624,7 @@ function commentInsert(commentIdk,count) {
 		
 			<thead>
 			    <tr>
-              		<p style="text-align:center; font-size:42px; color:black; font-weight:bold;">${community.commuTitle}</p>
+              		<p style="text-align:center; font-size:32px; color:black; font-weight:bold;">${community.commuTitle}</p>
 			    </tr>
 			    
 			    <tr>
