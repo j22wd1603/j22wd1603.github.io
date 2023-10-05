@@ -75,7 +75,7 @@ $(document).ready(function() {
          </thead>
          <tbody>
             <tr>
-               <td colspan="2" class="custom-td-style"><pre"><c:out value="${cs.noticeContent}" /></pre></td>
+               <td colspan="2" class="custom-td-style"><c:out value="${cs.noticeContent}" /></td>
             </tr>
          </tbody>
          <tfoot>
