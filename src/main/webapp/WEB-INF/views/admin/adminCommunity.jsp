@@ -16,23 +16,11 @@
 <script type="text/javascript">
 $("document").ready(function(){
 	
-	$("a[name='userUpdate']").colorbox({
-		iframe:true, 
-		innerWidth:1235,
-		innerHeight:400,
-		scrolling:false,
-		onComplete:function()
-		{
-			$("#colorbox").css("width", "1235px");
-			$("#colorbox").css("height", "400px");
-			$("#colorbox").css("border-radius", "10px");
-		}		
-	});
 });
 
 function fn_search()
 {
-	document.searchForm.action = "/admin/communityList";
+	document.searchForm.action = "/admin/adminCommunity";
 	
 	document.searchForm.submit();
 }
@@ -130,8 +118,6 @@ function fn_commentUpdate(commentIdk, commentStatus)
 </head>
 <body>
 
-    <%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
-
 	<div style="width:90%; margin:auto; margin-top:5rem;">
 		<div style="display:flex; margin-bottom:0.8rem;">
 			<h2 style="margin-right:auto; color: #525252;">게시글 관리</h2>
@@ -163,13 +149,13 @@ function fn_commentUpdate(commentIdk, commentStatus)
 			<table class="table table-hover" style="border:1px solid #c4c2c2;">
 				<thead style="border-bottom: 1px solid #c4c2c2;">
 				<tr class="table-thead-main">
-					<th scope="col" style="width:15%;">아이디</th>
-					<th scope="col">제목</th>
-					<th scope="col">내용</th>
-					<th scope="col">등록일자</th>
-					<th scope="col">수정일자</th>
-					<th scope="col">삭제일자</th>
-					<th scope="col">상태</th>
+					<th scope="col" style="width:10%;">아이디</th>
+					<th scope="col" style="width:10%;">제목</th>
+					<th scope="col" >내용</th>
+					<th scope="col" style="width:7%;">등록일자</th>
+					<th scope="col" style="width:7%;">수정일자</th>
+					<th scope="col" style="width:7%;">삭제일자</th>
+					<th scope="col" style="width:5%;">상태</th>
 				</tr>
 				</thead>
 				
@@ -180,7 +166,7 @@ function fn_commentUpdate(commentIdk, commentStatus)
 		            <tr>
 		                <td>${boardList.userId}</td>
 		                <td>${boardList.commuTitle}</td>
-		                <td>${boardList.commuContent}</td>
+		                <td style = "word-break: break-all">${boardList.commuContent}</td>
 		                <td>${boardList.regDate}</td>
 		                <td>${boardList.modDate}</td>
 		                <td>${boardList.deleteDate}</td>
@@ -188,12 +174,6 @@ function fn_commentUpdate(commentIdk, commentStatus)
 		            </tr>
 		        </c:forEach>
 		    </c:if>				
-				
-				
-			
-				
-		
-
 
 				</tbody>
 			</table>

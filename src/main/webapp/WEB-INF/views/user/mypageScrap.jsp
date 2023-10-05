@@ -157,7 +157,7 @@
 }
 
 .title {
-    width: 200px; /* 원하는 폭으로 설정하세요 */
+    max-width: 200px; /* 원하는 폭으로 설정하세요 */
     white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
     text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
     display: flex;
@@ -173,6 +173,38 @@ flex-direction: column;
 .middlebox{
 width:7px;
 }
+
+.check{
+
+	max-width:50px;
+	
+}
+
+.num{
+
+	max-width:90px;
+	
+}
+
+.delete{
+
+	max-width:100px;
+	
+}
+
+.button{
+
+	max-width:100px;
+	
+}
+
+.date{
+
+	max-width:100px;
+	
+}
+
+
 
 </style>
 <script type="text/javascript">
@@ -998,7 +1030,7 @@ function deleteValue() {
 			  	<div class="num">글번호</div>
 			  	<div class="title" style="text-align: center;">제목</div>
 			  	<div class="date">작성일</div>
-			  	<div class="num">삭제</div>
+			  	<div class="delete">삭제</div>
 			  </div>
 
 <c:if test="${!empty list}">	

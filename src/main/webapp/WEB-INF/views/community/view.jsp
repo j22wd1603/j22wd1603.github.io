@@ -620,11 +620,11 @@ function commentInsert(commentIdk,count) {
 <!-- Team Start -->
 <c:if test="${community.commuStatus eq 'Y'}">	
 	<div class="container">
-		<table style="margin-left:auto; margin-right:auto; width:825px;">
+		<table style="margin-left:auto; margin-right:auto; width:718px;">
 		
 			<thead>
 			    <tr>
-			            <h2 style="text-align:center;">${community.commuTitle}</h2>
+              		<p style="text-align:center; font-size:32px; color:black; font-weight:bold;">${community.commuTitle}</p>
 			    </tr>
 			    
 			    <tr>
@@ -649,7 +649,7 @@ function commentInsert(commentIdk,count) {
 			        <td colspan="4">
 			            <c:if test="${community.fileCheck eq 'Y'}">
 			                <div style="text-align : center;">
-			                    <img style="width:825px; height:auto; " src="/resources/images/community/${community.commuIdk}.${community.fileExt}">
+			                    <img style="width:718px; height:auto; " src="/resources/images/community/${community.commuIdk}.${community.fileExt}">
 			                </div>
 			            </c:if>
 			        </td>
@@ -679,17 +679,17 @@ function commentInsert(commentIdk,count) {
 				</tr>
 				
 				<tr>
-					<td colspan="2"><pre><c:out value="${community.commuContent}" /></pre></td>
+					<td colspan="2"><pre style="font-size:14.58px; font-weight:500; color:#2F3438; white-space: pre-wrap; word-break: break-all; overflow: auto;"><c:out value="${community.commuContent}" /></pre></td>
 				</tr>
 				
 			</tbody>
 			
 		</table>
 		
-		<hr style="width:825px; height:2px; text-align: center; border:none; color:black; margin: 0px auto;">
+		<hr style="width:718px; height:2px; text-align: center; border:none; color:black; margin: 0px auto;">
 		
 		<div style="margin-top:50px;">
-	    	<table style="margin-left:auto; margin-right:auto; width:825px;">
+	    	<table style="margin-left:auto; margin-right:auto; width:718px;">
 					<tr>
 						<td colspan="2">
 						   <form name="comment" id="comment" method="post">
@@ -766,7 +766,7 @@ function commentInsert(commentIdk,count) {
 				</c:if>					
 			</table>
 		</div>		
-        <div class="container" style="margin-left:auto; margin-right:auto; width:825px; margin-top:50px;">
+        <div class="container" style="margin-left:auto; margin-right:auto; width:718px; margin-top:50px;">
 			<c:if test="${community.commuTab eq '1'}">	
 				<button type="button" id="btnList" class="btn btn-secondary" style="background-color:white; background-color:white; color:#9E0E0B; border-radius:3px;">마이룸 가기</button>
 			</c:if>

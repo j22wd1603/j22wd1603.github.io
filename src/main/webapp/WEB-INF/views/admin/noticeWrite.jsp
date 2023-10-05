@@ -87,8 +87,6 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <div class="container">
    <h2>공지사항 등록</h2>
    <form name="replyForm" id="replyForm" method="post" enctype="multipart/form-data">
@@ -105,12 +103,5 @@ $(document).ready(function() {
       </div>
    </div>
 </div>
-<!-- <form name="bbsForm" id="bbsForm" method="post">
-   <input type="hidden" name="questionIdk" value="${question.questionIdk}" />
-   <input type="hidden" name="searchType" value="${searchType}" />
-   <input type="hidden" name="searchValue" value="${searchValue}" />
-   <input type="hidden" name="curPage" value="${curPage}" />
-</form> --> 
-
 </body>
 </html>

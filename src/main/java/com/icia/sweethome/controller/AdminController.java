@@ -71,54 +71,18 @@ public class AdminController {
 	
 	
 	//관리자 메인페이지
-	@RequestMapping(value = "/admin/adminIndex", method=RequestMethod.GET)
-	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+	@GetMapping(value = "/admin/adminIndex")
+	public String index()
 	{
-		List<Community> list1 = null; 	// 마이룸 조회
-		list1 = communityService.boardListByMonth("1");	//1.마이룸 2.자유게시판 3.질문게시판
-		
-		//현재페이지 번호 
-		int curPage = HttpUtil.get(request, "curPage", 1);
-		//총조회수
-		int totalCount = 0;
-		//페이징
-		Paging paging =null;
-		
-		List<Shop> listView = null;
-		
-		Shop shop = new Shop();
-	
-		
-		totalCount = shopService.shopListCount(shop);
-		
-		if(totalCount >0)
-		{
-			
-			paging = new Paging("/shop/shop", totalCount , 3, 3 , curPage , "curPage");
-			
-			shop.setStartRow(1);
-			shop.setEndRow(3);
-
-			listView = shopService.shopListView(shop);
-		}
-		
-		
-        model.addAttribute("list1", list1);
-        model.addAttribute("listView",listView);
-
-
 		return "/admin/adminIndex";
 	}        
     
     
 	//관리자 로그인 페이지
-	@RequestMapping(value = "/admin/main")
-	public String main(Model model, HttpServletRequest request, HttpServletResponse response) {
-		
-		
+	@GetMapping(value = "/admin/main")
+	public String main() {
 		return "/admin/main";
 	}
-	
 	
 	@RequestMapping(value="/admin/login", method=RequestMethod.POST)
 	@ResponseBody
@@ -169,30 +133,13 @@ public class AdminController {
 	@RequestMapping(value="/admin/loginOut", method=RequestMethod.GET)
 	public String loginOut(HttpServletRequest request, HttpServletResponse response)
 	{
-		if(com.icia.sweethome.util.CookieUtil.getCookie(request,"ADMIN_ID") != null)
+		if(com.icia.sweethome.util.CookieUtil.getCookie(request,AUTH_COOKIE_ADMIN_NAME) != null)
 		{
-			CookieUtil.deleteCookie(request, response, "/", "ADMIN_ID");
+			CookieUtil.deleteCookie(request, response, "/", AUTH_COOKIE_ADMIN_NAME);
 		}
 			
 		return "/admin/main";		//재접속하라는 명령(URL을 다시 가리킴)
-	}	
-
-//유저
-//=====================================================================================================================
-	
-
-
-	
-//쇼핑몰
-//=====================================================================================================================
-		
-		@RequestMapping(value = "/admin/adminShop")
-		public String adminShop(Model model, HttpServletRequest request, HttpServletResponse response) {
-			
-			
-			return "/admin/adminShop";
-		}		
-	
+	}		
 	
 //판매자
 //=====================================================================================================================
@@ -208,14 +155,6 @@ public class AdminController {
 //=====================================================================================================================
 		
 		@RequestMapping(value = "/admin/adminCommunity")
-		public String adminCommunity(Model model, HttpServletRequest request, HttpServletResponse response) {
-			
-	
-			return "/admin/adminCommunity";
-		}
-		
-		
-		@RequestMapping(value = "/admin/communityList")
 		public String communityList(Model model, HttpServletRequest request, HttpServletResponse response) {
 			
 			List<Community> boardList = null; 	// 게시글 리스트 객체
@@ -226,7 +165,6 @@ public class AdminController {
 			
 		    String searchType = HttpUtil.get(request, "searchType", "");
 		    String searchValue = HttpUtil.get(request, "searchValue", "");
-		    String userSearch = HttpUtil.get(request, "userSearch", "");
 		    String userValue = HttpUtil.get(request, "userValue", "");
 		    String status = HttpUtil.get(request, "status", "");
 		    
@@ -661,30 +599,6 @@ public class AdminController {
 					    return ajaxResponse;
 					}
 				 
-		
-
-		
-			
-		
-		
-		
-		
-
-		
 	}
-	
-	
-	
-	//==================================================================
 
-
-
-	
-	
-	//==================================================================
-
-	
-	
-	
-	
 

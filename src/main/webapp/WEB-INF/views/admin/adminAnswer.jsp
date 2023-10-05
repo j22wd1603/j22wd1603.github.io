@@ -65,7 +65,7 @@ $(document).ready(function() {
 <body>
 
 <div class="container1">
-</br>   
+<br/>   
    <div class="row" style="margin-right:0; margin-left:0;">
       <table class="table">
          <thead>

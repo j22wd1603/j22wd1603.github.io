@@ -55,8 +55,6 @@ function fn_pageInit()
 </head>
 <body>
 
-    <%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
-
 	<div style="width:90%; margin:auto; margin-top:5rem;">
 		<div style="display:flex; margin-bottom:0.8rem;">
 			<h2 style="margin-right:auto; color: #525252;">판매자 관리</h2>
