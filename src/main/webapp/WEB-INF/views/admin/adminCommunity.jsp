@@ -20,7 +20,7 @@ $("document").ready(function(){
 
 function fn_search()
 {
-	document.searchForm.action = "/admin/communityList";
+	document.searchForm.action = "/admin/adminCommunity";
 	
 	document.searchForm.submit();
 }
