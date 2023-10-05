@@ -39,6 +39,7 @@
     max-width: 100%;
     box-sizing: border-box;
     min-height: 1px;
+    
     }
 }
 .container {
