@@ -202,9 +202,19 @@ display: flex;
 }
 
 .card-body .title{
-	width:79%
-	text-align: left;
+	max-width:250px;
 }
+.card-body .num{
+	max-width:80px;
+}
+.card-body .delete{
+	max-width:50px;
+}
+
+.card-body .date{
+	max-width:140px;
+}
+
 
 .card-body .delete button{
 	background-color: #fff;
@@ -217,6 +227,7 @@ display: flex;
 }
 .number{
 padding: 10px;
+max-width:100px;
 }
 
 .number li{
@@ -240,17 +251,18 @@ padding: 10px;
 }
 
 .userbtn{
-	/* position: absolute; 는 절대적인 값으로 상대적인 값이 필요하다. */
-	/* 상대적인 값은 전체 영역을 담당하는 class="card"에 position: relative;를 추가한다. */
-	position: absolute; /*절대적인 값*/
-	left:1200px;
-	padding: 10px;
-	margin: 10px 10px 20px 10px ;
-	color: #696969;
-	font-size:15px;
-	   
+	font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #8b1411;
+    padding-left: 650px;
+    padding-right: 20px;
 	
 }
+
+
 .userbtn a{
 	padding: 10px;
 	background-color: #8b1411;
@@ -479,7 +491,7 @@ function fn_boardDelete(idk)
 						</c:choose>
                      </h1>
                             <div class="userbtn">
-							    <button type="button" onclick="openPopup('/shop/reviewPage')">리뷰쓰러가기</button>
+							    <a href="/shop/reviewPage">리뷰쓰러가기</a>
 							</div>
 
 
@@ -506,7 +518,7 @@ function fn_boardDelete(idk)
 			  	<div class="check">선택</div>
 			  	<div class="num">리뷰 번호</div>
 			  	<div class="num">주문 번호</div>
-			  	<div class="num">상품명</div>
+			  	<div class="date">상품명</div>
 			  	<div class="title" style="text-align: center;">리뷰 내용</div>
 			  	<div class="date">작성일</div>  
 			  	<div class="delete">삭제</div>
@@ -519,7 +531,7 @@ function fn_boardDelete(idk)
 			    <div class="check"><input type="checkbox" name="" id="" value="${reviewMy.reviewIdk}"></div>
 			    <div class="num">${reviewMy.reviewIdk}</div>
 			     <div class="num">${reviewMy.orderIdk}</div>
-			    <div class="num">${reviewMy.productName}</div>
+			    <div class="date">${reviewMy.productName}</div>
 			     <div class="title" style="text-overflow: ellipsis;"><a href="/shop/view?commuIdk=${reviewMy.productIdk}">${reviewMy.reviewContent}</a></div>
 			    <div class="date">${reviewMy.regDate}</div>
 			    <div class="delete"><button class="btnDelete" onClick="fn_boardDelete(${reviewMy.reviewIdk})"><i class="fa-solid fa-trash-can"></i></button></div>
