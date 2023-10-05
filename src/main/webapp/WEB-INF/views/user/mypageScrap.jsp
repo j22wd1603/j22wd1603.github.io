@@ -993,7 +993,7 @@ function deleteValue() {
 
 			  <!-- 내용을 html로 작성하기 -->
 			  <div class="content-box">
-			  	<div class="check">선택삭제</div>
+			  	<div class="check" type="button" value="선택삭제" class="btn btn-outline-info" onClick="deleteValue()">선택삭제</button></div>
 			  	<div class="num">카테고리</div>
 			  	<div class="num">글번호</div>
 			  	<div class="title" style="text-align: center;">제목</div>
