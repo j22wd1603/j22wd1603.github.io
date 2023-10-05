@@ -16,6 +16,7 @@
     <result column="DELETE_DATE" property="deleteDate" />
     <result column="FILE_CHECK" property="fileCheck" />
     <result column="FILE_EXT" property="fileExt" />
+    <result column="IMAGE_FILE_EXT" property="imageFileExt" />
 </resultMap>
 
 <resultMap id="commentResultMap" type="com.icia.sweethome.model.Comment">
@@ -264,7 +265,8 @@ SELECT COMMU_IDK,
        MOD_DATE,
        DELETE_DATE,
        FILE_CHECK,
-       FILE_EXT       
+       FILE_EXT,   
+       IMAGE_FILE_EXT
   FROM (SELECT ROWNUM RNM,
                COMMU_IDK,
                COMMU_TAB,
@@ -278,7 +280,8 @@ SELECT COMMU_IDK,
                MOD_DATE,
                DELETE_DATE,
                FILE_CHECK,
-               FILE_EXT
+               FILE_EXT,
+               IMAGE_FILE_EXT
           FROM (SELECT COMMU_IDK,
                        NVL(A.COMMU_TAB, '') AS COMMU_TAB,
                        NVL(A.USER_ID, '') AS USER_ID,
@@ -291,7 +294,8 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT,
+					   NVL(B.IMAGE_FILE_EXT, '') AS IMAGE_FILE_EXT
                   FROM COMMU_BOARD A, USERS B
                  WHERE A.COMMU_TAB = #{value}
                    AND A.USER_ID = B.USER_ID
@@ -363,7 +367,8 @@ SELECT COMMU_IDK,
        MOD_DATE,
        DELETE_DATE,
        FILE_CHECK,
-       FILE_EXT       
+       FILE_EXT,
+       IMAGE_FILE_EXT
   FROM (SELECT ROWNUM RNM,
                COMMU_IDK,
                COMMU_TAB,
@@ -377,7 +382,8 @@ SELECT COMMU_IDK,
                MOD_DATE,
                DELETE_DATE,
                FILE_CHECK,
-               FILE_EXT
+               FILE_EXT,
+               IMAGE_FILE_EXT
           FROM (SELECT COMMU_IDK,
                        NVL(A.COMMU_TAB, '') AS COMMU_TAB,
                        NVL(A.USER_ID, '') AS USER_ID,
@@ -390,7 +396,8 @@ SELECT COMMU_IDK,
                        TO_CHAR(A.MOD_DATE, 'YYYY.MM.DD') AS MOD_DATE,
                        TO_CHAR(A.DELETE_DATE, 'YYYY.MM.DD') AS DELETE_DATE,
                        NVL(A.FILE_CHECK, 'N') AS FILE_CHECK,
-					   NVL(A.FILE_EXT, '') AS FILE_EXT       
+					   NVL(A.FILE_EXT, '') AS FILE_EXT,     
+					   NVL(B.IMAGE_FILE_EXT, '') AS IMAGE_FILE_EXT       
                   FROM COMMU_BOARD A, USERS B
                   
 				   <choose>
