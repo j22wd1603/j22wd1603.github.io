@@ -165,7 +165,6 @@ public class AdminController {
 			
 		    String searchType = HttpUtil.get(request, "searchType", "");
 		    String searchValue = HttpUtil.get(request, "searchValue", "");
-		    String userSearch = HttpUtil.get(request, "userSearch", "");
 		    String userValue = HttpUtil.get(request, "userValue", "");
 		    String status = HttpUtil.get(request, "status", "");
 		    
