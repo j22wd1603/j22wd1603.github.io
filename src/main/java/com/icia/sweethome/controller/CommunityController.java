@@ -130,6 +130,9 @@ public class CommunityController {
         int curPage = HttpUtil.get(request, "curPage", 1);
         //페이징 객체
         Paging paging = null; 
+        //프로필 이미지 확장자 객체
+	    List<User> userList = null;
+
 
 	    if(!StringUtil.isEmpty(searchType) && !StringUtil.isEmpty(searchValue))
 	    {
@@ -149,7 +152,8 @@ public class CommunityController {
             paging = new Paging("/board/community", (int)totalCount, LIST_COUNT, PAGE_COUNT, (int)curPage, "curPage");
             search.setStartRow(paging.getStartRow());
             search.setEndRow(paging.getEndRow());
-	    	
+            
+			
 	    	list = communityService.boardList(search);
 	    }
 	    			
