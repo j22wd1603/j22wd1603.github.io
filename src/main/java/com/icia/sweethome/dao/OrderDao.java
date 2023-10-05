@@ -24,6 +24,7 @@ public interface OrderDao {
 	
 	public Order orderMySelect(int orderIdk);
 	
+	//리뷰
 	public OrderDetail orderDetailSearch(OrderDetail orderDetail);
 	
 }

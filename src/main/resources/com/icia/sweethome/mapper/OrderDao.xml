@@ -142,6 +142,8 @@ SELECT
    AND D.PRODUCT_IDK = P.PRODUCT_IDK
 </select>
 
+
+<!-- 리뷰 -->
 <select id="orderDetailSearch" parameterType ="com.icia.sweethome.model.OrderDetail" resultMap="orderDetailSelectResultMap">   	
 SELECT 
         D.ORDER_IDK,
