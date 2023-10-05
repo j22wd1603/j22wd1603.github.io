@@ -168,7 +168,7 @@
 		</select>
 		
  		<input type="text" style="width:196px; ime-mode:active; font-weight:bold;" name="_searchValue" id="_searchValue" value="${searchValue}" class="justify-content-center" maxlength="20" placeholder="조회값을 입력하세요." />
-        <button type="button" id="btnSearch" class="mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-radius:3px; height:30px;transition: .5s;">조회</button>
+        <button type="button" id="btnSearch" class="mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-width: thin; border-color:gray; border-radius:3px; height:30px;transition: .5s;">조회</button>
 	 </div>
 	    
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
