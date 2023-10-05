@@ -138,7 +138,7 @@ $(document).ready(function() {
          
          <tbody>
             <tr hight="40%">
-               <td colspan="2" class="custom-td-style" ><pre><c:out value="${counsel.questionContent}" /></pre>
+               <td colspan="2" class="custom-td-style" ><c:out value="${counsel.questionContent}" />
                <c:if test="${counsel.fileCheck eq 'Y'}">
 		       <img class="img-fluid" src="/resources/images/question/${questionIdk}.${counsel.fileExt}" style="max-width: 100%; height: auto; display: block; margin: 0 auto; width: 300px; height: 300px;">
 				
@@ -182,7 +182,7 @@ $(document).ready(function() {
          
          <tbody>
             <tr>
-               <td colspan="5" class="custom-td-style"><pre><c:out value="${answer.ansContent}" /></pre>
+               <td colspan="5" class="custom-td-style"><c:out value="${answer.ansContent}" />
                
                </td>
             </tr>
