@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <head>
     <%@ include file="/WEB-INF/views/include/head.jsp" %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 <script>
 function fn_view(commuIdk)
 {
@@ -51,7 +51,7 @@ h1{
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-1 text-white animated slideInDown" style="font-family: 'Gothic A1', sans-serif;";>금주의 <br> 베스트 아이템</h1>
+                                <h1 class="display-1 text-white animated slideInDown" style="font-family: 'Gothic A1', sans-serif;">금주의 <br> 베스트 아이템</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">만명의 유저들이 선택한 이번주 베스트 아이템 가구들을 구경하세요</p>
                                 <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
                             </div>
@@ -287,15 +287,13 @@ h1{
 	            <div class="team-item position-relative">  
 	                  <a href="/shop/productDetail?productIdk=${shop.productIdk}">
 		              <div class="position-relative">
-	                                 <a href="/shop/productDetail?productIdk=${shop.productIdk}">
-									    <img class="img-fluid" src="/resources/images/product/small/${shop.productCode}.${shop.productFileExt}" alt="${shop.productName}">
-									</a>
-	                            </div>
+					  		<img class="img-fluid" src="/resources/images/product/small/${shop.productCode}.${shop.productFileExt}" alt="${shop.productName}">
+	                  </div>
 		              <div class="bg-light text-center p-4">
-	                                <h3 class="mt-2">${shop.productName}</h3>
-	                                <span class="text-primary">${shop.productBrandName}</span>
-	                            </div>
-	              	</a>
+	                        <h3 class="mt-2">${shop.productName}</h3>
+	                        <span class="text-primary">${shop.productBrandName}</span>
+	                  </div>
+	              	  </a>
 	            </div>
 	          </div>
 	  

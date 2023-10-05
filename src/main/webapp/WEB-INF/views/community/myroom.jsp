@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
-<script src="https://kit.fontawesome.com/293152e236.js" crossorigin="anonymous"></script>
 
 <head>
     <%@ include file="/WEB-INF/views/include/head.jsp" %>
-    
+    <script src="https://kit.fontawesome.com/293152e236.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
 	
     <style>
@@ -169,7 +168,7 @@
 		</select>
 		
  		<input type="text" style="width:196px; ime-mode:active; font-weight:bold;" name="_searchValue" id="_searchValue" value="${searchValue}" class="justify-content-center" maxlength="20" placeholder="조회값을 입력하세요." />
-        <button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-radius:3px; height:30px;">조회</button>
+        <button type="button" id="btnSearch" class="mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-radius:3px; height:30px;transition: .5s;">조회</button>
 	 </div>
 	    
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">

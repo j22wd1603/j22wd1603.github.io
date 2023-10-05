@@ -5,24 +5,8 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
-<script src="/resources/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/resources/js/icia.common.js"></script>
-<script type="text/javascript" src="/resources/js/icia.ajax.js"></script>
-
-
-
 
 <style>
-
-/*userstyle.css 추출*/
-
-
-
-
-
-
-
-
 /* Theme Colors */
 :root {
     --accent-color       : #8d8d8d;
@@ -34,13 +18,9 @@
     --light-primary-color   : #eef1f3;
 }
 
-
-
 /*----------------------------------------------*/
 /* 2 GENERAL TYPOGRAPHY */
 /*----------------------------------------------*/
-
-
 ::-moz-selection {
   background: var(--primary-color);
   color: var(--light-color);
@@ -347,11 +327,6 @@ body .container_member .content .checkbox:checked + label:before {
 
 #phone3 {
     width: 30%;
-}
-    
- div {
-    padding-top: 3px;
-    padding-bottom: 8px;
 }
 
 input{
