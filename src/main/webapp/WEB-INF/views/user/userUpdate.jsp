@@ -691,11 +691,11 @@ function previewImage(input) {
     	 <div class="expert-form-group_input">
     	  <div class="edit_userInfo">
     	   <div class="input-group email-input">
-    	     <span><input id="phone1" type="text" class="form-control" size="4.5px" maxlength="3"></span>
+    	     <span><input id="phone1" type="text" class="form-control" size="4px" maxlength="3"></span>
     	     <span class="input_separator">-</span>
-    	     <span><input id="phone2" type="text" class="form-control" size="7px" maxlength="4"></span>
+    	     <span><input id="phone2" type="text" class="form-control" size="6px" maxlength="4"></span>
     	     <span class="input_separator">-</span>
-    	     <span><input id="phone3" type="text" class="form-control" size="7px" maxlength="4" ></span>
+    	     <span><input id="phone3" type="text" class="form-control" size="6px" maxlength="4" ></span>
     	     </div>
     	     </div>
     	    </div>
