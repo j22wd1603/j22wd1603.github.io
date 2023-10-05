@@ -268,8 +268,48 @@ flex-direction: column;
 width:7px;
 }
 
-.button{
+.check{
+
+	max-width:90px;
+
 }
+
+.title{
+
+	max-width:230px;
+	
+}
+
+.category{
+
+	max-width:90px;
+	
+}
+
+.num{
+
+	max-width:90px;
+	
+}
+
+.date{
+
+	max-width:100px;
+	
+}
+
+.delete{
+
+	max-width:70px;
+
+}
+
+.button{
+
+	max-width:70px;
+
+}
+
 
 </style>
 <script type="text/javascript">
@@ -1166,7 +1206,7 @@ $(function(){
 
         <div class="content-box">
             <div class="check"><input type="checkbox" name="RowCheck" value="${commuMy.commuIdk}"></div>
-            <div class="num">${categoryName}</div>
+            <div class="category">${categoryName}</div>
             <div class="num">${commuMy.commuIdk}</div>
             <div class="title"><a href="/community/view?commuIdk=${commuMy.commuIdk}">${commuMy.commuTitle}</a></div>
             <div class="date">${commuMy.regDate}</div>	
