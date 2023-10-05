@@ -221,7 +221,7 @@
 .edit_userInfo_form_title {
 
     padding-top: 30px;
-    width: 170px;
+    width: 180px;
     text-align : left;
 }
 
@@ -331,7 +331,7 @@ ol, ul {
     -webkit-justify-content: space-between;
     border: 1px dashed #dbdbdb;
     color: #757575;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
     -webkit-transition: .1s color;
     transition: .1s color;
