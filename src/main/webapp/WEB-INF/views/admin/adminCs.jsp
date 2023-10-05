@@ -158,7 +158,6 @@ function fn_boardDelete(userId, userStatus)
                 else if (response.code == 404)
                 {
                     alert("해당 게시물을 찾을 수 없습니다.");
-                    location.href = "/user/mypage";
                 }
                 else if (response.code == -999)
                 {
@@ -270,8 +269,7 @@ function deleteValue()
 	            },
 	            success: function (response) {
 	                if (response.code == 0) {
-	                    alert("공지사항이 삭제되었습니다.");
-	                    location.href = "/user/cartPage";	                   
+	                    alert("공지사항이 삭제되었습니다.");                 
 	                } else if (response.code == 500) {
 	                    alert("삭제 중 오류가 발생했습니다.");
 	                } else {
@@ -288,9 +286,6 @@ function deleteValue()
 </script>
 </head>
 <body>
-
-    <%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
-
 	<div style="width:90%; margin:auto; margin-top:5rem;">
    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
         <h2 style="margin: 0; color: #525252;">고객센터 관리</h2>

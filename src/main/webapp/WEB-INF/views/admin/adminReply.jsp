@@ -95,8 +95,6 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <div class="container">
    <h2>게시물 답변</h2>
    <form name="replyForm" id="replyForm" method="post" enctype="multipart/form-data">
