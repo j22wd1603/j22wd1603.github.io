@@ -87,6 +87,9 @@ public class OrderService {
    }
 	
 	
+
+	
+	
 	public Order orderMySelect(int orderIdk)
 	{
 		Order info = null;
@@ -102,6 +105,22 @@ public class OrderService {
 		
 		return info;
 	}
+	
+	public OrderDetail orderDetailSearch(OrderDetail orderDetail)
+	{
+		OrderDetail search = null;
+      
+		try
+		{
+			search = orderDao.orderDetailSearch(orderDetail);
+		}
+		catch(Exception e)
+		{
+			logger.error("[OrderService] orderDetailSearch Exception", e);
+		}
+      
+		return search;
+   }
 	
 }
 

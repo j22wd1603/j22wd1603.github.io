@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.sweethome.model.Cart;
@@ -408,62 +409,37 @@ public class ShopController {
 	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 	    User user = userService.userSelect(userId);
 
-	    if (user != null) {
-	        String reviewContent = request.getParameter("reviewContent");
-	        int rating = Integer.parseInt(request.getParameter("rating")); // 별점을 숫자로 받아옴
-
-	        if (reviewContent != null && !reviewContent.isEmpty()) {
-	            Review review = new Review();
-	            review.setReviewContent(reviewContent);
-	            review.setRating(rating); // Review 객체에 별점 설정
-
-	            int count = shopService.reviewInsert(review);
-
-	            if (count > 0) {
-	                ajaxResponse.setResponse(0, "리뷰가 등록되었습니다.");
-	            } else {
-	                ajaxResponse.setResponse(500, "리뷰 등록 중 오류가 발생했습니다.");
-	            }
-	        } else {
-	            ajaxResponse.setResponse(400, "리뷰 내용을 찾을 수 없거나 비어 있습니다.");
-	        }
-	    } else {
-	        ajaxResponse.setResponse(401, "사용자를 찾을 수 없습니다.");
-	    }
-
-	    if (logger.isDebugEnabled()) {
-	        logger.debug("[ShopController]/shop/review response\n" + JsonUtil.toJsonPretty(ajaxResponse));
-	    }
 
 	    return ajaxResponse;
 	}
 
-	@RequestMapping(value = "/shop/reviewPage")
-	public String reviewPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-	    // 쿠키값
-	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-	    User user = userService.userSelect(userId);
-	    int orderIdk = HttpUtil.get(request, "orderIdk", 0);
+	@RequestMapping("/shop/reviewPage")
+	public String reviewPage(@RequestParam("orderIdk") int orderIdk, @RequestParam("detailIdk") int detailIdk, Model model) {
 
-	    if (user != null) {
-	        // 주문 정보 가져오기
-	        List<OrderComplete> orderComplete = sellerService.orderComplete(orderIdk);
+		OrderDetail search = new OrderDetail();
+		
+		search.setOrderIdk(orderIdk);
+		search.setOrderDetailIdk(detailIdk);
+		
+	    OrderDetail orderDetails = orderService.orderDetailSearch(search);
 
-	        if (orderComplete != null) {
-	            model.addAttribute("orderComplete", orderComplete);
-	            model.addAttribute("userId", userId);
-	        } else {
-	            String errorMessage = "주문 정보를 찾을 수 없습니다.";
-	            model.addAttribute("errorMessage", errorMessage);
-	        }
-	    } else {
-	        String errorMessage = "사용자를 찾을 수 없습니다.";
-	        model.addAttribute("errorMessage", errorMessage);
+	    String reviewStatus = "";
+	  
+	    if (orderDetails != null) {	      
+	        reviewStatus = orderDetails.getReviewStatus();
 	    }
+
+	   
+	    if (!"N".equals(reviewStatus)) {
+	        return "redirect:/errorPage"; // 오류 페이지 URL로 리다이렉트
+	    }
+
+	    model.addAttribute("orderDetails", orderDetails);
 
 	    return "/shop/reviewPage";
 	}
 
+	
 
 }
 

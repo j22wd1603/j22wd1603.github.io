@@ -23,6 +23,9 @@ public interface OrderDao {
 	public List<OrderDetail> orderDetailSelect(int orderIdk);
 	
 	public Order orderMySelect(int orderIdk);
+	
+	public OrderDetail orderDetailSearch(OrderDetail orderDetail);
+	
 }
 
 

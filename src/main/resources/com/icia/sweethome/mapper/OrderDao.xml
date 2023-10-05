@@ -142,5 +142,21 @@ SELECT
    AND D.PRODUCT_IDK = P.PRODUCT_IDK
 </select>
 
+<select id="orderDetailSearch" parameterType ="com.icia.sweethome.model.OrderDetail" resultMap="orderDetailSelectResultMap">   	
+SELECT 
+        D.ORDER_IDK,
+        D.ORDER_DETAIL_IDK,
+        D.PRODUCT_IDK,
+        NVL(D.QUANTITY, 0) AS QUANTITY,
+        NVL(D.PRODUCT_PRICE, 0) AS PRODUCT_PRICE,
+        NVL(D.REVIEW_STATUS, 'N') AS REVIEW_STATUS,
+        NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME,
+		NVL(P.PRODUCT_CODE, '') AS PRODUCT_CODE,
+        NVL(P.PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT
+  FROM  ORDER_DETAIL D, PRODUCT P
+ WHERE D.ORDER_IDK = #{orderIdk}
+   AND D.ORDER_DETAIL_IDK = #{orderDetailIdk}
+   AND D.PRODUCT_IDK = P.PRODUCT_IDK
+</select>
 
 </mapper>
