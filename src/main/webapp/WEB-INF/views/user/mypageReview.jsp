@@ -478,7 +478,11 @@ function fn_boardDelete(idk)
 						    </c:otherwise>
 						</c:choose>
                      </h1>
-                                	<div class="userbtn"><a href="/shop/review">리뷰쓰러가기</a></div>
+                            <div class="userbtn">
+							    <button type="button" onclick="openPopup('/shop/reviewPage')">리뷰쓰러가기</button>
+							</div>
+
+
                </div>
  
               
@@ -566,6 +570,26 @@ function fn_boardDelete(idk)
        </div>
        </div>
 
+<!-- 리뷰창 팝업 -->
+ <script>
+function openPopup(url) {    
+    // 화면 중앙에 팝업 창을 띄우기 위한 위치 계산
+    var screenWidth = window.screen.width;
+    var screenHeight = window.screen.height;
+    var popupWidth = 600;
+    var popupHeight = 900; 
+    var left = (screenWidth - popupWidth) / 2;
+    var top = (screenHeight - popupHeight) / 2;
+
+    var popupOptions = "width=" + popupWidth + ",height=" + popupHeight + ",left=" + left + ",top=" + top + ",scrollbars=yes";
+
+    var popupWindow = window.open(url, "_blank", popupOptions);
+
+    if (popupWindow == null || typeof(popupWindow) === "undefined") {
+        alert("팝업 창이 차단되었습니다. 팝업 차단을 해제해주세요.");
+    }
+}
+</script>
  </body>
  </html>
  

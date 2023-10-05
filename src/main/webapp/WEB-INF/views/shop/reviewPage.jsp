@@ -3,7 +3,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 
 
@@ -20,12 +19,15 @@
         <section class="review-form">
             <h2>리뷰 작성</h2>
             <form id="reviewForm">
-                <div class="form-group">
-                    <label for="username">ID:</label>
-                    <input type="text" id="username" name="username" value="${orderCompleteList.userId}" readonly>     
-                    <label for="productname">제품명:</label>
-                    <input type="text" id="productname" name="productname" required value="${orderCompleteList.productName}" readonly>               
-                </div>
+               <div class="form-group">
+				    <label for="username">ID:</label>
+				    <input type="text" id="username" name="username" value="${orderCompleteList.userId}" readonly>
+				</div>
+				<div class="form-group">
+				    <label for="productname">제품명:</label>
+				    <input type="text" id="productname" name="productname" required value="${orderCompleteList.productName}" readonly>
+				</div>
+
 		    <div class="form-group">
 			    <div class="star_rating">
 				    <span class="star" data-value="1">&#9733;</span>
