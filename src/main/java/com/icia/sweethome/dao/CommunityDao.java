@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository("communityDao")
 public interface CommunityDao 
 {
-   //높은 좋아요 순으로 게시물 리스트 
+   ///높은 좋아요 순으로 게시물 리스트 
    public List<Community> boardListByLikes(String commuTab);
    
    //높은 조회수 순으로 게시물 리스트 
