@@ -35,6 +35,12 @@ $(document).ready(function() {
 	   var regPhone3 = /^[0-9]{4}$/;
 	   var name = /^[가-힣a-zA-Z]+$/;
 	   var address = /^[가-힣a-zA-Z0-9\s\-]+$/;
+	   
+	   if(!$("#orderAgreement").prop('checked')){
+	         alert("주문 동의를 해주세요");
+	         $("#orderAgreement").focus();
+	         return;
+	   }
 
 	   if(deliveryRadio.checked){		   
 		   if(trimCheck("deliveryName","수령인을 입력해주세요"))return;
