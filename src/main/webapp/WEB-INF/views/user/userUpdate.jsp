@@ -15,7 +15,7 @@
 .userInfo.container {
 	width:70%
     position: relative;
-     margin-right: auto;
+    margin-right: auto;
     margin-left: auto;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
     padding: 100px;

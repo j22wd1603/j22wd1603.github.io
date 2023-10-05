@@ -33,7 +33,7 @@ table {
   transition: .1s color;
   margin: auto;
   border: 1px dashed #dbdbdb;
-    color: #757575;
+  color: #757575;
 }
 
 .container{
@@ -49,7 +49,7 @@ th {
 thead {
   font-weight: bold;
   color: #fff;
-  background: #73685d;
+  background: #8b1411;
 }
   
  td, th {
@@ -209,7 +209,7 @@ function fn_list(curPage)
     border-radius: 10px;
     top : 1px;
     height: 50px;
-    background-color: #73685d;
+    background-color: #8b1411;
     color: #fff;
     font-size: 13px;
     font-weight: bold;
@@ -252,9 +252,9 @@ function fn_list(curPage)
         </tr>
       </tfoot>
    </table>
-   </br>
+   <br/>
    <nav>
-      <ul class="pagination justify-content-center" ">
+      <ul class="pagination justify-content-center">
 <c:if test="${!empty paging}">      
    <c:if test="${paging.prevBlockPage gt 0}">
          <li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="fn_list(${paging.prevBlockPage})">이전블럭</a></li>
@@ -263,10 +263,10 @@ function fn_list(curPage)
    <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
       <c:choose>
          <c:when test="${i ne curPage}">
-         <li class="page-item" style="border-radius: 10px; background: none;"><a class="page-link" style="border-radius: 10px;" href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
+         <li class="page-item" style="background: none;"><a class="page-link" style="border-radius: 10px; " href="javascript:void(0)" onclick="fn_list(${i})">${i}</a></li>
          </c:when>
          <c:otherwise>
-         <li class="page-item active" ><a class="page-link"  style="  background: none; border-radius: 10px;" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
+         <li class="page-item active" ><a class="page-link" style="  background: none; border-radius: 10px;" href="javascript:void(0)" style="cursor:default;">${i}</a></li>
          </c:otherwise>
       </c:choose>
    </c:forEach>
