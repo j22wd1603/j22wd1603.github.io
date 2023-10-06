@@ -162,7 +162,7 @@ function fn_share(productIdk) {
 				<div id="review-rating">
 				        <div id="review-rating-star">   
 				            <h1>★ 4.5</h1>
-				            <p>3개의 리뷰</p>
+				            <p>${fn:length(review)}개의 리뷰</p>
 				        </div>
 				        <div id="review-rating-rate">    
 				            <h6>디자인</h6>
