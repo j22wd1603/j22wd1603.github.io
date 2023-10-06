@@ -9,7 +9,79 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">    
     
-    
+    <style>
+    		.search-container {
+			  display: flex;
+			  justify-content: center; 
+			  align-items: center;
+			  margin-top: 20px;
+			  margin-bottom:40px;
+			}
+			
+			.search-input {
+			  padding: 10px;
+			  width: 300px;
+			  border: none;
+			  border-radius: 50px; 
+			  font-size: 16px;
+			  outline: none;
+			  transition: background-color 0.3s ease-in-out;
+			  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); 
+			}
+			
+			.search-input::placeholder {
+			  color: #ccc;
+			}
+			
+			.search-input:focus {
+			  background-color: #f0f0f0;
+			}
+			
+			.search-button {
+			  padding: 10px 20px;
+			  background-color:#8b1411;
+			  color: #fff;
+			  border: none;
+			  border-radius: 50px; 
+			  margin-left: 10px;
+			  cursor: pointer;
+			  transition: background-color 0.3s ease-in-out;
+			  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); 
+			}
+			
+			.search-button:hover {
+			  background-color: #561414;
+			}
+			
+			/* 셀렉트 박스 스타일 */
+			.custom-select {
+			  display: inline-block;
+			  padding: 10px;
+			  border: 1px solid #ccc;
+			  border-radius: 5px;
+			  background-color: #fff;
+			  font-size: 16px;
+			  font-weight: bold;
+			  color: #333;
+			  outline: none;
+			  transition: border-color 0.3s ease-in-out;
+			  cursor: pointer;
+			  margin-right:10px;
+			}
+			
+			.custom-select:hover {
+			  border-color: #8b1411;
+			}
+			
+			
+			.custom-select option {
+			  font-weight: bold;
+			}
+			
+			.custom-select:focus {
+			  border-color: #8b1411; 
+			}
+    </style>
     
     
 	<script type="text/javascript">
@@ -153,24 +225,24 @@
 <div class="container-xxl py-5">
   <div class="container">
   
-   <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
-        <select name="_sortType" id="_sortType" class="custom-select" style="width:auto; padding:5px; font-weight:bold;">
+  <div class="search-container">
+        <select name="_sortType" id="_sortType" class="custom-select" >
           <option value="" style="font-weight:bold;">조회 항목</option>
           <option value="1" style="font-weight:bold;" <c:if test='${sortType eq "1"}'>selected</c:if>>최신순</option>
           <option value="2" style="font-weight:bold;" <c:if test='${sortType eq "2"}'>selected</c:if>>과거순</option>
           <option value="3" style="font-weight:bold;" <c:if test="${sortType eq '3'}">selected</c:if>>인기순</option>                 	
         </select>
 	             	
-	    <select name="_searchType" id="_searchType" class="custom-select" style="width:auto; padding:5px; font-weight:bold;">
+	    <select name="_searchType" id="_searchType" class="custom-select" >
 			<option value="" style="font-weight:bold;">검색 항목</option>
 			<option value="1" style="font-weight:bold;" <c:if test='${searchType eq "1"}'>selected</c:if>>작성자</option>
 			<option value="2" style="font-weight:bold;" <c:if test='${searchType eq "2"}'>selected</c:if>>제목</option>
 			<option value="3" style="font-weight:bold;" <c:if test="${searchType eq '3'}">selected</c:if>>내용</option>
 		</select>
 		
- 		<input type="text" style="width:196px; ime-mode:active; font-weight:bold;" name="_searchValue" id="_searchValue" value="${searchValue}" class="justify-content-center" maxlength="20" placeholder="조회값을 입력하세요." />
-        <button type="button" id="btnSearch" class="mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-width: thin; border-color:gray; border-radius:3px; height:30px;transition: .5s;">조회</button>
-	 </div>
+ 		 <input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="search-input" maxlength="20" placeholder="조회값을 입력하세요." />
+ 		<button type="button" id="btnSearch" class="search-button">조회</button>
+ 		</div>
 	    
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
       <h1 class="display-5 mb-4"><a href="/community/ask" style="color:black">질문 게시판</a></h1>
