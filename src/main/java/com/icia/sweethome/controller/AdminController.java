@@ -304,7 +304,7 @@ public class AdminController {
 		    String userId = HttpUtil.get(request, "userId", "");
 		    String userStatus = HttpUtil.get(request, "userStatus", "");
 		    User user = userService.userSelect(userId);
-		    if ("Y".equals(userStatus) || "N".equals(userStatus)) {
+		    if ("Y".equals(userStatus) || "D".equals(userStatus) ||"N".equals(userStatus)) {
 		        adminService.userStatusUpdate(user);
 		        ajaxResponse.setCode(0); // 성공 코드
 		    } else {
@@ -316,12 +316,10 @@ public class AdminController {
 		@RequestMapping(value = "/admin/adminUser")
 		public String adminUser(ModelMap model, HttpServletRequest request, HttpServletResponse response)
 		{
-			String userId = HttpUtil.get(request, "userId", "");
-			Question user = new Question();
+			Question question = new Question();
+			//Question user = new Question();
 			List<Question> list = null;
-			user.setUserId(userId);
-
-			list = adminService.userQuestion(user);
+			list = adminService.userQuestion(question);
 		    if (list != null) {
 		        System.out.println("Received list with " + list.size() + " items.");
 		    } else {

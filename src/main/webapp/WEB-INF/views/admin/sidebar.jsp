@@ -85,7 +85,7 @@ function openFrame(url) {
 
 		<!-- Nav Item - Pages Collapse Menu -->
 		<li class="nav-item">
-			<a class="nav-link collapsed" onclick="openFrame('/admin/adminCs')" data-toggle="collapse" data-target="#collapsePages"
+			<a class="nav-link collapsed" onclick="openFrame('/admin/adminUser')" data-toggle="collapse" data-target="#collapsePages"
 			aria-expanded="true" aria-controls="collapsePages"><span>1대1 문의 관리</span>
 			</a>
 		</li>

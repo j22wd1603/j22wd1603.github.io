@@ -609,21 +609,21 @@ function commentInsert(commentIdk,count) {
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb text-uppercase mb-0">
 					<c:if test="${community.commuTab eq '1'}">
-						<li class="breadcrumb-item text-primary active" aria-current="community/myroom">마이룸</li>
-						<li class="breadcrumb-item"><a class="text-white" href="/community/free">자유게시판</a></li>
-						<li class="breadcrumb-item"><a class="text-white" href="/community/ask">질문게시판</a></li>
+	                    <li class="breadcrumb-item text-primary active" aria-current="community/myroom" style="color:#9E0E0B; font-weight:bold;">마이룸</li>
+	                    <li class="breadcrumb-item"><a class="text-white" href="/community/ask">질문게시판</a></li>
+	                    <li class="breadcrumb-item"><a class="text-white" href="/community/free">자유게시판</a></li>
 					</c:if>
 					
 					<c:if test="${community.commuTab eq '2'}">
-						<li class="breadcrumb-item"><a class="text-white" href="/community/myroom">마이룸</a></li>
-						<li class="breadcrumb-item"><a class="text-white" href="/community/ask">질문게시판</a></li>
-						<li class="breadcrumb-item text-primary active" aria-current="community/free">자유게시판</li>
+	                    <li class="breadcrumb-item"><a class="text-white" href="/community/myroom">마이룸</a></li>
+	                    <li class="breadcrumb-item"><a class="text-white" href="/community/ask" >질문게시판</a></li>
+	                    <li class="breadcrumb-item text-primary active" aria-current="community/free" style="color:#9E0E0B; font-weight:bold;">자유게시판</li>
 					</c:if>
 					
 					<c:if test="${community.commuTab eq '3'}">
-						<li class="breadcrumb-item"><a class="text-white" href="/community/myroom">마이룸</a></li>
-						<li class="breadcrumb-item text-primary active" aria-current="community/ask">질문게시판</li>
-						<li class="breadcrumb-item"><a class="text-white" href="/community/free">자유게시판</a></li>
+	                    <li class="breadcrumb-item"><a class="text-white" href="/community/myroom">마이룸</a></li>
+	                    <li class="breadcrumb-item text-primary active" aria-current="community/ask" style="color:#9E0E0B; font-weight:bold;">질문게시판</li>
+	                    <li class="breadcrumb-item"><a class="text-white" href="/community/free">자유게시판</a></li>
 					</c:if>		                
                 </ol>
             </nav>
