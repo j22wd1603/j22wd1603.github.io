@@ -503,7 +503,8 @@ function fn_loginCheck()
          if(response.code == 0)
          {
             alert("로그인을 성공했습니다.");
-            location.href = document.referrer;
+            //location.href = document.referrer; 다음페이지로 넘어가질때 전송값진행이안되서 폐쇄
+            location.href = "/index";
          }
          else
          {
