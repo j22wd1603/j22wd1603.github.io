@@ -615,7 +615,7 @@ function previewImage(input) {
 		 <div class="userInfoheader_title">회원정보수정</div>
 		 </div>
 		 <div class="card">
-    <form>
+    <form id="regForm" name="regForm">
     	<div class="userInfo_form">
     	<div class="edit_userInfo_form_title">이메일
     	  </div>
@@ -655,7 +655,7 @@ function previewImage(input) {
     	<div class="expert-form-group_content">
     	 <div class="expert-form-group_input">
     	  <div class="edit_userInfo">
-    	     <input type="password" value="${user.userPwd}" id="#userPwd1" name="userPwd1" class="form-control">
+    	     <input type="password" value="${user.userPwd}" id="userPwd1" name="userPwd1" class="form-control">
     	     </div>
     	    </div>
     	   </div>

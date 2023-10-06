@@ -128,18 +128,16 @@ font-family: 'Gothic A1', sans-serif;
   <h1 class="text-primary m-0"><img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"><br>SISTUSER</h1>
   </div>
   <a href="/user/mypage">마이페이지</a>
-  <a href="/user/order_list">내 주문내역</a>
-  <a href="/user/order_list">내 배송상태</a>
-  <a href="/user/order_list">내 문의내역</a>
-  <a href="/user/order_list">마이룸 3D</a>
-  <a href="/user/order_list">미정미정</a>
-  <a href="/user/order_list">미정미정</a>
-  <a href="/user/order_list">미정미정</a>
+  <a href="/user/myShopping">내 주문내역</a>
+  <a href="/shop/cartPage">내 장바구니</a>
+  <a href="user/mypageMyQ">내 문의내역</a>
+ <!--  <a href="/user/order_list">마이룸 3D</a> --> 
+
   <br>
   <hr>
   <a href="/user/mypage">회원정보수정</a>
   <a href="/user/order_list">로그아웃</a>
-<button onclick="showModal()" class="cart-button">회원탈퇴</button>
+  <a href="#" onclick="showModal()">회원탈퇴</a>
   <a class="text-body px-2" href="tel:+0123456789">㈜ SWEETHOME<br><i class="fa fa-phone-alt text-primary me-2"></i>010 1234 1234</a>
 </div>
 
@@ -171,7 +169,7 @@ font-family: 'Gothic A1', sans-serif;
       <!-- 모달 헤더 -->
       <div class="modal-header">
         <h4 class="modal-title">회원 탈퇴 확인</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" onclick="closeModal()">&times;</button>
       </div>
       <!-- 모달 내용 -->
       <div class="modal-body">
@@ -180,7 +178,7 @@ font-family: 'Gothic A1', sans-serif;
       </div>
       <!-- 모달 푸터 -->
       <div class="modal-footer">
-        <button type="button" onclick="window.location.href='/'">닫기</button>
+        <button type="button" onclick="closeModal()">닫기</button>
         <button type="button" onclick="isDeleted()">확인</button>
       </div>
     </div>
@@ -193,6 +191,10 @@ font-family: 'Gothic A1', sans-serif;
 function showModal() {
     var modal = document.getElementById("modal2");
     modal.style.display = "block"; 
+}
+function closeModal() {
+    var modal = document.getElementById("modal2");
+    modal.style.display = "none"; 
 }
 function getCookie(name) {
     var value = "; " + document.cookie;
