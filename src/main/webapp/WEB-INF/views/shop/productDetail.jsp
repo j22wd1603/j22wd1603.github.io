@@ -157,18 +157,19 @@ function fn_share(productIdk) {
 	         <img class="detailImage" src="/resources/images/product/big/${shop.productCode}.${shop.productFileExt}" alt="${shop.productName}">
 	   </div>  
 	    
-	   <div id="detail-reviews" class="content">
+	   <div id="detail-reviews" class="content" style="display: none;">
 		    <div class="detail-reviews-title">리뷰</div>
 				<div id="review-rating">
-				        <div id="review-rating-star">   
-				            <h1>★ 4.5</h1>
+
+				        <div id="review-rating-star">
+				            <h1>★ <fmt:formatNumber value="${grade}" pattern="#.#" /></h1>
 				            <p>${fn:length(review)}개의 리뷰</p>
 				        </div>
 				        <div id="review-rating-rate">    
 				            <h6>디자인</h6>
 				            <p>만족해요</p>
 				            <div class="bar">
-						        <div class="bar-fill" style="width: 80%;"></div>
+						        <div class="bar-fill" style="width: ${gradeP}%;"></div>
 						    </div>
 				        </div>
 				</div>   
@@ -176,8 +177,9 @@ function fn_share(productIdk) {
 		 	<div class="review-content" >
 		  		<div id="review-content-user" >
 			 		<p>리뷰번호: ${review.reviewIdk}</p>
-	                <p>아이디: ${review.userId}</p>        
+	                <p>작성자 아이디: ${review.userId}</p>        
 					<p>등록일: ${review.regDate}</p>
+					<p>평점: ${review.score}</p>
 		        </div>
 			 	<div id="review-content-text" >
 			 	 	<div id="review-content-image">

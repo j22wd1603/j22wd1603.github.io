@@ -204,10 +204,19 @@ public class ShopController {
 		
 		shop = shopService.productSelect(productIdk);
 		review = shopService.reviewList(productIdk);
+		
+		int score =0;
+		for(int i=0;i < review.size();i++) {
+			score += review.get(i).getScore();
+		}
+		double grade = score / review.size();
+		int gradeP = (int) ((grade / 5) *100);
 	
 	    model.addAttribute("shop", shop);
 	    model.addAttribute("review",review);
 	    model.addAttribute("user",user);
+	    model.addAttribute("grade",grade);
+	    model.addAttribute("gradeP",gradeP);
 	    
 	    return "/shop/productDetail"; 
 	}
