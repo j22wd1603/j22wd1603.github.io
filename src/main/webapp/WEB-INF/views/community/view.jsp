@@ -19,6 +19,21 @@
     <style>
     
     
+    pre {
+    
+    	font-family: 'Pretendard Variable',sans-serif;    
+		letter-spacing: -0.3px;
+    	-webkit-font-smoothing: antialiased;    
+    	
+		margin: 24px 0px;
+	    padding: 0px 16px;
+	    font-size: 16px;
+	    line-height: 24px;
+	    color: rgb(47, 52, 56);
+	    white-space: pre-line;        		
+    }    
+  
+    
     .trWhite {
     	background-color:white;
     }
@@ -657,7 +672,7 @@ function commentInsert(commentIdk,count) {
 			    
 			    <tr>
 			    		<th></th>
-			    		<th>
+			    		<th style="padding-bottom:10px;">
 							<c:if test="${userScrap eq 1}">
 									<button type ="button" id="btnFilledScrap" style="border:none; background-color:transparent; padding:0; margin:5px; display:block; float:right;"><img src="/resources/img/icons/icon_bookmark_filled.png"/></button>
 									<button type ="button" id="btnScrap" style="border:none; background-color:transparent; padding:0; margin:5px; display:none; float:right;"><img src="/resources/img/icons/icon_bookmark.png"/></button>
@@ -678,15 +693,16 @@ function commentInsert(commentIdk,count) {
 						</th>
 				</tr>
 				
-				<tr>
-					<td colspan="2"><pre style="font-size:14.58px; font-weight:500; color:#2F3438; white-space: pre-wrap; word-break: break-all; overflow: auto;"><c:out value="${community.commuContent}" /></pre></td>
-				</tr>
+				
+              	  <tr style="border-top:2px solid #bfbfbf; border-bottom:2px solid #bfbfbf;">
+	                <td colspan="2"><pre style="height:300px; white-space: pre-wrap; word-break: break-all; overflow: auto;"><c:out value="${community.commuContent}" /></pre></td>
+	              </tr>
 				
 			</tbody>
 			
+			
 		</table>
 		
-		<hr style="width:718px; height:2px; text-align: center; border:none; color:black; margin: 0px auto;">
 		
 		<div style="margin-top:50px;">
 	    	<table style="margin-left:auto; margin-right:auto; width:718px;">
