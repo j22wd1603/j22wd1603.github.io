@@ -157,7 +157,7 @@ function fn_share(productIdk) {
 	         <img class="detailImage" src="/resources/images/product/big/${shop.productCode}.${shop.productFileExt}" alt="${shop.productName}">
 	   </div>  
 	    
-	   <div id="detail-reviews" class="content" style="display: none;">
+	   <div id="detail-reviews" class="content">
 		    <div class="detail-reviews-title">리뷰</div>
 				<div id="review-rating">
 
