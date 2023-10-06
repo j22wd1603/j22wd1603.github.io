@@ -65,42 +65,57 @@
     <div class="row g-0 team-items">
     
       <c:forEach var="commuBoard" items="${list1}" varStatus="status">
+      	<c:if test="${commuBoard.commuStatus eq 'Y'}">	
 	        <c:if test="${commuBoard.fileCheck eq 'Y'}">
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-    					<img  class="img-fluid" style="object-fit: cover; height:407.98px; width:408px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
+           				<img  class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
 		              </div>
-		              <div class="bg-light text-center p-4">
-		                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
-		                <h3 class="mt-2">${commuBoard.regDate}</h3>
-		                <h3 class="mt-2">${commuBoard.userId}</h3>
-		                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
-		                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
+		              <div class="text-center p-4">
+		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
+						<div style="display: flex; align-items: center;">
+						    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+						        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+						    </div>
+						    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+						</div>
+					    
+		                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+          					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+		                <span style="color:black; float:right; font-weight: bold;"> ${commuBoard.regDate}</span>
 		              </div>
 	              	</a>
 	            </div>
 	          </div>
-	        </c:if>
+	        </c:if>		
+	         
 	        <c:if test="${commuBoard.fileCheck ne 'Y'}">
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-			                <img class="img-fluid" src="/resources/images/community/default.jpg">
+           				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/default.jpg">
 		              </div>
-		              <div class="bg-light text-center p-4">
-		                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
-		                <h3 class="mt-2">${commuBoard.regDate}</h3>
-		                <h3 class="mt-2">${commuBoard.userId}</h3>
-		                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
-		                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
+		              <div class="text-center p-4">
+		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
+						<div style="display: flex; align-items: center;">
+						    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+						        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+						    </div>
+						    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+						</div>
+					    
+		                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+          					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+		                <span style="color:black; float:right; font-weight: bold;"> ${commuBoard.regDate}</span>
 		              </div>
 	              	</a>
 	            </div>
 	          </div>
-	        </c:if>	
+	        </c:if>
+        </c:if>
       </c:forEach>
     </div>
   </div>
@@ -116,42 +131,57 @@
 
     <div class="row g-0 team-items">
       <c:forEach var="commuBoard" items="${list2}" varStatus="status">
+      	<c:if test="${commuBoard.commuStatus eq 'Y'}">	
 	        <c:if test="${commuBoard.fileCheck eq 'Y'}">
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-    					<img  class="img-fluid" style="object-fit: cover; height:407.98px; width:408px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
+           				<img  class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
 		              </div>
-		              <div class="bg-light text-center p-4">
-		                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
-		                <h3 class="mt-2">${commuBoard.regDate}</h3>
-		                <h3 class="mt-2">${commuBoard.userId}</h3>
-		                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
-		                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
+		              <div class="text-center p-4">
+		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
+						<div style="display: flex; align-items: center;">
+						    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+						        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+						    </div>
+						    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+						</div>
+					    
+		                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+          					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+		                <span style="color:black; float:right; font-weight: bold;"> ${commuBoard.regDate}</span>
 		              </div>
 	              	</a>
 	            </div>
 	          </div>
-	        </c:if>
+	        </c:if>		
+	         
 	        <c:if test="${commuBoard.fileCheck ne 'Y'}">
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-			                <img class="img-fluid" src="/resources/images/community/default.jpg">
+           				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/default.jpg">
 		              </div>
-		              <div class="bg-light text-center p-4">
-		                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
-		                <h3 class="mt-2">${commuBoard.regDate}</h3>
-		                <h3 class="mt-2">${commuBoard.userId}</h3>
-		                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
-		                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
+		              <div class="text-center p-4">
+		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
+						<div style="display: flex; align-items: center;">
+						    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+						        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+						    </div>
+						    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+						</div>
+					    
+		                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+          					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+		                <span style="color:black; float:right; font-weight: bold;"> ${commuBoard.regDate}</span>
 		              </div>
 	              	</a>
 	            </div>
 	          </div>
-	        </c:if>	
+	        </c:if>
+        </c:if>
       </c:forEach>
     </div>
   </div>
@@ -167,42 +197,57 @@
 
     <div class="row g-0 team-items">
       <c:forEach var="commuBoard" items="${list3}" varStatus="status">
+      	<c:if test="${commuBoard.commuStatus eq 'Y'}">	
 	        <c:if test="${commuBoard.fileCheck eq 'Y'}">
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-    					<img  class="img-fluid" style="object-fit: cover; height:407.98px; width:408px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
+           				<img  class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
 		              </div>
-		              <div class="bg-light text-center p-4">
-		                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
-		                <h3 class="mt-2">${commuBoard.regDate}</h3>
-		                <h3 class="mt-2">${commuBoard.userId}</h3>
-		                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
-		                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
+		              <div class="text-center p-4">
+		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
+						<div style="display: flex; align-items: center;">
+						    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+						        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+						    </div>
+						    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+						</div>
+					    
+		                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+          					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+		                <span style="color:black; float:right; font-weight: bold;"> ${commuBoard.regDate}</span>
 		              </div>
 	              	</a>
 	            </div>
 	          </div>
-	        </c:if>
+	        </c:if>		
+	         
 	        <c:if test="${commuBoard.fileCheck ne 'Y'}">
 	          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">  
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-			                <img class="img-fluid" src="/resources/images/community/default.jpg">
+           				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/default.jpg">
 		              </div>
-		              <div class="bg-light text-center p-4">
-		                <h3 class="mt-2">${commuBoard.commuTitle}</h3>
-		                <h3 class="mt-2">${commuBoard.regDate}</h3>
-		                <h3 class="mt-2">${commuBoard.userId}</h3>
-		                <span class="text-primary">조회수: ${commuBoard.commuViews}</span>
-		                <span class="text-primary">좋아요수: ${commuBoard.commuLikes}</span>
+		              <div class="text-center p-4">
+		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
+						<div style="display: flex; align-items: center;">
+						    <div class="box" style="background: #BDBDBD; width: 24px; height: 24px; border-radius: 70%; overflow: hidden; margin-right: 10px;">
+						        <img class="profile" src="/resources/images/profile/${commuBoard.userId}.${commuBoard.imageFileExt}" style="width: 100%; height: 100%; object-fit: cover;" />
+						    </div>
+						    <div style="font-size: large; color: black;">${commuBoard.userId}</div>
+						</div>
+					    
+		                <span style="float:left; color:black;"><img src="/resources/img/icons/eye.png"/> ${commuBoard.commuViews}&nbsp;</span>
+          					<span style="float:left; color:black;"><img src="/resources/img/icons/small_heart.png" style="margin-bottom:4px;"/> ${commuBoard.commuLikes}</span>
+		                <span style="color:black; float:right; font-weight: bold;"> ${commuBoard.regDate}</span>
 		              </div>
 	              	</a>
 	            </div>
 	          </div>
-	        </c:if>	
+	        </c:if>
+        </c:if>
       </c:forEach>
     </div>
   </div>
