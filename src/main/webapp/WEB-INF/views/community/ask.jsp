@@ -154,21 +154,22 @@
   <div class="container">
   
    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
-	    <select name="_sortType" id="_sortType" class="custom-select" style="width:auto;">
-			<option value="">조회 항목</option>
-			<option value="1" <c:if test='${sortType eq "1"}'>selected</c:if>>최신순</option>
-			<option value="2" <c:if test='${sortType eq "2"}'>selected</c:if>>과거순</option>
-			<option value="3" <c:if test="${sortType eq '3'}">selected</c:if>>인기순</option>                 	
-	    </select>
+        <select name="_sortType" id="_sortType" class="custom-select" style="width:auto; padding:5px; font-weight:bold;">
+          <option value="" style="font-weight:bold;">조회 항목</option>
+          <option value="1" style="font-weight:bold;" <c:if test='${sortType eq "1"}'>selected</c:if>>최신순</option>
+          <option value="2" style="font-weight:bold;" <c:if test='${sortType eq "2"}'>selected</c:if>>과거순</option>
+          <option value="3" style="font-weight:bold;" <c:if test="${sortType eq '3'}">selected</c:if>>인기순</option>                 	
+        </select>
 	             	
-	    <select name="_searchType" id="_searchType" class="custom-select" style="width:auto;">
-			<option value="">검색 항목</option>
-			<option value="1" <c:if test='${searchType eq "1"}'>selected</c:if>>작성자</option>
-			<option value="2" <c:if test='${searchType eq "2"}'>selected</c:if>>제목</option>
-			<option value="3" <c:if test="${searchType eq '3'}">selected</c:if>>내용</option>
+	    <select name="_searchType" id="_searchType" class="custom-select" style="width:auto; padding:5px; font-weight:bold;">
+			<option value="" style="font-weight:bold;">검색 항목</option>
+			<option value="1" style="font-weight:bold;" <c:if test='${searchType eq "1"}'>selected</c:if>>작성자</option>
+			<option value="2" style="font-weight:bold;" <c:if test='${searchType eq "2"}'>selected</c:if>>제목</option>
+			<option value="3" style="font-weight:bold;" <c:if test="${searchType eq '3'}">selected</c:if>>내용</option>
 		</select>
-			<input type="text" name="_searchValue" id="_searchValue" value="${searchValue}" class="form-control mx-1" maxlength="20" style="width:auto;ime-mode:active;" placeholder="조회값을 입력하세요." />
-			<button type="button" id="btnSearch" class="btn btn-secondary mb-3 mx-1">조회</button>
+		
+ 		<input type="text" style="width:196px; ime-mode:active; font-weight:bold;" name="_searchValue" id="_searchValue" value="${searchValue}" class="justify-content-center" maxlength="20" placeholder="조회값을 입력하세요." />
+        <button type="button" id="btnSearch" class="mb-3 mx-1" style="color:#9E0E0B; background-color:white; font-weight:bold; border-width: thin; border-color:gray; border-radius:3px; height:30px;transition: .5s;">조회</button>
 	 </div>
 	    
     <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
