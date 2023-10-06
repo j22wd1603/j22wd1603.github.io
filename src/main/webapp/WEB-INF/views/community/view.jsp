@@ -31,6 +31,21 @@
 	    line-height: 24px;
 	    color: rgb(47, 52, 56);
 	    white-space: pre-line;        		
+    }
+    
+    p {
+    
+    	font-family: 'Pretendard Variable',sans-serif;    
+		letter-spacing: -0.3px;
+    	-webkit-font-smoothing: antialiased;    
+    	
+		margin: 24px 0px;
+	    padding: 0px 16px;
+	    font-size: 16px;
+	    line-height: 24px;
+	    color: rgb(47, 52, 56);
+	    white-space: pre-line;           
+    
     }    
   
     
@@ -386,6 +401,8 @@ function commentUpdateEvent(count){
 	var commentContent = document.getElementById('commentContent' + count);
 	
 	var commentUpdateContent = document.getElementById('commentUpdateContent' + count);
+	
+	var btnReplyWrite = document.getElementById('btnReplyWrite' + count);
 		
 	//댓글 수정 버튼 숨기기 및 보이기
 	if(btnReplyUpdate.style.display != 'none'){
@@ -409,6 +426,14 @@ function commentUpdateEvent(count){
 	}
 	else{
 		commentUpdateContent.style.display = 'block';
+	}	
+	
+	//댓글 등록버튼 숨기기 및 보이기
+	if(btnReplyWrite.style.display != 'none'){
+		btnReplyWrite.style.display = 'none';
+	}
+	else{
+		btnReplyWrite.style.display = 'block';
 	}	
 }
 
@@ -721,18 +746,19 @@ function commentInsert(commentIdk,count) {
 				<c:if test="${!empty commentList}">
 					<c:forEach var="commentList" items="${commentList}" varStatus="status">
 					<c:set var="count" value = "${count+1}" />
+
 					<tr>
-					
 					<c:choose>
 						<c:when test="${commentList.parentIdk eq 1 && commentList.commentStatus eq 'Y'}">									
 							<td>
-							    <div class="box" style="background: #BDBDBD; width:48px; height:48px; border-radius:70%; overflow:hidden;"> 
-							        <img class="profile" src="/resources/images/profile/${commentList.userId}.${commentList.imageFileExt}" style="width:100%; height:100%; object-fit:cover;"/>
-							    </div>							
 							
-								<div style="font-size:large; color:black; margin-left:1px">${commentList.userId}</div>
+							    <div class="box" style="background: #BDBDBD; width:48px; height:48px; border-radius:70%; overflow:hidden; float:left; margin:10px;"> 
+							        <img class="profile" src="/resources/images/profile/${commentList.userId}.${commentList.imageFileExt}" style="width:100%; height:100%; object-fit:cover;"/>
+							    </div>	
+			            		<h4 style="margin:0px;">${commentList.userId}</h4>
+			            		<p style="margin:0px;">${commentList.regDate}</p>							
+
 								<div style="color:black">${commentList.commentContent}</div>
-								<div style="">${commentList.regDate}</div>
 							         <textarea class="form-control" rows="1" name="commentContent${count}" id="commentContent${count}" style="ime-mode:active; dlsplay:block;" placeholder="내용을 입력해주세요" required></textarea>
 							         <textarea class="form-control" rows="1" name="commentUpdateContent${count}" id="commentUpdateContent${count}" style="ime-mode:active; display:none;" placeholder="수정 할 내용을 입력해주세요." required></textarea>
 								<c:if test="${cookieUserId eq commentList.userId}">	
@@ -740,7 +766,7 @@ function commentInsert(commentIdk,count) {
 									<button type="button" style="background-color:white; margin:5px; padding:0px; float:right; border:none; color:black" name="btnReplyEvent${count}" id="btnReplyEvent${count}" class="btn btn-secondary" onclick="commentUpdateEvent(${count})">수정</button>
 									<button type="button" style="background-color:white; border:none; color:black; display: none;" name="btnReplyUpdate${count}" id="btnReplyUpdate${count}" class="btn btn-secondary" onclick="commentUpdate(${commentList.commentIdk},${count})">수정 완료</button>								
 								</c:if>	
-						      	  <button type="button" style="background-color:white; margin:5px; padding:0px; float:right; border:none; color:black" name="btnReplyWrite${count}" id="btnReplyWrite${count}" class="btn btn-secondary" onclick="commentInsert(${commentList.commentIdk},${count})">등록</button>
+						      	  <button type="button" style="display:block; background-color:white; margin:5px; padding:0px; float:right; border:none; color:black" name="btnReplyWrite${count}" id="btnReplyWrite${count}" class="btn btn-secondary" onclick="commentInsert(${commentList.commentIdk},${count})">등록</button>
 							</td>
 						</c:when>
 						<c:when test="${commentList.parentIdk eq 1 && commentList.commentStatus eq 'N'}">									
