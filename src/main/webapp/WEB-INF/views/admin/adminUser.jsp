@@ -12,6 +12,12 @@
 	border: 1px solid #c4c2c2;
 	text-align: center;
 }
+.table-cell {
+    max-width: 300px; /* 원하는 최대 길이로 조절하세요 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 </style>
 <script type="text/javascript">
 $("document").ready(function(){
@@ -58,8 +64,8 @@ $("document").ready(function(){
 				<tr>							      
 				 <td>${list.questionIdk }</td>
 				    <td>${list.userId}</td>
-				    <td>${list.questionTitle }</td>
-				    <td><a href="/admin/adminAnswer?questionIdk=${list.questionIdk }">${list.questionContent }</a></td>
+				    <td class="table-cell">${list.questionTitle }</td>
+				    <td class="table-cell"><a href="/admin/adminAnswer?questionIdk=${list.questionIdk }">${list.questionContent }</a></td>
 				    <td>${list.regDate }</td>
 				</tr>
 </c:forEach>

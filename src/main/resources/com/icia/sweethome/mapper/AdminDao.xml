@@ -213,6 +213,7 @@ WHERE 1=1
   CASE
     WHEN USER_STATUS = 'Y' THEN 'N'
     WHEN USER_STATUS = 'N' THEN 'Y'
+    WHEN USER_STATUS = 'D' THEN 'Y'
   END
   WHERE USER_ID = #{userId}
 </update>
@@ -254,8 +255,7 @@ WHERE USER_ID = #{userId}
              		   NVL(FILE_EXT, '') AS FILE_EXT
                        
                   FROM QUESTION_BOARD
-          		 WHERE USER_ID = #{userId}
-          		   AND ANS_STATUS = 'N'
+          		 WHERE ANS_STATUS = 'N'
         ORDER BY QUESTION_IDK DESC  ))
   </select>
 <!-- 관리자 끝 -->

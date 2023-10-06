@@ -124,6 +124,8 @@ function fn_boardDelete(userId, userStatus)
         confirmationMessage = "회원을 정지 하시겠습니까?";
     } else if (userStatus == "N") {
         confirmationMessage = "회원 정지를 해제 하시겠습니까?";
+    }else if (userStatus == "D") {
+        confirmationMessage = "회원을 복귀 시킵니다.";
     }
 
     if (confirmationMessage !== "" && confirm(confirmationMessage))
@@ -144,7 +146,7 @@ function fn_boardDelete(userId, userStatus)
             {
                 if (response.code == 0)
                 {
-                    alert("회원이 정지 또는 정지 해제 되었습니다.");
+                    alert("회원이 정지 또는 정지 해제 또는 복귀 되었습니다.");
                     location.href = "/admin/adminCs";
                 }
                 else if (response.code == 400)
