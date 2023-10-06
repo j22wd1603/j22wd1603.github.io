@@ -165,7 +165,7 @@ font-family: 'Gothic A1', sans-serif;
 %>
 </nav>
 
-<div id="modal" class="modal">
+<div id="modal2" class="modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- 모달 헤더 -->
@@ -191,7 +191,7 @@ font-family: 'Gothic A1', sans-serif;
 
 <script>
 function showModal() {
-    var modal = document.getElementById("modal");
+    var modal = document.getElementById("modal2");
     modal.style.display = "block"; 
 }
 function getCookie(name) {
