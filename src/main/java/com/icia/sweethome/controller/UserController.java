@@ -573,27 +573,29 @@ public class UserController
     @ResponseBody
     public Response<Object> updateProc(MultipartHttpServletRequest request, HttpServletResponse response)
     {
-       String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-       String userId = HttpUtil.get(request, "userId");
-       String userPwd = HttpUtil.get(request, "userPwd");
+       String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+       String userPwd = HttpUtil.get(request, "userPwd1");
        String userName = HttpUtil.get(request, "userName");
        String userEmail = HttpUtil.get(request, "userEmail");
        String userPhone = HttpUtil.get(request, "userPhone");  
        String userAddress = HttpUtil.get(request, "userAddress");
        String userNickname = HttpUtil.get(request, "userNickname");
+       String fileCheck = HttpUtil.get(request, "fileCheck","N");
        
-        FileData fileData = HttpUtil.getFile(request, "profilePicture", UPLOAD_SAVE_DIR + "\\profile", userId);
-
+       FileData fileData = null;
+       
+       if(StringUtil.equals(fileCheck, "Y")) {
+    	   fileData = HttpUtil.getFile(request, "profilePicture", UPLOAD_SAVE_DIR + "\\profile", userId);
+       }
        Response<Object> ajaxResponse = new Response<Object>();
        
-       if(!StringUtil.isEmpty(cookieUserId))
+       if(!StringUtil.isEmpty(userId))
        {
-          User user = userService.userSelect(cookieUserId);
+          User user = userService.userSelect(userId);
           
           if(user != null)
           {
-             if(!StringUtil.isEmpty(userPwd) && !StringUtil.isEmpty(userName) &&
-                                  !StringUtil.isEmpty(userEmail) && !StringUtil.isEmpty(userPhone) && !StringUtil.isEmpty(userAddress) )
+             if(!StringUtil.isEmpty(userPwd) && !StringUtil.isEmpty(userName) && !StringUtil.isEmpty(userEmail) && !StringUtil.isEmpty(userPhone) && !StringUtil.isEmpty(userAddress) )
              {
                 user.setUserPwd(userPwd);
                 user.setUserName(userName);
@@ -634,11 +636,6 @@ public class UserController
           ajaxResponse.setResponse(400, "Bad Request");
        }
        
-       if(logger.isDebugEnabled())
-       {
-          logger.debug("[UserController]/user/updateProc response\n" + JsonUtil.toJsonPretty(ajaxResponse));
-       }
-       
        return ajaxResponse;
     }
 	//마이페이지에 있는 내 스크랩 삭제 0913 윤하나 
@@ -648,10 +645,6 @@ public class UserController
 	{
 		int commuIdk = HttpUtil.get(request, "commuIdk", 0);
 		Response<Object> ajaxResponse = new Response<Object>();
-		
-		logger.debug("==================================");
-		logger.debug("commuIdk : " + commuIdk);
-		logger.debug("==================================");
 		
 		if(!StringUtil.isEmpty(commuIdk))
 		{
