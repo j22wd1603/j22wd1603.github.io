@@ -217,6 +217,12 @@ WHERE 1=1
   WHERE USER_ID = #{userId}
 </update>
 
+<update id="isDeleted" parameterType="com.icia.sweethome.model.User">
+UPDATE USERS
+SET USER_STATUS = 'D'
+WHERE USER_ID = #{userId}
+</update>
+
   <select id="userQuestion" parameterType="com.icia.sweethome.model.Question" resultMap="questionResultMap1">     
 	SELECT  QUESTION_IDK,
 		QUESTION_CATEGORY,

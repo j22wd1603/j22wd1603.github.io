@@ -510,7 +510,15 @@ function fn_loginCheck() {
 					} else if (response.code == 400) {
 						alert("파라미터 값이 올바르지 않습니다.");
 						$("#userId").focus();
-					} else {
+					} else if (response.code == -3)
+						{
+							alert("탈퇴된 회원입니다.")
+						}
+					else if (response.code == -2)
+					{
+						alert("정지된 회원입니다.")
+					}
+					else {
 						alert("오류가 발생하였습니다.");
 						$("#userId").focus();
 					}

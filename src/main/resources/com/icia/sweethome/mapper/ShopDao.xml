@@ -285,25 +285,7 @@ UPDATE PRODUCT
 </update>
 
 <!-- shop - productDetail 리뷰조회 리스트   -->
-<select id="reviewList" parameterType="int" resultMap="reviewResultMap">
-SELECT
-    PR.REVIEW_IDK AS REVIEW_IDK,
-    PR.PRODUCT_IDK AS PRODUCT_IDK,
-    PR.ORDER_IDK AS ORDER_IDK,
-    U.USER_ID   AS USER_ID,
-    PR.REVIEW_CONTENT  AS REVIEW_CONTENT,
-    TO_CHAR(PR.REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE,
-    '' AS PRODUCT_NAME
-FROM
-    PRODUCT_REVIEW PR
-INNER JOIN
-    USERS U
-ON
-    PR.USER_ID = U.USER_ID
-WHERE
-    PR.PRODUCT_IDK = #{value}
-ORDER BY REG_DATE ASC
-</select>
+
 
 
 <!-- user- cart 카트조회해서 인서트 또는 업데이트 -->

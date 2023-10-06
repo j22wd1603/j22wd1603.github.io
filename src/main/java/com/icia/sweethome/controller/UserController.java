@@ -29,6 +29,7 @@ import com.icia.sweethome.model.Question;
 import com.icia.sweethome.model.Response;
 import com.icia.sweethome.model.Review;
 import com.icia.sweethome.model.User;
+import com.icia.sweethome.service.AdminService;
 import com.icia.sweethome.service.CommunityService;
 import com.icia.sweethome.service.CsService;
 import com.icia.sweethome.service.ShopService;
@@ -64,6 +65,10 @@ public class UserController
 	
 	@Autowired
 	private ShopService shopService;
+
+	@Autowired
+	private AdminService adminService;
+	
 	
 	private static final int LIST_COUNT = 5;	//한 페이지의 게시물 수
 	private static final int PAGE_COUNT = 5;	//페이징 수
@@ -386,12 +391,19 @@ public class UserController
 			if(user != null)
 			{
 				
-				if(StringUtil.equals(user.getUserPwd(), userPwd))
+				if(StringUtil.equals(user.getUserPwd(), userPwd) && "Y".equals(user.getUserStatus()))
 				{
 					CookieUtil.addCookie(response, "/", -1, AUTH_COOKIE_NAME, CookieUtil.stringToHex(userId));
 					
 					ajaxResponse.setResponse(0, "Success"); // 로그인 성공
 				}
+				else if ("N".equals(user.getUserStatus())) {
+	                // 정지된 회원
+	                ajaxResponse.setResponse(-2, "User is suspended");
+	            } else if ("D".equals(user.getUserStatus())) {
+	                // 탈퇴된 회원
+	                ajaxResponse.setResponse(-3, "User has been withdrawn");
+	            }
 				else
 				{
 					ajaxResponse.setResponse(-1, "Passwords do not match"); // 비밀번호 불일치
@@ -746,5 +758,25 @@ public class UserController
 	        
 			return ajaxResponse;	
 		}
-		
+		@PostMapping("/user/isDeleted")
+		@ResponseBody
+		public Response<Object> isDeleted(HttpServletRequest request, HttpServletResponse response) {
+			Response<Object> ajaxResponse = new Response<Object>();
+			String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
+		    User user = userService.userSelect(userId);
+		    System.out.println("Received userId: " + userId); // userId 출력
+		    if (user != null) {
+		        if (userId.equals(user.getUserId())) { // 객체가 null이 아닌 경우에만 비교 수행
+		            adminService.isDeleted(user);
+		            ajaxResponse.setResponse(0, "탈퇴 성공");
+		        } else {
+		            ajaxResponse.setResponse(500, "탈퇴 실패");
+		        }
+		    } else {
+		        ajaxResponse.setResponse(500, "사용자가 존재하지 않습니다.");
+		    }	
+			
+	        
+			return ajaxResponse;	
+		}
 	}

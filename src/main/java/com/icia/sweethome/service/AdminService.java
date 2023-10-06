@@ -123,7 +123,13 @@ public class AdminService
 	    int count = adminDao.userStatusUpdate(user);
 	    return count;
 	}
-	  
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public int isDeleted(User user) {
+	    int count = adminDao.isDeleted(user);
+	    return count;
+	}
+	
 	public Question questionSelect(String userId)
 	   {
 		Question question = null;

@@ -52,6 +52,8 @@ public interface AdminDao {
 	public List<Question> userQuestion(Question user);
 	public int noticeInsert(Cs cs);
 	public int noticeDelete(Cs cs);
+	public int isDeleted(User user);
 
+	
 }
 

@@ -139,7 +139,7 @@ font-family: 'Gothic A1', sans-serif;
   <hr>
   <a href="/user/mypage">회원정보수정</a>
   <a href="/user/order_list">로그아웃</a>
-  <a href="/user/order_list">회원탈퇴</a><br>
+<button onclick="showModal()" class="cart-button">회원탈퇴</button>
   <a class="text-body px-2" href="tel:+0123456789">㈜ SWEETHOME<br><i class="fa fa-phone-alt text-primary me-2"></i>010 1234 1234</a>
 </div>
 
@@ -164,3 +164,75 @@ font-family: 'Gothic A1', sans-serif;
    }
 %>
 </nav>
+
+<div id="modal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- 모달 헤더 -->
+      <div class="modal-header">
+        <h4 class="modal-title">회원 탈퇴 확인</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- 모달 내용 -->
+      <div class="modal-body">
+        <!-- 모달 내용을 여기에 추가 -->
+        <p>회원 탈퇴하시겠습니까?</p>
+      </div>
+      <!-- 모달 푸터 -->
+      <div class="modal-footer">
+        <button type="button" onclick="window.location.href='/'">닫기</button>
+        <button type="button" onclick="isDeleted()">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+function showModal() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "block"; 
+}
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+function isDeleted() {
+    var userId = getCookie("AUTH_COOKIE_NAME");
+
+    $.ajax({
+        type: 'POST',
+        url: '/user/isDeleted',
+        data: {   
+            userId: userId,
+        },
+        dataType: "json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader("AJAX", "true");
+        },
+        success: function(response) {      
+            if (response.code == 0) {
+                alert("탈퇴 되었습니다.");
+                // 모달 닫기
+                var modal = document.getElementById("modal");
+                modal.style.display = "none"; 
+                // 여기에서 로그아웃 또는 리다이렉션 등 추가 작업 수행 가능
+                handleLogoutSuccess();
+            } else if(response.code == 500){
+                alert("탈퇴 중 오류 발생: " + response.message);
+            }
+        },
+        error: function(xhr, status, error) {      
+            alert("탈퇴 중 오류 발생: " + error);
+        }
+    });
+}
+
+function handleLogoutSuccess() {
+    // 쿠키 삭제
+	window.location.href = '/user/loginOut';
+
+}
+</script>
