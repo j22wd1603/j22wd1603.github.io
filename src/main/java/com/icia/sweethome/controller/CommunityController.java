@@ -81,17 +81,11 @@ public class CommunityController {
 		List<Community> list2 = null; 	// 자유게시판 조회
 		List<Community> list3 = null;	// 질문게시판 조회
 		
-		list1 = communityService.boardListByLikes("1");	//1.마이룸 2.자유게시판 3.질문게시판
-		list2 = communityService.boardListByLikes("2");	//1.마이룸 2.자유게시판 3.질문게시판
-		list3 = communityService.boardListByViews("3");	//1.마이룸 2.자유게시판 3.질문게시판
+		list1 = communityService.boardListByMonth("1");	//1.마이룸 2.자유게시판 3.질문게시판
+		list2 = communityService.boardListByMonth("2");	//1.마이룸 2.자유게시판 3.질문게시판
+		list3 = communityService.boardListByMonth("3");	//1.마이룸 2.자유게시판 3.질문게시판
 		
-		
-		for(int i = 0; i < list1.size(); i++)
-		{
-			logger.debug("list getCommuTitle [" + i + "] : " + list1.get(i).getCommuTitle());
-			logger.debug("list regDate [" + i + "] : " + list1.get(i).getRegDate());
-			logger.debug("list userId [" + i + "] : " + list1.get(i).getUserId());
-		}
+
         
 		model.addAttribute("cookieUserId", cookieUserId);
         model.addAttribute("list1", list1);
