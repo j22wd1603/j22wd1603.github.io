@@ -84,10 +84,6 @@ public class UserController
 		return "/user/join";
 	}
 	
-	@RequestMapping(value = "/user/userUpdate")
-	public String userUpdate(Model model, HttpServletRequest request, HttpServletResponse response) {
-		return "/user/userUpdate";
-	}
 	
 	@RequestMapping(value = "/user/idPopup")
 	   public String idPopup(Model model, HttpServletRequest request, HttpServletResponse response) { 
@@ -380,10 +376,6 @@ public class UserController
 		String userPwd = HttpUtil.get(request, "userPwd");
 		Response<Object> ajaxResponse = new Response<Object>();
 		
-		logger.debug("==================================");
-		logger.debug("userId : " + userId);
-		logger.debug("==================================");
-		
 		if(!StringUtil.isEmpty(userId) && !StringUtil.isEmpty(userPwd))
 		{
 			User user = userService.userSelect(userId);
@@ -586,9 +578,9 @@ public class UserController
        String userPwd = HttpUtil.get(request, "userPwd");
        String userName = HttpUtil.get(request, "userName");
        String userEmail = HttpUtil.get(request, "userEmail");
-        String userPhone = HttpUtil.get(request, "userPhone");  
-        String userAddress = HttpUtil.get(request, "userAddress");
-        String userNickname = HttpUtil.get(request, "userNickname");
+       String userPhone = HttpUtil.get(request, "userPhone");  
+       String userAddress = HttpUtil.get(request, "userAddress");
+       String userNickname = HttpUtil.get(request, "userNickname");
        
         FileData fileData = HttpUtil.getFile(request, "profilePicture", UPLOAD_SAVE_DIR + "\\profile", userId);
 

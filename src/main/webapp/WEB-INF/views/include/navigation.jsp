@@ -60,10 +60,10 @@ font-family: 'Gothic A1', sans-serif;
                 <a class="text-body px-2" href="/user/join">회원가입</a>
             </div>
             <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-sm-square btn-outline-body me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-sm-square btn-outline-body me-0" href=""><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href="/index"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href="/index"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href="/index"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-0" href="/index"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
@@ -135,8 +135,8 @@ font-family: 'Gothic A1', sans-serif;
 
   <br>
   <hr>
-  <a href="/user/mypage">회원정보수정</a>
-  <a href="/user/order_list">로그아웃</a>
+  <a href="/user/userUpdate">회원정보수정</a>
+  <a href="/user/loginOut">로그아웃</a>
   <a href="#" onclick="showModal()">회원탈퇴</a>
   <a class="text-body px-2" href="tel:+0123456789">㈜ SWEETHOME<br><i class="fa fa-phone-alt text-primary me-2"></i>010 1234 1234</a>
 </div>

@@ -424,7 +424,10 @@ public class CommunityController {
 			{
 				boardMe = "Y";
 			}
+		}else {
+			return "/index";
 		}
+		
 		if(StringUtil.equals(community.getCommuTab(), "1"))
 		{
 			redirectUrl = "/community/myroom";

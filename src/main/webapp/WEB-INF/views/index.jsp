@@ -53,7 +53,7 @@ h1{
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-1 text-white animated slideInDown" style="font-family: 'Gothic A1', sans-serif;">금주의 <br> 베스트 아이템</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">만명의 유저들이 선택한 이번주 베스트 아이템 가구들을 구경하세요</p>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
+                                <a href="/shop/bestItem" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ h1{
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-1 text-white animated slideInDown">자취생 <br>필수템</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">자취생들에게 없어서는 안될 필수템들을 모아봤습니다</p>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
+                                <a href="/shop/bestItem" class="btn btn-primary py-3 px-5 animated slideInLeft">구경하기</a>
                             </div>
                         </div>
                     </div>
