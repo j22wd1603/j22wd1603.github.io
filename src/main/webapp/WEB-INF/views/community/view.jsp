@@ -54,6 +54,21 @@
     }
     </style>
     
+    
+<script>
+  // 페이지가 로드되고 나서 스크립트를 실행합니다.
+  document.addEventListener('DOMContentLoaded', function () {
+    // JavaScript로 DOM 요소를 찾습니다.
+    var preElement = document.getElementById('myPre');
+
+    // 내용이 300px 이상인 경우 높이를 조정합니다.
+    if (preElement.scrollHeight > 300) {
+      preElement.style.height = "auto";
+    }
+  });
+</script>
+    
+    
 <script>
 	$(document).ready(function() {
 		
@@ -719,9 +734,9 @@ function commentInsert(commentIdk,count) {
 				</tr>
 				
 				
-              	  <tr style="border-top:2px solid #bfbfbf; border-bottom:2px solid #bfbfbf;">
-	                <td colspan="2"><pre style="height:300px; white-space: pre-wrap; word-break: break-all; overflow: auto;"><c:out value="${community.commuContent}" /></pre></td>
-	              </tr>
+				<tr style="border-top:2px solid #bfbfbf; border-bottom:2px solid #bfbfbf;">
+				  <td colspan="2"><pre id="myPre" style="height:300px; white-space: pre-wrap; word-break: break-all; overflow: auto;"><c:out value="${community.commuContent}" /></pre></td>
+				</tr>
 				
 			</tbody>
 			
