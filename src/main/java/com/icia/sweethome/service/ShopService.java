@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.sweethome.dao.ShopDao;
 import com.icia.sweethome.model.Cart;
@@ -128,43 +130,7 @@ public class ShopService
 		return count;
 	}
 	
-	
-	//shop - review
-	
-	public List<Review> reviewList(int productIdk)
-	{
-		List<Review> review = null;
-
-		try
-		{
-			review = shopDao.reviewList(productIdk);	
-		}
-		catch(Exception  e)
-		{
-			logger.error("[ShopService] reviewList Exception" , e);
-		}
-		return review;
-	}
-	
-	
-	 public int reviewInsert(Review review)
-	   {
-	      int count = 0;
-	      
-	      try
-	      {
-	         count =  shopDao.reviewInsert(review);
-	      }
-	      catch(Exception e)
-	      {
-	         logger.error("[ShopService]reviewInsert Exception", e);
-	      }
-	      
-	      return count;
-	      
-	   }
 	 
-
 	 //shop - cart
 	public List<Cart> cartSelect(Cart cart)
 	   {
@@ -340,7 +306,38 @@ public class ShopService
 			}
 				
 			return count;
-		}  
+		} 
+		
+		
+		//민기 -리뷰
+		@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+		 public int reviewInsert(Review review){
+		      int count = 0;
+		      
+		      count =  shopDao.reviewInsert(review);
+		      
+		      if(count > 0) {
+		    	  shopDao.reviewUpdate(review.getOrderDetailIdk());
+		      }
+		         
+		      return count;
+		 }
+		
+		public List<Review> reviewList(int productIdk){
+			List<Review> list = null;
+			
+			try
+			{
+				list = shopDao.reviewList(productIdk);
+			}
+			catch(Exception e)
+			{
+				logger.error("[shopService] reviewList Exception", e);
+			}
+						
+			return list;
+			
+		}
 		
 }
 

@@ -416,11 +416,11 @@ background: #ffffff;
 	           
 	            <c:choose>
 	                <c:when test="${detailList.reviewStatus eq 'Y'}">
-	                    <td class="text-center">리뷰작성완료</td>
+	                    <div class="text-center">리뷰작성완료</div>
 	                </c:when>
 	                <c:otherwise>
 	                    <div class="btn-set btn-parents">
-	                        <button type="button" class="n-btn btn-sm btn-accent" onclick="openReviewPopup(${detailList.orderIdk}, ${detailList.orderDetailIdk})">미작성</button>
+	                        <button type="button" class="n-btn btn-sm btn-accent" onclick="openReviewPopup(${detailList.productIdk}, ${detailList.orderDetailIdk})">미작성</button>
 	                    </div>
 	                </c:otherwise>
 	            </c:choose>
@@ -449,17 +449,14 @@ background: #ffffff;
 </div>
 <!-- 리뷰창 팝업 -->
 <script>
-function openReviewPopup(order, detail) {
-    var orderIdk = order;   	
-    var detailIdk = detail;
-
+function openReviewPopup(productIdk, detailIdk) {
     var popupWidth = 600;
-    var popupHeight = 900; 
+    var popupHeight = 700; 
 
     var left = (window.innerWidth - popupWidth) / 2;
     var top = (window.innerHeight - popupHeight) / 2;
 
-    var popupUrl = "/shop/reviewPage?orderIdk=" + orderIdk + "&detailIdk=" + detailIdk;
+    var popupUrl = "/shop/reviewPage?productIdk=" + productIdk + "&detailIdk=" + detailIdk;
     var popupName = "ReviewPopup"; 
 
     var popup = window.open(popupUrl, popupName, "width=" + popupWidth + ",height=" + popupHeight + ",left=" + left + ",top=" + top);

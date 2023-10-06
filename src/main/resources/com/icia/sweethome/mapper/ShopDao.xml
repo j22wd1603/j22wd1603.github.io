@@ -23,15 +23,13 @@
 <resultMap type="com.icia.sweethome.model.Review" id="reviewResultMap" >
     <id column="REVIEW_IDK" property="reviewIdk" />
     <result column="PRODUCT_IDK"  property="productIdk"/>
-    <result column="ORDER_IDK" property="orderIdk"/>
+    <result column="ORDER_DETAIL_IDK" property="orderDetailIdk"/>
     <result column="USER_ID"  property="userId"/>
     <result column="REVIEW_CONTENT"  property="reviewContent"/>
     <result column="REG_DATE"  property="regDate"/>
     <result column="PRODUCT_NAME"  property="productName"/>
-    <result column="RATING"  property="rating"/>
+    <result column="SCORE"  property="score"/>
 </resultMap>
-
-
 
 <resultMap type="com.icia.sweethome.model.Cart" id="cartResultMap" >
     <id column="USER_ID" property="userId" />
@@ -400,37 +398,11 @@ WHERE	USER_ID = #{userId}
     AND PRODUCT_IDK = #{productIdk}
 </delete>
 
-
-<!-- shop - review -->
-<insert id="reviewInsert" parameterType="com.icia.sweethome.model.Review" >
-INSERT INTO PRODUCT_REVIEW (
-    REVIEW_IDK,
-    PRODUCT_IDK, 
-    ORDER_IDK, 
-    USER_ID, 
-    REVIEW_CONTENT, 
-    REG_DATE,
-    PRODUCT_NAME,
-    RATING
-) VALUES (
-	#{reviewIdk},
-    #{productIdk},
-    #{orderIdk},
-    #{userId},
-    #{reviewContent},
-   sysdate,
-   #{productName},
-   #{rating}
-)
-</insert>
-
-
-
 <!-- user - review(마이페이지) -->
 <select id="boardMyReview" parameterType ="com.icia.sweethome.model.Review" resultMap="reviewResultMap">
 SELECT REVIEW_IDK,
 	   PRODUCT_IDK,
-	   ORDER_IDK,
+	   ORDER_DETAIL_IDK,
 	   USER_ID,
 	   REVIEW_CONTENT,
 	   REG_DATE,
@@ -438,14 +410,14 @@ SELECT REVIEW_IDK,
   FROM (SELECT ROWNUM RNUM,
 			   REVIEW_IDK,
 			   PRODUCT_IDK,
-			   ORDER_IDK,
+			   ORDER_DETAIL_IDK,
 			   USER_ID,
 			   REVIEW_CONTENT,
 			   REG_DATE,
                PRODUCT_NAME
 		  FROM (SELECT NVL(R.REVIEW_IDK, 0) AS REVIEW_IDK,
 					   NVL(R.PRODUCT_IDK, 0) AS PRODUCT_IDK,
-					   NVL(R.ORDER_IDK, 0) AS ORDER_IDK,
+					   NVL(R.ORDER_DETAIL_IDK, 0) AS ORDER_DETAIL_IDK,
 					   NVL(R.USER_ID, '') AS USER_ID,
 					   NVL(R.REVIEW_CONTENT, '') AS REVIEW_CONTENT,
 					   NVL(TO_CHAR(R.REG_DATE,  'YYYY.MM.DD'), '') AS REG_DATE,
@@ -470,7 +442,7 @@ SELECT NVL(COUNT(R.REVIEW_IDK), 0) AS CNT
 <select id="boardMyReviewSearch" parameterType="int" resultType="int">
 SELECT REVIEW_IDK,
 	   PRODUCT_IDK,
-	   ORDER_IDK,
+	   ORDER_DETAIL_IDK,
 	   USER_ID,
 	   REVIEW_CONTENT,
 	   REG_DATE
@@ -482,5 +454,38 @@ WHERE  PRODUCT_IDK = #{value}
 DELETE FROM PRODUCT_REVIEW
  WHERE PRODUCT_IDK = #{value}
 </delete>
+
+<insert id="reviewInsert" parameterType="com.icia.sweethome.model.Review">
+<selectKey resultType="int" keyProperty="reviewIdk" order="BEFORE">
+	SELECT PRODUCT_REVIEW_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO PRODUCT_REVIEW VALUES (
+    #{reviewIdk},
+    #{productIdk},
+    #{orderDetailIdk},
+    #{userId},
+    #{reviewContent},
+    SYSDATE,
+    #{score}
+)
+</insert>
+
+<update id="reviewUpdate" parameterType="int">
+UPDATE ORDER_DETAIL
+SET REVIEW_STATUS = 'Y'
+WHERE ORDER_DETAIL_IDK = #{value}
+</update>
+
+<select id="reviewList" parameterType="int" resultMap="reviewResultMap">
+SELECT REVIEW_IDK
+      ,PRODUCT_IDK
+      ,ORDER_DETAIL_IDK
+      ,USER_ID
+      ,REVIEW_CONTENT
+      ,TO_CHAR(REG_DATE,'YY.MM.DD HH24:MI:SS') AS REG_DATE
+      ,SCORE
+FROM PRODUCT_REVIEW
+WHERE PRODUCT_IDK = #{value}
+</select>
 
 </mapper>

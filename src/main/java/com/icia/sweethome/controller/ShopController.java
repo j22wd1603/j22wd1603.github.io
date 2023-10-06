@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,8 +55,6 @@ public class ShopController {
 	@Autowired
 	private OrderService orderService;
 	
-	@Autowired
-	private SellerService sellerService;
 
 	private static final int LIST_COUNT = 12;		//한페이지의 게시물 수
 	private static final int PAGE_COUNT = 5;		//페이징 수 
@@ -87,8 +86,6 @@ public class ShopController {
 		return "/shop/shop";
 	}
 
-	
-	
 	//shop product
 	@RequestMapping(value="/shop/product")
 	public String product(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -205,7 +202,7 @@ public class ShopController {
 		List<Review> review = null;
 			
 		
-		shop = shopService.productSelect(productIdk);			
+		shop = shopService.productSelect(productIdk);
 		review = shopService.reviewList(productIdk);
 	
 	    model.addAttribute("shop", shop);
@@ -401,40 +398,45 @@ public class ShopController {
 			 
 		    return "/shop/cartPage"; 
 	}
-		
-	@RequestMapping(value = "/shop/review", method = RequestMethod.POST)
+// 민기 - 리뷰
+	@PostMapping("/shop/reviewInsert")
 	@ResponseBody
-	public Response<Object> review(HttpServletRequest request) {
+	public Response<Object> review(HttpServletRequest request,HttpServletResponse response) {
 	    Response<Object> ajaxResponse = new Response<Object>();
 	    String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
-	    User user = userService.userSelect(userId);
-
+	    
+	    int productIdk = HttpUtil.get(request, "productIdk", 0);
+	    int orderDetailIdk = HttpUtil.get(request, "orderDetailIdk", 0);
+	    String reviewContent = HttpUtil.get(request, "reviewContent","");
+	    int score = HttpUtil.get(request, "score", 0);
+	    
+	    Review review = new Review();
+	    review.setUserId(userId);
+	    review.setProductIdk(productIdk);
+	    review.setOrderDetailIdk(orderDetailIdk);
+	    review.setReviewContent(reviewContent);
+	    review.setScore(score);
+	    
+	    if(shopService.reviewInsert(review) > 0) {
+	    	ajaxResponse.setResponse(0, "성공");
+	    }
+	    else {
+	    	ajaxResponse.setResponse(-1, "SQL 실패");
+	    }
 
 	    return ajaxResponse;
 	}
 
 	@RequestMapping("/shop/reviewPage")
-	public String reviewPage(@RequestParam("orderIdk") int orderIdk, @RequestParam("detailIdk") int detailIdk, Model model) {
+	public String reviewPage(@RequestParam("productIdk") int productIdk, @RequestParam("detailIdk") int detailIdk, Model model) {
 
-		OrderDetail search = new OrderDetail();
+		Shop product = new Shop();
 		
-		search.setOrderIdk(orderIdk);
-		search.setOrderDetailIdk(detailIdk);
+		product = shopService.productSelect(productIdk);
 		
-	    OrderDetail orderDetails = orderService.orderDetailSearch(search);
-
-	    String reviewStatus = "";
-	  
-	    if (orderDetails != null) {	      
-	        reviewStatus = orderDetails.getReviewStatus();
-	    }
-
-	   
-	    if (!"N".equals(reviewStatus)) {
-	        return "redirect:/errorPage"; // 오류 페이지 URL로 리다이렉트
-	    }
-
-	    model.addAttribute("orderDetails", orderDetails);
+	    model.addAttribute("detailIdk", detailIdk);
+	    model.addAttribute("productIdk", productIdk);
+	    model.addAttribute("product", product);
 
 	    return "/shop/reviewPage";
 	}

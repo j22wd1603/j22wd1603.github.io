@@ -50,13 +50,13 @@ function openFrame(url) {
 				</a>
 		</li>
 		<!-- Nav Item - Utilities Collapse Menu -->
-		<!-- Order -->
+		<!-- Order 
 		<li class="nav-item">
 			<a class="nav-link collapsed" onclick="openFrame('/admin/adminSeller')" data-toggle="collapse" data-target="#collapseUtilities"
 			aria-expanded="true" aria-controls="collapseUtilities"><span>판매자 관리</span>
 			</a>
 		</li>
-
+-->
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 

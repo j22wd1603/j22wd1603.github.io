@@ -35,12 +35,7 @@ public interface ShopDao {
 	 	
 	 //cartPage 리스트
 	 public List<Cart> cartList (Cart cart);
-	
-	 
-	 //리뷰 
-	 public List<Review> reviewList (int productIdk); 
-	 public int reviewInsert(Review review);
-	 
+
 	 
 	//user 마이페이지 리뷰, 리뷰존재여부, 삭제
 	public List<Review> boardMyReview(Review review);
@@ -48,6 +43,10 @@ public interface ShopDao {
 	public int boardMyReviewDelete(int productIdk);	
 	public int boardMyReviewCount(Review review);
 	
+	//민기 리뷰
+	public int reviewInsert(Review review);
+	public int reviewUpdate(int detailIdk);
+	public List<Review> reviewList(int productIdk);
 	
 }
 

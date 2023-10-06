@@ -19,18 +19,8 @@
     <main>
         <section class="review-form">
             <h2>리뷰 작성</h2>
-            <form id="reviewForm">
-            <div class="form-group">
-                    <label for="username">주문번호:</label>
-                    <input type="text" id="orderDetailIdk" name="orderDetailIdk" value="${orderDetails.orderIdk}" readonly>     
-                    </div>
-                <div class="form-group">
-                    <label for="username">주문상세번호:</label>
-                    <input type="text" id="orderDetailIdk" name="orderDetailIdk" value="${orderDetails.orderDetailIdk}" readonly>     
-                    </div>
-                    <div class="form-group">
-                    <label for="productname">제품명:</label>
-                    <input type="text" id="productname" name="productname" value="${orderDetails.productName}" readonly>               
+                 <div class="form-group">
+                    제품명: <p>${product.productName}</p>              
                 </div>
 		    <div class="form-group">
 			    <div class="star_rating">
@@ -44,17 +34,19 @@
 			    <input type="text" id="reviewContent" name="reviewContent" placeholder="리뷰 내용" required>
 			</div>
 
-			<button type="submit" class="review-button">리뷰 등록</button>
+			<button type="button" id="btnReview" class="review-button">리뷰 등록</button>
 
-                
-            </form>
             <!-- 오류 메시지를 표시할 공간 추가 -->
             <div id="errorMessage" style="color: red;"></div>
         </section>
     </main>
 </div>
 
-
+ <form name="reviewForm" id="reviewForm">
+      <input type="hidden" name="productIdk" id="productIdk" value="${productIdk}" />
+      <input type="hidden" name="orderDetailIdk" id="orderDetailIdk" value="${detailIdk}" />
+      <input type="hidden" name="score" id="score" value="" />
+</form>
 
 <script>
 $(document).ready(function() {
@@ -69,34 +61,37 @@ $(document).ready(function() {
 
         
         $(this).prevAll('.star').addClass('selected');
+        $("#score").val($(this).data('value'));
+
     });
 
   
-    $('#reviewForm').submit(function(e) {
-        e.preventDefault(); // 폼 제출을 중지
-
-        var reviewContent = $('#reviewContent').val();
-        var rating = $('#rating').val();
-
-        
+    $("#btnReview").on("click", function() {
         $.ajax({
             type: 'POST',
-            url: '/shop/review', 
+            url: '/shop/reviewInsert', 
             data: {
-                reviewContent: reviewContent,
-                rating: rating 
+            	productIdk: $("#productIdk").val(),
+            	orderDetailIdk: $("#orderDetailIdk").val(),
+            	reviewContent: $("#reviewContent").val(),
+            	score: $("#score").val()
             },
+            dataType: "json",
             success: function(response) {
-                if (response.status === 0) {
+                if (response.code == 0) {
                     alert('리뷰가 등록되었습니다.');
+                    window.close();
+                    window.opener.location.reload()
                 } else {
                     alert('리뷰 등록 중 오류가 발생했습니다.');
                 }
             },
-            error: function(xhr, status, error) {
-                console.error('Ajax 요청 오류:', error);
+            error: function(error) {
+                console.error('Ajax 에러:', error);
+                //icia.common.error(error);
             }
         });
+        
     });
 });
 </script>

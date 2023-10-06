@@ -288,14 +288,14 @@ function deleteValue()
 <body>
 	<div style="width:90%; margin:auto; margin-top:5rem;">
    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-        <h2 style="margin: 0; color: #525252;">고객센터 관리</h2>
+        <h2 style="margin: 0; color: #525252;">유저 관리</h2>
         <div class="button-group">
             <button id="showTable1Button">회원관리</button>
             <button id="showTable2Button">공지사항</button>
         </div>
     </div>
 		<div>
-		<div style="width: 50%; float: left;">
+		<div style="width: 90%;">
 			<table  id="table1" class="table table-hover" style="border:1px solid #c4c2c2;">
 				<thead style="border-bottom: 1px solid #c4c2c2;">
 				<tr class="table-thead-main">
