@@ -347,6 +347,7 @@ ol, ul {
 }
 </style>
 <script type="text/javascript">
+var fileCheck = 'N';
 $(document).ready(function() {
 
    $("#userId").focus();
@@ -446,17 +447,17 @@ document.getElementById("phone3").value = phone3;
          return;
       }
       
+      
       //전화번호 조합
       $("#userPhone").val($("#phone1").val() + $("#phone2").val() + $("#phone3").val());
-      
 
-      
-      $("#userPwd").val($("#userPwd1").val());
       
       //아이디 중복체크 aJax
       
-         var form = $("#regForm")[0];
+   var form = $("#updateForm")[0];
    var formData = new FormData(form);
+   
+   formData.append("fileCheck",fileCheck);
    
    $.ajax({
       type:"POST",
@@ -524,6 +525,7 @@ function previewImage(input) {
 
         reader.onload = function (e) {
             preview.src = e.target.result;
+            fileCheck = 'Y';
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -615,7 +617,7 @@ function previewImage(input) {
 		 <div class="userInfoheader_title">회원정보수정</div>
 		 </div>
 		 <div class="card">
-    <form id="regForm" name="regForm">
+    <form id="updateForm" name="updateForm">
     	<div class="userInfo_form">
     	<div class="edit_userInfo_form_title">이메일
     	  </div>
@@ -703,6 +705,7 @@ function previewImage(input) {
     	   </div>
     	  </div>
     	 </div>
+    	 <input type="hidden" name="userPhone" id="userPhone" value="" />
     	 <div class="edit_userInfo_form">
 	    	<div class="edit_userInfo_form_title">프로필 이미지</div>
 	    	<div class="expert-form-group edit_userInfo_form_group">
@@ -729,7 +732,7 @@ function previewImage(input) {
     	<div class="expert-form-group_content">
     	 <div class="expert-form-group_input">
     	  <div class="edit_userInfo">
-    	     <input value="${user.userAddress}" id="userAddress" class="form-control"  maxlength="30" >
+    	     <input value="${user.userAddress}" id="userAddress" name="userAddress" class="form-control"  maxlength="30" >
     	     <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호">
                <input type="button" onclick="sample6_execDaumPostcode()" class="form-control" value="우편번호 찾기"><br>
                <input class="form-control" id="sample6_address" placeholder="주소"><br>

@@ -88,7 +88,7 @@ FROM (SELECT NVL(COUNT(COMMU_IDK),0) AS CNT
   </insert>
   
     <update id="userUpdate" parameterType="com.icia.sweethome.model.User">
-  UPDATE TBL_USER
+  UPDATE USERS
    SET USER_PWD = #{userPwd},
        USER_NAME = #{userName},
        USER_NICKNAME = #{userNickname},
