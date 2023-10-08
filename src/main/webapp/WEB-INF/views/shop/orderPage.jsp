@@ -4,6 +4,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -256,7 +257,7 @@ function setInputAddress() {
 
 
 <body>
-<%@ include file="/WEB-INF/views/include/navigation.jsp" %>
+ <header><h1 id="cart-title">ORDER</h1></header>
 
 <div id="wrapper">
 <!-- 오더페이지로 main둔 이유는 complete페이지에서도 쓰기때문에 오더페이지로 묶음 -->
@@ -584,8 +585,7 @@ function setInputAddress() {
                      	
                </section>
              </form>
-    </section>
-    
+    	</section>
         </main>
     </div>
 
