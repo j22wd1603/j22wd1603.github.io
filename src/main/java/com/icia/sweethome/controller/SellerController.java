@@ -185,7 +185,7 @@ public class SellerController {
 		     int orderIdk = sellerService.orderSeqSelect();
 		     String userId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 		     
-		     String redemCode = HttpUtil.get(request, "redemCode", "");
+		     String redemCode = HttpUtil.get(request, "redemCode","");
 		     String deliveryAddress = HttpUtil.get(request, "deliveryAddress", "");
 		     String deliveryPhone = HttpUtil.get(request, "deliveryPhone", "");
 		     String deliveryName = HttpUtil.get(request, "deliveryName", "");
@@ -228,7 +228,8 @@ public class SellerController {
 		     order.setTotalPrice(totalPrice);
 		     order.setOrderDetailList(orderDetails);
 		     
-		     if (redemCode != null && !redemCode.isEmpty()) {
+		     if (redemCode != null || !StringUtil.equals(redemCode, "")) {
+		    	 System.out.println("11111111111111111111111111111111111111111111111111111111111111");
 		         order.setRedemCode(redemCode);
 		         
 		         Coupon coupon = sellerService.couponSelect(redemCode);

@@ -8,6 +8,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+    $(window).on('beforeunload', function() {
+		opener.movePage();
+		window.close();
+    });
+	
 	$("#btnClose").on("click", function() {
 		
 		opener.movePage();

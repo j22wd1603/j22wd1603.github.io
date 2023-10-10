@@ -33,10 +33,18 @@ $(document).ready(function() {
 		   }
 		   
 		   var fileValue = $('#fileCheckValue').is(':checked');
+		   
 			
 			if(fileValue)
 				document.updateForm.fileDeleteCheck.value = "Y";
 			
+		   if($("#communityFile").val() != null && fileValue == null)
+		   {
+			   alert("수정 또는 삭제 하시려면 체크박스에 체크가 필요합니다.");
+			   $("#btnUpdate").prop("disabled", false);		//버튼 활성화
+			   return;
+		   }				
+
 		   var form = $("#updateForm")[0];
 		   var formData = new FormData(form);
 		   
@@ -102,6 +110,8 @@ $(document).ready(function() {
     
 </head>
 <body>
+
+   <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 
 <div class="container">
 	<h2>게시물 수정하기</h2>

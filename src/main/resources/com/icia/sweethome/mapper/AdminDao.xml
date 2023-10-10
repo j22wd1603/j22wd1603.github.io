@@ -225,38 +225,19 @@ WHERE USER_ID = #{userId}
 </update>
 
   <select id="userQuestion" parameterType="com.icia.sweethome.model.Question" resultMap="questionResultMap1">     
-	SELECT  QUESTION_IDK,
-		QUESTION_CATEGORY,
-		USER_ID,
-		QUESTION_TITLE,
-		QUESTION_CONTENT,
-		ANS_STATUS,
-		REG_DATE,
-		FILE_CHECK,
-		FILE_EXT
-  FROM (SELECT ROWNUM RNM,
-  			   QUESTION_IDK,
-		   	   QUESTION_CATEGORY,
-			   USER_ID,
-			   QUESTION_TITLE,
-			   QUESTION_CONTENT,
-			   ANS_STATUS,
-			   REG_DATE,
-			   FILE_CHECK,
-			   FILE_EXT
-          FROM (SELECT QUESTION_IDK,
-                       NVL(QUESTION_CATEGORY, '') AS QUESTION_CATEGORY,
-                       NVL(USER_ID, '') AS USER_ID,
-                       NVL(QUESTION_TITLE, '') AS QUESTION_TITLE,
-                       NVL(QUESTION_CONTENT, '') AS QUESTION_CONTENT,
-                       NVL(ANS_STATUS, '') AS ANS_STATUS,
-                       TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE,
-                       NVL(FILE_CHECK, '') AS FILE_CHECK,
-             		   NVL(FILE_EXT, '') AS FILE_EXT
-                       
-                  FROM QUESTION_BOARD
-          		 WHERE ANS_STATUS = 'N'
-        ORDER BY QUESTION_IDK DESC  ))
+SELECT QUESTION_IDK
+      ,QUESTION_CATEGORY
+      ,USER_ID
+      ,QUESTION_TITLE
+      ,QUESTION_CONTENT
+      ,ANS_STATUS
+      ,TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE
+      ,FILE_CHECK
+      ,FILE_EXT
+FROM QUESTION_BOARD
+<if test='userId != null and userId !="" '>
+	WHERE USER_ID = #{userId}
+</if>
   </select>
 <!-- 관리자 끝 -->
   <insert id="noticeInsert" parameterType="com.icia.sweethome.model.Cs">

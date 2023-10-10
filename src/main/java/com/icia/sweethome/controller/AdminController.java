@@ -62,11 +62,6 @@ public class AdminController {
     private String AUTH_COOKIE_ADMIN_NAME;	   	
     
 	@Autowired
-	private CommunityService communityService;
-
-	@Autowired
-    private ShopService shopService;
-	@Autowired
 	private UserService userService;
 	
 	
@@ -277,7 +272,7 @@ public class AdminController {
 //고객센터
 //=====================================================================================================================
 	
-		@RequestMapping(value = "/admin/adminCs")
+		@RequestMapping(value = "/admin/adminUser")
 		public String adminCs(Model model, HttpServletRequest request, HttpServletResponse response) {
 
 			List<User> list = null;
@@ -293,7 +288,7 @@ public class AdminController {
 
 			model.addAttribute("list2", list2);
 			model.addAttribute("list",list);
-			return "/admin/adminCs";
+			return "/admin/adminUser";
 		}
 		
 		@RequestMapping(value = "/admin/userStatus", method = RequestMethod.POST)//회원정지
@@ -313,11 +308,14 @@ public class AdminController {
 
 		    return ajaxResponse;
 		}
-		@RequestMapping(value = "/admin/adminUser")
+		@RequestMapping(value = "/admin/adminCs")
 		public String adminUser(ModelMap model, HttpServletRequest request, HttpServletResponse response)
 		{
+			
 			Question question = new Question();
-			//Question user = new Question();
+			String userId = HttpUtil.get(request, "userId", "");
+			question.setUserId(userId);
+			
 			List<Question> list = null;
 			list = adminService.userQuestion(question);
 		    if (list != null) {
@@ -327,7 +325,7 @@ public class AdminController {
 		    }
 			
 			model.addAttribute("list", list);
-			return "/admin/adminUser";
+			return "/admin/adminCs";
 		}
 		
 	

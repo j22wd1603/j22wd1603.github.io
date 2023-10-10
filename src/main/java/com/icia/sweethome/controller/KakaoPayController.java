@@ -213,10 +213,11 @@ public class KakaoPayController
 				pay.setApprovedDate(kakaoPayApprove.getApproved_at());
 				
 				sellerService.payInsert(pay);
+				model.addAttribute("kakaoPayApprove", kakaoPayApprove);
 			}
 		}		
 		
-		model.addAttribute("kakaoPayApprove", kakaoPayApprove);
+		
 		
 		return "/kakao/payResult";
 	}
