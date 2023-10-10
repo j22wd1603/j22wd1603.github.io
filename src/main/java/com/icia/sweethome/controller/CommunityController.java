@@ -642,14 +642,15 @@ public class CommunityController {
 		       String commuTab = HttpUtil.get(request, "commuTab", "");
 		       String commuIdk = HttpUtil.get(request, "commuIdk", "");
 		       String fileDeleteCheck = HttpUtil.get(request, "fileDeleteCheck", "N");
-		       
-		       
+		           
 			   Community community = communityService.boardSelect(Integer.valueOf(commuIdk));
 			   
 			   if(Integer.valueOf(commuIdk) > 0 && !StringUtil.isEmpty(communityTitle) && !StringUtil.isEmpty(communityContent))
 			   {
 				   if(StringUtil.equals(community.getFileCheck(), "Y") && StringUtil.equals(fileDeleteCheck, "Y"))
 				   {
+
+					   
 					   FileUtil.deleteFile(UPLOAD_SAVE_DIR_COMMUNITY + community.getCommuIdk() + "." + community.getFileExt());
 				   }
 				   
