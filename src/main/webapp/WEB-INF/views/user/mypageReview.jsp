@@ -530,7 +530,7 @@ function fn_boardDelete(idk)
 			    <div class="num">${reviewMy.reviewIdk}</div>
 			     <div class="num">${reviewMy.orderDetailIdk}</div>
 			    <div class="date">${reviewMy.productName}</div>
-			     <div class="title" style="text-overflow: ellipsis;"><a href="/shop/productDetail?${reviewMy.productIdk}">${reviewMy.reviewContent}</a></div>
+			     <div class="title" style="text-overflow: ellipsis;"><a href="/shop/productDetail?productIdk=${reviewMy.productIdk}">${reviewMy.reviewContent}</a></div>
 			    <div class="date">${reviewMy.regDate}</div>
 			    <div class="delete"><button class="btnDelete" onClick="fn_boardDelete(${reviewMy.reviewIdk})"><i class="fa-solid fa-trash-can"></i></button></div>
 			  </div>
