@@ -373,7 +373,7 @@ function commentDelete(commentIdk) {
 			{
 				if(response.code == 0)
 				{
-					alert("게시물이 삭제 되었습니다.");
+					alert("댓글이 삭제 되었습니다.");
 					document.bbsForm.action = "/community/view";
 					document.bbsForm.submit();					
 				}
@@ -383,20 +383,20 @@ function commentDelete(commentIdk) {
 				}
 				else if(response.code == 403)
 				{
-					alert("본인 글이 아니므로 삭제할 수 없습니다.");
+					alert("본인 댓글이 아니므로 삭제할 수 없습니다.");
 				}
 				else if(response.code == 404)
 				{
-					alert("해당 게시물을 찾을 수 없습니다.");
+					alert("해당 댓글을 찾을 수 없습니다.");
 					location.href = "/community/blog";
 				}
 				else if(response.code == 500)
 				{
-					alert("게시물 삭제 시 오류가 발생하였습니다.");
+					alert("댓글 삭제 시 오류가 발생하였습니다.");
 				}
 				else
 				{
-					alert("게시물 삭제 시 오류가 발생하였습니다.");
+					alert("댓글 삭제 시 오류가 발생하였습니다.");
 				}
 			},
 			error:function(xhr, status, error)

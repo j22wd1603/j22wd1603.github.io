@@ -130,7 +130,7 @@ font-family: 'Gothic A1', sans-serif;
   <a href="/user/mypage">마이페이지</a>
   <a href="/user/myShopping">내 주문내역</a>
   <a href="/shop/cartPage">내 장바구니</a>
-  <a href="user/mypageMyQ">내 문의내역</a>
+  <a href="/user/mypageMyQ">내 문의내역</a>
  <!--  <a href="/user/order_list">마이룸 3D</a> --> 
 
   <br>
