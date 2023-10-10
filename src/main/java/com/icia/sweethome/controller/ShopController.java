@@ -331,7 +331,6 @@ public class ShopController {
 	    		deleteCount += shopService.cartDelete(cart);
 	    	}
 	    	
-	    	System.out.println("deleteCount  :  "+ deleteCount+"productList.length  :  " + productList.length);
 	    	
             if (deleteCount>0) {
                 ajaxResponse.setResponse(0, "상품이 삭제되었습니다.");
