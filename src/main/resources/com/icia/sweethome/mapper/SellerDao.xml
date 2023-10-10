@@ -425,6 +425,7 @@ SELECT SELLER_ID
       ,NVL(TO_CHAR(DELETE_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS DELETE_DATE
 FROM SELLERS
 WHERE SELLER_ID = #{value}
+AND SELLER_STATUS = 'Y'
 </select>
 
 <select id="detailTabSelect" parameterType="String" resultMap="shopResultMap">
