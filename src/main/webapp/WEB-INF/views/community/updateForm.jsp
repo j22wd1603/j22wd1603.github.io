@@ -31,6 +31,7 @@ $(document).ready(function() {
 			   $("#btnUpdate").prop("disabled", false);		//버튼 활성화
 			   return;
 		   }
+
 		   
 		   var fileValue = $('#fileCheckValue').is(':checked');
 		   
@@ -38,12 +39,15 @@ $(document).ready(function() {
 			if(fileValue)
 				document.updateForm.fileDeleteCheck.value = "Y";
 			
-		   if($("#communityFile").val() != null && fileValue == null)
+		   
+		   if($("#communityFile").val() != null && fileValue != true)
 		   {
 			   alert("수정 또는 삭제 하시려면 체크박스에 체크가 필요합니다.");
 			   $("#btnUpdate").prop("disabled", false);		//버튼 활성화
 			   return;
 		   }				
+
+			
 
 		   var form = $("#updateForm")[0];
 		   var formData = new FormData(form);
