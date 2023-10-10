@@ -49,27 +49,6 @@ public class Order implements Serializable {
 		orderDetailList = null;
 	}
 
-	
-	public int getStartRow() {
-		return startRow;
-	}
-
-
-	public void setStartRow(int startRow) {
-		this.startRow = startRow;
-	}
-
-
-	public int getEndRow() {
-		return endRow;
-	}
-
-
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
-
-
 	public int getOrderIdk() {
 		return orderIdk;
 	}
@@ -90,7 +69,7 @@ public class Order implements Serializable {
 		return redemCode;
 	}
 
-	public void orderDetailIdk(String redemCode) {
+	public void setRedemCode(String redemCode) {
 		this.redemCode = redemCode;
 	}
 
@@ -174,6 +153,22 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
 	public Coupon getCoupon() {
 		return coupon;
 	}
@@ -189,15 +184,4 @@ public class Order implements Serializable {
 	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
 		this.orderDetailList = orderDetailList;
 	}
-
-	public void setRedemCode(String redemCode2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setProductBrandName(String productBrandName) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

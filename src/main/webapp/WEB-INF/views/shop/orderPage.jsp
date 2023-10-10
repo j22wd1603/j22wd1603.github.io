@@ -35,7 +35,7 @@ $(document).ready(function() {
 	   var regPhone2 = /^[0-9]{3,4}$/;
 	   var regPhone3 = /^[0-9]{4}$/;
 	   var name = /^[가-힣a-zA-Z]+$/;
-	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)]+$/;//
+	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)]+$/;
 	   
 	   if(!$("#orderAgreement").prop('checked')){
 	         alert("주문 동의를 해주세요");
@@ -47,7 +47,7 @@ $(document).ready(function() {
 		   if(trimCheck("deliveryName","수령인을 입력해주세요"))return;
 		   if(expCheck("deliveryName","이름은 한국어,영어만 입력가능합니다.",name))return;
 		   if(trimCheck("deliveryAddress","배송지를 입력해주세요"))return;
-		   if(expCheck("deliveryAddress","주소는 한국어,영어, 숫자 '-' 만 입력가능합니다.",address))return;
+		   if(expCheck("deliveryAddress","주소는 한국어,영어, 숫자 '-()' 만 입력가능합니다.",address))return;
 		   if(trimCheck("phone1","휴대폰번호를 입력해주세요"))return;
 		   if(expCheck("phone1","휴대폰 첫번째는 010, 011, 016, 017, 018, 019만 가능합니다",regPhone1))return;
 		   if(trimCheck("phone2","휴대폰번호를 입력해주세요"))return;
@@ -65,9 +65,9 @@ $(document).ready(function() {
 	   
 	   if(deliveryAnotherRadio.checked){
 		   if(trimCheck("anotherDeliveryName","수령인을 입력해주세요"))return;
-		   if(expCheck("anotherDeliveryName","이름은 한국어,영어만 입력가능합니다.",regKoreanAndEnglish))return;
+		   if(expCheck("anotherDeliveryName","이름은 한국어,영어만 입력가능합니다.",name))return;
 		   if(trimCheck("anotherDeliveryAddress","배송지를 입력해주세요"))return;
-		   if(expCheck("anotherDeliveryName","주소은 한국어,영어, 숫자만 입력가능합니다.",regKoreanEnglishAndNumber))return;
+		   if(expCheck("anotherDeliveryName","주소는 한국어,영어, 숫자 '-()' 만 입력가능합니다.",name))return;
 		   if(trimCheck("anotherPhone1","휴대폰번호를 입력해주세요"))return;
 		   if(expCheck("anotherPhone1","휴대폰 첫번째는 010, 011, 016, 017, 018, 019만 가능합니다",regPhone1))return;
 		   if(trimCheck("anotherPhone2","휴대폰번호를 입력해주세요"))return;
@@ -91,7 +91,7 @@ $(document).ready(function() {
 
        // AJAX 요청 데이터 생성
        var requestData = {
-           redemCode: $("#couponSelect").val(),
+           redemCode: $("#redemCode").val(),
            deliveryAddress: $("#deliveryAddress").val(),
            deliveryPhone: $("#deliveryPhone").val(),
            deliveryName: $("#deliveryName").val(),
@@ -99,8 +99,8 @@ $(document).ready(function() {
            productIdk: productIds, // 상품 ID 배열
            quantity: quantities // 수량 배열
        };
-
-       $.ajax({
+       
+        $.ajax({
            type: "POST",
            url: "/shop/order",
            data: requestData, // 배열로 된 데이터 전송
@@ -124,7 +124,7 @@ $(document).ready(function() {
            error: function(xhr, status, error) {
                icia.common.error(error);
            }
-      });
+      }); 
 
    });
 
