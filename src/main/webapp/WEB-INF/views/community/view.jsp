@@ -373,7 +373,7 @@ function commentDelete(commentIdk) {
 			{
 				if(response.code == 0)
 				{
-					alert("게시물이 삭제 되었습니다.");
+					alert("댓글이 삭제 되었습니다.");
 					document.bbsForm.action = "/community/view";
 					document.bbsForm.submit();					
 				}
