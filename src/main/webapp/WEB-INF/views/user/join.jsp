@@ -587,6 +587,12 @@ $(document).ready(function() {
     	  return;
       }
       
+	   if(!$("#agreement").prop('checked')){
+	         alert("약관 동의를 해주세요");
+	         $("#agreement").focus();
+	         return;
+	   }
+      
       //전화번호 조합
       $("#userPhone").val($("#phone1").val() + $("#phone2").val() + $("#phone3").val());
       $("#userEmail").val($("#userEmail1").val() + $("#userEmail2").val());
@@ -637,9 +643,19 @@ $(document).ready(function() {
    });
    
 	$("#mailCheckBtn").click(function() {
+		
+	    if($.trim($("#userEmail1").val()).length <= 0)
+	    {
+	       alert("이메일을를 입력하세요.");
+	       $("#userEmail1").val("");
+	       $("#userEmail1").focus();
+	         return;
+	    }
+		
 		const eamil = $("#userEmail1").val() + $("#userEmail2").val(); // 이메일 주소값
 		console.log("완성된 이메일 : " + eamil); // 이메일 오는지 확인
-		const checkInput = $("#mailCheckInput") // 인증번호 입력하는곳 
+		const checkInput = $("#mailCheckInput") // 인증번호 입력하는곳
+		$("#userEmail1").attr("disabled",true);
 		$("#mailCheckBtn").attr("disabled",true);
 		$.ajax({
 			type : "POST",
@@ -844,6 +860,18 @@ function agree() {
     // 체크박스 상태 확인
     var checkBox = document.getElementById("agreement");
     
+    $("#term2").scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var innerHeight = $(this).innerHeight();
+        var scrollHeight = $(this).prop('scrollHeight');
+
+        if (scrollTop + innerHeight >= scrollHeight) {
+        	$("#agreement").attr("disabled",false);
+        } else {
+        	$("#agreement").attr("disabled",true);
+        }
+});
+    
     if (checkBox.checked == true) {
         // 동의한 경우에 실행할 동작
         alert("동의하셨습니다.");
@@ -941,11 +969,11 @@ function agree() {
                 
               <div class="form-group3">
               <label for="agreement" style="margin-left: 130px;">이용약관</label>
-                  <div class="term2" style="padding-top: 30px;">
+                  <div class="term2" id="term2" style="padding-top: 30px;">
       
-                          <div class="box">
+                          <div class="box" id="box">
                               <h4>회원가입 이용약관</h4>
-                              <p class="formuse">제 1조 Lorem ipsum dolor sit amet<br> <!-- 약관 텍스트 내용 -->
+                              <p class="formuse" id="formuse">제 1조 Lorem ipsum dolor sit amet<br> <!-- 약관 텍스트 내용 -->
                            이 약관은 (0)0000(전자거래 사업자)이 운영하는 홈페이지(이하 "쇼핑몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 (0)0000와 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.<br>
                            ※ 「PC통신 등을 이용하는 전자거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다」<br>
                            제2조(정의)   
