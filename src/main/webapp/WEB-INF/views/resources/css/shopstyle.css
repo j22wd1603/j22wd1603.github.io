@@ -2127,11 +2127,13 @@ text-align: center;
 
 /* 테이블 스타일 */
 .cartList table {
-    width: 1250px;
+   width: calc(100% - 280px);
+    margin: 0 140px;; 
     margin-bottom: 30px;
     margin-top: 10px;
     border-collapse: collapse; /* 테이블 셀 간격을 없앰 */
 }
+
 
 
 .cartList th, .cartList td {
@@ -2205,36 +2207,36 @@ text-align: center;
     text-align: center;
 
 }
-
-/*페이징버튼*/
+/* 페이징 버튼 */
 .paging {
     display: flex;
-   margin-left:980px;
+    justify-content: flex-end; /* 우측 정렬 */
+
 }
 
 .paging .page-item {
-    margin: 0; 
-    padding: 0; 
+    margin: 0;
+    padding: 0;
     display: inline-block;
 }
 
 .paging .page-link {
-    background-color: transparent; 
-    color: #000; 
-    border: none; 
+    background-color: transparent;
+    color: #000;
+    border: none;
     cursor: pointer;
-    font-size: 12px; 
+    font-size: 12px;
 }
 
 .paging .page-link:hover {
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 
-.button-container-cart, .paging {
+.button-container-cart,
+.paging {
     display: inline-block;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
-
 
 
 #deleteButton:hover,#deleteButton-all:hover {

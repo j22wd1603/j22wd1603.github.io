@@ -338,10 +338,11 @@ function fn_list(curPage)
               </table>           
              </div>
           
-          <div class="button-container-cart">
-               <button id="deleteButton" onClick="deleteValue()">선택삭제</button>
-               <button id="deleteButton-all" onClick="deleteValueAll()">전체삭제</button>
-               
+	          <div class="button-container-cart">
+	               <button id="deleteButton" onClick="deleteValue()">선택삭제</button>
+	               <button id="deleteButton-all" onClick="deleteValueAll()">전체삭제</button>
+	          </div>  
+                
                <div class="paging">
                <c:if test="${!empty paging}">      
                   <c:if test="${paging.prevBlockPage gt 0}">
@@ -364,14 +365,13 @@ function fn_list(curPage)
                   </c:if>
                </c:if>
             </div>   
-         </div>
+      
          
          
          
-          
-        <div>
-          <h6 style="font-size: 11px; text-align: right; margin-top:10px; margin-right: 160px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
-      </div>
+		   <div style="display: flex; justify-content: center;">
+			    <h6 style="width: 1200px; font-size: 11px; margin-top: 10px; text-align: right;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
+			</div>
 
                
           
