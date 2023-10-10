@@ -91,7 +91,7 @@ $(document).ready(function() {
 
        // AJAX 요청 데이터 생성
        var requestData = {
-           redemCode: $("#redemCode").val(),
+           redemCode: $("#couponSelect").val(),
            deliveryAddress: $("#deliveryAddress").val(),
            deliveryPhone: $("#deliveryPhone").val(),
            deliveryName: $("#deliveryName").val(),
@@ -453,7 +453,7 @@ function setInputAddress() {
                                      <tr>
                                        <td>사용가능 쿠폰</td>
                                        <td>
-											<select id="couponSelect" name="">
+											<select id="couponSelect" name="couponSelect">
 												<option value="" selected="selected">쿠폰선택</option>
 												<c:forEach var="redem" items="${couponList}" >
 													<option value="${redem}">${redem}</option>
