@@ -314,7 +314,7 @@ function setInputAddress() {
                       <div class= "orderPage-container-section"> 
                          <div class = "orderPage-container-section-list"> 
                         <div class="orderPage-container-section-title"> 
-                                <h1>주문정보<span style="color: red; margin-left: 80vh;  font-weight: normal;">*</span><span class="required">필수입력사항</span></h1></div> 
+                                <h1>주문정보<span style="color: red; margin-left: 95vh;  font-weight: normal;">*</span><span class="required">필수입력사항</span></h1></div> 
                                
                                <article class="orderer">    
                                  <table>
@@ -350,7 +350,7 @@ function setInputAddress() {
      
                        <div class = "orderPage-container-section-list"> 
                        		<div class="orderPage-container-section-title"> 
-                                <h1>배송정보<span style="color: red; margin-left: 80vh;  font-weight: normal;">*</span><span class="required">필수입력사항</span></h1>
+                                <h1>배송정보<span style="color: red; margin-left: 95vh;  font-weight: normal;">*</span><span class="required">필수입력사항</span></h1>
                             </div> 
                                
                             <article class="delivery">    
