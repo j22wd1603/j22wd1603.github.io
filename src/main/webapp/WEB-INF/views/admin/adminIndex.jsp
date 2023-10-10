@@ -50,7 +50,7 @@ function fn_pageInit()
 			<div class="container-fluid">
 				<!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <iframe src="/admin/adminCs" id="adminFrame" frameborder="0" scrolling="auto"></iframe>
+                    <iframe src="/admin/adminUser" id="adminFrame" frameborder="0" scrolling="auto"></iframe>
                 </div>
 			</div>
 		</div>
