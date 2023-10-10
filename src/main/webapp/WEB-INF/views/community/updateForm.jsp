@@ -37,10 +37,9 @@ $(document).ready(function() {
 		   
 			
 			if(fileValue)
-				document.updateForm.fileDeleteCheck.value = "Y";
-			
+				document.updateForm.fileDeleteCheck.value = "Y";	
 		   
-		   if($("#communityFile").val() != null && fileValue != true)
+		   if($("#communityFile").val() != "" && fileValue != true)
 		   {
 			   alert("수정 또는 삭제 하시려면 체크박스에 체크가 필요합니다.");
 			   $("#btnUpdate").prop("disabled", false);		//버튼 활성화
@@ -119,50 +118,54 @@ $(document).ready(function() {
 
 <div class="container">
 	<h2>게시물 수정하기</h2>
-	<form name="updateForm" id="updateForm" method="post" enctype="multipart/form-data">
-
-		<select disabled name="commuTab" id=commuTab class="custom-select" style="width:auto;">
-            <option value="">게시판 고르기</option>
-            <option value="1" <c:if test='${community.commuTab eq "1"}'>selected</c:if>>마이룸 게시판</option>
-            <option value="2" <c:if test='${community.commuTab eq "2"}'>selected</c:if>>자유 게시판</option>
-            <option value="3" <c:if test="${community.commuTab eq '3'}">selected</c:if>>질문 게시판</option>
-         </select>	   
-               
-         <div>
- 			<c:if test="${community.fileCheck eq 'Y'}">
-           		<img class="img-fluid" src="/resources/images/community/${community.commuIdk}.${community.fileExt}">
-   			</c:if>
-   			
- 		 </div>			
- 		 		
-		<input type="text" name="userName" id="userName" maxlength="20" value="${user.userId}" style="ime-mode:active;" class="form-control mt-4 mb-2" placeholder="이름을 입력해주세요." readonly />
-		<input type="text" name="communityTitle" id="communityTitle" maxlength="100" value="${community.commuTitle}" style="ime-mode:active;" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
-	    <div class="form-group">
-	       <textarea class="form-control" rows="10" name="communityContent" id="communityContent" style="ime-mode:active;" placeholder="내용을 입력해주세요" required>${community.commuContent}</textarea>
-	    </div>
-	    
-		 <c:if test="${community.fileCheck eq 'Y'}">
-	        <div style="margin-bottom:0.3em;">[첨부파일 : ${community.commuIdk}.${community.fileExt}]</div>
-	        <input type="checkbox" id="fileCheckValue" name="fileCheckValue" /> 사진 수정 또는 삭제 여부		
-		 </c:if>
+		<div style="margin-left:auto; margin-right:auto; width:718px;">
 		
-		<input type="file" id="communityFile" name="communityFile" class="form-control mb-2" placeholder="파일을 선택하세요." required />
 		
-		<input type="hidden" name="commuIdk" value="${community.commuIdk}" />
-		<input type="hidden" name="curPage" value="${curPage}"/>
-		<input type="hidden" name="searchType" value="${searchType}" />
-		<input type="hidden" name="searchValue" value="${searchValue}" />
-		<input type="hidden" name="sortType" value="${sortType}" />		
-		<input type="hidden" name="fileDeleteCheck" value="" />	
+			<form name="updateForm" id="updateForm" method="post" enctype="multipart/form-data">
 		
-		<div class="form-group row">
-			<div class="col-sm-12">
-				<button type="button" id="btnUpdate" class="btn btn-primary" title="수정">수정</button>
-				<button type="button" id="btnList" class="btn btn-secondary" title="리스트">돌아가기</button>
-			</div>
-		</div>			
-		
-	</form>
+				<select disabled name="commuTab" id=commuTab class="custom-select" style="width:auto;">
+		            <option value="">게시판 고르기</option>
+		            <option value="1" <c:if test='${community.commuTab eq "1"}'>selected</c:if>>마이룸 게시판</option>
+		            <option value="2" <c:if test='${community.commuTab eq "2"}'>selected</c:if>>자유 게시판</option>
+		            <option value="3" <c:if test="${community.commuTab eq '3'}">selected</c:if>>질문 게시판</option>
+		         </select>	   
+		               
+		         <div>
+		 			<c:if test="${community.fileCheck eq 'Y'}">
+		           		<img class="img-fluid" src="/resources/images/community/${community.commuIdk}.${community.fileExt}">
+		   			</c:if>
+		   			
+		 		 </div>			
+		 		 		
+				<input type="text" name="userName" id="userName" maxlength="20" value="${user.userId}" style="ime-mode:active;" class="form-control mt-4 mb-2" placeholder="이름을 입력해주세요." readonly />
+				<input type="text" name="communityTitle" id="communityTitle" maxlength="100" value="${community.commuTitle}" style="ime-mode:active;" class="form-control mb-2" placeholder="제목을 입력해주세요." required />
+			    <div class="form-group">
+			       <textarea class="form-control" rows="10" name="communityContent" id="communityContent" style="ime-mode:active;" placeholder="내용을 입력해주세요" required>${community.commuContent}</textarea>
+			    </div>
+			    
+				 <c:if test="${community.fileCheck eq 'Y'}">
+			        <div style="margin-bottom:0.3em;">[첨부파일 : ${community.commuIdk}.${community.fileExt}]</div>
+			        <input type="checkbox" id="fileCheckValue" name="fileCheckValue" /> 사진 수정 또는 삭제 여부		
+				 </c:if>
+				
+				<input type="file" id="communityFile" name="communityFile" class="form-control mb-2" placeholder="파일을 선택하세요." required />
+				
+				<input type="hidden" name="commuIdk" value="${community.commuIdk}" />
+				<input type="hidden" name="curPage" value="${curPage}"/>
+				<input type="hidden" name="searchType" value="${searchType}" />
+				<input type="hidden" name="searchValue" value="${searchValue}" />
+				<input type="hidden" name="sortType" value="${sortType}" />		
+				<input type="hidden" name="fileDeleteCheck" value="" />	
+				
+				<div class="form-group row">
+					<div class="col-sm-12">
+						<button type="button" id="btnUpdate" class="btn btn-primary" title="수정">수정</button>
+						<button type="button" id="btnList" class="btn btn-secondary" title="리스트">돌아가기</button>
+					</div>
+				</div>			
+				
+			</form>
+		</div>
 	
 	<form name="bbsForm" id="bbsForm" method="post">
 		<input type="hidden" name="commuIdk" value="${community.commuIdk}" />
