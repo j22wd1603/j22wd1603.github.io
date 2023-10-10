@@ -130,7 +130,6 @@ $(document).ready(function() {
 		            <option value="3" <c:if test="${community.commuTab eq '3'}">selected</c:if>>질문 게시판</option>
 		         </select>	   
 		         
-		         
 		        <p style="text-align:center; font-size:32px; color:black; font-weight:bold;">${community.commuTitle}</p>
 		        
 		           <div class="box" style="background: #BDBDBD; width:64px; height:64px; border-radius:70%; overflow:hidden; float:left; margin:10px;"> 
