@@ -52,9 +52,6 @@ public class ShopController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private OrderService orderService;
-	
 
 	private static final int LIST_COUNT = 12;		//한페이지의 게시물 수
 	private static final int PAGE_COUNT = 5;		//페이징 수 
@@ -334,9 +331,11 @@ public class ShopController {
 	    		deleteCount += shopService.cartDelete(cart);
 	    	}
 	    	
-            if (deleteCount == productList.length) {
+	    	System.out.println("deleteCount  :  "+ deleteCount+"productList.length  :  " + productList.length);
+	    	
+            if (deleteCount>0) {
                 ajaxResponse.setResponse(0, "상품이 삭제되었습니다.");
-            } 
+            }
             else 
             {
                 ajaxResponse.setResponse(500, "상품 삭제 중 오류가 발생했습니다.");
