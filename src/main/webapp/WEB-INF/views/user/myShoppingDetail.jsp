@@ -403,8 +403,12 @@ background: #ffffff;
 <c:if test="${!empty orderDetailList}">	
 	<c:forEach var="detailList" items="${orderDetailList}" varStatus="status">
    			<tr>
-   				<td> <img src="/resources/images/product/small/${detailList.productCode}.${detailList.productFileExt}" width="100" height="100" />
-   				</td>
+   				<td>
+  <a href="/shop/productDetail?productIdk=${detailList.productIdk}">
+    <img src="/resources/images/product/small/${detailList.productCode}.${detailList.productFileExt}" width="100" height="100" />
+  </a>
+</td>
+
    				<td>${detailList.orderIdk}</td>
    				<td>${detailList.orderDetailIdk}</td>
    				<td>${detailList.productName}</td>

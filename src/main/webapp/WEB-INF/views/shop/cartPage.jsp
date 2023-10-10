@@ -316,7 +316,12 @@ function fn_list(curPage)
                            <input type="hidden" class="individual_totalPrice_input" value="${cartItem.quantity * cartItem.productPrice}">
                        </td>
 
-                       <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}"></td>
+                       <td>
+						    <a href="/shop/productDetail?productIdk=${cartItem.productIdk}">
+						        <img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}">
+						    </a>
+						</td>
+
                        <td>
                        <div class="product-info">
                           <div class="brand" style="color: #808080; font-size: 12px;">${cartItem.productBrandName}</div>

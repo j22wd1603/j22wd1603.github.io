@@ -560,7 +560,7 @@ function setInputAddress() {
                                      </tr>
                                      <tr>
                                          <td>배송비</td>
-                                         <td>0</td>
+                                         <td>0원</td>
                                      </tr>
                                      <tr>
                                          <td>쿠폰 할인</td>
