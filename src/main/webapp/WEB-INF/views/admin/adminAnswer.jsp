@@ -43,7 +43,6 @@
 }
 </style>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
-<%@ include file="/WEB-INF/views/include/adminNavigation.jsp" %>
 
 <script type="text/javascript">
 $(document).ready(function() {

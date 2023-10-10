@@ -13,8 +13,12 @@
 	text-align: center;
 }
 #noticeDetail {
-    margin: 0 auto; /* 수평 가운데 정렬 */
-    width: 50%; /* 원하는 너비 설정 */
+    margin: 10 auto; /* 수평 가운데 정렬 */
+    position: fixed; /* 요소를 고정 */
+    right: 0; /* 화면 오른쪽에 고정 */
+    width: 500px; /* 요소의 너비를 조정하세요 */
+    background-color: white; /* 배경색을 원하는 색상으로 설정하세요 */
+    padding: 10px; /* 내용과의 간격 설정 */
 }
 .custom-button {
   background-color: #9E0E0B; /* 배경색 */
@@ -34,7 +38,31 @@
     width: 80%; /* 선의 너비를 조절할 수 있습니다. */
     margin: 0 auto; /* 가운데 정렬을 위해 사용합니다. */
   }
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    border: 1px solid #c4c2c2;
+    width: 100%;
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+}
+
+/* 화면 크기가 768px 이하일 때 스타일 변경 */
+@media screen and (max-width: 768px) {
+    .table-container {
+        overflow-x: hidden; /* 스크롤바 감춤 */
+    }
+}
+.table-cell {
+    max-width: 300px; /* 원하는 최대 길이로 조절하세요 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 </style>
+
 <script type="text/javascript">
 $("document").ready(function(){
 	var checkValue = "";
@@ -348,16 +376,16 @@ function deleteValue()
 		
 		
 		
-		<div style="width: 50%; float: left;">
+		<div style="width: 50%; float: left;" class="table-container">
 		<table id="table2" style="display: none;" class="table table-hover" style="border:1px solid #c4c2c2;">
       <thead>
       <tr>
-      <th class="select-checkbox" style="width:15%">
+      <th class="select-checkbox" style="width:30%">
+      <label for="selectAllCheckbox" style="font-size: 5px;">전체<br>선택</label><br>
          <input type="checkbox" id="selectAllCheckbox">
-		 <label for="selectAllCheckbox">전체 선택</label>
      </th>
-         <th scope="col" class="text-center" style="width:10%">번호</th>
-         <th scope="col" class="text-center" style="width:55%">제목</th>
+         <th scope="col" class="text-center" style="width:10%; font-size: 13px;">번호</th>
+         <th scope="col" class="text-center" style="width:25%">제목</th>
          <th scope="col" class="text-center" style="width:15%">날짜</th>
       </tr>
       </thead>
@@ -370,7 +398,7 @@ function deleteValue()
        <input type="checkbox" class="productCheckbox" name="selectedProduct" value="${cs.noticeIdk}">
       </td>
       <td>${cs.noticeIdk}</td>
-            <td>
+            <td class="table-cell">
             <a href="javascript:void(0)" onclick="fn_view(${cs.noticeIdk})">
 				<c:out value="${cs.noticeTitle}" />
             </a>
@@ -396,10 +424,10 @@ function deleteValue()
    <input type="hidden" name="questionIdk" value="${questionIdk}" />
 </form>
 
-<div id="noticeDetail" style="width: 50%; float: left; display: none;">
+<div id="noticeDetail" style="display: none;">
     <h3 id="noticeTitle" style="text-align: center;"></h3>
     <hr class="custom-hr">
-    <p id="noticeContent" style="text-align: center; width: 80%; margin-right: 0; padding-left: 70px;"></p>
+    <p id="noticeContent" style="text-align: center; width: 80%; margin-right: 0; padding-left: 40px;"></p>
 </div>
     
 

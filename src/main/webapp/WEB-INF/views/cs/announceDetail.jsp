@@ -53,6 +53,11 @@ $(document).ready(function() {
 .custom-button:hover {
   background-color: #9E0E0B; /* 마우스 오버 시 배경색 변경 */
 }
+pre {
+white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+}
 </style>
 </head>
 <body>
@@ -75,7 +80,7 @@ $(document).ready(function() {
          </thead>
          <tbody>
             <tr>
-               <td colspan="2" class="custom-td-style"><c:out value="${cs.noticeContent}" /></td>
+               <td colspan="2" class="custom-td-style"><pre><c:out value="${cs.noticeContent}" /></pre></td>
             </tr>
          </tbody>
          <tfoot>

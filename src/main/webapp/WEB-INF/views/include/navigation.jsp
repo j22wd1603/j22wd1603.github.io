@@ -218,7 +218,7 @@ function isDeleted() {
             if (response.code == 0) {
                 alert("탈퇴 되었습니다.");
                 // 모달 닫기
-                var modal = document.getElementById("modal");
+                var modal = document.getElementById("modal2");
                 modal.style.display = "none"; 
                 // 여기에서 로그아웃 또는 리다이렉션 등 추가 작업 수행 가능
                 handleLogoutSuccess();

@@ -18,7 +18,11 @@ body {
 *{
 font-family: 'Gothic A1', sans-serif;
 }
-
+.table th.text-center {
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트에 "..." 추가 */
+}
 table {
   border: 1px #a39485 solid;
   position: relative;
@@ -35,12 +39,26 @@ table {
   border: 1px dashed #dbdbdb;
   color: #757575;
 }
-
+.table-cell {
+    max-width: 300px; /* 원하는 최대 길이로 조절하세요 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .container{
 
   padding:1.5em;
   
  }
+ .title {
+    width: 100px; /* 원하는 폭으로 설정하세요 */
+    white-space: nowrap; /* 제목이 한 줄로 표시되도록 설정 */
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
+    text-align: left;
+    text-overflow: ellipsis;
+    
+}
 
 th {
   text-align: left;
@@ -232,7 +250,7 @@ function fn_list(curPage)
       <tr>
       
       <td class="text-center">${cs.noticeIdk}</td>
-            <td class="text-center">
+            <td class="table-cell">
             <a href="javascript:void(0)" onclick="fn_view(${cs.noticeIdk})">
 				<c:out value="${cs.noticeTitle}" />
             </a>
