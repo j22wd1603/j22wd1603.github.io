@@ -160,9 +160,9 @@ h1{
                         <img class="bg-img" src="/resources/img/service-3.jpg" alt="">
                         <div class="service-text p-5">
                             <img class="mb-4" src="/resources/img/icons/icon-7.png" alt="Icon">
-                            <h3 class="mb-3">MyRoom 3D</h3>
-                            <p class="mb-4">나만의 방을 미리 꾸며보고 필요한 물품들을 구입해보세요</p>
-                            <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>SEE MORE</a>
+                            <h3 class="mb-3">MyRoom</h3>
+                            <p class="mb-4">나의 방 사진을 올려 나의 방을 자랑해보세요!!!</p>
+                            <a class="btn" href="/community/myroom"><i class="fa fa-plus text-primary me-3"></i>SEE MORE</a>
                         </div>
                     </div>
                 </div>
@@ -268,6 +268,9 @@ h1{
 </div>
 
     <!-- Project End -->
+ 	<form name="bbsForm" id="bbsForm" method="post">
+		<input type="hidden" name="commuIdk" id="commuIdk" value="" />
+	</form>
 
     <!-- Team Start -->
    <div class="container-xxl py-5">
