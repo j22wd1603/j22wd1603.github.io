@@ -111,6 +111,8 @@ $(document).ready(function() {
 </head>
 <body>
 
+   <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
+
 <div class="container">
 	<h2>게시물 수정하기</h2>
 	<form name="updateForm" id="updateForm" method="post" enctype="multipart/form-data">
