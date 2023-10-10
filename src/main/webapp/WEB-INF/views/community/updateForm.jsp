@@ -117,10 +117,10 @@ $(document).ready(function() {
    <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 
 <div class="container">
-	<h2>게시물 수정하기</h2>
 		<div style="margin-left:auto; margin-right:auto; width:718px;">
 		
-		
+		<h2>게시물 수정하기</h2>		
+
 			<form name="updateForm" id="updateForm" method="post" enctype="multipart/form-data">
 		
 				<select disabled name="commuTab" id=commuTab class="custom-select" style="width:auto;">
@@ -129,12 +129,20 @@ $(document).ready(function() {
 		            <option value="2" <c:if test='${community.commuTab eq "2"}'>selected</c:if>>자유 게시판</option>
 		            <option value="3" <c:if test="${community.commuTab eq '3'}">selected</c:if>>질문 게시판</option>
 		         </select>	   
+		         
+		         
+		        <p style="text-align:center; font-size:32px; color:black; font-weight:bold;">${community.commuTitle}</p>
+		        
+		           <div class="box" style="background: #BDBDBD; width:64px; height:64px; border-radius:70%; overflow:hidden; float:left; margin:10px;"> 
+		               <img class="profile" src="/resources/images/profile/${user.userId}.${user.imageFileExt}" style="width:100%; height:100%; object-fit:cover;"/>
+		           </div>    
+		           <h4 style="margin:0px;">${community.userId}</h4>
+		           <p style="margin:0px;">${community.regDate}</p>      		        
 		               
-		         <div>
+	             <div style="text-align : center;"> 
 		 			<c:if test="${community.fileCheck eq 'Y'}">
-		           		<img class="img-fluid" src="/resources/images/community/${community.commuIdk}.${community.fileExt}">
+		           		<img class="img-fluid" src="/resources/images/community/${community.commuIdk}.${community.fileExt}" style="width:718px; height:auto;">
 		   			</c:if>
-		   			
 		 		 </div>			
 		 		 		
 				<input type="text" name="userName" id="userName" maxlength="20" value="${user.userId}" style="ime-mode:active;" class="form-control mt-4 mb-2" placeholder="이름을 입력해주세요." readonly />
