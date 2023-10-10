@@ -455,7 +455,7 @@ background: #ffffff;
 <script>
 function openReviewPopup(productIdk, detailIdk) {
     var popupWidth = 600;
-    var popupHeight = 700; 
+    var popupHeight = 645; 
 
     var left = (window.innerWidth - popupWidth) / 2;
     var top = (window.innerHeight - popupHeight) / 2;

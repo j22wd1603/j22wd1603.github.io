@@ -97,8 +97,9 @@ $(document).ready(function() {
    </div>
 
    <button type="button" id="btnList" class="btn btn-secondary">리스트</button>
+   <c:if test="${counsel.ansStatus eq 'N'}">
    <button type="button" id="btnReply" class="btn btn-secondary">답변</button>
-
+	</c:if>
    <br/>
    <br/>
    </br>

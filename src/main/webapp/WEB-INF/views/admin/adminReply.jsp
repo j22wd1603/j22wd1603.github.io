@@ -53,11 +53,7 @@ $(document).ready(function() {
     		 if(response.code ==0)
     		{
     			 alert("답변이 완료되었습니다.");
-    			 location.href = "/admin/adminIndex";
-    			 /*
-    			 document.bbsForm.action = "/board/list";
-    			 document.bbsForm.submit();
-    			 */
+    			 location.href = "/admin/adminUser";
     		}
     		 else if(response.code == 400)
     		 {
@@ -67,7 +63,6 @@ $(document).ready(function() {
     		 else if(response.code == 404)
     		 {
     			 alert("게시물을 찾을수 없습니다.");
-    			 location.href = "/user/mypageMyQ";
     		 }
     		 else
     	     {

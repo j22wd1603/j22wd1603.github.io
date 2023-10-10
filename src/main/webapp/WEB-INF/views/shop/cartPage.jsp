@@ -171,6 +171,11 @@
   //선택삭제    
     function deleteValue()
     {
+	 	if($("input[name='selectedProduct']:checked").length <= 0){
+	 		alert("선택된 물품이 없습니다.");
+	 		return;
+	 	}
+	 		
         var userId = $("#deleteUserId").val();
         //var productIdk = $("#deleteProductIdk").val();
 
@@ -232,7 +237,7 @@
 
         // 모든 체크박스를 선택 상태로 변경
         $("input[name='selectedProduct']").prop("checked", true);
-
+        
         var valueArr = [];
         var list = $("input[name='selectedProduct']");
         for (var i = 0; i < list.length; i++) {
@@ -273,6 +278,9 @@
                         alert("장바구니 삭제 중 오류 발생: " + error);
                     }
                 });
+            }
+            else{
+            	$("input[name='selectedProduct']").prop("checked", false);
             }
         }
     }
@@ -338,10 +346,11 @@ function fn_list(curPage)
               </table>           
              </div>
           
-          <div class="button-container-cart">
-               <button id="deleteButton" onClick="deleteValue()">선택삭제</button>
-               <button id="deleteButton-all" onClick="deleteValueAll()">전체삭제</button>
-               
+	          <div class="button-container-cart">
+	               <button id="deleteButton" onClick="deleteValue()">선택삭제</button>
+	               <button id="deleteButton-all" onClick="deleteValueAll()">전체삭제</button>
+	          </div>  
+                
                <div class="paging">
                <c:if test="${!empty paging}">      
                   <c:if test="${paging.prevBlockPage gt 0}">
@@ -364,14 +373,13 @@ function fn_list(curPage)
                   </c:if>
                </c:if>
             </div>   
-         </div>
+      
          
          
          
-          
-        <div>
-          <h6 style="font-size: 11px; text-align: right; margin-top:10px; margin-right: 160px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
-      </div>
+		   <div style="display: flex; justify-content: center;">
+			    <h6 style="width: 1200px; font-size: 11px; margin-top: 10px; text-align: right;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
+			</div>
 
                
           
