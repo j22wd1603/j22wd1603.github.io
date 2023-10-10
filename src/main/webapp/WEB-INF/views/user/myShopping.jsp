@@ -400,6 +400,7 @@ function movePage()
    		<section class="n-section-block first list-block">
    		<header class="n-section-title">
    			<h2 class="tit">주문내역 조회</h2>
+   			<p style="color: #8b1411; font-size:12px; ">*상세 조회는 주문번호를 클릭해주세요</p>
    		</header>
    		<!-- 주문내역 상자 -->
    		<table class="n-table table-col">
@@ -415,7 +416,7 @@ function movePage()
    		<thead>
    			<tr>
    				<th scope="col" style="font-weight: bold">주문일자</th>
-   				<th scope="col" style="font-weight: bold">주문번호</th>
+   				<th scope="col" style="font-weight: bold; color: #8b1411;">주문번호</th>
    				<th scope="col" style="font-weight: bold">결제상태</th>
    				<th scope="col" style="font-weight: bold">배송상태</th>
    				<th scope="col" style="font-weight: bold">총주문가격</th>
@@ -431,8 +432,8 @@ function movePage()
    				<td>
    					${myShopping.orderDate}
    				</td>
-   				<td><a href="javascript:void(0)" onclick="fn_view(${myShopping.orderIdk},'${myShopping.payStatus}')">${myShopping.orderIdk}</a></td>
-   			
+   				<td><a href="javascript:void(0)" onclick="fn_view(${myShopping.orderIdk},'${myShopping.payStatus}')"><b style="color: #8b1411;">${myShopping.orderIdk}</b></a></td>
+
    				
    		<c:choose>
 			<c:when test="${myShopping.payStatus eq 'Y'}">
