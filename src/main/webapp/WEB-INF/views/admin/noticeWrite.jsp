@@ -46,7 +46,7 @@ $(document).ready(function() {
     		 if(response.code ==0)
     		{
     			 alert("등록이 완료되었습니다.");
-    			 location.href = "/admin/adminCs";
+    			 location.href = "/admin/adminUser";
     			 /*
     			 document.bbsForm.action = "/board/list";
     			 document.bbsForm.submit();
@@ -60,7 +60,7 @@ $(document).ready(function() {
     		 else if(response.code == 404)
     		 {
     			 alert("게시물을 찾을수 없습니다.");
-    			 location.href = "/admin/adminCs";
+    			 location.href = "/admin/adminUser";
     		 }
     		 else
     	     {
@@ -79,7 +79,7 @@ $(document).ready(function() {
    });
    
    $("#btnList").on("click", function() {
-		document.bbsForm.action ="/admin/adminCs";
+		document.bbsForm.action ="/admin/adminUser";
 		document.bbsForm.submit();
    });
   
@@ -103,5 +103,7 @@ $(document).ready(function() {
       </div>
    </div>
 </div>
+<form name="bbsForm" id="replyForm" method="post" enctype="multipart/form-data">
+
 </body>
 </html>

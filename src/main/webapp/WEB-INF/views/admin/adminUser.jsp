@@ -175,7 +175,7 @@ function fn_boardDelete(userId, userStatus)
                 if (response.code == 0)
                 {
                     alert("회원이 정지 또는 정지 해제 또는 복귀 되었습니다.");
-                    location.href = "/admin/adminCs";
+                    location.href = "/admin/adminUser";
                 }
                 else if (response.code == 400)
                 {
