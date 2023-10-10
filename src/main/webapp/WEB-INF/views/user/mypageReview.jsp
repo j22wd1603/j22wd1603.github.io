@@ -490,9 +490,7 @@ function fn_boardDelete(idk)
 						    </c:otherwise>
 						</c:choose>
                      </h1>
-                            <div class="userbtn">
-							    <a href="/shop/reviewPage">리뷰쓰러가기</a>
-							</div>
+                            
 
 
                </div>

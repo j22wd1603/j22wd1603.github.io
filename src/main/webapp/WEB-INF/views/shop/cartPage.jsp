@@ -10,37 +10,36 @@
 
  <script>
 
-   //선택 삭제
-   var checkValue = "";
+ //선택 삭제
+ var checkValue = "";
+ 
+ $(document).ready(function () {
+    
+    //선택한것에 대한 삭제
+   var chkObj = document.getElementsByName("selectedProduct");
+   var rowCnt = chkObj.length;
+ 
+   $("input[name='selectedProduct']").click(function(){
+       if($("input[name='selectedProduct']:checked").length == rowCnt){
+           $("input[name='allCheck']")[0].checked = true;
+       }
+       else{
+           $("input[name='allCheck']")[0].checked = false;
+       }
+   });
    
-   $(document).ready(function () {
-      
-      //선택한것에 대한 삭제
-     var chkObj = document.getElementsByName("selectedProduct");
-     var rowCnt = chkObj.length;
-   
-     $("input[name='selectedProduct']").click(function(){
-         if($("input[name='selectedProduct']:checked").length == rowCnt){
-             $("input[name='allCheck']")[0].checked = true;
-         }
-         else{
-             $("input[name='allCheck']")[0].checked = false;
-         }
-     });
-     
-    // "전체 선택" 체크박스 클릭 시
-    $("#selectAllCheckbox").click(function () {
-        var isChecked = $(this).prop("checked");
+  // "전체 선택" 체크박스 클릭 시
+  $("#selectAllCheckbox").click(function () {
+      var isChecked = $(this).prop("checked");
 
-        // 모든 상품 체크박스 상태 변경
-        $(".productCheckbox").prop("checked", isChecked);
+      // 모든 상품 체크박스 상태 변경
+      $(".productCheckbox").prop("checked", isChecked);
 
-        // 현재 페이지 이외의 페이지의 "전체 선택" 체크박스 상태도 변경
-        $(".otherPageSelectAllCheckbox").prop("checked", isChecked);
-       setTotalInfo($(".cart_info_td"));   
+      // 현재 페이지 이외의 페이지의 "전체 선택" 체크박스 상태도 변경
+      $(".otherPageSelectAllCheckbox").prop("checked", isChecked);
+     setTotalInfo($(".cart_info_td"));   
 
-    });
-
+  });
 
  
     /* 체크여부에 따른 종합 정보 변화 */
@@ -169,116 +168,114 @@
         });
     });
 
-//선택삭제    
-function deleteValue()
-{
-    var userId = $("#deleteUserId").val();
-    //var productIdk = $("#deleteProductIdk").val();
+  //선택삭제    
+    function deleteValue()
+    {
+        var userId = $("#deleteUserId").val();
+        //var productIdk = $("#deleteProductIdk").val();
 
-    var valueArr = new Array();
-    var list = $("input[name='selectedProduct']");
-    for(var i = 0; i < list.length; i++){
-        if(list[i].checked){//선택되어 있으면 배열에 값을 저장함 
-            //valueArr.push(list[i].value);
-           if(checkValue == "")
-           {
-              checkValue = list[i].value;
-           }
-           else
-           {
-              checkValue = checkValue + "," + list[i].value;
+        var valueArr = new Array();
+        var list = $("input[name='selectedProduct']");
+        for(var i = 0; i < list.length; i++){
+            if(list[i].checked){//선택되어 있으면 배열에 값을 저장함 
+                //valueArr.push(list[i].value);
+               if(checkValue == "")
+               {
+                  checkValue = list[i].value;
+               }
+               else
+               {
+                  checkValue = checkValue + "," + list[i].value;
+               }
+            }
+        }
+        //alert("선택한 물품코드 : " + checkValue);
+
+        if(checkValue == "")      //if(valueArr.length == 0){
+        {
+            alert("선택된 물품이 없습니다.");
+        }
+        else{
+
+           if (confirm("장바구니 물품을 삭제 하시겠습니까?") == true) {
+               $.ajax({
+                   type: 'POST',
+                   url: '/shop/cartDelete',
+                   data: {
+                       productIdk: checkValue
+                   },
+                   dataType: "json",
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader("AJAX", "true");
+                   },
+                   success: function (response) {
+                       if (response.code == 0) {
+                           alert("상품이 삭제되었습니다.");
+                           location.href = "/shop/cartPage";                      
+                       } else if (response.code == 500) {
+                           alert("상품 삭제 중 오류가 발생했습니다.");
+                       } else {
+                           alert("알 수 없는 오류가 발생했습니다.");
+                       }
+                   },
+                   error: function (xhr, status, error) {
+                       alert("장바구니 삭제 중 오류 발생: " + error);
+                   }
+               });
            }
         }
     }
-    //alert("선택한 물품코드 : " + checkValue);
+       
+    //전체삭제
+    function deleteValueAll() {
+        var userId = $("#deleteUserId").val();
 
-    if(checkValue == "")      //if(valueArr.length == 0){
-    {
-        alert("선택된 물품이 없습니다.");
-    }
-    else{
+        // 모든 체크박스를 선택 상태로 변경
+        $("input[name='selectedProduct']").prop("checked", true);
 
-       if (confirm("장바구니 물품을 삭제 하시겠습니까?") == true) {
-           $.ajax({
-               type: 'POST',
-               url: '/shop/cartDelete',
-               data: {
-                   productIdk: checkValue
-               },
-               dataType: "json",
-               beforeSend: function (xhr) {
-                   xhr.setRequestHeader("AJAX", "true");
-               },
-               success: function (response) {
-                   if (response.code == 0) {
-                       alert("상품이 삭제되었습니다.");
-                       location.href = "/shop/cartPage";                      
-                   } else if (response.code == 500) {
-                       alert("상품 삭제 중 오류가 발생했습니다.");
-                   } else {
-                       alert("알 수 없는 오류가 발생했습니다.");
-                   }
-               },
-               error: function (xhr, status, error) {
-                   alert("장바구니 삭제 중 오류 발생: " + error);
-               }
-           });
-       }
-    }
-}
-   
-//전체삭제
-function deleteValueAll() {
-    var userId = $("#deleteUserId").val();
+        var valueArr = [];
+        var list = $("input[name='selectedProduct']");
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].checked) {
+                if (checkValue == "") {
+                    checkValue = list[i].value;
+                } else {
+                    checkValue = checkValue + "," + list[i].value;
+                }
+            }
+        }
 
-    // 모든 체크박스를 선택 상태로 변경
-    $("input[name='selectedProduct']").prop("checked", true);
-
-    var valueArr = [];
-    var list = $("input[name='selectedProduct']");
-    for (var i = 0; i < list.length; i++) {
-        if (list[i].checked) {
-            if (checkValue == "") {
-                checkValue = list[i].value;
-            } else {
-                checkValue = checkValue + "," + list[i].value;
+        if (checkValue == "") {
+            alert("선택된 물품이 없습니다.");
+        } else {
+            if (confirm("장바구니 물품을 삭제 하시겠습니까?") == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/shop/cartDelete',
+                    data: {
+                        productIdk: checkValue
+                    },
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("AJAX", "true");
+                    },
+                    success: function (response) {
+                        if (response.code == 0) {
+                            alert("상품이 삭제되었습니다.");
+                            location.href = "/shop/cartPage";
+                        } else if (response.code == 500) {
+                            alert("상품 삭제 중 오류가 발생했습니다.");
+                        } else {
+                            alert("알 수 없는 오류가 발생했습니다.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("장바구니 삭제 중 오류 발생: " + error);
+                    }
+                });
             }
         }
     }
-
-    if (checkValue == "") {
-        alert("선택된 물품이 없습니다.");
-    } else {
-        if (confirm("장바구니 물품을 삭제 하시겠습니까?") == true) {
-            $.ajax({
-                type: 'POST',
-                url: '/shop/cartDelete',
-                data: {
-                    productIdk: checkValue
-                },
-                dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("AJAX", "true");
-                },
-                success: function (response) {
-                    if (response.code == 0) {
-                        alert("상품이 삭제되었습니다.");
-                        location.href = "/shop/cartPage";
-                    } else if (response.code == 500) {
-                        alert("상품 삭제 중 오류가 발생했습니다.");
-                    } else {
-                        alert("알 수 없는 오류가 발생했습니다.");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    alert("장바구니 삭제 중 오류 발생: " + error);
-                }
-            });
-        }
-    }
-}
-
-
 
 //페이징
 function fn_list(curPage)
@@ -319,7 +316,12 @@ function fn_list(curPage)
                            <input type="hidden" class="individual_totalPrice_input" value="${cartItem.quantity * cartItem.productPrice}">
                        </td>
 
-                       <td><img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}"></td>
+                       <td>
+						    <a href="/shop/productDetail?productIdk=${cartItem.productIdk}">
+						        <img src="/resources/images/product/small/${cartItem.productCode}.${cartItem.productFileExt}" alt="${cartItem.productName}">
+						    </a>
+						</td>
+
                        <td>
                        <div class="product-info">
                           <div class="brand" style="color: #808080; font-size: 12px;">${cartItem.productBrandName}</div>
@@ -368,7 +370,7 @@ function fn_list(curPage)
          
           
         <div>
-          <h6 style="font-size: 11px; text-align: right; margin-top:10px; margin-right: 190px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
+          <h6 style="font-size: 11px; text-align: right; margin-top:10px; margin-right: 160px;">*쿠폰은 주문서 작성 시 적용할 수 있습니다.</h6>
       </div>
 
                

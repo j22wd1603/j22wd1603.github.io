@@ -166,20 +166,21 @@ function fn_share(productIdk) {
 				            <p>${fn:length(review)}개의 리뷰</p>
 				        </div>
 				        <div id="review-rating-rate">    
-				            <h6>디자인</h6>
-				            <p>만족해요</p>
+				            <h6>평균평점</h6>
+				             <p>불만족</p> 
 				            <div class="bar">
 						        <div class="bar-fill" style="width: ${gradeP}%;"></div>
 						    </div>
+						    <p>만족</p>
 				        </div>
 				</div>   
 		<c:forEach var="review" items="${review}">
 		 	<div class="review-content" >
 		  		<div id="review-content-user" >
 			 		<p>리뷰번호: ${review.reviewIdk}</p>
-	                <p>작성자 아이디: ${review.userId}</p>        
-					<p>등록일: ${review.regDate}</p>
-					<p>평점: ${review.score}</p>
+	                <p>작성자 아이디: ${review.userId}</p>  
+	                <p>평점: ${review.score}</p>      
+					<p>등록일: ${review.regDate}</p>					
 		        </div>
 			 	<div id="review-content-text" >
 			 	 	<div id="review-content-image">
@@ -191,16 +192,11 @@ function fn_share(productIdk) {
 			            <span id="less-text">[줄이기]</span>  
 		            </div>
 				</div>
-				
 		 	 </div>
 		  </c:forEach> 
 	   </div>
 
 		
-	
-	
-	
-	
 
 
 <!--재품 내용, 배송정보 버튼-->
