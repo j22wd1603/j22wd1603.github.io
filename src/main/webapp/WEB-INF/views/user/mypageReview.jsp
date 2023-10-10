@@ -515,7 +515,7 @@ function fn_boardDelete(idk)
 			  <div class="content-box">
 			  	<div class="check">선택</div>
 			  	<div class="num">리뷰 번호</div>
-			  	<div class="num">주문 번호</div>
+			  	<div class="num">주문 상세 번호</div>
 			  	<div class="date">상품명</div>
 			  	<div class="title" style="text-align: center;">리뷰 내용</div>
 			  	<div class="date">작성일</div>  
@@ -528,9 +528,9 @@ function fn_boardDelete(idk)
 			  <div class="content-box">
 			    <div class="check"><input type="checkbox" name="" id="" value="${reviewMy.reviewIdk}"></div>
 			    <div class="num">${reviewMy.reviewIdk}</div>
-			     <div class="num">${reviewMy.orderIdk}</div>
+			     <div class="num">${reviewMy.orderDetailIdk}</div>
 			    <div class="date">${reviewMy.productName}</div>
-			     <div class="title" style="text-overflow: ellipsis;"><a href="/shop/view?commuIdk=${reviewMy.productIdk}">${reviewMy.reviewContent}</a></div>
+			     <div class="title" style="text-overflow: ellipsis;"><a href="/shop/productDetail?productIdk=${reviewMy.productIdk}">${reviewMy.reviewContent}</a></div>
 			    <div class="date">${reviewMy.regDate}</div>
 			    <div class="delete"><button class="btnDelete" onClick="fn_boardDelete(${reviewMy.reviewIdk})"><i class="fa-solid fa-trash-can"></i></button></div>
 			  </div>
