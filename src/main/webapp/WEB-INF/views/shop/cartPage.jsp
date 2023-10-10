@@ -171,6 +171,11 @@
   //선택삭제    
     function deleteValue()
     {
+	 	if(!$("input[name='selectedProduct']").prop('checked')){
+	 		alert("선택된 물품이 없습니다.");
+	 		return;
+	 	}
+	 		
         var userId = $("#deleteUserId").val();
         //var productIdk = $("#deleteProductIdk").val();
 
@@ -232,7 +237,7 @@
 
         // 모든 체크박스를 선택 상태로 변경
         $("input[name='selectedProduct']").prop("checked", true);
-
+        
         var valueArr = [];
         var list = $("input[name='selectedProduct']");
         for (var i = 0; i < list.length; i++) {
@@ -273,6 +278,9 @@
                         alert("장바구니 삭제 중 오류 발생: " + error);
                     }
                 });
+            }
+            else{
+            	$("input[name='selectedProduct']").prop("checked", false);
             }
         }
     }
