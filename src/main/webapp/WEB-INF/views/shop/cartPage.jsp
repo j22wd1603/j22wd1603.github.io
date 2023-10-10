@@ -171,7 +171,7 @@
   //선택삭제    
     function deleteValue()
     {
-	 	if(!$("input[name='selectedProduct']").prop('checked')){
+	 	if($("input[name='selectedProduct']:checked").length <= 0){
 	 		alert("선택된 물품이 없습니다.");
 	 		return;
 	 	}
