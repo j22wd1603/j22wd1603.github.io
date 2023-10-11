@@ -264,7 +264,13 @@ INSERT INTO NOTICE (
 DELETE FROM NOTICE
 WHERE NOTICE_IDK = #{noticeIdk}
 </delete>
-  
+ 
+<select id="totalplace" resultType="int">
+SELECT SUM(TOTAL_PRICE) AS TOTAL
+FROM ORDERS
+WHERE ORDER_IDK IN (SELECT ORDER_IDK fROM PAY)
+AND PAY_STATUS = 'Y'
+</select>
 
  
 </mapper>

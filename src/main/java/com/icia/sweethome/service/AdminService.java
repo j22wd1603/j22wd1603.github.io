@@ -190,4 +190,8 @@ public class AdminService
 		return count;
 
 	}
+	
+	public int totalplace() {
+		return adminDao.totalplace();
+	}
 }

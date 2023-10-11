@@ -139,11 +139,12 @@ public class AdminController {
 //판매자
 //=====================================================================================================================
 		
-		@RequestMapping(value = "/admin/adminSeller")
-		public String adminSeller(Model model, HttpServletRequest request, HttpServletResponse response) {
+		@RequestMapping(value = "/admin/adminDash")
+		public String adminSeller(Model model) {
 			
+			model.addAttribute("total", adminService.totalplace());
 			
-			return "/admin/adminSeller";
+			return "/admin/adminDash";
 		}			
 	
 //커뮤니티
@@ -333,9 +334,6 @@ public class AdminController {
 				@RequestMapping(value="/admin/adminAnswer")
 				public String inquirylistDetail(ModelMap model, HttpServletRequest request, HttpServletResponse response)throws IOException
 				{
-
-					//쿠키 값
-					String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_NAME);
 					//게시물 번호
 					int questionIdk = HttpUtil.get(request, "questionIdk", (int)0);
 								//본인글 여부
@@ -417,7 +415,6 @@ public class AdminController {
 				{
 
 					Response<Object> ajaxResponse = new Response<Object>();
-					String cookieUserId = CookieUtil.getHexValue(request, AUTH_COOKIE_ADMIN_NAME);
 					int questionIdk = HttpUtil.get(request, "questionIdk", (int)0);
 					String ansTitle = HttpUtil.get(request, "ansTitle","");
 					String ansContent = HttpUtil.get(request, "ansContent", "");

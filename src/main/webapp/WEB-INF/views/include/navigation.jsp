@@ -80,6 +80,7 @@ font-family: 'Gothic A1', sans-serif;
   <a href="/index" class="navbar-brand ms-4 ms-lg-0">
        <h1 class="text-primary m-0"><img class="me-3" src="/resources/images/shop/logo1.jpg" alt="Icon"></h1>
   </a>
+  <div id="clock">시계</div>
   <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
   </button>
@@ -237,4 +238,28 @@ function handleLogoutSuccess() {
 	window.location.href = '/user/loginOut';
 
 }
+
+function currentTime() {
+	  const date = new Date(); 
+	  var HH = date.getHours();
+	  var MM = date.getMinutes();
+	  var SS = date.getSeconds();
+	  var session = "AM";
+
+	  if (HH > 12) {
+	    session = "PM";
+	  }
+
+	  HH = (HH < 10) ? "0" + HH : HH;
+	  MM = (MM < 10) ? "0" + MM : MM;
+	  SS = (SS < 10) ? "0" + SS : SS;
+
+	  const time = HH + ":" + MM + ":" + SS + " " + session;
+
+	  document.getElementById("clock").innerText = time;
+
+	  setTimeout(() => currentTime(), 1000);
+	}
+
+	currentTime();
 </script>
