@@ -2,6 +2,7 @@ package com.icia.sweethome.service;
 
 
 import java.util.List;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -339,6 +340,32 @@ public class ShopService
 			
 		}
 		
+		public int recommend(){
+			List<Integer> list = null;
+			int recom = 0;
+			
+			try
+			{
+				list = shopDao.recommend();
+				
+		        Random random = new Random();
+		        int randomIndex = random.nextInt(list.size());
+		        
+		        // 추천된 값을 가져오기
+		        recom = list.get(randomIndex);
+		        
+		        System.out.println("list.size() : "+list.size());
+		        System.out.println("randomIndex : "+randomIndex);
+		        System.out.println("recom : "+recom);
+				
+			}
+			catch(Exception e)
+			{
+				logger.error("[shopService] rcommend Exception", e);
+			}
+			
+			return recom;
+		}
 }
 
 

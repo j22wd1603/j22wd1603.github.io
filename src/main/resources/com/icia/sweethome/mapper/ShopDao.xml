@@ -471,4 +471,10 @@ WHERE PRODUCT_IDK = #{value}
 ORDER BY REVIEW_IDK ASC
 </select>
 
+<select id="recommend" resultType="int">
+SELECT PRODUCT_IDK
+FROM PRODUCT
+WHERE PRODUCT_STATUS = 'Y'
+</select>
+
 </mapper>

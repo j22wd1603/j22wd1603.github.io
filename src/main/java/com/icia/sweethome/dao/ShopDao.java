@@ -3,9 +3,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.icia.sweethome.model.Shop;
 import com.icia.sweethome.model.Cart;
 import com.icia.sweethome.model.Review;
+import com.icia.sweethome.model.Shop;
 @Repository("shopDao")
 public interface ShopDao {
 	//샵,페이징
@@ -47,6 +47,8 @@ public interface ShopDao {
 	public int reviewInsert(Review review);
 	public int reviewUpdate(int detailIdk);
 	public List<Review> reviewList(int productIdk);
+	
+	public List<Integer> recommend();
 	
 }
 

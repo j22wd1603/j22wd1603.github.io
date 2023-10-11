@@ -329,14 +329,14 @@ public class SellerController {
 		
 		FileData bigFileData = HttpUtil.getFile(request, "bigFile", UPLOAD_SAVE_DIR + "\\product\\big", productCode);
 	    FileData smallFileData = HttpUtil.getFile(request, "smallFile", UPLOAD_SAVE_DIR + "\\product\\small", productCode);
+
 	    
-		
 		if(!StringUtil.isEmpty(tabCode) && !StringUtil.isEmpty(detailTabCode) && !StringUtil.isEmpty(productName)&& !StringUtil.isEmpty(productBrandName) && productPrice != 0 && !StringUtil.equals(productCode,"")
 				&& bigFileData != null && bigFileData.getFileSize() > 0 && smallFileData != null && smallFileData.getFileSize() > 0)
 		{
 			
 			if(sellerService.sellerSelect(sellerId) != null)
-			{					
+			{								
 				Shop product = new Shop();
 				
 				product.setShopTabCode(tabCode);
@@ -357,7 +357,7 @@ public class SellerController {
 				}
 				
 				if(sellerService.productInsert(product) > 0)
-				{
+				{	
 					ajaxResponse.setResponse(0, "Success");
 				}
 				else

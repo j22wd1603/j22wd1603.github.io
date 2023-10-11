@@ -12,8 +12,7 @@ function search()
 {
 	document.shopForm.submit();
 }
-</script>
-<script> /*채널톡*/
+/*채널톡*/
   (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
 
   ChannelIO('boot', {
@@ -58,12 +57,12 @@ function search()
      <div class="container-xxl py-5">
        <div class="container">
          <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-           <h4 class="section-title2">BEST ITEM</h4>
+           <h4 class="section-title2"><a href="/shop/bestItem">BEST ITEM</a></h4>
            <h1 class="display-5 mb-4">TOP 8</h1>
          </div>
          
          <div class="text-center">
-           <a href="/shop/bestItem" class="btn btn-primary">View More Products</a>
+           <a onclick="rcommend()" class="btn btn-primary" style="margin-bottom: 1rem">Rcommend Products</a>
          </div>
          
          <div class="row g-0 team-items">
@@ -123,6 +122,22 @@ function search()
   </section>
  
 <script>
+function rcommend() {
+	
+    $.ajax({
+        url: "/shop/recommend",
+        method: "GET",
+        success: function (data) {
+        	alert("추천상품으로 이동합니다.");
+        	location.href = "/shop/productDetail?productIdk="+data;
+        },
+        error: function () {
+        	alert("상품 추천 실패했습니다.");
+        }
+    });
+	
+}
+
       //페이지 로드 시 모달 자동으로 열기
       window.addEventListener("load", function () {
           var modal = document.getElementById("rouletteModal");
