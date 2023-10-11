@@ -15,13 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.icia.sweethome.model.Cart;
@@ -50,6 +52,14 @@ import com.icia.sweethome.util.StringUtil;
 public class SellerController {
 	
 	private static Logger logger = LoggerFactory.getLogger(SellerController .class);
+	
+    // HTTP 405 에러를 처리
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ModelAndView handle405Error() {
+        // 인덱스 페이지로 리디렉션
+        ModelAndView modelView = new ModelAndView("redirect:/index"); // index 페이지로 리디렉션
+        return modelView;
+    }
 	
 	@Value("#{env['auth.cookie.name']}")
 	private String AUTH_COOKIE_NAME;	
