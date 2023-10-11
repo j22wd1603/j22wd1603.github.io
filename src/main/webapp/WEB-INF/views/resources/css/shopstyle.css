@@ -616,10 +616,13 @@ ul:after { clear: both; }
 
 
 /*shop banner 슬라이드*/
+
+/*shop banner 슬라이드*/
 .banner-container{
   width:100vw;
-  height:600px;
+  height:500px;
   overflow:hidden;
+  margin-top:30px;
 }
 
 .banner{
@@ -628,11 +631,11 @@ ul:after { clear: both; }
   display:flex;
   animation: animation1 6s infinite;
   /*기본 전환 animation을 위한 설정*/
-  -webkit-transition: all 0.5s cubic-bezier(1, .01, .32, 1);
-  -moz-transition: all 0.5s cubic-bezier(1, .01, .32, 1);
-  -o-transition: all 0.5s cubic-bezier(1, .01, .32, 1);
-  -ms-transition: all 0.5s cubic-bezier(1, .01, .32, 1);
-  transition: all 0.5s cubic-bezier(1, .01, .32, 1);
+  -webkit-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
+  -moz-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
+  -o-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
+  -ms-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
+  transition: all 0.9s cubic-bezier(1, .01, .32, 1);
 }
 
 
@@ -640,6 +643,7 @@ ul:after { clear: both; }
   width:100vw;
   height:100%;   
 }
+
 
 @keyframes animation1 {
   0% {margin-left: 0}
@@ -685,7 +689,6 @@ ul:after { clear: both; }
   95% {margin-left: -200%}
   100% {margin-left: -300%}
 }
-
 
 
 
@@ -2021,7 +2024,7 @@ text-align: center;
 .roulette-wacu {
   height: 100%;
   background: #f1f1e5
-    url("/resources/images/product/big/룰렛-removebg-preview.png")
+    url("/resources/images/shop/룰렛-removebg-preview.png")
     no-repeat;
   background-size: 125%;
   background-position:center;
@@ -2059,6 +2062,7 @@ text-align: center;
 .hidden-input {
   display: none;
 }
+
 
 
 /* 룰렛모달 스타일 */

@@ -6,19 +6,19 @@
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 
-
 <script>
 function search()
 {
 	document.shopForm.submit();
 }
 /*채널톡*/
-  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+(function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
 
-  ChannelIO('boot', {
-    "pluginKey": "04813fae-6608-41f3-9dc9-3287c53485be"
-  });
+ChannelIO('boot', {
+  "pluginKey": "04813fae-6608-41f3-9dc9-3287c53485be"
+});
 </script>
+
 </head>
 
 <body>
@@ -26,43 +26,31 @@ function search()
    <!--banner -->
       <div class="banner-container">
         <div class="banner">
-          <img class="banner-images" src="/resources/images/shop/shopbanner3.jpg">
-          <img class="banner-images" src="/resources/images/shop/shopbanner.jpg">
-          <img class="banner-images" src="/resources/images/shop/shopbanner2.jpg">
-          <img class="banner-images" src="/resources/images/shop/shopbanner.jpg">
+        <a href="/user/join">
+		    <img class="banner-images" src="/resources/images/shop/shopbanner.jpg">
+		</a> 
+         <a href="/community/myroom">
+		    <img class="banner-images" src="/resources/images/shop/shopbanner3.jpg">
+		</a>      
+          <a href="/shop/product?shopTabCode=A">
+		    <img class="banner-images" src="/resources/images/shop/shopbanner2.jpg">
+		</a>
+          <img class="banner-images" src="/resources/images/shop/shopbanner4.jpg" id="recommendImage">
          </div>
       </div> 
    </header>
    
-   
-   
-   
- <!-- 모달
-    <div id="rouletteModal" class="rouletteModal">
-        <div class="rouletteModal-content">
-          <p>집가고싶다 </p>
-            <span class="rouletteModal-close">&times;</span>
-            <!-- 룰렛 추가 -->
-         <!--    <div class="roulette">
-                <div class="roulette-bg"><div class="roulette-wacu"></div></div>
-                <div class="roulette-arrow"></div>
-                <button class="roulette-btn">START</button>
-            </div>
-        </div>
-    </div>
- -->
-	
-  
+
   <section>
      <div class="container-xxxxl py-7">
        <div class="container">
          <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-           <h4 class="section-title2"><a href="/shop/bestItem">BEST ITEM</a></h4>
+           <h4 class="section-title2">BEST ITEM</h4>
            <h1 class="display-5 mb-4">TOP 8</h1>
          </div>
          
-         <div class="text-center">
-           <a onclick="rcommend()" class="btn btn-primary" style="margin-bottom: 1rem">Rcommend Products</a>
+         <div class="text-center" style="margin-bottom:30px;">
+           <a href="/shop/bestItem" class="btn btn-primary">View More Products</a>
          </div>
          
          <div class="row g-0 team-items">
@@ -120,7 +108,13 @@ function search()
         </div>
     </div>      
   </section>
- 
+  
+  
+  
+  <!-- 모달 -->
+  <div id="app"></div>
+  <script src="/resources/js/roulette.js"></script>
+  
 <script>
 function rcommend() {
 	
@@ -137,38 +131,6 @@ function rcommend() {
     });
 	
 }
-
-      //페이지 로드 시 모달 자동으로 열기
-      window.addEventListener("load", function () {
-          var modal = document.getElementById("rouletteModal");
-          var hasModalBeenOpened = localStorage.getItem("modalOpened");
-      
-          if (!hasModalBeenOpened) {
-              // 모달이 아직 열리지 않았다면 열기
-              modal.style.display = "block";
-              localStorage.setItem("modalOpened", "true");
-          }
-      });
-
-
-     // 모달 닫기 함수
-        function closeModal() {
-            var modal = document.getElementById("rouletteModal");
-            modal.style.display = "none";
-        }
-
-        // 모달 닫기 버튼 클릭 이벤트 핸들러
-        var closeBtn = document.querySelector(".rouletteModal-close");
-        closeBtn.addEventListener("click", closeModal);
-
-        // 모달 바깥 영역 클릭 시 모달 닫기
-        window.addEventListener("click", function(event) {
-            var modal = document.getElementById("rouletteModal");
-            if (event.target == modal) {
-                closeModal();
-            }
-        });
-    </script>
-    
+ </script>
 </body>
 </html>

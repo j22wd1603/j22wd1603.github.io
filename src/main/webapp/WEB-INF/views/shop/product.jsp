@@ -4,7 +4,6 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navigation.jsp" %>
-<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 
 <script> /*채널톡*/

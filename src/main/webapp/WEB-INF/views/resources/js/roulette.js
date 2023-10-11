@@ -48,7 +48,7 @@ const rLayerPopup = (num) => {
     case 3:
       alert("당첨!! 10% 할인 쿠폰");
       break;
-    case 5:
+    case 5: 
       alert("당첨!! 30% 할인 쿠폰");
       break;
     default:
