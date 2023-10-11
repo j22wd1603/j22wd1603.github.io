@@ -564,13 +564,14 @@ progress {
     color: #6c757d
 }
 
-.container,.container-fluid,.container-sm,.container-md,.container-lg,.container-xl,.container-xxl {
+.container,.container-fluid,.container-sm,.container-md,.container-lg,.container-xl,.container-xxl,.container-xxxxl {
     width: 100%;
     padding-right: var(--bs-gutter-x, .75rem);
     padding-left: var(--bs-gutter-x, .75rem);
     margin-right: auto;
     margin-left: auto
 }
+
 
 @media (min-width: 576px) {
     .container,.container-sm {
@@ -600,7 +601,14 @@ progress {
     .container,.container-sm,.container-md,.container-lg,.container-xl,.container-xxl {
         max-width:1320px
     }
+    
 }
+
+ @media (min-width: 1450px) {
+    .container,.container-sm,.container-md,.container-lg,.container-xl,.container-xxl,.container-xxxxl {
+        max-width:1400px
+    }
+ }
 
 .row {
     --bs-gutter-x: 1.5rem;
@@ -3962,7 +3970,7 @@ textarea.form-control-lg {
     padding-bottom: .5rem
 }
 
-.navbar>.container,.navbar>.container-fluid,.navbar>.container-sm,.navbar>.container-md,.navbar>.container-lg,.navbar>.container-xl,.navbar>.container-xxl {
+.navbar>.container,.navbar>.container-fluid,.navbar>.container-sm,.navbar>.container-md,.navbar>.container-lg,.navbar>.container-xl,.navbar>.container-xxl,.navbar>.container-xxxxl {
     display: flex;
     flex-wrap: inherit;
     align-items: center;
@@ -7494,6 +7502,11 @@ textarea.form-control-lg {
 }
 
 .py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important
+}
+
+.py-7 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important
 }

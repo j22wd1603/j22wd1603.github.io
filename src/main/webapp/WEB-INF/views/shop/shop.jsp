@@ -54,7 +54,7 @@ function search()
 	
   
   <section>
-     <div class="container-xxl py-5">
+     <div class="container-xxxxl py-7">
        <div class="container">
          <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
            <h4 class="section-title2"><a href="/shop/bestItem">BEST ITEM</a></h4>
@@ -89,7 +89,7 @@ function search()
      
 
   <section>
-    <div class="container-xxl py-5">
+    <div class="container-xxxxl py-7">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h4 class="section-title2">ALL ITEM</h4>
