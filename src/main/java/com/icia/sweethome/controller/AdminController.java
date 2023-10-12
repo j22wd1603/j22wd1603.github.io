@@ -141,9 +141,7 @@ public class AdminController {
 		
 		@RequestMapping(value = "/admin/adminDash")
 		public String adminSeller(Model model) {
-			
-			System.out.println(adminService.monthTotals());
-			
+
 			model.addAttribute("monthTotals", adminService.monthTotals());
 			model.addAttribute("total", adminService.totalplace());
 			

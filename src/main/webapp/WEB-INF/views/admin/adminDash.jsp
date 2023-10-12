@@ -209,41 +209,32 @@ main .graph_box .graph_date {
     
 </head>
 <body>
-<c:forEach items="${monthTotals}" var="monthTotal">
-	<div>${monthTotal.key} : ${monthTotal.value}</div>
-</c:forEach>
-
     <main style="width: 80%; max-width: 800px; margin: 20px auto;">
-		<canvas id="line-chart" width="300" height="250" ></canvas>    
+		<canvas id="bar-chart" width="300" height="250" ></canvas>    
 	</main>
 	
     <script>
-	    new Chart(document.getElementById("line-chart"), {
-	    	  type: 'line',
+	    new Chart(document.getElementById("bar-chart"), {
+	    	  type: 'bar',
 	    	  data: {
 	    	    labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
 	    	    datasets: [{ 
+	    	    	
 	    	        data: [6,3,2,2,7,26,82,172,312,20000],
 	    	        label: "가구",
-	    	        borderColor: "#c45850",
-	    	        fill: false
-	    	      }, { 
-	    	        data: [86,114,106,106,107,111,133,221,783,2478],
-	    	        label: "가전",
-	    	        borderColor: "#3e95cd",
-	    	        fill: false
-	    	      }, { 
-	    	        data: [282,350,411,502,635,809,947,1402,3700,5267],
-	    	        label: "잡화",
-	    	        borderColor: "#8e5ea2",
-	    	        fill: false
+	    	        fill: false,
+	    	        backgroundColor:'red',
+	    	        borderWidth:10,
+	    	        borderColor:'rgba(255,0,0,0.2)'
+
 	    	      }
 	    	    ]
 	    	  },
 	    	  options: {
 	    	    title: {
 	    	      display: true,
-	    	      text: '매출 추이'
+	    	      text: '매출 추이',
+   	              fontSize: 30
 	    	    }
 	    	  }
 	    	});
