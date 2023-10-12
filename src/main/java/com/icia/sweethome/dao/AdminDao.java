@@ -1,8 +1,8 @@
 package com.icia.sweethome.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.icia.sweethome.model.Admin;
@@ -26,7 +26,9 @@ public interface AdminDao {
 //=========================================================================================
 
 //판매자
-	public int totalplace();	
+	public int totalplace();
+	public Map<String, Object> monthTotals();
+	
 //=========================================================================================
 
 //커뮤니티(0927)

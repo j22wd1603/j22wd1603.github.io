@@ -1,6 +1,8 @@
 package com.icia.sweethome.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +12,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.sweethome.dao.AdminDao;
-import com.icia.sweethome.dao.UserDao;
 import com.icia.sweethome.model.Admin;
 import com.icia.sweethome.model.Comment;
 import com.icia.sweethome.model.Community;
@@ -194,4 +195,29 @@ public class AdminService
 	public int totalplace() {
 		return adminDao.totalplace();
 	}
+	
+	public Map<String, Object> monthTotals(){
+		Map<String, Object> list =  null;
+		
+		try
+		{
+			list = adminDao.monthTotals();
+			list = sortMap(list);
+		}
+		catch(Exception e)
+		{
+			logger.error("[ShopService]monthTotals Exception", e);
+		}
+	
+		return list;
+	}
+	
+    private static Map<String, Object> sortMap(Map<String, Object> unsortMap) {
+    	Map<String, Object> sortMap = new LinkedHashMap<>();
+    	unsortMap.entrySet()
+            .stream()
+            .sorted(Map.Entry.comparingByKey())
+            .forEach(entry -> sortMap.put(entry.getKey(), entry.getValue()));
+        return sortMap;
+    }
 }

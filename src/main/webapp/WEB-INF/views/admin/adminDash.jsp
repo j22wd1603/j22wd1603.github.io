@@ -209,6 +209,10 @@ main .graph_box .graph_date {
     
 </head>
 <body>
+<c:forEach items="${monthTotals}" var="monthTotal">
+	<div>${monthTotal.key} : ${monthTotal.value}</div>
+</c:forEach>
+
     <main style="width: 80%; max-width: 800px; margin: 20px auto;">
 		<canvas id="line-chart" width="300" height="250" ></canvas>    
 	</main>
