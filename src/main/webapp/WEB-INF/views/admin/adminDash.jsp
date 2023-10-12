@@ -209,7 +209,7 @@ main .graph_box .graph_date {
     
 </head>
 <body>
-    <main>
+    <main style="width: 80%; max-width: 800px; margin: 20px auto;">
 		<canvas id="line-chart" width="300" height="250" ></canvas>    
 	</main>
 	
