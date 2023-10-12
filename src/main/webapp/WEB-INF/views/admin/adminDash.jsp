@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-<title>관리자 페이지</title>
+    <title>관리자 페이지</title>
 <style>
 @charset "utf-8";
  
@@ -203,55 +203,46 @@ main .graph_box .graph_date {
 	
 }
 </style>
-
-
-<script>
-$(document).ready(function(){
-
-})
-
-</script>
-</head>  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>    
     
-	<main>
-		<section>
-  			<div class="today">
-  				<span>
-  					<span>매출</span>
-  					<span id="today"></span>
-  				</span>
-  			</div>
-  			
-  		</section>
-  		
-		<section class="detail today_detail">
-  			<div>
-				<h3 class="sales_today_detail_title">
-					<span>매출 상세</span>
-				</h3>
-				
-  				<div class="sales_today_detail">
-  					<div>메뉴</div>
-  					<div>수량</div>
-  					<div>가격</div>
-  				</div>
-  			</div>
-  		</section>
-	
-	
-		<section class="graph_section"> 
-			<div class="box" style="height: 700px">
-			
-				<h1>총 합계</h1>
-				
-				<div>(단위 : 원)</div>
-					
-					<div><p>총 매출 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${total}" />원</p></div>
-				</div>
-			
-		</section>
-  		
+    
+    
+</head>
+<body>
+    <main>
+		<canvas id="line-chart" width="300" height="250" ></canvas>    
 	</main>
- 
+	
+    <script>
+	    new Chart(document.getElementById("line-chart"), {
+	    	  type: 'line',
+	    	  data: {
+	    	    labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+	    	    datasets: [{ 
+	    	        data: [6,3,2,2,7,26,82,172,312,20000],
+	    	        label: "가구",
+	    	        borderColor: "#c45850",
+	    	        fill: false
+	    	      }, { 
+	    	        data: [86,114,106,106,107,111,133,221,783,2478],
+	    	        label: "가전",
+	    	        borderColor: "#3e95cd",
+	    	        fill: false
+	    	      }, { 
+	    	        data: [282,350,411,502,635,809,947,1402,3700,5267],
+	    	        label: "잡화",
+	    	        borderColor: "#8e5ea2",
+	    	        fill: false
+	    	      }
+	    	    ]
+	    	  },
+	    	  options: {
+	    	    title: {
+	    	      display: true,
+	    	      text: '매출 추이'
+	    	    }
+	    	  }
+	    	});
+    </script>
 </body>
 </html>

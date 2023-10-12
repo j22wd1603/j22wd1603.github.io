@@ -37,6 +37,23 @@ function openFrame(url) {
 
 		<!-- Divider -->
 		<hr class="sidebar-divider">
+		
+		
+		<!-- Heading -->
+		<div class="sidebar-heading">매출</div>
+
+		<!-- Nav Item - Pages Collapse Menu -->
+		<!-- Product -->
+		<li class="nav-item">
+				<a class="nav-link collapsed" onclick="openFrame('/admin/adminDash')" data-toggle="collapse" data-target="#collapseTwo"
+				    aria-expanded="true" aria-controls="collapseTwo">
+				    <span>매출 추이</span>
+				</a>
+		</li>	
+		
+		<!-- Divider -->
+		<hr class="sidebar-divider">		
+		
 
 		<!-- Heading -->
 		<div class="sidebar-heading">관리</div>
@@ -96,6 +113,7 @@ function openFrame(url) {
 			aria-expanded="true" aria-controls="collapsePages"> <span>공지사항 등록</span>
 			</a>
 		</li>
+		
 		
 		<!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">
