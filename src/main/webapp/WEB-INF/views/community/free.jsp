@@ -170,7 +170,7 @@
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-           				<img  class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
+           				<img  class="img-fluid" style="object-fit: cover; height:261px;  border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
 		              </div>
 		              <div class="text-center p-4">
 		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
@@ -195,7 +195,7 @@
 	            <div class="team-item position-relative">  
 					<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 		              <div class="position-relative">
-           				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/default.jpg">
+           				<img class="img-fluid" style="object-fit: cover; height:261px;  border-radius:10px;" src="/resources/images/community/default.jpg">
 		              </div>
 		              <div class="text-center p-4">
 		                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
@@ -258,7 +258,7 @@
 		            <div class="team-item position-relative">  
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
-            				<img  class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
+            				<img  class="img-fluid" style="object-fit: cover; height:261px;  border-radius:10px;" src="/resources/images/community/${commuBoard.commuIdk}.${commuBoard.fileExt}">
 			              </div>
 			              <div class="text-center p-4">
 			                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
@@ -283,7 +283,7 @@
 		            <div class="team-item position-relative">  
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
-            				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/default.jpg">
+            				<img class="img-fluid" style="object-fit: cover; height:261px;  border-radius:10px;" src="/resources/images/community/default.jpg">
 			              </div>
 			              <div class="text-center p-4">
 			                <h3 class="mt-2" style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">${commuBoard.commuTitle}</h3>
@@ -310,7 +310,7 @@
 		            <div class="team-item position-relative">  
 						<a href="javascript:void(0)" onclick="fn_view(${commuBoard.commuIdk})">
 			              <div class="position-relative">
-            				<img class="img-fluid" style="object-fit: cover; height:261px; width:408px; border-radius:10px;" src="/resources/images/community/delete.jpg">
+            				<img class="img-fluid" style="object-fit: cover; height:261px;  border-radius:10px;" src="/resources/images/community/delete.jpg">
 			              </div>
 			              <div class="text-center p-4">
 			                <h3 class="mt-2">삭제된 게시물 입니다.</h3>
