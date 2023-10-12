@@ -7,11 +7,50 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <link href="/resources/css/shopstyle.css" rel="stylesheet">
 <script>
+function sendSpeech() {
+	var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+	var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+	var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+	
+	var productNameInput = document.getElementById('productName');
+	var recognition = new SpeechRecognition();
+	var speechRecognitionList = new SpeechGrammarList();
+	
+	recognition.grammars = speechRecognitionList;
+	recognition.lang = 'ko-KR';
+	recognition.interimResults = false; // true: 중간 결과를 반환, false: 최종 결과만 반환
+	recognition.continious = false; // true: 음성인식을 계속해서 수행, false: 음성인식을 한번만 수행
+	recognition.maxAlternatives = 1; // 신뢰성 제일높은거 1개만
+	
+	recognition.start();
+	
+	recognition.onresult = function(event) {
+		var speechResult = event.results[0][0].transcript.toLowerCase();
+		console.log('Confidence: ' + event.results[0][0].confidence);
+		console.log('Speech Result: ' + speechResult);
+		productNameInput.value = speechResult;
+		document.bestForm.submit();
+	}
+	
+	recognition.onend = function(event) {
+		console.log('SpeechRecognition.onend');
+	}
+	
+	recognition.onnomatch = function(event) {
+		console.log('SpeechRecognition.onnomatch');
+	}
+	
+	recognition.onstart = function(event) {
+		console.log('SpeechRecognition.onstart');
+	}
+}
+
 function fn_list(curPage)
 {
 	document.bestForm.curPage.value = curPage;
 	document.bestForm.submit();
 }
+
 function search()
 {
 	document.bestForm.curPage.value = 1;
@@ -28,9 +67,10 @@ function search()
 	        <h4 class="section-title2">BEST ITEM</h4>
 	        <h1 class="display-5 mb-4">BEST</h1>
 	            <form id="bestForm" name="bestForm" action="/shop/bestItem" method="get">
-				  <input type="text" name="productName" class="search-input" placeholder="제품 이름" value="${productName}">
+				  <input type="text" id="productName" name="productName" class="search-input" placeholder="제품 이름" value="${productName}">
 				  <input type="hidden" name="curPage" value="${curPage}">
 				  <button type="button" id="buttonA" class="search-button" onclick="search()">검색</button>
+				  <button type="button" id="btnVoice" class="search-button" onclick="sendSpeech()">음성</button>
 				</form>
 			</div>
 	      		

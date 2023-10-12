@@ -76,8 +76,6 @@ ChannelIO('boot', {
      </div>
   </section>
 
-     
-
   <section>
     <div class="container-xxxxl py-7">
         <div class="container">
@@ -89,7 +87,7 @@ ChannelIO('boot', {
 				  <button type="button" id="buttonA" name="buttonA" class="search-button" onclick="search()">검색</button>
             </form>
          </div>
-                  
+
             <div class="row g-0 team-items">
                 <c:forEach var="shop" items="${list}">
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -113,10 +111,10 @@ ChannelIO('boot', {
   
   
   
-  <!-- 모달 -->
+  <!-- 모달 
   <div id="app"></div>
   <script src="/resources/js/roulette.js"></script>
-  
+  -->
 <script>
 function rcommend() {
 	
