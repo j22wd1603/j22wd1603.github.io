@@ -229,9 +229,7 @@ main .graph_box .graph_date {
 		    			],
 	    	        label: "월 매출",
 	    	        fill: false,
-	    	        backgroundColor:'red',
-	    	        borderWidth:10,
-	    	        borderColor:'rgba(255,0,0,0.2)'
+	    	        backgroundColor: ["#c45850", "#c45850","#c45850","#c45850","#c45850","#c45850","#c45850","#c45850","#c45850","#c45850","#c45850"]    	        
 
 	    	      }
 	    	    ]
