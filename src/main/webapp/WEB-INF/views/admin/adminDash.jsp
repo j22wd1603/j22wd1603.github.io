@@ -212,16 +212,22 @@ main .graph_box .graph_date {
     <main style="width: 80%; max-width: 800px; margin: 20px auto;">
 		<canvas id="bar-chart" width="300" height="250" ></canvas>    
 	</main>
-	
     <script>
 	    new Chart(document.getElementById("bar-chart"), {
 	    	  type: 'bar',
 	    	  data: {
-	    	    labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+	    	    labels: [	
+	    	    <c:forEach items="${monthTotals}" var="monthTotal" varStatus="loop">
+	    	    	"${monthTotal.key}"${loop.last ? '' : ','}
+	    		</c:forEach>
+	    		],
 	    	    datasets: [{ 
-	    	    	
-	    	        data: [6,3,2,2,7,26,82,172,312,20000],
-	    	        label: "가구",
+	    	        data: [  
+	    	        	<c:forEach items="${monthTotals}" var="monthTotal" varStatus="loop">
+	    					${monthTotal.value}${loop.last ? '' : ','}
+		    			</c:forEach>
+		    			],
+	    	        label: "월 매출",
 	    	        fill: false,
 	    	        backgroundColor:'red',
 	    	        borderWidth:10,
