@@ -35,8 +35,10 @@ ChannelIO('boot', {
           <a href="/shop/product?shopTabCode=A">
 		    <img class="banner-images" src="/resources/images/shop/shopbanner2.jpg">
 		</a>
+		<a href="#" onclick="rcommend()">
           <img class="banner-images" src="/resources/images/shop/shopbanner4.jpg" id="recommendImage">
-         </div>
+        </a>
+        </div>
       </div> 
    </header>
    
