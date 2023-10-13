@@ -120,10 +120,10 @@ $(document).ready(function() {
 				        </div>
 				        <div class="col-md-9">
 				            <textarea class="form-control" name="communityContent" id="communityContent" style="text-align:left; resize: none; height: 300px;" placeholder="내용을 입력해주세요" required>
-Sweethome 쇼핑몰 백예린친구 님이 아래 상품을 공유합니다:
+Sweethome 쇼핑몰 ${user.userNickname} 님이 아래 상품을 공유합니다:
 상품명: ${product.productName}
 가격: <fmt:formatNumber type="number" maxFractionDigits="3" value="${product.productPrice}" />원
-브랜드: 판둘
+브랜드: ${product.productBrandName}
 더 많은 정보와 구매 링크는 아래에서 확인하세요!
 http://sweethome.co.kr:8088/shop/productDetail?productIdk=${product.productIdk}
 
