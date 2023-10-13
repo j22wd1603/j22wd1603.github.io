@@ -13,12 +13,15 @@
 	text-align: center;
 }
 #noticeDetail {
-    margin: 10 auto; /* 수평 가운데 정렬 */
-    position: fixed; /* 요소를 고정 */
-    right: 0; /* 화면 오른쪽에 고정 */
-    width: 500px; /* 요소의 너비를 조정하세요 */
-    background-color: white; /* 배경색을 원하는 색상으로 설정하세요 */
-    padding: 10px; /* 내용과의 간격 설정 */
+    margin: 7px 80px 10px; /* Center horizontally and add space above */
+    position: fixed;
+    right: 0;
+    width: 500px;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid #9E0E0B; /* Border color and thickness */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* 그림자 설정 (가로 거리, 세로 거리, 흐림 정도, 색상) */
 }
 .custom-button {
   background-color: #9E0E0B; /* 배경색 */
@@ -40,7 +43,6 @@
   }
 .table-container {
     width: 100%;
-    overflow-x: auto;
 }
 
 .table {
@@ -50,7 +52,7 @@
 }
 
 /* 화면 크기가 768px 이하일 때 스타일 변경 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 778px) {
     .table-container {
         overflow-x: hidden; /* 스크롤바 감춤 */
     }
@@ -61,6 +63,28 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.button-container {
+        display: flex;
+        justify-content: flex-start; /* Align buttons to the left */
+        align-items: center;
+        margin-bottom: 0.8rem;
+    }
+
+    .button-container button {
+        background-color: #9E0E0B;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .button-container button:hover {
+        background-color: #D83E3E;
+    }
+    
 </style>
 
 <script type="text/javascript">
@@ -80,7 +104,6 @@ $("document").ready(function(){
 	        $("#table1").hide();
 	        $("#table2").show();
 	        $("#btnReply").show(); 
-	        $("#noticeDetail").show();
 	        $("#deleteButton").show();
 
 	        
@@ -218,6 +241,11 @@ $(document).ready(function () {
         // 새로운 URL로 페이지 이동
         window.location.href = newUrl;
     });
+    $(".table-cell a").click(function () {
+        var noticeIdk = $(this).data("noticeidk"); // 클릭한 게시글의 ID 가져오기
+        fn_view(noticeIdk); // fn_view 함수를 호출하여 상세 내용 표시
+        $("#noticeDetail").show(); // 상세 내용을 나타나게 함
+    });
 });
 function filterUsers() {
     var selectedStatus = $("#statusFilter").val();
@@ -226,10 +254,19 @@ function filterUsers() {
     
     if (selectedStatus === "active") {
         // 정상 상태인 회원만 표시
+        $(".user-row[data-status='Y']").show();
         $(".user-row[data-status='N']").hide();
+        $(".user-row[data-status='D']").hide();
     } else if (selectedStatus === "inactive") {
         // 정지 상태인 회원만 표시
         $(".user-row[data-status='Y']").hide();
+        $(".user-row[data-status='N']").show();
+        $(".user-row[data-status='D']").hide();
+    } else if (selectedStatus === "withdrawn") {
+        // 탈퇴 상태인 회원만 표시
+        $(".user-row[data-status='N']").hide();
+        $(".user-row[data-status='Y']").hide();
+        $(".user-row[data-status='D']").show();
     }
 }
 
@@ -246,15 +283,14 @@ function fn_view(noticeIdk) {
                 var noticeContent = response.noticeContent;
 
                 // 가져온 데이터를 화면 오른쪽에 표시
+                	
                 $("#noticeTitle").text(noticeTitle);
                 $("#noticeContent").text(noticeContent);
             } else {
                 alert("데이터를 가져오는데 실패했습니다.");
             }
         },
-        error: function () {
-            alert("서버와의 통신 중 오류가 발생했습니다.");
-        }
+
     });
 }
 function deleteValue()
@@ -314,16 +350,18 @@ function deleteValue()
     }
 }
 </script>
+
 </head>
 <body>
 	<div style="width:90%; margin:auto; margin-top:5rem;">
    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
         <h2 style="margin: 0; color: #525252;">유저 관리</h2>
-        <div class="button-group">
+  
+    </div>
+          <div class="button-container">
             <button id="showTable1Button">회원관리</button>
             <button id="showTable2Button">공지사항</button>
         </div>
-    </div>
 		<div>
 		<div style="width: 90%;">
 			<table  id="table1" class="table table-hover" style="border:1px solid #c4c2c2;">
@@ -337,6 +375,7 @@ function deleteValue()
 					    <option value="all">전체</option>
 					    <option value="active">정상</option>
 					    <option value="inactive">정지</option>
+					    <option value="withdrawn">탈퇴</option> <!-- 탈퇴된 회원 옵션 추가 -->
 					</select>
 					</th>
 					<th scope="col">등록일</th>
@@ -368,8 +407,7 @@ function deleteValue()
 			</table>
 			
 			</div>
-			    <button type="button" id="btnReply" class="btn btn-secondary" style="display: none;">글쓰기</button>
-				<button id="deleteButton" onClick="deleteValue()"class="btn btn-secondary"  style="display: none;">삭제</button>
+			   
 			
 		</div>
 		
@@ -377,14 +415,13 @@ function deleteValue()
 		
 		
 		<div style="width: 50%; float: left;" class="table-container">
-		<table id="table2" style="display: none;" class="table table-hover" style="border:1px solid #c4c2c2;">
+		<table id="table2" style="display: none; border: none;" class="table">
       <thead>
       <tr>
-      <th class="select-checkbox" style="width:30%">
-      <label for="selectAllCheckbox" style="font-size: 5px;">전체<br>선택</label><br>
-         <input type="checkbox" id="selectAllCheckbox">
+      <th class="select-checkbox" style="width:10%">
+         <input type="checkbox" id="selectAllCheckbox"> <label for="selectAllCheckbox" style="font-size: 13px;">전체선택</label>
      </th>
-         <th scope="col" class="text-center" style="width:10%; font-size: 13px;">번호</th>
+         <th scope="col" class="text-center" style="width:10%;">번호</th>
          <th scope="col" class="text-center" style="width:25%">제목</th>
          <th scope="col" class="text-center" style="width:15%">날짜</th>
       </tr>
@@ -416,6 +453,8 @@ function deleteValue()
 
       </tfoot>
    </table>
+    <button type="button" id="btnReply" class="btn btn-secondary" style="display: none;">글쓰기</button>
+				<button id="deleteButton" onClick="deleteValue()"class="btn btn-secondary"  style="display: none;">삭제</button>
 	</div>
 	 
 	
