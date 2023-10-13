@@ -158,7 +158,7 @@ h1{
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="service-item d-flex position-relative text-center h-100">
                         <img class="bg-img" src="/resources/img/service-3.jpg" alt="">
-                        <div class="service-text p-5">
+                        <div class="service-text p-5" style="width:434px;">
                             <img class="mb-4" src="/resources/img/icons/icon-7.png" alt="Icon">
                             <h3 class="mb-3">MyRoom</h3>
                             <p class="mb-4">나의 방 사진을 올려 나의 방을 자랑해보세요!!!</p>
