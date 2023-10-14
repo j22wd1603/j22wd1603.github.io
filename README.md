@@ -1,4 +1,4 @@
-# sweethome
+# SWEETHOME
 ---
 # 개발 환경
 * JDK 1.8
@@ -10,6 +10,7 @@
 * BootStrap 4<br>
 * AWS
 ---
+![ezgif com-video-to-gif (1)](https://github.com/daekk74/sweethome/assets/145513812/9e6ca81e-3f56-4dab-91ed-728509272dc9)
 - [x] 베스트 아이템 조회
 - [x] 상품 장바구니 추가/삭제
 - [x] 상품 음성 검색 
