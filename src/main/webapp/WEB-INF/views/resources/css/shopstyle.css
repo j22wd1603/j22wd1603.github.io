@@ -629,13 +629,13 @@ ul:after { clear: both; }
   width:calc(100vw*4);
   height:100%;
   display:flex;
-  animation: animation1 6s infinite;
+  animation: animation1 9s infinite;
   /*기본 전환 animation을 위한 설정*/
-  -webkit-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
-  -moz-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
-  -o-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
-  -ms-transition: all 0.9s cubic-bezier(1, .01, .32, 1);
-  transition: all 0.9s cubic-bezier(1, .01, .32, 1);
+  -webkit-transition: all 1.5s cubic-bezier(1, .01, .32, 1);
+  -moz-transition: all 1.5s cubic-bezier(1, .01, .32, 1);
+  -o-transition: all 1.5s cubic-bezier(1, .01, .32, 1);
+  -ms-transition: all 1.5s cubic-bezier(1, .01, .32, 1);
+  transition: all 1.5s cubic-bezier(1, .01, .32, 1);
 }
 
 
