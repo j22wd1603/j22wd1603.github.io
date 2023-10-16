@@ -18,6 +18,10 @@
 - [x] 원하는 조건별 상품 정렬
 - [x] 상품별 리뷰등록 및 상품별 별점분석
 ---
-#ORDER
+# ORDER
+![ezgif com-gif-maker](https://github.com/daekk74/sweethome/assets/145513812/ed8c7774-43db-4ea7-b778-8922f3fb9e55)
 - [x] 카카오페이 api 결제
 - [x] 쿠폰 할인
+- [x] 기본배송지 신규배송지 관리
+---
+# COMMUNITY
