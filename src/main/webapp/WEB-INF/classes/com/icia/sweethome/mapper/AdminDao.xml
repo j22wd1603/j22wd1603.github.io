@@ -90,9 +90,9 @@ SELECT
   COMMENT_IDK,
   COMMU_IDK,
   COMMENT_STATUS,
-  REG_DATE,
-  MOD_DATE,
-  DELETE_DATE,
+  TO_CHAR(REG_DATE,'YYMMDD HH24:MI:SS') AS REG_DATE,
+  TO_CHAR(MOD_DATE,'YYMMDD HH24:MI:SS') AS MOD_DATE,
+  TO_CHAR(DELETE_DATE,'YYMMDD HH24:MI:SS') AS DELETE_DATE,
   PARENT_IDK,
   COMMENT_CONTENT,
   USER_ID,
@@ -122,9 +122,9 @@ SELECT COMMU_IDK,
        COMMU_VIEWS,
        COMMU_LIKES,
        COMMU_STATUS,
-       TO_CHAR(REG_DATE,'YYMMDD HH24:MI:SS'),
-       TO_CHAR(MOD_DATE,'YYMMDD HH24:MI:SS'),
-       TO_CHAR(DELETE_DATE,'YYMMDD HH24:MI:SS'),
+       TO_CHAR(REG_DATE,'YYMMDD HH24:MI:SS') AS REG_DATE,
+       TO_CHAR(MOD_DATE,'YYMMDD HH24:MI:SS') AS MOD_DATE,
+       TO_CHAR(DELETE_DATE,'YYMMDD HH24:MI:SS') AS DELETE_DATE,
        FILE_CHECK,
        FILE_EXT 
 FROM COMMU_BOARD
@@ -142,21 +142,31 @@ WHERE 1=1
 
 <update id="boardStatusUpdate" parameterType="int">
 	UPDATE COMMU_BOARD
-	   SET COMMU_STATUS =
-	  CASE
-	    WHEN COMMU_STATUS = 'Y' THEN 'N'
-	    WHEN COMMU_STATUS = 'N' THEN 'Y'
-	   END   
+	SET DELETE_DATE =
+	    CASE
+	        WHEN DELETE_DATE IS NULL THEN SYSDATE
+	        ELSE NULL
+	    END,   
+	    COMMU_STATUS =
+	    CASE
+	        WHEN COMMU_STATUS = 'Y' THEN 'N'
+	        WHEN COMMU_STATUS = 'N' THEN 'Y'
+	    END   
 	WHERE COMMU_IDK = #{commuIdk}
 </update>
 
 <update id="commentStatusUpdate" parameterType="int">
 	UPDATE COMMENT_TABLE
-	   SET COMMENT_STATUS =
-	  CASE
-	    WHEN COMMENT_STATUS = 'Y' THEN 'N'
-	    WHEN COMMENT_STATUS = 'N' THEN 'Y'
-	   END   
+	SET DELETE_DATE = 
+	    CASE
+	        WHEN DELETE_DATE IS NULL THEN SYSDATE
+	        ELSE NULL
+	    END,
+	    COMMENT_STATUS =
+	      CASE
+	        WHEN COMMENT_STATUS = 'Y' THEN 'N'
+	        WHEN COMMENT_STATUS = 'N' THEN 'Y'
+	      END   
 	WHERE COMMENT_IDK = #{commentIdk}
 </update>
 
@@ -203,50 +213,84 @@ WHERE 1=1
   CASE
     WHEN USER_STATUS = 'Y' THEN 'N'
     WHEN USER_STATUS = 'N' THEN 'Y'
+    WHEN USER_STATUS = 'D' THEN 'Y'
   END
   WHERE USER_ID = #{userId}
 </update>
 
+<update id="isDeleted" parameterType="com.icia.sweethome.model.User">
+UPDATE USERS
+SET USER_STATUS = 'D'
+WHERE USER_ID = #{userId}
+</update>
+
   <select id="userQuestion" parameterType="com.icia.sweethome.model.Question" resultMap="questionResultMap1">     
-	SELECT  QUESTION_IDK,
-		QUESTION_CATEGORY,
-		USER_ID,
-		QUESTION_TITLE,
-		QUESTION_CONTENT,
-		ANS_STATUS,
-		REG_DATE,
-		FILE_CHECK,
-		FILE_EXT
-  FROM (SELECT ROWNUM RNM,
-  			   QUESTION_IDK,
-		   	   QUESTION_CATEGORY,
-			   USER_ID,
-			   QUESTION_TITLE,
-			   QUESTION_CONTENT,
-			   ANS_STATUS,
-			   REG_DATE,
-			   FILE_CHECK,
-			   FILE_EXT
-          FROM (SELECT QUESTION_IDK,
-                       NVL(QUESTION_CATEGORY, '') AS QUESTION_CATEGORY,
-                       NVL(USER_ID, '') AS USER_ID,
-                       NVL(QUESTION_TITLE, '') AS QUESTION_TITLE,
-                       NVL(QUESTION_CONTENT, '') AS QUESTION_CONTENT,
-                       NVL(ANS_STATUS, '') AS ANS_STATUS,
-                       TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE,
-                       NVL(FILE_CHECK, '') AS FILE_CHECK,
-             		   NVL(FILE_EXT, '') AS FILE_EXT
-                       
-                  FROM QUESTION_BOARD
-          		 WHERE USER_ID = #{userId}
-          		   AND ANS_STATUS = 'N'
-        ORDER BY QUESTION_IDK DESC  ))
+SELECT QUESTION_IDK
+      ,QUESTION_CATEGORY
+      ,USER_ID
+      ,QUESTION_TITLE
+      ,QUESTION_CONTENT
+      ,ANS_STATUS
+      ,TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS') AS REG_DATE
+      ,FILE_CHECK
+      ,FILE_EXT
+FROM QUESTION_BOARD
+<if test='userId != null and userId !="" '>
+	WHERE USER_ID = #{userId}
+</if>
   </select>
 <!-- 관리자 끝 -->
-  
-  
-
+  <insert id="noticeInsert" parameterType="com.icia.sweethome.model.Cs">
+<!-- 선행처리기(시퀀스번호 생성) -->
+<selectKey resultType="int" keyProperty="noticeIdk" order="BEFORE">
+	SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO NOTICE (
+    NOTICE_IDK,
+    ADMIN_ID,
+    NOTICE_TITLE,
+    NOTICE_CONTENT,
+    REG_DATE
+) VALUES (
+    #{noticeIdk},
+    #{adminId},
+    #{noticeTitle},
+    #{noticeContent},
+    SYSDATE
+)
+ </insert>
  
+ <delete id="noticeDelete" parameterType="com.icia.sweethome.model.Cs">
+DELETE FROM NOTICE
+WHERE NOTICE_IDK = #{noticeIdk}
+</delete>
+ 
+<select id="totalplace" resultType="int">
+SELECT SUM(TOTAL_PRICE) AS TOTAL
+FROM ORDERS
+WHERE ORDER_IDK IN (SELECT ORDER_IDK fROM PAY)
+AND PAY_STATUS = 'Y'
+</select>
+
+ <select id="monthTotals" resultType="map">
+SELECT NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '01', TOTAL_PRICE)),0) AS "01월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '02', TOTAL_PRICE)),0) AS "02월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '03', TOTAL_PRICE)),0) AS "03월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '04', TOTAL_PRICE)),0) AS "04월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '05', TOTAL_PRICE)),0) AS "05월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '06', TOTAL_PRICE)),0) AS "06월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '07', TOTAL_PRICE)),0) AS "07월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '08', TOTAL_PRICE)),0) AS "08월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '09', TOTAL_PRICE)),0) AS "09월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '10', TOTAL_PRICE)),0) AS "10월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '11', TOTAL_PRICE)),0) AS "11월"
+     , NVL(SUM(DECODE(TO_CHAR(APPROVED_DATE, 'MM'), '12', TOTAL_PRICE)),0) AS "12월"
+FROM ORDERS O
+INNER JOIN PAY P
+ON O.ORDER_IDK = P.ORDER_IDK
+WHERE APPROVED_DATE BETWEEN TO_DATE('2023-01-01', 'YYYY-MM-DD')
+AND TO_DATE('2023-12-31', 'YYYY-MM-DD')
+</select>
 </mapper>
 
 

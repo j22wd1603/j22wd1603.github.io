@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.sweethome.dao.SellerDao">
+
+	<resultMap type="com.icia.sweethome.model.Seller" id="sellerResultMap">
+		<id column="SELLER_ID" property="sellerId" />
+		<result column="SELLER_PWD" property="sellerPwd" />
+		<result column="SELLER_NAME" property="sellerName" />
+		<result column="SELLER_PHONE" property="sellerPhone" />
+		<result column="SELLER_STATUS" property="sellerStatus" />
+		<result column="REG_DATE" property="regDate" />
+		<result column="SHOP_TAB_CODE" property="shopTabCode" />
+		<result column="DELETE_DATE" property="deleteDate" />
+	</resultMap>
+
+	<resultMap type="com.icia.sweethome.model.Shop" id="shopResultMap" >
+		<id column="PRODUCT_IDK" property="productIdk"/>
+		<result column="SHOP_TAB_CODE" property="shopTabCode"/>
+		<result column="SHOP_DETAIL_TAB_CODE" property="shopDetailTabCode"/>
+		<result column="PRODUCT_CODE" property="productCode"/>
+		<result column="SELLER_ID" property="sellerId"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_PRICE" property="productPrice"/>
+		<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
+		<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
+		<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
+		<result column="PRODUCT_STATUS" property="productStatus"/>
+		<result column="REG_DATE" property="regDate"/>
+		<result column="PRODUCT_VIEWS" property="productViews"/>
+		
+		<result column="SHOP_TAB_NAME" property="shopTabName"/>
+		<result column="SHOP_DETAIL_TAB_NAME" property="shopDetailTabName"/>
+	</resultMap>
+	
+	<resultMap type="com.icia.sweethome.model.Coupon" id="couponResultMap" >
+		<id column="REDEM_CODE" property="redemCode"/>
+		<result column="COUPON_DISCOUNT" property="couponDiscount"/>
+		<result column="COUPON_CONTENT" property="couponContent"/>
+		<result column="COUPON_STATUS" property="couponStatus"/>
+		
+		<result column="USER_ID" property="userId"/>
+		<result column="ORDER_IDK" property="orderIdk"/>
+		<result column="COUPON_DISCOUNT_PRICE" property="couponDiscountPrice"/>
+		<result column="USE_DATE" property="useDate"/>
+	</resultMap>
+	
+	<resultMap type="com.icia.sweethome.model.Order" id="orderResultMap" >
+		<id column="ORDER_IDK" property="orderIdk"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="REDEM_CODE" property="redemCode"/>
+		<result column="PAY_STATUS" property="payStatus"/>
+		<result column="DELIVERY_STATUS" property="deliveryStatus"/>
+		<result column="DELIVERY_NAME" property="deliveryName"/>
+		<result column="DELIVERY_ADDRESS" property="deliveryAddress"/>
+		<result column="DELIVERY_PHONE" property="deliveryPhone"/>
+		<result column="DELIVERY_CONTENT" property="deliveryContent"/>
+		<result column="TOTAL_PRICE" property="totalPrice"/>
+		<result column="COUPON_DISCOUNT_PRICE" property="couponDiscountPrice"/>
+		<result column="ACTUAL_PRICE" property="actualPrice"/>
+		<result column="ORDER_DATE" property="orderDate"/>
+	</resultMap>
+	
+		<resultMap type="com.icia.sweethome.model.OrderComplete" id="orderCompleteResultMap" >
+		<id column="ORDER_DETAIL_IDK" property="orderDetailIdk"/>
+		<result column="ORDER_IDK" property="orderIdk"/>
+		<result column="PRODUCT_IDK" property="productIdk"/>
+		<result column="QUANTITY" property="quantity"/>
+		<result column="PRODUCT_PRICE" property="productPrice"/>
+		<result column="REVIEW_STATUS" property="reviewStatus"/>
+		<result column="PRODUCT_CODE" property="productCode"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_BRAND_NAME" property="productBrandName"/>
+		<result column="PRODUCT_DESCRIPTION" property="productDescription"/>
+		<result column="PRODUCT_FILE_EXT" property="productFileExt"/>
+		<result column="PRODUCT_STATUS" property="productStatus"/>
+	</resultMap>
+	<resultMap type="com.icia.sweethome.model.Pay" id="orderPayResultMap">
+		<result column="PAY_IDK" property="payIdk"/>
+		<result column="AID" property="aid"/>
+		<result column="TID" property="tid"/>
+		<result column="CID" property="cid"/>
+		<result column="ORDER_IDK" property="orderIdk"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PAY_METHOD_TYPE" property="payMethodType"/>
+		<result column="APPROVED_DATE" property="approvedDate"/>
+		<result column="CARD_BIN" property="cardBin"/>
+		<result column="CARD_TYPE" property="cardType"/>
+	</resultMap>
+	
+	<resultMap id="deliveryDetailResultMap" type="com.icia.sweethome.model.DeliveryDetail">
+	    <id column="ORDER_DETAIL_IDK" property="orderDetailIdk" />
+	    <result column="ORDER_IDK" property="orderIdk" />
+	    <result column="PRODUCT_IDK" property="productIdk" />
+	    <result column="PRODUCT_NAME" property="productName" />
+	    <result column="PRODUCT_BRAND_NAME" property="productBrandName" />
+	    <result column="PRODUCT_PRICE" property="productPrice" />
+	    <result column="QUANTITY" property="quantity" />
+	    <result column="PRODUCT_CODE" property="productCode" />
+	    <result column="PRODUCT_FILE_EXT" property="productFileExt" />
+	</resultMap>
+	
+	<resultMap id="deliveryResultMap" type="com.icia.sweethome.model.Delivery">
+        <result column="ORDER_IDK" property="orderIdk"/>
+        <result column="REDEM_CODE" property="redemCode"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="USER_EMAIL" property="userEmail"/>
+        <result column="USER_PHONE" property="userPhone"/>
+        <result column="USER_ADDRESS" property="userAddress"/>
+        <result column="IMAGE_FILE_EXISTS" property="imageFileExists"/>
+        <result column="IMAGE_FILE_EXT" property="imageFileExt"/>
+        <result column="DELIVERY_NAME" property="deliveryName"/>
+        <result column="DELIVERY_ADDRESS" property="deliveryAddress"/>
+        <result column="DELIVERY_PHONE" property="deliveryPhone"/>
+        <result column="DELIVERY_CONTENT" property="deliveryContent"/>
+        <result column="TOTAL_PRICE" property="totalPrice"/>
+        <result column="COUPON_DISCOUNT_PRICE" property="couponDiscountPrice"/>
+        <result column="ACTUAL_PRICE" property="actualPrice"/>
+        <result column="PAY_METHOD_TYPE" property="payMethodType"/>
+        <result column="PAY_STATUS" property="payStatus"/>
+        <result column="DELIVERY_STATUS" property="deliveryStatus"/>
+        <result column="APPROVED_DATE" property="approvedDate"/>
+        <result column="ORDER_DATE" property="orderDate"/>
+    </resultMap>
+	
+<!-- 사용제외 쿠폰리스트 -->
+<select id="noUseCoupon" parameterType="String" resultType="String">
+SELECT REDEM_CODE
+FROM COUPON
+WHERE REDEM_CODE NOT IN(SELECT REDEM_CODE FROM COUPON_USE WHERE USER_ID = #{value})
+</select>
+
+<!-- 주문 쿼리 -->
+<select id="orderSeqSelect" resultType = "int">
+	SELECT ORDER_SEQ.NEXTVAL FROM DUAL
+</select>
+
+<select id="orderComplete" parameterType ="int" resultMap = "orderCompleteResultMap">
+SELECT
+    NVL(OD.ORDER_DETAIL_IDK, 0) AS ORDER_DETAIL_IDK,
+    NVL(OD.ORDER_IDK, 0) AS ORDER_IDK,
+    NVL(OD.PRODUCT_IDK, 0) AS PRODUCT_IDK,
+    NVL(OD.QUANTITY, 0) AS QUANTITY,
+    NVL(OD.PRODUCT_PRICE, 0) AS PRODUCT_PRICE,
+    NVL(OD.REVIEW_STATUS, '') AS REVIEW_STATUS,
+    NVL(P.PRODUCT_CODE, '0000') AS PRODUCT_CODE,
+    NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME,
+    NVL(P.PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME,
+    NVL(P.PRODUCT_DESCRIPTION, '') AS PRODUCT_DESCRIPTION,
+    NVL(P.PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT,
+    NVL(P.PRODUCT_STATUS, 'N') AS PRODUCT_STATUS 
+FROM
+    ORDER_DETAIL OD
+LEFT OUTER JOIN
+    PRODUCT P ON OD.PRODUCT_IDK = P.PRODUCT_IDK
+WHERE
+    OD.ORDER_IDK = #{value}
+</select>
+
+<select id="orderPaySelect" parameterType="int" resultMap="orderPayResultMap">
+SELECT PAY_METHOD_TYPE
+  FROM PAY
+ WHERE ORDER_IDK = #{value}
+</select>
+
+<insert id="orderInsert" parameterType="com.icia.sweethome.model.Order">
+INSERT INTO ORDERS VALUES (
+    #{orderIdk},
+    #{userId},
+    #{redemCode},
+    #{payStatus},
+    #{deliveryStatus},
+    #{deliveryName},
+    #{deliveryAddress},
+    #{deliveryPhone},
+    #{deliveryContent},
+    #{totalPrice},
+    #{couponDiscountPrice},
+    #{actualPrice},
+    SYSDATE
+)
+</insert>
+
+<insert id="orderDetailInsert" parameterType="com.icia.sweethome.model.OrderDetail">
+<selectKey resultType="int" keyProperty="orderDetailIdk" order="BEFORE">
+	SELECT ORDER_DETAIL_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO ORDER_DETAIL VALUES (
+    #{orderDetailIdk},
+    #{orderIdk},
+    #{productIdk},
+    #{quantity},
+    #{productPrice},
+    #{reviewStatus}
+)
+</insert>
+
+<select id="orderSelect" parameterType ="int" resultMap = "orderResultMap">
+SELECT ORDER_IDK
+      ,NVL(USER_ID,'') AS USER_ID
+      ,NVL(REDEM_CODE,'') AS REDEM_CODE
+      ,NVL(PAY_STATUS,'') AS PAY_STATUS
+      ,NVL(DELIVERY_STATUS,'') AS DELIVERY_STATUS
+      ,NVL(DELIVERY_NAME,'') AS DELIVERY_NAME
+      ,NVL(DELIVERY_ADDRESS,'') AS DELIVERY_ADDRESS
+      ,NVL(DELIVERY_PHONE,'') AS DELIVERY_PHONE
+      ,NVL(DELIVERY_CONTENT,'') AS DELIVERY_CONTENT
+      ,NVL(TOTAL_PRICE,'') AS TOTAL_PRICE
+      ,NVL(COUPON_DISCOUNT_PRICE,'') AS COUPON_DISCOUNT_PRICE
+      ,NVL(ACTUAL_PRICE,'') AS ACTUAL_PRICE
+      ,NVL(TO_CHAR(ORDER_DATE,'YYYY.MM.DD HH24:MI:SS'),'') AS ORDER_DATE
+FROM ORDERS
+WHERE ORDER_IDK = #{value}
+</select>
+
+<update id="orderPayUpdate" parameterType ="int">
+UPDATE ORDERS
+SET PAY_STATUS = 'Y'
+WHERE ORDER_IDK = #{value}
+</update>
+
+<select id="couponSelect" parameterType ="String" resultMap = "couponResultMap">
+	SELECT NVL(REDEM_CODE,'') AS REDEM_CODE
+	      ,NVL(COUPON_DISCOUNT,'') AS COUPON_DISCOUNT
+	      ,NVL(COUPON_CONTENT,'') AS COUPON_CONTENT
+	      ,NVL(COUPON_STATUS,'') AS COUPON_STATUS
+	FROM COUPON
+	WHERE REDEM_CODE = #{value}
+</select>
+
+<insert id="couponUseInsert" parameterType="com.icia.sweethome.model.Coupon">
+INSERT INTO COUPON_USE VALUES (
+    #{redemCode},
+    #{userId},
+    #{orderIdk},
+    #{couponDiscountPrice},
+    SYSDATE
+)
+</insert>
+
+<insert id="payInsert" parameterType="com.icia.sweethome.model.Pay">
+<selectKey resultType="int" keyProperty="payIdk" order="BEFORE">
+	SELECT PAY_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO PAY VALUES (
+    #{payIdk},
+    #{aid},
+    #{tid},
+    #{cid},
+    #{orderIdk},
+    #{userId},
+    #{payMethodType},
+    #{approvedDate},
+    #{cardBin},
+    #{cardType}
+)
+</insert>
+
+<!-- 아래 찐 판매자  -->
+<!-- 상품 단일 검색 쿼리 -->
+<select id = "productSelect" parameterType ="int" resultMap = "shopResultMap">
+	SELECT NVL(PRODUCT_IDK,0) AS PRODUCT_IDK
+	      ,NVL(SHOP_TAB_CODE,'0') AS SHOP_TAB_CODE
+	      ,NVL(SHOP_DETAIL_TAB_CODE,'00') AS SHOP_DETAIL_TAB_CODE
+	      ,NVL(PRODUCT_CODE,'0000') AS PRODUCT_CODE
+	      ,NVL(SELLER_ID,'') AS SELLER_ID
+	      ,NVL(PRODUCT_NAME,'') AS PRODUCT_NAME
+	      ,NVL(PRODUCT_PRICE,0) AS PRODUCT_PRICE
+	      ,NVL(PRODUCT_BRAND_NAME,'') AS PRODUCT_BRAND_NAME
+	      ,NVL(PRODUCT_DESCRIPTION,'') AS PRODUCT_DESCRIPTION
+	      ,NVL(PRODUCT_FILE_EXT,'') AS PRODUCT_FILE_EXT
+	      ,NVL(PRODUCT_STATUS,'N') AS PRODUCT_STATUS
+	      ,NVL(TO_CHAR(REG_DATE,'YYYY.MM.DD HH24:MI:SS'),'') AS REG_DATE
+	      ,NVL(PRODUCT_VIEWS,0) AS PRODUCT_VIEWS
+	FROM PRODUCT
+	WHERE PRODUCT_IDK = #{value}
+</select>
+
+<select id="productList" parameterType ="com.icia.sweethome.model.Shop" resultMap = "shopResultMap">
+SELECT PRODUCT_IDK
+      ,SHOP_TAB_CODE
+      ,SHOP_TAB_NAME
+      ,SHOP_DETAIL_TAB_CODE
+      ,SHOP_DETAIL_TAB_NAME
+      ,PRODUCT_CODE
+      ,SELLER_ID
+      ,PRODUCT_NAME
+      ,PRODUCT_PRICE
+      ,PRODUCT_BRAND_NAME
+      ,PRODUCT_DESCRIPTION
+      ,PRODUCT_FILE_EXT
+      ,PRODUCT_STATUS
+      ,REG_DATE
+      ,PRODUCT_VIEWS		
+FROM(SELECT ROWNUM AS RNUM
+           ,PRODUCT_IDK
+           ,SHOP_TAB_CODE
+           ,SHOP_TAB_NAME
+           ,SHOP_DETAIL_TAB_CODE
+           ,SHOP_DETAIL_TAB_NAME
+           ,PRODUCT_CODE
+           ,SELLER_ID
+           ,PRODUCT_NAME
+           ,PRODUCT_PRICE
+           ,PRODUCT_BRAND_NAME
+           ,PRODUCT_DESCRIPTION
+           ,PRODUCT_FILE_EXT
+           ,PRODUCT_STATUS
+           ,REG_DATE
+           ,PRODUCT_VIEWS	
+	 FROM(SELECT PRODUCT_IDK
+                ,NVL(SHOP_TAB_CODE, '') AS SHOP_TAB_CODE
+                ,NVL(SHOP_TAB_NAME, '') AS SHOP_TAB_NAME
+                ,NVL(SHOP_DETAIL_TAB_CODE, '') AS SHOP_DETAIL_TAB_CODE
+                ,NVL(SHOP_DETAIL_TAB_NAME, '') AS SHOP_DETAIL_TAB_NAME
+                ,NVL(PRODUCT_CODE, '') AS PRODUCT_CODE
+                ,NVL(SELLER_ID, '') AS SELLER_ID
+                ,NVL(PRODUCT_NAME, '') AS PRODUCT_NAME
+                ,NVL(PRODUCT_PRICE, '') AS PRODUCT_PRICE
+                ,NVL(PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME
+                ,NVL(PRODUCT_DESCRIPTION, '') AS PRODUCT_DESCRIPTION
+                ,NVL(PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT
+                ,NVL(PRODUCT_STATUS, '') AS PRODUCT_STATUS
+                ,NVL( TO_CHAR( REG_DATE, 'YYYY.MM.DD HH24:MI:SS'),'') AS REG_DATE
+                ,NVL(PRODUCT_VIEWS, '') AS PRODUCT_VIEWS
+           FROM PRODUCT P
+           NATURAL JOIN SHOP_TAB T
+           NATURAL JOIN SHOP_DETAIL_TAB DT
+           WHERE SELLER_ID = #{sellerId}
+           <if test='shopTabCode != null and shopTabCode !="" '>
+           		AND SHOP_TAB_CODE = #{shopTabCode}
+           </if>
+           <if test='shopDetailTabCode != null and shopDetailTabCode !="" '>
+           		AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
+           </if>
+           <if test='productName != null and productName !="" '>
+           		AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
+           </if>
+           <if test='productBrandName != null and productBrandName !="" '>
+           		AND PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+           </if>
+           <if test='productStatus != null and productStatus !="" '>
+           		AND PRODUCT_STATUS = #{productStatus}
+           </if>
+           ORDER BY REG_DATE DESC))
+WHERE RNUM <![CDATA[>=]]> #{startRow}
+AND RNUM <![CDATA[<=]]> #{endRow}  
+</select>
+
+<select id="productListCount" parameterType ="com.icia.sweethome.model.Shop" resultType = "int">
+SELECT COUNT(PRODUCT_IDK)
+FROM PRODUCT
+WHERE 1=1
+<if test='shopTabCode != null and shopTabCode !="" '>
+		AND SHOP_TAB_CODE = #{shopTabCode}
+</if>
+<if test='shopDetailTabCode != null and shopDetailTabCode !="" '>
+		AND SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
+</if>
+<if test='sellerId != null and sellerId !="" '>
+		AND SELLER_ID LIKE '%' || #{productName} || '%'
+</if>
+<if test='productName != null and productName !="" '>
+		AND PRODUCT_NAME LIKE '%' || #{productName} || '%'
+</if>
+<if test='productBrandName != null and productBrandName !="" '>
+		AND PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+</if>
+<if test='productStatus != null and productStatus !="" '>
+		AND PRODUCT_STATUS = #{productStatus}
+</if>
+</select>
+
+<select id="productCodeSelect" resultType = "int">
+	SELECT PRODUCT_CODE_SEQ.NEXTVAL FROM DUAL
+</select>
+
+<insert id="productInsert" parameterType="com.icia.sweethome.model.Shop">
+<selectKey resultType="int" keyProperty="productIdk" order="BEFORE">
+	SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO PRODUCT VALUES (
+    #{productIdk},
+    #{shopTabCode},
+    #{shopDetailTabCode},
+    #{productCode},
+    #{sellerId},
+    #{productName},
+    #{productPrice},
+    #{productBrandName},
+    #{productDescription},
+    #{productFileExt},
+    #{productStatus},
+    SYSDATE,
+    #{productViews}
+)
+</insert>
+
+<update id="productStatusUpdate" parameterType="com.icia.sweethome.model.Shop">
+UPDATE PRODUCT
+SET PRODUCT_STATUS = #{productStatus}
+WHERE PRODUCT_IDK = #{productIdk}
+</update>
+
+<update id="productUpdate" parameterType="com.icia.sweethome.model.Shop">
+UPDATE PRODUCT
+SET SHOP_TAB_CODE = #{shopTabCode}
+   ,SHOP_DETAIL_TAB_CODE = #{shopDetailTabCode}
+   ,PRODUCT_NAME = #{productName}
+   ,PRODUCT_PRICE = #{productPrice}
+   ,PRODUCT_BRAND_NAME = #{productBrandName}
+   ,PRODUCT_DESCRIPTION = #{productDescription}
+   ,PRODUCT_FILE_EXT = #{productFileExt}
+WHERE PRODUCT_IDK = #{productIdk}
+</update>
+
+<select id="sellerSelect" parameterType="String" resultMap="sellerResultMap">
+SELECT SELLER_ID
+      ,NVL(SELLER_PWD,'') AS SELLER_PWD
+      ,NVL(SELLER_NAME,'') AS SELLER_NAME
+      ,NVL(SELLER_PHONE,'') AS SELLER_PHONE
+      ,NVL(SELLER_STATUS,'') AS SELLER_STATUS
+      ,NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE
+      ,NVL(SHOP_TAB_CODE,'') AS SHOP_TAB_CODE
+      ,NVL(TO_CHAR(DELETE_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS DELETE_DATE
+FROM SELLERS
+WHERE SELLER_ID = #{value}
+AND SELLER_STATUS = 'Y'
+</select>
+
+<select id="detailTabSelect" parameterType="String" resultMap="shopResultMap">
+SELECT NVL(SHOP_DETAIL_TAB_CODE,'') AS SHOP_DETAIL_TAB_CODE,
+       NVL(SHOP_DETAIL_TAB_NAME,'') AS SHOP_DETAIL_TAB_NAME
+FROM SHOP_DETAIL_TAB
+WHERE SHOP_DETAIL_TAB_CODE LIKE #{value} || '%'
+</select>
+<select id="tabSelect" parameterType="String" resultMap="shopResultMap">
+SELECT NVL(SHOP_TAB_CODE,'') AS SHOP_TAB_CODE
+      ,NVL(SHOP_TAB_NAME,'') AS SHOP_TAB_NAME
+FROM SHOP_TAB
+WHERE SHOP_TAB_CODE = #{value}
+</select>
+
+<select id="deliveryList" parameterType="com.icia.sweethome.model.Delivery" resultMap="deliveryResultMap">
+SELECT ORDER_IDK,
+       REDEM_CODE,
+       USER_ID,
+       USER_NAME,
+       USER_EMAIL,
+       USER_PHONE,
+       USER_ADDRESS,
+       IMAGE_FILE_EXISTS,
+       IMAGE_FILE_EXT,
+       DELIVERY_NAME,
+       DELIVERY_ADDRESS,
+       DELIVERY_PHONE,
+       DELIVERY_CONTENT,
+       TOTAL_PRICE,
+       COUPON_DISCOUNT_PRICE,
+       ACTUAL_PRICE,
+       PAY_METHOD_TYPE,
+       PAY_STATUS,
+       DELIVERY_STATUS,
+       APPROVED_DATE,
+       ORDER_DATE
+FROM (SELECT ROWNUM AS RNUM,
+             ORDER_IDK,
+             REDEM_CODE,
+             USER_ID,
+             USER_NAME,
+             USER_EMAIL,
+             USER_PHONE,
+             USER_ADDRESS,
+             IMAGE_FILE_EXISTS,
+             IMAGE_FILE_EXT,
+             DELIVERY_NAME,
+             DELIVERY_ADDRESS,
+             DELIVERY_PHONE,
+             DELIVERY_CONTENT,
+             TOTAL_PRICE,
+             COUPON_DISCOUNT_PRICE,
+             ACTUAL_PRICE,
+             PAY_METHOD_TYPE,
+             PAY_STATUS,
+             DELIVERY_STATUS,
+             APPROVED_DATE,
+             ORDER_DATE
+      FROM(SELECT NVL(O.ORDER_IDK, 0) AS ORDER_IDK,
+                  NVL(O.REDEM_CODE, '') AS REDEM_CODE,
+                  NVL(U.USER_ID, '') AS USER_ID,
+                  NVL(U.USER_NAME, '') AS USER_NAME,
+                  NVL(U.USER_EMAIL, '') AS USER_EMAIL,
+                  NVL(U.USER_PHONE, '') AS USER_PHONE,
+                  NVL(U.USER_ADDRESS, '') AS USER_ADDRESS,
+                  NVL(U.IMAGE_FILE_EXISTS, '') AS IMAGE_FILE_EXISTS,
+                  NVL(U.IMAGE_FILE_EXT, '') AS IMAGE_FILE_EXT,
+                  NVL(O.DELIVERY_NAME, '') AS DELIVERY_NAME,
+                  NVL(O.DELIVERY_ADDRESS, '') AS DELIVERY_ADDRESS,
+                  NVL(O.DELIVERY_PHONE, '') AS DELIVERY_PHONE,
+                  NVL(O.DELIVERY_CONTENT, '') AS DELIVERY_CONTENT,
+                  NVL(O.TOTAL_PRICE, 0) AS TOTAL_PRICE,
+                  NVL(O.COUPON_DISCOUNT_PRICE, 0) AS COUPON_DISCOUNT_PRICE,
+                  NVL(O.ACTUAL_PRICE, 0) AS ACTUAL_PRICE,
+                  NVL(P.PAY_METHOD_TYPE, '') AS PAY_METHOD_TYPE,
+                  NVL(O.PAY_STATUS, '') AS PAY_STATUS,
+                  NVL(O.DELIVERY_STATUS, '') AS DELIVERY_STATUS,
+                  NVL(TO_CHAR(P.APPROVED_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS APPROVED_DATE,
+                  NVL(TO_CHAR(O.ORDER_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS ORDER_DATE
+			FROM ORDERS O, PAY P, USERS U
+			WHERE O.ORDER_IDK IN(SELECT D.ORDER_IDK AS ORDER_IDK FROM ORDER_DETAIL D, PRODUCT P
+								 WHERE P.SELLER_ID = #{sellerId}
+								 <if test='productName != null and productName !="" '>
+									AND P.PRODUCT_NAME LIKE '%' || #{productName} || '%'
+								</if>
+								 <if test='productBrandName != null and productBrandName !="" '>
+									AND P.PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+								</if>
+								 AND D.PRODUCT_IDK = P.PRODUCT_IDK) 
+			
+			<if test='orderIdk != null and orderIdk !="" '>
+				AND O.ORDER_IDK LIKE '%' || #{orderIdk} || '%'
+			</if>
+			<if test='deliveryStatus != null and deliveryStatus !="" '>
+				AND O.DELIVERY_STATUS = #{deliveryStatus}
+			</if>
+			AND P.ORDER_IDK(+)=O.ORDER_IDK
+			AND O.USER_ID = U.USER_ID
+			ORDER BY O.ORDER_IDK DESC))
+WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+</select>
+
+<select id="deliveryListCount" parameterType="com.icia.sweethome.model.Delivery" resultType = "int">
+SELECT COUNT(O.ORDER_IDK)
+			FROM ORDERS O, PAY P, USERS U
+			WHERE O.ORDER_IDK IN(SELECT D.ORDER_IDK AS ORDER_IDK FROM ORDER_DETAIL D, PRODUCT P
+								 WHERE P.SELLER_ID = #{sellerId}
+								 <if test='productName != null and productName !="" '>
+									AND P.PRODUCT_NAME LIKE '%' || #{productName} || '%'
+								</if>
+								 <if test='productBrandName != null and productBrandName !="" '>
+									AND P.PRODUCT_BRAND_NAME LIKE '%' || #{productBrandName} || '%'
+								</if>
+								 AND D.PRODUCT_IDK = P.PRODUCT_IDK) 
+			
+			<if test='orderIdk != null and orderIdk !="" '>
+				AND O.ORDER_IDK LIKE '%' || #{orderIdk} || '%'
+			</if>
+			<if test='deliveryStatus != null and deliveryStatus !="" '>
+				AND O.DELIVERY_STATUS = #{deliveryStatus}
+			</if>
+			AND P.ORDER_IDK(+)=O.ORDER_IDK
+			AND O.USER_ID = U.USER_ID
+</select>
+
+<select id="deliveryDetailSelect" parameterType="com.icia.sweethome.model.DeliveryDetail"  resultMap="deliveryDetailResultMap">
+    SELECT NVL(D.ORDER_DETAIL_IDK, 0) AS ORDER_DETAIL_IDK
+    	  ,NVL(D.ORDER_IDK, 0) AS ORDER_IDK
+    	  ,NVL(D.PRODUCT_IDK, 0) AS PRODUCT_IDK
+    	  ,NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME
+    	  ,NVL(P.PRODUCT_BRAND_NAME, '') AS PRODUCT_BRAND_NAME
+    	  ,NVL(D.PRODUCT_PRICE, 0) AS PRODUCT_PRICE
+    	  ,NVL(D.QUANTITY, 0) AS QUANTITY
+    	  ,NVL(P.PRODUCT_CODE, '') AS PRODUCT_CODE
+    	  ,NVL(P.PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT
+    FROM ORDER_DETAIL D, PRODUCT P
+    WHERE D.ORDER_IDK = #{orderIdk}
+    AND D.PRODUCT_IDK = P.PRODUCT_IDK
+    ORDER BY ORDER_DETAIL_IDK DESC
+</select>
+
+<update id="deliveryStatusUpdate" parameterType="com.icia.sweethome.model.Order">
+UPDATE ORDERS
+SET DELIVERY_STATUS = #{deliveryStatus}
+WHERE ORDER_IDK = #{orderIdk}
+</update>
+</mapper>

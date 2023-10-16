@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icia.sweethome.dao.OrderDao">
+
+  <resultMap type="com.icia.sweethome.model.Order" id="orderInfoSelectResultMap">
+	 <id column="ORDER_IDK" property="orderIdk" />
+     <result column="USER_ID" property="userId" />
+     <result column="REDEM_CODE" property="redemCode" />
+     <result column="PAY_STATUS" property="payStatus" />
+     <result column="DELIVERY_STATUS" property="deliveryStatus" />
+     <result column="DELIVERY_NAME" property="deliveryName" />
+     <result column="DELIVERY_ADDRESS" property="deliveryAddress" />
+     <result column="DELIVERY_PHONE" property="deliveryPhone" />
+     <result column="DELIVERY_CONTENT" property="deliveryContent" />
+     <result column="TOTAL_PRICE" property="totalPrice" />
+     <result column="COUPON_DISCOUNT_PRICE" property="couponDiscountPrice" />
+     <result column="ACTUAL_PRICE" property="actualPrice" />
+     <result column="ORDER_DATE" property="orderDate" /> 
+  </resultMap>
+  
+    <resultMap type="com.icia.sweethome.model.OrderDetail" id="orderDetailSelectResultMap">
+     <id column="ORDER_IDK" property="orderIdk" />
+     <result column="ORDER_DETAIL_IDK" property="orderDetailIdk" />
+     <result column="PRODUCT_IDK" property="productIdk" />
+     <result column="QUANTITY" property="quantity" />
+     <result column="PRODUCT_PRICE" property="productPrice" />
+     <result column="REVIEW_STATUS" property="reviewStatus" />
+     <result column="PRODUCT_NAME" property="productName" />
+     <result column="PRODUCT_CODE" property="productCode" />
+     <result column="PRODUCT_FILE_EXT" property="productFileExt" />
+  </resultMap>
+  
+  
+  
+<select id = "orderList" parameterType ="com.icia.sweethome.model.Order" resultMap = "orderInfoSelectResultMap">
+SELECT  ORDER_IDK,
+		USER_ID,
+		REDEM_CODE,
+		PAY_STATUS,
+		DELIVERY_STATUS,
+		DELIVERY_NAME,
+		DELIVERY_ADDRESS,
+		DELIVERY_PHONE,
+		DELIVERY_CONTENT,
+		TOTAL_PRICE,
+		COUPON_DISCOUNT_PRICE,
+		ACTUAL_PRICE,
+		ORDER_DATE	
+  FROM ( SELECT ROWNUM AS RNUM,	
+				ORDER_IDK,
+				USER_ID,
+				REDEM_CODE,
+				PAY_STATUS,
+				DELIVERY_STATUS,
+				DELIVERY_NAME,
+				DELIVERY_ADDRESS,
+				DELIVERY_PHONE,
+				DELIVERY_CONTENT,
+				TOTAL_PRICE,
+				COUPON_DISCOUNT_PRICE,
+				ACTUAL_PRICE,
+				ORDER_DATE
+				FROM(SELECT ORDER_IDK,
+							NVL(USER_ID, '') AS USER_ID,
+							NVL(REDEM_CODE, '') AS REDEM_CODE,
+							NVL(PAY_STATUS, '') AS PAY_STATUS,
+							NVL(DELIVERY_STATUS, '') AS DELIVERY_STATUS,
+							NVL(DELIVERY_NAME, '') AS DELIVERY_NAME,
+							NVL(DELIVERY_ADDRESS, '') AS DELIVERY_ADDRESS,
+							NVL(DELIVERY_PHONE, '') AS DELIVERY_PHONE,
+							NVL(DELIVERY_CONTENT, '') AS DELIVERY_CONTENT,
+							NVL(TOTAL_PRICE, 0) AS TOTAL_PRICE,
+							NVL(COUPON_DISCOUNT_PRICE, 0) AS COUPON_DISCOUNT_PRICE,
+							NVL(ACTUAL_PRICE, 0) AS ACTUAL_PRICE,
+							NVL(TO_CHAR(ORDER_DATE, 'YYYY.MM.DD'), '') AS ORDER_DATE
+					   FROM ORDERS
+					  WHERE USER_ID = #{userId}
+					  ORDER BY ORDER_IDK DESC))
+WHERE RNUM <![CDATA[>=]]> #{startRow}
+AND RNUM <![CDATA[<=]]> #{endRow} 
+</select>
+  
+	<select id="orderInfoSelect" parameterType="String" resultMap="orderInfoSelectResultMap">   
+	 SELECT ORDER_IDK,
+	       NVL(USER_ID, '') AS USER_ID,
+	       NVL(REDEM_CODE, '') AS REDEM_CODE,
+	       NVL(PAY_STATUS, '') AS PAY_STATUS,
+	       NVL(DELIVERY_STATUS, '') AS DELIVERY_STATUS,
+	       NVL(DELIVERY_NAME, '') AS DELIVERY_NAME,
+	       NVL(DELIVERY_ADDRESS, '') AS DELIVERY_ADDRESS,
+	       NVL(DELIVERY_PHONE, '') AS DELIVERY_PHONE,
+	       NVL(DELIVERY_CONTENT, '') AS DELIVERY_CONTENT,
+	       NVL(TOTAL_PRICE, 0) AS TOTAL_PRICE,
+	       NVL(COUPON_DISCOUNT_PRICE, 0) AS COUPON_DISCOUNT_PRICE,
+	       NVL(ACTUAL_PRICE, 0) AS ACTUAL_PRICE,
+	       NVL(TO_CHAR(ORDER_DATE, 'YYYY.MM.DD'), '') AS ORDER_DATE
+	  FROM ORDERS
+	 WHERE USER_ID = #{value}
+	 ORDER BY ORDER_IDK DESC
+	</select>
+	
+	<!--  0919 내 주문내역 카운트 조회 -->
+<select id="orderInfoCount" parameterType ="com.icia.sweethome.model.Order" resultType="int">
+SELECT NVL(COUNT(O.ORDER_IDK), 0) AS CNT
+  FROM ORDERS O, USERS U
+ WHERE O.USER_ID = #{userId}
+   AND O.USER_ID = U.USER_ID
+</select>
+
+	<select id="orderMySelect" parameterType="int" resultMap="orderInfoSelectResultMap">   
+	 SELECT ORDER_IDK,
+	       NVL(USER_ID, '') AS USER_ID,
+	       NVL(REDEM_CODE, '') AS REDEM_CODE,
+	       NVL(PAY_STATUS, '') AS PAY_STATUS,
+	       NVL(DELIVERY_STATUS, '') AS DELIVERY_STATUS,
+	       NVL(DELIVERY_NAME, '') AS DELIVERY_NAME,
+	       NVL(DELIVERY_ADDRESS, '') AS DELIVERY_ADDRESS,
+	       NVL(DELIVERY_PHONE, '') AS DELIVERY_PHONE,
+	       NVL(DELIVERY_CONTENT, '') AS DELIVERY_CONTENT,
+	       NVL(TOTAL_PRICE, 0) AS TOTAL_PRICE,
+	       NVL(COUPON_DISCOUNT_PRICE, 0) AS COUPON_DISCOUNT_PRICE,
+	       NVL(ACTUAL_PRICE, 0) AS ACTUAL_PRICE,
+	       NVL(TO_CHAR(ORDER_DATE, 'YYYY.MM.DD'), '') AS ORDER_DATE
+	  FROM ORDERS
+	 WHERE ORDER_IDK = #{value}
+	</select>
+	
+	
+<select id="orderDetailSelect" parameterType="int" resultMap="orderDetailSelectResultMap">   	
+SELECT 
+        D.ORDER_IDK,
+        D.ORDER_DETAIL_IDK,
+        D.PRODUCT_IDK,
+        NVL(D.QUANTITY, 0) AS QUANTITY,
+        NVL(D.PRODUCT_PRICE, 0) AS PRODUCT_PRICE,
+        NVL(D.REVIEW_STATUS, 'N') AS REVIEW_STATUS,
+        NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME,
+		NVL(P.PRODUCT_CODE, '') AS PRODUCT_CODE,
+        NVL(P.PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT
+  FROM  ORDER_DETAIL D, PRODUCT P
+ WHERE D.ORDER_IDK = #{value}
+   AND D.PRODUCT_IDK = P.PRODUCT_IDK
+</select>
+
+
+<!-- 리뷰 -->
+<select id="orderDetailSearch" parameterType ="com.icia.sweethome.model.OrderDetail" resultMap="orderDetailSelectResultMap">   	
+SELECT 
+        D.ORDER_IDK,
+        D.ORDER_DETAIL_IDK,
+        D.PRODUCT_IDK,
+        NVL(D.QUANTITY, 0) AS QUANTITY,
+        NVL(D.PRODUCT_PRICE, 0) AS PRODUCT_PRICE,
+        NVL(D.REVIEW_STATUS, 'N') AS REVIEW_STATUS,
+        NVL(P.PRODUCT_NAME, '') AS PRODUCT_NAME,
+		NVL(P.PRODUCT_CODE, '') AS PRODUCT_CODE,
+        NVL(P.PRODUCT_FILE_EXT, '') AS PRODUCT_FILE_EXT
+  FROM  ORDER_DETAIL D, PRODUCT P
+ WHERE D.ORDER_IDK = #{orderIdk}
+   AND D.ORDER_DETAIL_IDK = #{orderDetailIdk}
+   AND D.PRODUCT_IDK = P.PRODUCT_IDK
+</select>
+
+</mapper>

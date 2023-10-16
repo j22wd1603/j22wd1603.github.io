@@ -214,7 +214,8 @@ public class AdminService
 	
     private static Map<String, Object> sortMap(Map<String, Object> unsortMap) {
     	Map<String, Object> sortMap = new LinkedHashMap<>();
-    	unsortMap.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> sortMap.put(entry.getKey(), entry.getValue()));
+    	unsortMap.entrySet().stream().sorted(Map.Entry.comparingByKey())
+    	.forEach(entry -> sortMap.put(entry.getKey(), entry.getValue()));
         return sortMap;
     }
 }
