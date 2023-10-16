@@ -713,10 +713,10 @@ $(document).ready(function() {
 		}
 	});
 });
+
 function mailTimer() {
-	$("#countdown").text("남은 시간: " + Math.
-(maillTime / 60) + "분 " + maillTime % 60 + "초");
-	$("#countdown").css("color","green")
+	$("#countdown").text("남은 시간: " + Math.floor(maillTime / 60) + "분 " + maillTime % 60 + "초");
+	$("#countdown").css("color","green");
     
     if(maillTime > 0) {
       maillTime--;
