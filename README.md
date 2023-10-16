@@ -2,11 +2,11 @@
 ---
 # 개발 환경
 * JDK 1.8
-* MVC
+* SPRING MVC
 * Tomcat 9.0
 * STS
 * HTML, CSS, JS
-* ORACLE
+* RDBMS ORACLE
 * BootStrap 4<br>
 * AWS
 ---
