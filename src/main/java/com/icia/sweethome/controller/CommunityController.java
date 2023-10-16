@@ -62,7 +62,7 @@ public class CommunityController {
     private String UPLOAD_SAVE_DIR;      //이미지 저장 경로
     
     
-    private static final int LIST_COUNT = 12;   //한 페이지의 게시물 수
+    private static final int LIST_COUNT = 9;   //한 페이지의 게시물 수
     private static final int PAGE_COUNT = 5;   //페이징 수	
     
     //쿠키명
