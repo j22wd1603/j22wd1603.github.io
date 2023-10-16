@@ -47,6 +47,8 @@ public interface SellerDao {
     public Pay orderPaySelect(int orderIdk);
     
     public int deliveryStatusUpdate(Order order);
+    public int deleteView(int productIdk);
+    
 	
 }
 

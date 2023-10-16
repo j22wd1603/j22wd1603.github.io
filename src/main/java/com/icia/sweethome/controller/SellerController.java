@@ -499,6 +499,30 @@ public class SellerController {
 		return ajaxResponse;
 	}
 	
+	@PostMapping(value="/seller/deleteView")
+	@ResponseBody
+	public Response<Object> deleteView(HttpServletRequest request, HttpServletResponse response)
+	{
+		Response<Object> ajaxResponse = new Response<Object>();
+		
+		int productIdk = HttpUtil.get(request, "productIdk", 0);
+		
+		if(productIdk!=0) {
+				
+			if(sellerService.deleteView(productIdk)>0){
+				ajaxResponse.setResponse(0, "Success");
+			}
+			else {
+				ajaxResponse.setResponse(-1, "SQL Fail");
+			}
+		}
+		else {
+			ajaxResponse.setResponse(404, "Not Found");
+		}
+		
+		return ajaxResponse;
+	}
+	
 	@RequestMapping(value = "/seller/main")
 	public String main(Model model, HttpServletRequest request, HttpServletResponse response, @SessionAttribute(name = "sellerId", required = false) String sellerId) throws IOException {
 		

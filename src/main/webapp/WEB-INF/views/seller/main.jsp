@@ -254,6 +254,42 @@ function fn_delete(productIdk, bbsStatus)
      });
 }
 
+function fn_deleteView(productIdk)
+{
+	var msg ="삭제 하시겠습니까?";
+	
+    if(!confirm(msg)){
+        return;
+    }
+    
+    $.ajax({
+        type :"POST",
+        url:"/seller/deleteView",
+        data:{
+        	productIdk:productIdk
+        },
+        datatype:"JSON",
+        success:function(response)
+        {
+           if(response.code == 0)
+           {
+        	   alert("상품이 삭제되었습니다.");
+        	   location.href = "/seller/main";
+           }
+           else
+           {
+              alert("오류가 발생하였습니다.");
+           }
+        },
+        error:function(xhr, status, error)
+        {
+           icia.common.error(error);
+        }
+     });
+}
+
+
+
 function fn_write(){
 	location.href = "/seller/write";
 }

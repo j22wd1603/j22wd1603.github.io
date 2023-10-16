@@ -353,10 +353,11 @@ public class ShopService
 			}
 			catch(Exception e)
 			{
-				logger.error("[shopService] rcommend Exception", e);
+				logger.error("[shopService] recommend Exception", e);
 			}		
 			return recom;
 		}
+		
 }
 
 

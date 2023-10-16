@@ -573,4 +573,10 @@ UPDATE ORDERS
 SET DELIVERY_STATUS = #{deliveryStatus}
 WHERE ORDER_IDK = #{orderIdk}
 </update>
+
+<delete id="deleteView" parameterType="int">
+DELETE FROM PRODUCT
+WHERE product_idk = #{value}
+</delete>
+
 </mapper>

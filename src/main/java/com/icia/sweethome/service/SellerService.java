@@ -337,6 +337,19 @@ public class SellerService {
 		return count;
 	}
 	
+	public int deleteView(int productIdk) {
+		int count = 0;
+		try
+		{
+			count = sellerDao.deleteView(productIdk);				
+		}
+		catch(Exception e)
+		{
+			logger.error("[shopService] deleteView Exception", e);
+		}		
+		return count;
+	}
+	
 }
 
 
