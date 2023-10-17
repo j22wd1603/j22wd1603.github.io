@@ -42,7 +42,7 @@
    WHERE USER_ID = #{value}
   </select>   
   
- <!-- 마이페이지 스크랩건수, 좋아요건수, 쿠폰건수 -->
+ <!-- 마이페이지 스크랩건수, 좋아요건수, 내질문 건수 -->
 <select id="myCountList" parameterType="String" resultMap="userMyCountMap"> 
        
 SELECT S.CNT AS SCRAP_CNT, L.CNT AS LIKES_CNT, C.CNT AS QUESTION_CNT
