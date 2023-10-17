@@ -43,6 +43,7 @@ public class User implements Serializable
 	private int scrapCnt;
 	private int likesCnt;
 	private int couponCnt;
+	private int questionCnt;
 	
 	
 	/**
@@ -67,9 +68,24 @@ public class User implements Serializable
 		scrapCnt = 0; 
 		likesCnt = 0; 
 		couponCnt = 0; 
+		questionCnt = 0;
 	}
 	
 	
+
+
+	public int getQuestionCnt() {
+		return questionCnt;
+	}
+
+
+
+
+	public void setQuestionCnt(int questionCnt) {
+		this.questionCnt = questionCnt;
+	}
+
+
 
 
 	public int getScrapCnt() {

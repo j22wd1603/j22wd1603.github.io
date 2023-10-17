@@ -20,7 +20,7 @@
    <resultMap type="com.icia.sweethome.model.User" id="userMyCountMap">
    		<result column="SCRAP_CNT" property="scrapCnt" />
    		<result column="LIKES_CNT" property="likesCnt" />
-   		<result column="COUPON_CNT" property="couponCnt" />
+   		<result column="QUESTION_CNT" property="questionCnt"/>
      </resultMap>
      
      
@@ -44,16 +44,18 @@
   
  <!-- 마이페이지 스크랩건수, 좋아요건수, 쿠폰건수 -->
 <select id="myCountList" parameterType="String" resultMap="userMyCountMap"> 
-SELECT S.CNT AS SCRAP_CNT, L.CNT AS LIKES_CNT, C.CNT AS COUPON_CNT
+       
+SELECT S.CNT AS SCRAP_CNT, L.CNT AS LIKES_CNT, C.CNT AS QUESTION_CNT
 FROM (SELECT NVL(COUNT(COMMU_IDK),0) AS CNT
         FROM COMMU_SCRAP
         WHERE USER_ID = #{value}) S,
     (SELECT NVL(COUNT(COMMU_IDK),0) AS CNT
         FROM COMMU_LIKES
         WHERE USER_ID = #{value}) L,
-    (SELECT NVL(COUNT(REDEM_CODE),0) AS CNT
-        FROM COUPON_USE
-        WHERE USER_ID = #{value}) C
+    (SELECT NVL(COUNT(QUESTION_IDK),0) AS CNT
+        FROM QUESTION_BOARD
+        WHERE USER_ID = #{value}) C        
+        
 </select> 
         
   <insert id="userInsert" parameterType="com.icia.sweethome.model.User"> 

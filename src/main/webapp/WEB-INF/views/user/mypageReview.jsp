@@ -448,7 +448,7 @@ function fn_boardDelete(idk)
                   </svg>
                </div>
                         <div class="css-10ewlqi e1q26atk1">내 쿠폰</div>
-                        <div class="css-2rwq1u e1q26atk0"><fmt:formatNumber type="number" maxFractionDigits="3" value="${userCnt.couponCnt}" /></div>
+                        <div class="css-2rwq1u e1q26atk0"><fmt:formatNumber type="number" maxFractionDigits="3" value="${userCnt.questionCnt}" /></div>
                </a>
             </div>
          </div>
