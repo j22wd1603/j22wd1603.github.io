@@ -35,7 +35,6 @@ $(document).ready(function() {
 	   var regPhone2 = /^[0-9]{3,4}$/;
 	   var regPhone3 = /^[0-9]{4}$/;
 	   var name = /^[가-힣a-zA-Z]+$/;
-	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)\,]+$/;
 	   
 	   if(!$("#orderAgreement").prop('checked')){
 	         alert("주문 동의를 해주세요");
@@ -47,7 +46,6 @@ $(document).ready(function() {
 		   if(trimCheck("deliveryName","수령인을 입력해주세요"))return;
 		   if(expCheck("deliveryName","이름은 한국어,영어만 입력가능합니다.",name))return;
 		   if(trimCheck("deliveryAddress","배송지를 입력해주세요"))return;
-		   if(expCheck("deliveryAddress","주소는 한국어,영어, 숫자 '-()' 만 입력가능합니다.",address))return;
 		   if(trimCheck("phone1","휴대폰번호를 입력해주세요"))return;
 		   if(expCheck("phone1","휴대폰 첫번째는 010, 011, 016, 017, 018, 019만 가능합니다",regPhone1))return;
 		   if(trimCheck("phone2","휴대폰번호를 입력해주세요"))return;
@@ -67,7 +65,6 @@ $(document).ready(function() {
 		   if(trimCheck("anotherDeliveryName","수령인을 입력해주세요"))return;
 		   if(expCheck("anotherDeliveryName","이름은 한국어,영어만 입력가능합니다.",name))return;
 		   if(trimCheck("anotherDeliveryAddress","배송지를 입력해주세요"))return;
-		   if(expCheck("anotherDeliveryName","주소는 한국어,영어, 숫자 '-()' 만 입력가능합니다.",name))return;
 		   if(trimCheck("anotherPhone1","휴대폰번호를 입력해주세요"))return;
 		   if(expCheck("anotherPhone1","휴대폰 첫번째는 010, 011, 016, 017, 018, 019만 가능합니다",regPhone1))return;
 		   if(trimCheck("anotherPhone2","휴대폰번호를 입력해주세요"))return;
