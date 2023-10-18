@@ -172,7 +172,7 @@ function fn_update(productIdk,index){
 		{
 			if(response.code == 0)
 			{
-				alert("상품이 등록되었습니다.");
+				alert("상품이 수정되었습니다.");
 				location.href = "/seller/main";
 
 			}
