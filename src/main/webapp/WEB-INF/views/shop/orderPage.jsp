@@ -35,7 +35,7 @@ $(document).ready(function() {
 	   var regPhone2 = /^[0-9]{3,4}$/;
 	   var regPhone3 = /^[0-9]{4}$/;
 	   var name = /^[가-힣a-zA-Z]+$/;
-	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)]+$/;
+	   var address = /^[가-힣a-zA-Z0-9\s\-\(\)\,]+$/;
 	   
 	   if(!$("#orderAgreement").prop('checked')){
 	         alert("주문 동의를 해주세요");
