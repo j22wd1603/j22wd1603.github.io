@@ -793,7 +793,7 @@ input#check_btn:checked + label:before{
 .category-container> ul{
    background-color:#8b1411;
 }
-.category-container> ul  a:hover { background: #7e0707; }
+.category-container> ul  a:hover { background: #7e0707; color:#ac6967;}
 .category-container-second {
     height: 50px;
     width: auto;
