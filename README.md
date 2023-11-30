@@ -9,7 +9,6 @@
 * RDBMS ORACLE
 * BootStrap 4<br>
 * AWS<br>
-상품
 ---
 # PRODUCT
 ![KakaoTalk_20231107_203353570](https://github.com/j22wd1603/sweethome/assets/131651560/272998f4-ea51-4ca4-a6f3-f910ea6dcda0)
@@ -18,21 +17,18 @@
 - 상품 음성 검색 
 - 원하는 조건별 상품 정렬
 - 상품별 리뷰등록 및 상품별 별점분석<br>
-주문
 ---
 # ORDER
 ![KakaoTalk_20231107_203353570_03](https://github.com/j22wd1603/sweethome/assets/131651560/bcb97de0-f875-43cb-951a-bf6108b9b3ff)
 - 카카오페이 api 결제
 - 쿠폰 할인
 - 기본배송지 신규배송지 관리<br>
-게시판
 ---
 # COMMUNITY
 ![KakaoTalk_20231107_203353570_01](https://github.com/j22wd1603/sweethome/assets/131651560/276c4416-f047-4d04-a6bd-c097978c4f30)
 - 글쓰기, 댓글 작성, 게시글 검색
 - 좋아요, 스크랩
 - 상품 공유하기<br>
-회원
 # MEMBER
 ![KakaoTalk_20231107_203353570_02](https://github.com/j22wd1603/sweethome/assets/131651560/b3f7380c-867c-421f-9e91-a9bbefeac6be)
 - 이메일 인증, 타이머
