@@ -12,11 +12,11 @@
 ---
 # PRODUCT
 ![KakaoTalk_20231107_203353570](https://github.com/j22wd1603/sweethome/assets/131651560/272998f4-ea51-4ca4-a6f3-f910ea6dcda0)
-- [x] 베스트 아이템 조회
-- [x] 상품 장바구니 추가/삭제
-- [x] 상품 음성 검색 
-- [x] 원하는 조건별 상품 정렬
-- [x] 상품별 리뷰등록 및 상품별 별점분석
+- 베스트 아이템 조회
+- 상품 장바구니 추가/삭제
+- 상품 음성 검색 
+- 원하는 조건별 상품 정렬
+- 상품별 리뷰등록 및 상품별 별점분석
 ---
 # ORDER
 ![KakaoTalk_20231107_203353570_03](https://github.com/j22wd1603/sweethome/assets/131651560/bcb97de0-f875-43cb-951a-bf6108b9b3ff)
