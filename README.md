@@ -11,7 +11,7 @@
 * AWS
 ---
 # PRODUCT
-![ezgif com-video-to-gif (1)](https://github.com/daekk74/sweethome/assets/145513812/9e6ca81e-3f56-4dab-91ed-728509272dc9)
+![KakaoTalk_20231107_203353570](https://github.com/j22wd1603/sweethome/assets/131651560/272998f4-ea51-4ca4-a6f3-f910ea6dcda0)
 - [x] 베스트 아이템 조회
 - [x] 상품 장바구니 추가/삭제
 - [x] 상품 음성 검색 
@@ -19,19 +19,19 @@
 - [x] 상품별 리뷰등록 및 상품별 별점분석
 ---
 # ORDER
-![ezgif com-gif-maker](https://github.com/daekk74/sweethome/assets/145513812/ed8c7774-43db-4ea7-b778-8922f3fb9e55)
+![KakaoTalk_20231107_203353570_03](https://github.com/j22wd1603/sweethome/assets/131651560/bcb97de0-f875-43cb-951a-bf6108b9b3ff)
 - [x] 카카오페이 api 결제
 - [x] 쿠폰 할인
 - [x] 기본배송지 신규배송지 관리
 ---
 # COMMUNITY
-![ezgif com-video-to-gif (4)](https://github.com/daekk74/sweethome/assets/145513812/57688b5c-d9d2-418b-b217-592f2516e11e)
+![KakaoTalk_20231107_203353570_01](https://github.com/j22wd1603/sweethome/assets/131651560/276c4416-f047-4d04-a6bd-c097978c4f30)
 - [x] 글쓰기, 댓글 작성, 게시글 검색
 - [x] 좋아요, 스크랩
 - [x] 상품 공유하기
 ---
 # MEMBER
-![ezgif com-gif-maker (1)](https://github.com/daekk74/sweethome/assets/145513812/fb82009f-0d07-4309-90aa-eb0b41c963f2)
+![KakaoTalk_20231107_203353570_02](https://github.com/j22wd1603/sweethome/assets/131651560/b3f7380c-867c-421f-9e91-a9bbefeac6be)
 - [x] 이메일 인증, 타이머
 - [x] 도로명주소 API
 - [x] 아이디, 비밀번호, 전화번호 정규식
